@@ -2,45 +2,36 @@ package cat.itacademy.escaperoom;
 
 
 import cat.itacademy.escaperoom.database.mysql.MySqlConnection;
+import cat.itacademy.escaperoom.escaperoom.EscapeRoom;
+import cat.itacademy.escaperoom.escaperoom.EscapeRoomCreator;
+import cat.itacademy.escaperoom.escaperoom.EscapeRoomRepository;
 
 import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.Statement;
 
 public class Main {
     public static void main(String[] args) {
 
-        Statement stmt = null;
-        ResultSet rs = null;
+        // menu:
+        /*
+        al cargar revisa si existe un escaperoom y lo carga
+        si no existe  entra al menu de crear esscaperoom
+
+         */
+
+        EscapeRoomRepository repo = new EscapeRoomRepository();
+        EscapeRoom newroom = EscapeRoom.create("Escape Room 2", "http://example.com");
 
 
-        Connection conn = MySqlConnection.getInstance();
+        EscapeRoomCreator creator = new EscapeRoomCreator(newroom, repo);
+        creator.create();
+        /*
+         una vez el escape esta cargado tienes opciones:
+         editar escaperoom
+         ver rooms
+         ver packs
+         etc
 
-        try {
-            stmt = conn.createStatement();
-            rs = stmt.executeQuery("SELECT * FROM patata");
+         */
 
-            // or alternatively, if you don't know ahead of time that
-            // the query will be a SELECT...
-
-            if (stmt.execute("SELECT * FROM patata")) {
-                rs = stmt.getResultSet();
-                System.out.println("ResultSet");
-                System.out.println(rs.next());
-            }
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        } finally {
-            try {
-                if (rs != null) {
-                    rs.close();
-                }
-                if (stmt != null) {
-                    stmt.close();
-                }
-            } catch (Exception e) {
-                System.out.println(e.getMessage());
-            }
-        }
     }
 }
