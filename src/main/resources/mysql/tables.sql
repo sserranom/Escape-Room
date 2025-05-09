@@ -1,3 +1,7 @@
+DROP SCHEMA IF EXISTS escape_room;
+CREATE SCHEMA IF NOT EXISTS escape_room;
+USE escape_room;
+
 CREATE TABLE escape_rooms (
 id INT auto_increment PRIMARY KEY,
 name VARCHAR(255) NOT NULL,
@@ -25,7 +29,9 @@ FOREIGN KEY (theme_id) REFERENCES themes(id)
 CREATE TABLE rooms (
 id INT auto_increment PRIMARY KEY,
 name VARCHAR(255) NOT NULL,
-price DECIMAL (10,2) NOT NULL
+price DECIMAL (10,2) NOT NULL,
+escaperoom_id INT NOT NULL,
+FOREIGN KEY (escaperoom_id) REFERENCES escape_rooms(id)
 );
 
 CREATE TABLE puzzles (
@@ -63,12 +69,27 @@ email VARCHAR(255) NOT NULL
 
 CREATE TABLE reservations (
 id INT auto_increment PRIMARY KEY,
-customer_id INT,
-pack_id INT,
+customer_id INT NOT NULL,
+pack_id INT NOT NULL,
 total_price DECIMAL (10,2),
 creation_date DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP(),
 payment_date DATETIME NULL,
 escaperoom_date DATETIME NOT NULL,
 FOREIGN KEY (customer_id) REFERENCES customers(id),
 FOREIGN KEY (pack_id) REFERENCES packs(id)
+);
+
+CREATE TABLE notifications (
+id INT auto_increment PRIMARY KEY,
+customer_id INT NOT NULL,
+message TEXT NOT NULL, 
+FOREIGN KEY (customer_id) REFERENCES customers(id)
+);
+
+CREATE TABLE rewards (
+id INT auto_increment PRIMARY KEY,
+recipient VARCHAR(50) NOT NULL,
+description VARCHAR(255) NOT NULL,
+emision_date TIMESTAMP,
+delivery_date TIMESTAMP
 );
