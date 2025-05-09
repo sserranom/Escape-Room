@@ -1,4 +1,4 @@
-package cat.itacademy.escaperoom.database;
+package cat.itacademy.escaperoom.database.mysql;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

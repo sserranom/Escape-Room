@@ -1,8 +1,0 @@
-CREATE SCHEMA IF NOT EXISTS escape_room;
-USE escape_room;
-CREATE TABLE IF NOT EXISTS patata(
-    id INT NOT NULL AUTO_INCREMENT,
-    name VARCHAR(255) NOT NULL,
-    description TEXT NOT NULL,
-    PRIMARY KEY (id)
-)
