@@ -1,10 +1,10 @@
 package cat.itacademy.escaperoom.escaperoom;
 
-public class EscapeRoomCreator {
+public class CreateScapeRoom {
     private final EscapeRoom escapeRoom;
     private final EscapeRoomRepository repo;
 
-    public EscapeRoomCreator(EscapeRoom escapeRoom, EscapeRoomRepository repo ) {
+    public CreateScapeRoom(EscapeRoom escapeRoom, EscapeRoomRepository repo ) {
         this.escapeRoom = escapeRoom;
         this.repo = repo;
     }
