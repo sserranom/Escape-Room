@@ -1,7 +1,7 @@
 package cat.itacademy.escaperoom;
 
 
-import cat.itacademy.escaperoom.database.MySqlConnection;
+import cat.itacademy.escaperoom.database.mysql.MySqlConnection;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
