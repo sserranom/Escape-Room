@@ -6,15 +6,15 @@ import cat.itacademy.project.menu.shared.MenuScanner;
 import cat.itacademy.project.shared.domain.exceptions.AlreadyExistsException;
 import cat.itacademy.project.shared.domain.exceptions.EmptyFieldException;
 
-public class CreateController extends MenuCommand {
+import java.util.Optional;
+
+public class CreateController extends MenuCommand<Void> {
     private String name;
     private String url;
 
 
     @Override
-    public void execute() {
-        CreateEscapeRoomService service;
-        CreateEscapeRoomDTO createEscapeRoomDTO;
+    public Optional<Void> execute() {
         while (name == null || url == null) {
             try {
                 if (name == null) {
@@ -35,6 +35,7 @@ public class CreateController extends MenuCommand {
         } catch (Exception e) {
             error("Error: " + e.getMessage());
         }
+        return Optional.empty();
     }
 
     private void runService() {

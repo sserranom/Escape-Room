@@ -7,7 +7,7 @@ import java.sql.SQLException;
 
 public class EscapeRoomMySQLTestRepository extends EscapeRoomMySQLRepository {
     public EscapeRoomMySQLTestRepository() {
-
+        super();
     }
 
     public void restore() {
