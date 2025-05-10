@@ -1,6 +1,6 @@
 package cat.itacademy.escaperoom.escaperoom.application;
 
-import cat.itacademy.escaperoom.escaperoom.infrastructure.EscapeRoomMySQLTestRepository;
+import cat.itacademy.escaperoom.escaperoom.EscapeRoomMySQLTestRepository;
 import cat.itacademy.project.escaperoom.application.CreateEscapeRoom;
 import cat.itacademy.project.escaperoom.domain.CreateEscapeRoomDTO;
 import cat.itacademy.project.escaperoom.infrastructure.EscapeRoomMySQLRepository;
