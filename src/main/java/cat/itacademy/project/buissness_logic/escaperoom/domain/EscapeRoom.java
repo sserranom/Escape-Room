@@ -1,4 +1,7 @@
-package cat.itacademy.escaperoom.escaperoom;
+package cat.itacademy.project.buissness_logic.escaperoom.domain;
+
+import cat.itacademy.project.shared.domain.dtos.CreateEscapeRoomDTO;
+import cat.itacademy.project.shared.domain.dtos.EscapeRoomDTO;
 
 public class EscapeRoom  {
     private int id;
@@ -16,11 +19,11 @@ public class EscapeRoom  {
         this.url = url;
     }
 
-    public static EscapeRoom create(String name, String url) {
-        return new EscapeRoom(name, url);
+    public static EscapeRoom create(CreateEscapeRoomDTO dto) {
+        return new EscapeRoom(dto.name(), dto.url());
     }
-    public static EscapeRoom fromDatabase(int id, String name, String url) {
-        return new EscapeRoom(id, name, url);
+    public static EscapeRoom fromDatabase(EscapeRoomDTO dto) {
+        return new EscapeRoom(dto.id(), dto.name(), dto.url());
     }
 
     public String getName() {
