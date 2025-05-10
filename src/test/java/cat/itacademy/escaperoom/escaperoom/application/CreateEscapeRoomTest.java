@@ -1,9 +1,9 @@
 package cat.itacademy.escaperoom.escaperoom.application;
 
 import cat.itacademy.escaperoom.escaperoom.EscapeRoomMySQLTestRepository;
-import cat.itacademy.project.escaperoom.application.CreateEscapeRoom;
-import cat.itacademy.project.escaperoom.domain.CreateEscapeRoomDTO;
-import cat.itacademy.project.escaperoom.infrastructure.EscapeRoomMySQLRepository;
+import cat.itacademy.project.buissness_logic.escaperoom.application.CreateEscapeRoom;
+import cat.itacademy.project.shared.domain.dtos.CreateEscapeRoomDTO;
+import cat.itacademy.project.buissness_logic.escaperoom.infrastructure.EscapeRoomMySQLRepository;
 import cat.itacademy.project.shared.domain.exceptions.AlreadyExistsException;
 import cat.itacademy.project.shared.domain.exceptions.EmptyFieldException;
 import org.assertj.core.api.Assertions;

@@ -1,4 +1,4 @@
-package cat.itacademy.project.menu.shared;
+package cat.itacademy.project.frontend.shared;
 
 import cat.itacademy.project.shared.domain.exceptions.EmptyFieldException;
 
@@ -7,6 +7,9 @@ import java.util.Scanner;
 public class MenuScanner {
     private static final Scanner scanner = new Scanner(System.in);
 
+    private MenuScanner() {
+        // Prevent instantiation
+    }
 
     public static String readString(String message) {
         System.out.print(message);

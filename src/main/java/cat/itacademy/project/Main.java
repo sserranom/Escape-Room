@@ -1,11 +1,7 @@
 package cat.itacademy.project;
 
 
-import cat.itacademy.project.escaperoom.domain.CreateEscapeRoomDTO;
-import cat.itacademy.project.escaperoom.application.CreateEscapeRoom;
-import cat.itacademy.project.escaperoom.infrastructure.EscapeRoomMySQLRepository;
-import cat.itacademy.project.menu.escaperoom.CreateController;
-import cat.itacademy.project.shared.domain.exceptions.CustomException;
+import cat.itacademy.project.frontend.escaperoom.CreateEscapeRoomMenu;
 
 public class Main {
     public static void main(String[] args) {
@@ -17,8 +13,8 @@ public class Main {
 
          */
 
-        CreateController controller = new CreateController();
-        controller.execute();
+        CreateEscapeRoomMenu menu = new CreateEscapeRoomMenu();
+        menu.execute();
         /*
          una vez el escape esta cargado tienes opciones:
          editar escaperoom

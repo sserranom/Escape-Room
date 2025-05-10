@@ -1,9 +1,10 @@
-package cat.itacademy.project.escaperoom.infrastructure;
+package cat.itacademy.project.buissness_logic.escaperoom.infrastructure;
 
+import cat.itacademy.project.shared.domain.exceptions.DatabaseException;
 import cat.itacademy.project.shared.infrastructure.database.mysql.MySqlConnection;
-import cat.itacademy.project.escaperoom.domain.EscapeRoom;
-import cat.itacademy.project.escaperoom.domain.EscapeRoomDTO;
-import cat.itacademy.project.escaperoom.domain.EscapeRoomRepository;
+import cat.itacademy.project.buissness_logic.escaperoom.domain.EscapeRoom;
+import cat.itacademy.project.shared.domain.dtos.EscapeRoomDTO;
+import cat.itacademy.project.buissness_logic.escaperoom.domain.EscapeRoomRepository;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -27,7 +28,7 @@ public class EscapeRoomMySQLRepository implements EscapeRoomRepository {
             preparedStatement.setString(2, escapeRoom.getUrl());
             preparedStatement.executeUpdate();
         } catch (Exception e) {
-            System.out.println("Error saving escape room: " + e.getMessage());
+            throw new DatabaseException("Error saving escape room: " + e.getMessage());
         }
     }
 
@@ -68,7 +69,7 @@ public class EscapeRoomMySQLRepository implements EscapeRoomRepository {
                         )));
             }
         } catch (Exception e) {
-            System.out.println("Error while finding escape room: " + e.getMessage());
+            throw new DatabaseException("Error while finding escape room: " + e.getMessage());
         }
         return Optional.empty();
     }

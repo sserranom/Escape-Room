@@ -1,4 +1,7 @@
-package cat.itacademy.project.escaperoom.domain;
+package cat.itacademy.project.buissness_logic.escaperoom.domain;
+
+import cat.itacademy.project.shared.domain.dtos.CreateEscapeRoomDTO;
+import cat.itacademy.project.shared.domain.dtos.EscapeRoomDTO;
 
 public class EscapeRoom  {
     private int id;

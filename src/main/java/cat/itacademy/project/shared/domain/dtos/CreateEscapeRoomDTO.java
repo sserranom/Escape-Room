@@ -1,4 +1,4 @@
-package cat.itacademy.project.escaperoom.domain;
+package cat.itacademy.project.shared.domain.dtos;
 
 import cat.itacademy.project.shared.domain.exceptions.EmptyFieldException;
 
