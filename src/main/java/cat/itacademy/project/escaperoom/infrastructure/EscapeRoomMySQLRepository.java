@@ -1,21 +1,26 @@
-package cat.itacademy.escaperoom.escaperoom;
+package cat.itacademy.project.escaperoom.infrastructure;
 
-import cat.itacademy.escaperoom.database.mysql.MySqlConnection;
+import cat.itacademy.project.shared.infrastructure.database.mysql.MySqlConnection;
+import cat.itacademy.project.escaperoom.domain.EscapeRoom;
+import cat.itacademy.project.escaperoom.domain.EscapeRoomDTO;
+import cat.itacademy.project.escaperoom.domain.EscapeRoomRepository;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.Statement;
+import java.util.List;
+import java.util.Optional;
 
-public class EscapeRoomRepository  {
+public class EscapeRoomMySQLRepository implements EscapeRoomRepository {
 
-    private final Connection connection;
+    protected final Connection connection;
 
-    public EscapeRoomRepository() {
+    public EscapeRoomMySQLRepository() {
         this.connection = MySqlConnection.getInstance();
     }
 
-    public void create(EscapeRoom  escapeRoom)  {
+    @Override
+    public void create(EscapeRoom escapeRoom)  {
         String sql = "INSERT INTO escape_rooms (name, url) VALUES (?, ?)";
         try (var preparedStatement = connection.prepareStatement(sql)) {
             preparedStatement.setString(1, escapeRoom.getName());
@@ -26,23 +31,28 @@ public class EscapeRoomRepository  {
         }
     }
 
-    public void update( EscapeRoom escapeRoom) {
+    @Override
+    public void update(EscapeRoom escapeRoom) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
+    @Override
     public void delete(int id) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
-    public void findById(int id) {
+    @Override
+    public Optional<EscapeRoom> findById(int id) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
-    public void findAll() {
+    @Override
+    public List<EscapeRoom> findAll() {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
-    public EscapeRoom findByName(String name) {
+    @Override
+    public Optional<EscapeRoom> findByName(String name) {
         String sql = "SELECT * FROM escape_rooms WHERE name = ?";
         try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             // Set the "name" parameter in the SQL query
@@ -51,11 +61,15 @@ public class EscapeRoomRepository  {
             // Execute the query
             ResultSet rs = preparedStatement.executeQuery();
             if (rs.next()) {
-                return EscapeRoom.fromDatabase(rs.getInt("id"), rs.getString("name"), rs.getString("url"));
+                return Optional.of(EscapeRoom.fromDatabase(
+                        new EscapeRoomDTO(rs.getInt("id"),
+                                rs.getString("name"),
+                                rs.getString("url")
+                        )));
             }
         } catch (Exception e) {
             System.out.println("Error while finding escape room: " + e.getMessage());
         }
-        return null;
+        return Optional.empty();
     }
 }
