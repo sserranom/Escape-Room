@@ -9,6 +9,7 @@ import cat.itacademy.project.buissness_logic.escaperoom.domain.EscapeRoomReposit
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -49,7 +50,23 @@ public class EscapeRoomMySQLRepository implements EscapeRoomRepository {
 
     @Override
     public List<EscapeRoom> findAll() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        String sql = "SELECT  * FROM escape_rooms";
+        List<EscapeRoom> escapeRooms = new ArrayList<>();
+        try (PreparedStatement preparedStatement = connection.prepareStatement(sql);
+             ResultSet rs = preparedStatement.executeQuery()){
+            while (rs.next()){
+                escapeRooms.add(EscapeRoom.fromDatabase(
+                        new EscapeRoomDTO(
+                                rs.getInt("id"),
+                                rs.getString("name"),
+                                rs.getString("url")
+                        )
+                ));
+            }
+        }catch (Exception e){
+                throw new DatabaseException("Error while finding all escape rooms: " + e.getMessage());
+        }
+        return escapeRooms;
     }
 
     @Override

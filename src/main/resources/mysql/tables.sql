@@ -21,7 +21,7 @@ description VARCHAR(255) NOT NULL,
 type ENUM('furniture', 'garnishment') NOT NULL,
 theme_id INT NOT NULL,
 escaperoom_id INT NOT NULL,
-price DECIMAL (10,2) NOT NULL,  
+price DECIMAL (10,2) NOT NULL,
 FOREIGN KEY (escaperoom_id) REFERENCES escape_rooms(id),
 FOREIGN KEY (theme_id) REFERENCES themes(id)
 );
@@ -55,7 +55,7 @@ name VARCHAR(255) NOT NULL
 CREATE TABLE puzzle_packs(
 name VARCHAR(255) NOT NULL,
 puzzle_id INT,
-pack_id INT, 
+pack_id INT,
 PRIMARY KEY (puzzle_id, pack_id),
 FOREIGN KEY (puzzle_id) REFERENCES puzzles(id),
 FOREIGN KEY (pack_id) REFERENCES packs(id)
@@ -82,7 +82,7 @@ FOREIGN KEY (pack_id) REFERENCES packs(id)
 CREATE TABLE notifications (
 id INT auto_increment PRIMARY KEY,
 customer_id INT NOT NULL,
-message TEXT NOT NULL, 
+message TEXT NOT NULL,
 FOREIGN KEY (customer_id) REFERENCES customers(id)
 );
 
