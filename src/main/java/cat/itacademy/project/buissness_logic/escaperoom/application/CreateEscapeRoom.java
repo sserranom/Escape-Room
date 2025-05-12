@@ -1,8 +1,8 @@
 package cat.itacademy.project.buissness_logic.escaperoom.application;
 
-import cat.itacademy.project.shared.domain.dtos.CreateEscapeRoomDTO;
 import cat.itacademy.project.buissness_logic.escaperoom.domain.EscapeRoom;
 import cat.itacademy.project.buissness_logic.escaperoom.domain.EscapeRoomRepository;
+import cat.itacademy.project.shared.domain.dtos.CreateEscapeRoomDTO;
 import cat.itacademy.project.shared.domain.exceptions.AlreadyExistsException;
 
 import java.util.Optional;
@@ -11,12 +11,12 @@ public final class CreateEscapeRoom {
     private final EscapeRoom escapeRoom;
     private final EscapeRoomRepository repo;
 
-    public CreateEscapeRoom(CreateEscapeRoomDTO request, EscapeRoomRepository repo ) {
+    public CreateEscapeRoom(CreateEscapeRoomDTO request, EscapeRoomRepository repo) {
         this.escapeRoom = EscapeRoom.create(request);
         this.repo = repo;
     }
 
-    public void create() throws AlreadyExistsException {
+    public void create() {
         ensureDoesNotExist();
         repo.create(escapeRoom);
     }
