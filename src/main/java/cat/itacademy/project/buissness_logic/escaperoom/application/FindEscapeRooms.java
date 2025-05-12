@@ -7,6 +7,7 @@ import cat.itacademy.project.shared.domain.dtos.EscapeRoomDTO;
 import java.util.List;
 import java.util.stream.Collectors;
 
+
 public class FindEscapeRooms {
     private final EscapeRoomRepository repo;
 
@@ -17,12 +18,7 @@ public class FindEscapeRooms {
     public List<EscapeRoomDTO> findAll() {
         List<EscapeRoom> escapeRooms = repo.findAll();
         return escapeRooms.stream()
-                .map(escapeRoom -> new EscapeRoomDTO(
-                        escapeRoom.getId(),
-                        escapeRoom.getName(),
-                        escapeRoom.getUrl()
-                ))
+                .map(EscapeRoom::toDTO)
                 .collect(Collectors.toList());
     }
-
 }

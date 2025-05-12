@@ -16,6 +16,7 @@ public class FindEscapeRoomsController extends MenuCommand<List<EscapeRoomDTO>> 
     public FindEscapeRoomsController(FindEscapeRooms service) {
         this.service = service;
     }
+
     public FindEscapeRoomsController() {
         EscapeRoomRepository repo = new EscapeRoomMySQLRepository(MySqlConnection.getInstance());
         this.service = new FindEscapeRooms(repo);
@@ -25,11 +26,11 @@ public class FindEscapeRoomsController extends MenuCommand<List<EscapeRoomDTO>> 
     @Override
     public Optional<List<EscapeRoomDTO>> execute() {
         List<EscapeRoomDTO> escapeRooms = service.findAll();
-        if (escapeRooms.isEmpty()){
+        if (escapeRooms.isEmpty()) {
             info("No escape Rooms found.");
-        }else{
+        } else {
             info("List of escape Rooms");
-            escapeRooms.forEach(room -> log(room.name() + " (" + room.url() + ")" ));
+            escapeRooms.forEach(room -> log(room.name() + " (" + room.url() + ")"));
         }
         return Optional.of(escapeRooms);
     }

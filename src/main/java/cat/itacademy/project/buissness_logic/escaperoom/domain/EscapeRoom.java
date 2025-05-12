@@ -27,6 +27,10 @@ public class EscapeRoom {
         return new EscapeRoom(dto.id(), dto.name(), dto.url());
     }
 
+    public EscapeRoomDTO toDTO() {
+        return new EscapeRoomDTO(id, name, url);
+    }
+
     public String getName() {
         return name;
     }

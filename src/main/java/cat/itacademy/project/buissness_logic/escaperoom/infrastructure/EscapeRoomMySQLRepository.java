@@ -52,8 +52,8 @@ public class EscapeRoomMySQLRepository implements EscapeRoomRepository {
         String sql = "SELECT  * FROM escape_rooms";
         List<EscapeRoom> escapeRooms = new ArrayList<>();
         try (PreparedStatement preparedStatement = connection.prepareStatement(sql);
-             ResultSet rs = preparedStatement.executeQuery()){
-            while (rs.next()){
+             ResultSet rs = preparedStatement.executeQuery()) {
+            while (rs.next()) {
                 escapeRooms.add(EscapeRoom.fromDatabase(
                         new EscapeRoomDTO(
                                 rs.getInt("id"),
@@ -62,8 +62,8 @@ public class EscapeRoomMySQLRepository implements EscapeRoomRepository {
                         )
                 ));
             }
-        }catch (Exception e){
-                throw new DatabaseException("Error while finding all escape rooms: " + e.getMessage());
+        } catch (Exception e) {
+            throw new DatabaseException("Error while finding all escape rooms: " + e.getMessage());
         }
         return escapeRooms;
     }

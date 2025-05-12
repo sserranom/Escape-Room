@@ -101,6 +101,6 @@ CREATE TABLE rewards
     id            INT auto_increment PRIMARY KEY,
     recipient     VARCHAR(50)  NOT NULL,
     description   VARCHAR(255) NOT NULL,
-    emission_date  TIMESTAMP,
+    emission_date TIMESTAMP,
     delivery_date TIMESTAMP
 );
