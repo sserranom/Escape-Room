@@ -1,6 +1,4 @@
-DROP SCHEMA IF EXISTS escape_room;
-CREATE SCHEMA IF NOT EXISTS escape_room;
-USE escape_room;
+
 
 CREATE TABLE escape_rooms
 (
