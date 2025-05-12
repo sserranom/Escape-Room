@@ -28,6 +28,7 @@ public class MenuScanner {
         }
         return scanner.nextInt();
     }
+
     public static double readDouble(String message) {
         System.out.print(message);
         while (!scanner.hasNextDouble()) {

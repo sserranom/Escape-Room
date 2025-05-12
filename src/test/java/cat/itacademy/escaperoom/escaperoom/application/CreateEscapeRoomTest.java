@@ -1,24 +1,24 @@
 package cat.itacademy.escaperoom.escaperoom.application;
 
 import cat.itacademy.escaperoom.escaperoom.EscapeRoomMySQLTestRepository;
+import cat.itacademy.escaperoom.escaperoom.infrastructure.MySqlTestConnection;
 import cat.itacademy.project.buissness_logic.escaperoom.application.CreateEscapeRoom;
 import cat.itacademy.project.shared.domain.dtos.CreateEscapeRoomDTO;
-import cat.itacademy.project.buissness_logic.escaperoom.infrastructure.EscapeRoomMySQLRepository;
 import cat.itacademy.project.shared.domain.exceptions.AlreadyExistsException;
 import cat.itacademy.project.shared.domain.exceptions.EmptyFieldException;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class CreateEscapeRoomTest {
-    private EscapeRoomMySQLTestRepository repo;
+    private final EscapeRoomMySQLTestRepository repo = new EscapeRoomMySQLTestRepository(MySqlTestConnection.getInstance());
 
     @BeforeEach
     void setUp() {
-        repo = new EscapeRoomMySQLTestRepository();
         repo.restore();
     }
 
@@ -28,33 +28,48 @@ class CreateEscapeRoomTest {
     }
 
     @Test
-     void create_an_escape_room() {
-         CreateEscapeRoomDTO request = new CreateEscapeRoomDTO("Escape Room 1", "url");
-         CreateEscapeRoom creator = new CreateEscapeRoom(request, new EscapeRoomMySQLRepository());
-            creator.create();
+    void create_an_escape_room() {
+        CreateEscapeRoomDTO request = new CreateEscapeRoomDTO("Escape Room 1", "url");
+        CreateEscapeRoom creator = new CreateEscapeRoom(request, repo);
+        creator.create();
 
-            Assertions.assertThat(repo.findByName("Escape Room 1"))
-                    .isPresent()
-                    .hasValueSatisfying(escapeRoom -> {
-                        assertEquals("Escape Room 1", escapeRoom.getName());
-                        assertEquals("url", escapeRoom.getUrl());
-                    });
-     }
+        assertThat(repo.findByName("Escape Room 1"))
+                .isPresent()
+                .hasValueSatisfying(escapeRoom -> {
+                    assertEquals("Escape Room 1", escapeRoom.getName());
+                    assertEquals("url", escapeRoom.getUrl());
+                });
+    }
 
     @Test
     void throws_exception_when_escape_room_already_exists() {
         CreateEscapeRoomDTO request = new CreateEscapeRoomDTO("Escape Room 1", "url");
-        CreateEscapeRoom creator = new CreateEscapeRoom(request, new EscapeRoomMySQLRepository());
+        CreateEscapeRoom creator = new CreateEscapeRoom(request, repo);
         creator.create();
-
-        assertThrows(AlreadyExistsException.class, creator::create);
+        assertThatExceptionOfType(AlreadyExistsException.class)
+                .isThrownBy(creator::create)
+                .withMessage("Escape Room 'Escape Room 1' already exist");
     }
 
     @Test
     void throws_exception_when_fields_are_empty() {
 
-        assertThrows(EmptyFieldException.class, () -> new CreateEscapeRoomDTO("", "url"));
-        assertThrows(EmptyFieldException.class, () -> new CreateEscapeRoomDTO("hola", ""));
+        assertThatExceptionOfType(EmptyFieldException.class)
+                .isThrownBy(() -> new CreateEscapeRoomDTO("", "url"))
+                .withMessage("Name cannot be null or empty");
+        assertThatExceptionOfType(EmptyFieldException.class)
+                .isThrownBy(() -> new CreateEscapeRoomDTO("name", ""))
+                .withMessage("URL cannot be null or empty");
+    }
+
+    @Test
+    void throws_exception_when_fields_are_null() {
+        assertThatExceptionOfType(EmptyFieldException.class)
+                .isThrownBy(() -> new CreateEscapeRoomDTO(null, "url"))
+                .withMessage("Name cannot be null or empty");
+        assertThatExceptionOfType(EmptyFieldException.class)
+                .isThrownBy(() -> new CreateEscapeRoomDTO("name", null))
+                .withMessage("URL cannot be null or empty");
     }
 
 }

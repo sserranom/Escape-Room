@@ -15,5 +15,19 @@ services:
       - ./config/database:/docker-entrypoint-initdb.d
     restart: unless-stopped
 
+  mysql-test:
+    image: mysql:8.0
+    container_name: escape_room_mysql_test
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    ports:
+      - "${MYSQL_TEST_PORT}:3306"
+    volumes:
+      - ./config/database:/docker-entrypoint-initdb.d
+    restart: unless-stopped
+
 volumes:
   escape_data:

@@ -1,9 +1,9 @@
 package cat.itacademy.project.api.escaperoom.application;
 
 import cat.itacademy.project.buissness_logic.escaperoom.application.CreateEscapeRoom;
-import cat.itacademy.project.shared.domain.dtos.CreateEscapeRoomDTO;
 import cat.itacademy.project.buissness_logic.escaperoom.domain.EscapeRoomRepository;
 import cat.itacademy.project.frontend.shared.MenuCommand;
+import cat.itacademy.project.shared.domain.dtos.CreateEscapeRoomDTO;
 
 import java.util.Optional;
 
@@ -20,7 +20,7 @@ public class CreateEscapeRoomService extends MenuCommand<Void> {
     public Optional<Void> execute() {
         CreateEscapeRoom creator;
         creator = new CreateEscapeRoom(createEscapeRoomDTO, repo);
-            creator.create();
+        creator.create();
         return Optional.empty();
     }
 }

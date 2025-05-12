@@ -2,7 +2,7 @@ package cat.itacademy.project.frontend.shared;
 
 import cat.itacademy.project.shared.domain.Command;
 
-public abstract class MenuCommand<T> extends Command<T> {
+public abstract class MenuCommand<T> implements Command<T> {
     private static final String RESET_COLOR = "\u001B[0m";
     private static final String RED = "\u001B[31m";
     private static final String CYAN = "\u001B[36m";

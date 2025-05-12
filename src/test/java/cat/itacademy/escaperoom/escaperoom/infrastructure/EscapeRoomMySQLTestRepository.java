@@ -2,12 +2,13 @@ package cat.itacademy.escaperoom.escaperoom;
 
 import cat.itacademy.project.buissness_logic.escaperoom.infrastructure.EscapeRoomMySQLRepository;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class EscapeRoomMySQLTestRepository extends EscapeRoomMySQLRepository {
-    public EscapeRoomMySQLTestRepository() {
-        super();
+    public EscapeRoomMySQLTestRepository(Connection connection) {
+        super(connection);
     }
 
     public void restore() {

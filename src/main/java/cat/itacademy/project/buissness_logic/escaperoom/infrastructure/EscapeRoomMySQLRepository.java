@@ -1,10 +1,9 @@
 package cat.itacademy.project.buissness_logic.escaperoom.infrastructure;
 
-import cat.itacademy.project.shared.domain.exceptions.DatabaseException;
-import cat.itacademy.project.shared.infrastructure.database.mysql.MySqlConnection;
 import cat.itacademy.project.buissness_logic.escaperoom.domain.EscapeRoom;
-import cat.itacademy.project.shared.domain.dtos.EscapeRoomDTO;
 import cat.itacademy.project.buissness_logic.escaperoom.domain.EscapeRoomRepository;
+import cat.itacademy.project.shared.domain.dtos.EscapeRoomDTO;
+import cat.itacademy.project.shared.domain.exceptions.DatabaseException;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -16,12 +15,12 @@ public class EscapeRoomMySQLRepository implements EscapeRoomRepository {
 
     protected final Connection connection;
 
-    public EscapeRoomMySQLRepository() {
-        this.connection = MySqlConnection.getInstance();
+    public EscapeRoomMySQLRepository(Connection connection) {
+        this.connection = connection;
     }
 
     @Override
-    public void create(EscapeRoom escapeRoom)  {
+    public void create(EscapeRoom escapeRoom) {
         String sql = "INSERT INTO escape_rooms (name, url) VALUES (?, ?)";
         try (var preparedStatement = connection.prepareStatement(sql)) {
             preparedStatement.setString(1, escapeRoom.getName());

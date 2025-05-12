@@ -1,9 +1,9 @@
 package cat.itacademy.project.frontend.escaperoom;
 
 import cat.itacademy.project.api.escaperoom.application.CreateEscapeRoomController;
-import cat.itacademy.project.shared.domain.dtos.CreateEscapeRoomDTO;
 import cat.itacademy.project.frontend.shared.MenuCommand;
 import cat.itacademy.project.frontend.shared.MenuScanner;
+import cat.itacademy.project.shared.domain.dtos.CreateEscapeRoomDTO;
 import cat.itacademy.project.shared.domain.exceptions.AlreadyExistsException;
 import cat.itacademy.project.shared.domain.exceptions.EmptyFieldException;
 
