@@ -16,6 +16,7 @@ CREATE TABLE themes
     description VARCHAR(255) NOT NULL
 );
 
+
 CREATE TABLE deco
 (
     id            INT auto_increment PRIMARY KEY,
@@ -58,6 +59,7 @@ CREATE TABLE packs
     name VARCHAR(255) NOT NULL
 );
 
+
 CREATE TABLE puzzle_packs
 (
     name      VARCHAR(255) NOT NULL,
@@ -87,6 +89,7 @@ CREATE TABLE reservations
     FOREIGN KEY (customer_id) REFERENCES customers (id),
     FOREIGN KEY (pack_id) REFERENCES packs (id)
 );
+
 
 CREATE TABLE notifications
 (
