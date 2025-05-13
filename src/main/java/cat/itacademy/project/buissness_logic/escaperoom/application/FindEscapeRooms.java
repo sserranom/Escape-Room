@@ -18,7 +18,15 @@ public class FindEscapeRooms {
     public List<EscapeRoomDTO> findAll() {
         List<EscapeRoom> escapeRooms = repo.findAll();
         return escapeRooms.stream()
-                .map(EscapeRoom::toDTO)
+                .map(room -> new EscapeRoomDTO(
+                        room.getId(),
+                        room.getName(),
+                        room.getUrl()
+                ))
                 .collect(Collectors.toList());
+    }
+
+    public List<EscapeRoom> findAllRaw(){
+        return  repo.findAll();
     }
 }

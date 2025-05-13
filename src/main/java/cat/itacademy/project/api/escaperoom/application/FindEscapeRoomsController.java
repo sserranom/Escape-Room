@@ -1,6 +1,7 @@
 package cat.itacademy.project.api.escaperoom.application;
 
 import cat.itacademy.project.buissness_logic.escaperoom.application.FindEscapeRooms;
+import cat.itacademy.project.buissness_logic.escaperoom.domain.EscapeRoom;
 import cat.itacademy.project.buissness_logic.escaperoom.domain.EscapeRoomRepository;
 import cat.itacademy.project.buissness_logic.escaperoom.infrastructure.EscapeRoomMySQLRepository;
 import cat.itacademy.project.frontend.shared.MenuCommand;
@@ -10,7 +11,7 @@ import cat.itacademy.project.shared.infrastructure.database.mysql.MySqlConnectio
 import java.util.List;
 import java.util.Optional;
 
-public class FindEscapeRoomsController extends MenuCommand<List<EscapeRoomDTO>> {
+public class FindEscapeRoomsController extends MenuCommand<List<EscapeRoom>> {
     private final FindEscapeRooms service;
 
     public FindEscapeRoomsController(FindEscapeRooms service) {
@@ -24,13 +25,13 @@ public class FindEscapeRoomsController extends MenuCommand<List<EscapeRoomDTO>> 
 
 
     @Override
-    public Optional<List<EscapeRoomDTO>> execute() {
-        List<EscapeRoomDTO> escapeRooms = service.findAll();
+    public Optional<List<EscapeRoom>> execute() {
+        List<EscapeRoom> escapeRooms = service.findAllRaw();
         if (escapeRooms.isEmpty()) {
             info("No escape Rooms found.");
         } else {
             info("List of escape Rooms");
-            escapeRooms.forEach(room -> log(room.name() + " (" + room.url() + ")"));
+            escapeRooms.forEach(room -> log(room.getName() + " (" + room.getUrl()+ ")"));
         }
         return Optional.of(escapeRooms);
     }
