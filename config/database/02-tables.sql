@@ -1,3 +1,8 @@
+DROP DATABASE IF EXISTS escape_room
+
+CREATE DATABASE escape_room;
+USE escape_room;
+
 
 CREATE TABLE escape_rooms
 (
@@ -10,7 +15,9 @@ CREATE TABLE themes
 (
     id          INT auto_increment PRIMARY KEY,
     name        VARCHAR(255) NOT NULL,
-    description VARCHAR(255) NOT NULL
+    description VARCHAR(255) NOT NULL,
+    escaperoom_id INT NOT NULL,
+    FOREIGN KEY (escaperoom_id) REFERENCES escape_rooms (id)
 );
 
 CREATE TABLE deco
