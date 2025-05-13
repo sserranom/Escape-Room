@@ -1,4 +1,4 @@
-DROP DATABASE IF EXISTS escape_room
+DROP DATABASE IF EXISTS escape_room;
 
 CREATE DATABASE escape_room;
 USE escape_room;
