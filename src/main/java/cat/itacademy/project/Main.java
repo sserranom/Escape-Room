@@ -3,6 +3,7 @@ package cat.itacademy.project;
 
 import cat.itacademy.project.frontend.escaperoom.CreateEscapeRoomMenu;
 import cat.itacademy.project.frontend.escaperoom.FindEscapeRoomsMenu;
+import cat.itacademy.project.frontend.theme.CreateThemeMenu;
 
 public class Main {
     public static void main(String[] args) {
@@ -19,6 +20,10 @@ public class Main {
 
         FindEscapeRoomsMenu findMenu = new FindEscapeRoomsMenu();
         findMenu.execute();
+
+        CreateThemeMenu createThemeMenu = new CreateThemeMenu();
+
+        createThemeMenu.execute();
         /*
          una vez el escape esta cargado tienes opciones:
          editar escaperoom
