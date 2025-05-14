@@ -43,6 +43,7 @@ public class EscapeRoom {
         return id;
     }
 
+
     @Override
     public String toString() {
         return "EscapeRoom{" +
@@ -50,5 +51,13 @@ public class EscapeRoom {
                 ", name='" + name + '\'' +
                 ", url='" + url + '\'' +
                 '}';
+    }
+
+    public EscapeRoom withName(String newName) {
+        return new EscapeRoom(this.id, newName, this.url);
+    }
+
+    public EscapeRoom withUrl(String newUrl) {
+        return new EscapeRoom(this.id, this.name, newUrl);
     }
 }

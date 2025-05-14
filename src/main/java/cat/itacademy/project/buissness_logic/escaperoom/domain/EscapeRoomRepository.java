@@ -8,7 +8,7 @@ public interface EscapeRoomRepository {
 
     void update(EscapeRoom escapeRoom);
 
-    void delete(int id);
+    Optional<Void> delete(int id);
 
     Optional<EscapeRoom> findById(int id);
 
