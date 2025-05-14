@@ -4,10 +4,12 @@ import cat.itacademy.project.buissness_logic.escaperoom.domain.EscapeRoom;
 import cat.itacademy.project.buissness_logic.escaperoom.domain.EscapeRoomRepository;
 import cat.itacademy.project.shared.domain.dtos.EscapeRoomDTO;
 import cat.itacademy.project.shared.domain.exceptions.DatabaseException;
+import cat.itacademy.project.shared.domain.exceptions.NotFoundException;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -33,18 +35,53 @@ public class EscapeRoomMySQLRepository implements EscapeRoomRepository {
     }
 
     @Override
-    public void update(EscapeRoom escapeRoom) {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public void update(EscapeRoom escapeRoom)  {
+        String sql = "UPDATE escape_rooms Set name = ?, url = ? WHERE id = ?";
+        try (var preparedStatement = connection.prepareStatement(sql)){
+            preparedStatement.setString(1, escapeRoom.getName());
+            preparedStatement.setString(2, escapeRoom.getUrl());
+            preparedStatement.setInt(3, escapeRoom.getId());
+            int rowUpdated = preparedStatement.executeUpdate();
+            if (rowUpdated == 0){
+                throw new NotFoundException("Escape room with ID " + escapeRoom.getId() + " not found.");
+            }
+        }catch (SQLException | NotFoundException e){
+            throw new DatabaseException("Error updating escape room: " + e.getMessage());
+        }
+
     }
 
     @Override
-    public void delete(int id) {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public Optional<Boolean> delete(int id) {
+        String sql = "DELETE FROM escape_rooms WHERE id = ?";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+            preparedStatement.setInt(1, id);
+            int rowsDeleted = preparedStatement.executeUpdate();
+            if (rowsDeleted > 0) {
+                return Optional.of(true); // Indicación explícita de eliminación exitosa
+            } else {
+                return Optional.of(false); // Indicación explícita de no encontrado
+            }
+        } catch (SQLException e) {
+            throw new DatabaseException("Error deleting escape room: " + e.getMessage());
+        }
     }
 
     @Override
     public Optional<EscapeRoom> findById(int id) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        String sql = "SELECT id, name, url FROM escape_rooms WHERE id = ?";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+            preparedStatement.setInt(1, id);
+            ResultSet rs = preparedStatement.executeQuery();
+            if (rs.next()) {
+                return Optional.of(EscapeRoom.fromDatabase(
+                        new EscapeRoomDTO(rs.getInt("id"), rs.getString("name"), rs.getString("url"))
+                ));
+            }
+        } catch (SQLException e) {
+            throw new DatabaseException("Error finding escape room by id: " + e.getMessage());
+        }
+        return Optional.empty();
     }
 
     @Override
