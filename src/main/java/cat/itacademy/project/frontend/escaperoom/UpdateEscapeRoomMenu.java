@@ -4,7 +4,6 @@ import cat.itacademy.project.api.escaperoom.application.UpdateEscapeRoomControll
 import cat.itacademy.project.frontend.shared.MenuCommand;
 import cat.itacademy.project.frontend.shared.MenuScanner;
 import cat.itacademy.project.shared.domain.dtos.UpdateEscapeRoomDTO;
-import cat.itacademy.project.shared.domain.exceptions.NotFoundException;
 
 import java.util.Optional;
 
@@ -13,14 +12,10 @@ public class UpdateEscapeRoomMenu extends MenuCommand<Void> {
     @Override
     public Optional<Void> execute() {
         try {
-            String nameToUpdate = MenuScanner.readString("Enter the name of the escape room to update: ");
-            String newName = MenuScanner.readString("Enter the new name: ");
-            String newUrl = MenuScanner.readString("Enter the new URL: ");
-
-            UpdateEscapeRoomDTO dto = new UpdateEscapeRoomDTO(nameToUpdate, newName.isEmpty() ? null : newName, newUrl.isEmpty() ? null : newUrl);
+            UpdateEscapeRoomDTO dto = getInfo();
             UpdateEscapeRoomController controller = new UpdateEscapeRoomController(dto);
             controller.execute();
-            info("Escape room with name '" + nameToUpdate + "' updated successfully.");
+            info("Escape room with name '" + dto.nameToUpdate() + "' updated successfully.");
 
         }catch (IllegalArgumentException e){
             error("Error: " + e.getMessage());
@@ -28,5 +23,14 @@ public class UpdateEscapeRoomMenu extends MenuCommand<Void> {
             error("An unexpected error occurred: " + e.getMessage());
         }
         return Optional.empty();
+    }
+
+    private UpdateEscapeRoomDTO getInfo(){
+        String nameToUpdate = MenuScanner.readString("Enter the name of the escape room to update: ");
+        String newName = MenuScanner.readString("Enter the new name: ");
+        String newUrl = MenuScanner.readString("Enter the new URL: ");
+
+        return new UpdateEscapeRoomDTO(nameToUpdate, newName.isEmpty() ? null : newName, newUrl.isEmpty() ? null : newUrl);
+
     }
 }

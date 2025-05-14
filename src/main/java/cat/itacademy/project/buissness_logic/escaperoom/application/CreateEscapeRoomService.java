@@ -7,16 +7,16 @@ import cat.itacademy.project.shared.domain.exceptions.AlreadyExistsException;
 
 import java.util.Optional;
 
-public final class CreateEscapeRoom {
+public final class CreateEscapeRoomService {
     private final EscapeRoom escapeRoom;
     private final EscapeRoomRepository repo;
 
-    public CreateEscapeRoom(CreateEscapeRoomDTO request, EscapeRoomRepository repo) {
+    public CreateEscapeRoomService(CreateEscapeRoomDTO request, EscapeRoomRepository repo) {
         this.escapeRoom = EscapeRoom.create(request);
         this.repo = repo;
     }
 
-    public void create() {
+    public void execute() {
         ensureDoesNotExist();
         repo.create(escapeRoom);
     }

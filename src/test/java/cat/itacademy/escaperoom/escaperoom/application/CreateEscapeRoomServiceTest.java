@@ -2,7 +2,7 @@ package cat.itacademy.escaperoom.escaperoom.application;
 
 import cat.itacademy.escaperoom.escaperoom.EscapeRoomMySQLTestRepository;
 import cat.itacademy.escaperoom.escaperoom.infrastructure.MySqlTestConnection;
-import cat.itacademy.project.buissness_logic.escaperoom.application.CreateEscapeRoom;
+import cat.itacademy.project.buissness_logic.escaperoom.application.CreateEscapeRoomService;
 import cat.itacademy.project.shared.domain.dtos.CreateEscapeRoomDTO;
 import cat.itacademy.project.shared.domain.exceptions.AlreadyExistsException;
 import cat.itacademy.project.shared.domain.exceptions.EmptyFieldException;
@@ -14,7 +14,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class CreateEscapeRoomTest {
+class CreateEscapeRoomServiceTest {
     private final EscapeRoomMySQLTestRepository repo = new EscapeRoomMySQLTestRepository(MySqlTestConnection.getInstance());
 
     @BeforeEach
@@ -28,10 +28,10 @@ class CreateEscapeRoomTest {
     }
 
     @Test
-    void create_an_escape_room() {
+    void execute_an_escape_room() {
         CreateEscapeRoomDTO request = new CreateEscapeRoomDTO("Escape Room 1", "url");
-        CreateEscapeRoom creator = new CreateEscapeRoom(request, repo);
-        creator.create();
+        CreateEscapeRoomService creator = new CreateEscapeRoomService(request, repo);
+        creator.execute();
 
         assertThat(repo.findByName("Escape Room 1"))
                 .isPresent()
@@ -44,10 +44,10 @@ class CreateEscapeRoomTest {
     @Test
     void throws_exception_when_escape_room_already_exists() {
         CreateEscapeRoomDTO request = new CreateEscapeRoomDTO("Escape Room 1", "url");
-        CreateEscapeRoom creator = new CreateEscapeRoom(request, repo);
-        creator.create();
+        CreateEscapeRoomService creator = new CreateEscapeRoomService(request, repo);
+        creator.execute();
         assertThatExceptionOfType(AlreadyExistsException.class)
-                .isThrownBy(creator::create)
+                .isThrownBy(creator::execute)
                 .withMessage("Escape Room 'Escape Room 1' already exist");
     }
 

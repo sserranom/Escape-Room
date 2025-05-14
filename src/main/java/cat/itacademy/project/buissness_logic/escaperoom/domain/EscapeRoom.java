@@ -53,11 +53,11 @@ public class EscapeRoom {
                 '}';
     }
 
-    public EscapeRoom withName(String newName) {
+    public EscapeRoom createNewInstanceWithName(String newName) {
         return new EscapeRoom(this.id, newName, this.url);
     }
 
-    public EscapeRoom withUrl(String newUrl) {
+    public EscapeRoom createNewInstanceWithUrl(String newUrl) {
         return new EscapeRoom(this.id, this.name, newUrl);
     }
 }
