@@ -16,31 +16,23 @@ public class Main {
         CreateEscapeRoomMenu menu = new CreateEscapeRoomMenu();
         menu.execute();
 //
-//        FindEscapeRoomsMenu findMenu = new FindEscapeRoomsMenu();
-//        findMenu.execute();
+        FindEscapeRoomsMenu findMenu = new FindEscapeRoomsMenu();
+        findMenu.execute();
 
 
 
-//        CreateThemeMenu createThemeMenu = new CreateThemeMenu();
-//        createThemeMenu.execute();
+        CreateThemeMenu createThemeMenu = new CreateThemeMenu();
+        createThemeMenu.execute();
 
-//        UpdateEscapeRoomMenu updateMenu = new UpdateEscapeRoomMenu();
-//        updateMenu.execute();
+        UpdateEscapeRoomMenu updateMenu = new UpdateEscapeRoomMenu();
+        updateMenu.execute();
 
-//        FindEscapeRoomByIdMenu findByIdMenu = new FindEscapeRoomByIdMenu();
-//        findByIdMenu.execute();
+        FindEscapeRoomByIdMenu findByIdMenu = new FindEscapeRoomByIdMenu();
+        findByIdMenu.execute();
 
         DeleteEscapeRoomMenu deleteRomm = new DeleteEscapeRoomMenu();
         deleteRomm.execute();
 
-        /*
-         una vez el escape esta cargado tienes opciones:
-         editar escaperoom
-         ver rooms
-         ver packs
-         etc
-
-         */
-
+     
     }
 }

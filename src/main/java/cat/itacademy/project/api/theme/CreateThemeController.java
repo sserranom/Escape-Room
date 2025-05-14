@@ -1,6 +1,6 @@
 package cat.itacademy.project.api.theme;
 
-import cat.itacademy.project.buissness_logic.themes.CreateNewTheme;
+import cat.itacademy.project.buissness_logic.themes.CreateNewThemeService;
 import cat.itacademy.project.buissness_logic.themes.CreateThemeDTO;
 import cat.itacademy.project.buissness_logic.themes.ThemeMySQLRepository;
 import cat.itacademy.project.buissness_logic.themes.ThemeRepository;
@@ -10,12 +10,12 @@ import cat.itacademy.project.shared.infrastructure.database.mysql.MySqlConnectio
 import java.util.Optional;
 
 public class CreateThemeController implements Command<Void> {
-    private final CreateNewTheme service;
+    private final CreateNewThemeService service;
 
     public CreateThemeController(CreateThemeDTO createThemeDTO) {
 
         ThemeRepository repo = new ThemeMySQLRepository(MySqlConnection.getInstance());
-        this.service = new CreateNewTheme(createThemeDTO, repo);
+        this.service = new CreateNewThemeService(createThemeDTO, repo);
     }
 
     public Optional<Void> execute() {
