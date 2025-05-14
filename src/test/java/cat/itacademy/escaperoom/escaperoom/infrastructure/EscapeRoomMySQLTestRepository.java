@@ -1,6 +1,6 @@
 package cat.itacademy.escaperoom.escaperoom;
 
-import cat.itacademy.project.buissness_logic.escaperoom.infrastructure.EscapeRoomMySQLRepository;
+import cat.itacademy.project.business_logic.escaperoom.infrastructure.EscapeRoomMySQLRepository;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

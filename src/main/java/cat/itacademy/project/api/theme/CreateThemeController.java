@@ -1,9 +1,9 @@
 package cat.itacademy.project.api.theme;
 
-import cat.itacademy.project.buissness_logic.themes.CreateNewThemeService;
-import cat.itacademy.project.buissness_logic.themes.CreateThemeDTO;
-import cat.itacademy.project.buissness_logic.themes.ThemeMySQLRepository;
-import cat.itacademy.project.buissness_logic.themes.ThemeRepository;
+import cat.itacademy.project.business_logic.themes.CreateNewThemeService;
+import cat.itacademy.project.shared.domain.dtos.CreateThemeDTO;
+import cat.itacademy.project.business_logic.themes.ThemeMySQLRepository;
+import cat.itacademy.project.business_logic.themes.ThemeRepository;
 import cat.itacademy.project.shared.domain.Command;
 import cat.itacademy.project.shared.infrastructure.database.mysql.MySqlConnection;
 

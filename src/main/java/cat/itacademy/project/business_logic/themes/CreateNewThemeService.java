@@ -1,4 +1,6 @@
-package cat.itacademy.project.buissness_logic.themes;
+package cat.itacademy.project.business_logic.themes;
+
+import cat.itacademy.project.shared.domain.dtos.CreateThemeDTO;
 
 public class CreateNewThemeService {
     private ThemeRepository repo;

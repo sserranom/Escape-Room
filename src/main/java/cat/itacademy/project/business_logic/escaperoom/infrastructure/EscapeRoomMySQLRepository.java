@@ -1,7 +1,7 @@
-package cat.itacademy.project.buissness_logic.escaperoom.infrastructure;
+package cat.itacademy.project.business_logic.escaperoom.infrastructure;
 
-import cat.itacademy.project.buissness_logic.escaperoom.domain.EscapeRoom;
-import cat.itacademy.project.buissness_logic.escaperoom.domain.EscapeRoomRepository;
+import cat.itacademy.project.business_logic.escaperoom.domain.EscapeRoom;
+import cat.itacademy.project.business_logic.escaperoom.domain.EscapeRoomRepository;
 import cat.itacademy.project.shared.domain.dtos.EscapeRoomDTO;
 import cat.itacademy.project.shared.domain.exceptions.DatabaseException;
 import cat.itacademy.project.shared.domain.exceptions.NotFoundException;

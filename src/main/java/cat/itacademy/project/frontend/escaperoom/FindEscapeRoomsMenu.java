@@ -1,7 +1,7 @@
 package cat.itacademy.project.frontend.escaperoom;
 
 import cat.itacademy.project.api.escaperoom.application.FindEscapeRoomsController;
-import cat.itacademy.project.buissness_logic.escaperoom.domain.EscapeRoom;
+import cat.itacademy.project.business_logic.escaperoom.domain.EscapeRoom;
 import cat.itacademy.project.frontend.shared.MenuCommand;
 
 import java.util.List;
