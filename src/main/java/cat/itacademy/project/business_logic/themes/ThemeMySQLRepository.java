@@ -1,5 +1,6 @@
-package cat.itacademy.project.buissness_logic.themes;
+package cat.itacademy.project.business_logic.themes;
 
+import cat.itacademy.project.shared.domain.dtos.ThemeDTO;
 import cat.itacademy.project.shared.domain.exceptions.DatabaseException;
 
 import java.sql.Connection;
@@ -57,7 +58,7 @@ public class ThemeMySQLRepository implements ThemeRepository {
                                 rs.getInt("id"),
                                 rs.getString("name"),
                                 rs.getString("description"),
-                                rs.getInt("EscapeRoomId")
+                                rs.getInt("escaperoom_id")
                         )
                 ));
             }

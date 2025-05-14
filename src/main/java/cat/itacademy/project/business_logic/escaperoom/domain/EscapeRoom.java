@@ -1,4 +1,4 @@
-package cat.itacademy.project.buissness_logic.escaperoom.domain;
+package cat.itacademy.project.business_logic.escaperoom.domain;
 
 import cat.itacademy.project.shared.domain.dtos.CreateEscapeRoomDTO;
 import cat.itacademy.project.shared.domain.dtos.EscapeRoomDTO;

@@ -1,9 +1,11 @@
-package cat.itacademy.project.buissness_logic.themes;
+package cat.itacademy.project.business_logic.themes;
 
-import cat.itacademy.project.buissness_logic.escaperoom.application.FindEscapeRoomsService;
-import cat.itacademy.project.buissness_logic.escaperoom.domain.EscapeRoom;
-import cat.itacademy.project.buissness_logic.escaperoom.infrastructure.EscapeRoomMySQLRepository;
+import cat.itacademy.project.business_logic.escaperoom.application.FindEscapeRoomsService;
+import cat.itacademy.project.business_logic.escaperoom.domain.EscapeRoom;
+import cat.itacademy.project.business_logic.escaperoom.infrastructure.EscapeRoomMySQLRepository;
+import cat.itacademy.project.shared.domain.dtos.CreateThemeDTO;
 import cat.itacademy.project.shared.domain.dtos.EscapeRoomDTO;
+import cat.itacademy.project.shared.domain.dtos.ThemeDTO;
 import cat.itacademy.project.shared.infrastructure.database.mysql.MySqlConnection;
 
 import java.util.List;

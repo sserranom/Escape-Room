@@ -1,4 +1,4 @@
-package cat.itacademy.project.buissness_logic.escaperoom.domain;
+package cat.itacademy.project.business_logic.escaperoom.domain;
 
 import java.util.List;
 import java.util.Optional;

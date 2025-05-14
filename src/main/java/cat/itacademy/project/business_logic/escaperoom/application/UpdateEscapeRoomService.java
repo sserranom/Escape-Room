@@ -1,7 +1,7 @@
-package cat.itacademy.project.buissness_logic.escaperoom.application;
+package cat.itacademy.project.business_logic.escaperoom.application;
 
-import cat.itacademy.project.buissness_logic.escaperoom.domain.EscapeRoom;
-import cat.itacademy.project.buissness_logic.escaperoom.domain.EscapeRoomRepository;
+import cat.itacademy.project.business_logic.escaperoom.domain.EscapeRoom;
+import cat.itacademy.project.business_logic.escaperoom.domain.EscapeRoomRepository;
 import cat.itacademy.project.shared.domain.Command;
 import cat.itacademy.project.shared.domain.dtos.EscapeRoomDTO;
 import cat.itacademy.project.shared.domain.dtos.UpdateEscapeRoomDTO;

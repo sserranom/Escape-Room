@@ -1,7 +1,7 @@
 package cat.itacademy.project.frontend.theme;
 
 import cat.itacademy.project.api.theme.CreateThemeController;
-import cat.itacademy.project.buissness_logic.themes.CreateThemeDTO;
+import cat.itacademy.project.shared.domain.dtos.CreateThemeDTO;
 import cat.itacademy.project.frontend.shared.MenuCommand;
 import cat.itacademy.project.frontend.shared.MenuScanner;
 import cat.itacademy.project.shared.domain.exceptions.EmptyFieldException;

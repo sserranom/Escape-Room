@@ -1,9 +1,9 @@
 package cat.itacademy.project.api.escaperoom.application;
 
-import cat.itacademy.project.buissness_logic.escaperoom.application.FindEscapeRoomsService;
-import cat.itacademy.project.buissness_logic.escaperoom.domain.EscapeRoom;
-import cat.itacademy.project.buissness_logic.escaperoom.domain.EscapeRoomRepository;
-import cat.itacademy.project.buissness_logic.escaperoom.infrastructure.EscapeRoomMySQLRepository;
+import cat.itacademy.project.business_logic.escaperoom.application.FindEscapeRoomsService;
+import cat.itacademy.project.business_logic.escaperoom.domain.EscapeRoom;
+import cat.itacademy.project.business_logic.escaperoom.domain.EscapeRoomRepository;
+import cat.itacademy.project.business_logic.escaperoom.infrastructure.EscapeRoomMySQLRepository;
 import cat.itacademy.project.frontend.shared.MenuCommand;
 import cat.itacademy.project.shared.infrastructure.database.mysql.MySqlConnection;
 

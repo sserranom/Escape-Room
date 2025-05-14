@@ -1,9 +1,9 @@
-package cat.itacademy.project.buissness_logic.themes;
+package cat.itacademy.project.shared.domain.dtos;
 
 import cat.itacademy.project.shared.domain.exceptions.EmptyFieldException;
 
-public record CreateThemeDTO(String name, String description, int escapeRoomId) {
-    public CreateThemeDTO {
+public record ThemeDTO(int id, String name, String description, int escapeRoomId) {
+    public ThemeDTO {
         if (name == null || name.isBlank()) {
             throw new EmptyFieldException("Name cannot be null or empty");
         }

@@ -1,8 +1,10 @@
 package cat.itacademy.project.frontend.theme;
 
 import cat.itacademy.project.api.theme.FindThemeController;
+import cat.itacademy.project.shared.domain.dtos.ThemeDTO;
 import cat.itacademy.project.frontend.shared.MenuCommand;
 
+import java.util.List;
 import java.util.Optional;
 
 public class FindThemeMenu extends MenuCommand<Void> {
@@ -11,7 +13,13 @@ public class FindThemeMenu extends MenuCommand<Void> {
     public Optional<Void> execute() {
 
         FindThemeController controller = new FindThemeController();
-        controller.execute();
+        Optional<List<ThemeDTO>> themes = controller.execute();
+        if (themes.isEmpty()) {
+            info("No themes found.");
+        } else {
+            info("List of themes:");
+            themes.get().forEach(theme -> log(theme.name() + " (" + theme.description() + ")" + " (" + theme.escapeRoomId() + ")"));
+        }
         return Optional.empty();
     }
 }

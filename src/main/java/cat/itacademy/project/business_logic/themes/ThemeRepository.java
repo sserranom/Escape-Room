@@ -1,4 +1,4 @@
-package cat.itacademy.project.buissness_logic.themes;
+package cat.itacademy.project.business_logic.themes;
 
 
 import java.util.List;
