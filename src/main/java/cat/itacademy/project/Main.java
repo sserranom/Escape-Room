@@ -13,16 +13,16 @@ public class Main {
 
          */
 
-//        CreateEscapeRoomMenu menu = new CreateEscapeRoomMenu();
-//        menu.execute();
+        CreateEscapeRoomMenu menu = new CreateEscapeRoomMenu();
+        menu.execute();
 //
 //        FindEscapeRoomsMenu findMenu = new FindEscapeRoomsMenu();
 //        findMenu.execute();
 
 
 
-        //CreateThemeMenu createThemeMenu = new CreateThemeMenu();
-        //createThemeMenu.execute();
+//        CreateThemeMenu createThemeMenu = new CreateThemeMenu();
+//        createThemeMenu.execute();
 
 //        UpdateEscapeRoomMenu updateMenu = new UpdateEscapeRoomMenu();
 //        updateMenu.execute();
@@ -30,8 +30,8 @@ public class Main {
 //        FindEscapeRoomByIdMenu findByIdMenu = new FindEscapeRoomByIdMenu();
 //        findByIdMenu.execute();
 
-        //DeleteEscapeRoomMenu deleteRomm = new DeleteEscapeRoomMenu();
-       // deleteRomm.execute();
+        DeleteEscapeRoomMenu deleteRomm = new DeleteEscapeRoomMenu();
+        deleteRomm.execute();
 
         /*
          una vez el escape esta cargado tienes opciones:

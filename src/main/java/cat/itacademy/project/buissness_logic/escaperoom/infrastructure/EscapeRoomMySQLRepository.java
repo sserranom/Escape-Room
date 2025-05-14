@@ -52,16 +52,20 @@ public class EscapeRoomMySQLRepository implements EscapeRoomRepository {
     }
 
     @Override
-    public Optional<Boolean> delete(int id) {
+    public Optional<Void> delete(int id) {
         String sql = "DELETE FROM escape_rooms WHERE id = ?";
         try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             preparedStatement.setInt(1, id);
             int rowsDeleted = preparedStatement.executeUpdate();
-            if (rowsDeleted > 0) {
-                return Optional.of(true); // Indicación explícita de eliminación exitosa
-            } else {
-                return Optional.of(false); // Indicación explícita de no encontrado
+            if (rowsDeleted == 0) {
+                throw new NotFoundException("Escape room with ID " + id + " not found.");
             }
+            return Optional.empty(); // Indicación explícita de eliminación exitosa
+//            if (rowsDeleted > 0) {
+//                return Optional.of(true); // Indicación explícita de eliminación exitosa
+//            } else {
+//                return Optional.of(false); // Indicación explícita de no encontrado
+//            }
         } catch (SQLException e) {
             throw new DatabaseException("Error deleting escape room: " + e.getMessage());
         }

@@ -4,11 +4,12 @@ import cat.itacademy.project.buissness_logic.escaperoom.domain.EscapeRoomReposit
 import cat.itacademy.project.buissness_logic.escaperoom.infrastructure.EscapeRoomMySQLRepository;
 import cat.itacademy.project.frontend.escaperoom.DeleteEscapeRoomMenu;
 import cat.itacademy.project.frontend.shared.MenuCommand;
+import cat.itacademy.project.shared.domain.Command;
 import cat.itacademy.project.shared.infrastructure.database.mysql.MySqlConnection;
 
 import java.util.Optional;
 
-public class DeleteEscapeRoomController extends MenuCommand<Boolean> {
+public class DeleteEscapeRoomController implements Command<Void> {
     private final DeleteEscapeRoomService service;
     private final int idToDelete;
 
@@ -19,12 +20,13 @@ public class DeleteEscapeRoomController extends MenuCommand<Boolean> {
     }
 
     @Override
-    public Optional<Boolean> execute() {
-        try {
-            return service.execute();
-        } catch (Exception e) {
-            error(e.getMessage());
-            return Optional.of(false);
-        }
+    public Optional<Void> execute() {
+//        try {
+            service.execute();
+            return Optional.empty();
+//        } catch (Exception e) {
+//            error(e.getMessage());
+//            return Optional.of(false);
+//        }
     }
 }
