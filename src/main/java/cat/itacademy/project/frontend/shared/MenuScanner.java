@@ -24,9 +24,9 @@ public class MenuScanner {
         System.out.print(message);
         while (!scanner.hasNextInt()) {
             System.out.print("Invalid input. Please enter a number: ");
-            scanner.next();
+            scanner.nextLine();
         }
-        return scanner.nextInt();
+        return Integer.parseInt(scanner.nextLine());
     }
 
     public static double readDouble(String message) {
@@ -35,7 +35,7 @@ public class MenuScanner {
             System.out.print("Invalid input. Please enter a number: ");
             scanner.next();
         }
-        return scanner.nextDouble();
+        return Double.parseDouble(scanner.nextLine());
     }
 
     public static void close() {
