@@ -52,13 +52,36 @@ public class EscapeRoomMySQLRepository implements EscapeRoomRepository {
     }
 
     @Override
-    public void delete(int id) {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public Optional<Boolean> delete(int id) {
+        String sql = "DELETE FROM escape_rooms WHERE id = ?";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+            preparedStatement.setInt(1, id);
+            int rowsDeleted = preparedStatement.executeUpdate();
+            if (rowsDeleted > 0) {
+                return Optional.of(true); // Indicación explícita de eliminación exitosa
+            } else {
+                return Optional.of(false); // Indicación explícita de no encontrado
+            }
+        } catch (SQLException e) {
+            throw new DatabaseException("Error deleting escape room: " + e.getMessage());
+        }
     }
 
     @Override
     public Optional<EscapeRoom> findById(int id) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        String sql = "SELECT id, name, url FROM escape_rooms WHERE id = ?";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+            preparedStatement.setInt(1, id);
+            ResultSet rs = preparedStatement.executeQuery();
+            if (rs.next()) {
+                return Optional.of(EscapeRoom.fromDatabase(
+                        new EscapeRoomDTO(rs.getInt("id"), rs.getString("name"), rs.getString("url"))
+                ));
+            }
+        } catch (SQLException e) {
+            throw new DatabaseException("Error finding escape room by id: " + e.getMessage());
+        }
+        return Optional.empty();
     }
 
     @Override
