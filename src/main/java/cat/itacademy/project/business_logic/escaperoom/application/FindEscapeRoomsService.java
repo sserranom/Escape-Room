@@ -18,17 +18,17 @@ public class FindEscapeRoomsService {
     }
 
     public List<EscapeRoomDTO> findAll() {
-        List<EscapeRoom> escapeRooms = repo.findAll();
-        return escapeRooms.stream()
-                .map(room -> new EscapeRoomDTO(
-                        room.getId(),
-                        room.getName(),
-                        room.getUrl()
-                ))
-                .collect(Collectors.toList());
+        return   repo.findAll();
+//        return escapeRooms.stream()
+//                .map(room -> new EscapeRoomDTO(
+//                        room.getId(),
+//                        room.getName(),
+//                        room.getUrl()
+//                ))
+//                .collect(Collectors.toList());
     }
 
-    public List<EscapeRoom> findAllRaw(){
+    public List<EscapeRoomDTO> findAllRaw(){
         return  repo.findAll();
     }
 

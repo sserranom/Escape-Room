@@ -1,5 +1,6 @@
 package cat.itacademy.project;
 
+import cat.itacademy.project.frontend.Menu;
 import cat.itacademy.project.frontend.theme.CreateThemeMenu;
 import cat.itacademy.project.frontend.escaperoom.*;
 import cat.itacademy.project.frontend.theme.FindThemeMenu;
@@ -34,11 +35,13 @@ public class Main {
 //        DeleteEscapeRoomMenu deleteRomm = new DeleteEscapeRoomMenu();
 //        deleteRomm.execute();
 
-        FindEscapeRoomsMenu findEscapeRoomsMenu = new FindEscapeRoomsMenu();
-        findEscapeRoomsMenu.execute();
-
-        FindThemeMenu findThemeMenu = new FindThemeMenu();
-        findThemeMenu.execute();
-     
+//        FindEscapeRoomsMenu findEscapeRoomsMenu = new FindEscapeRoomsMenu();
+//        findEscapeRoomsMenu.execute();
+//
+//        FindThemeMenu findThemeMenu = new FindThemeMenu();
+//        findThemeMenu.execute();
+//
+        Menu menu = new Menu();
+        menu.execute();
     }
 }
