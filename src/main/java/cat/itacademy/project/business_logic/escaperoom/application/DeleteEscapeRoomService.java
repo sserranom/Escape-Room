@@ -1,4 +1,4 @@
-package cat.itacademy.project.api.escaperoom.application;
+package cat.itacademy.project.business_logic.escaperoom.application;
 
 import cat.itacademy.project.business_logic.escaperoom.domain.EscapeRoomRepository;
 import cat.itacademy.project.frontend.shared.MenuCommand;
