@@ -51,7 +51,7 @@ public class RoomMySQLRepository implements RoomRepository {
     }
 
     @Override
-    public Optional<Object> delete(int id) {
+    public Optional<Void> delete(int id) {
         String sql = "DELETE FROM rooms WHERE id = ?";
         try (PreparedStatement preparedStatement = connection.prepareStatement(sql)){
             preparedStatement.setInt(1, id);

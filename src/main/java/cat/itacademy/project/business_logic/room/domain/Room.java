@@ -58,6 +58,10 @@ public class Room {
         return new Room(dto.id(), dto.name(), dto.price(), dto.escapeRoomId());
     }
 
+    public RoomDTO toDTO(){
+        return new RoomDTO(id, name, price, escapeRoomId);
+    }
+
     @Override
     public String toString() {
         return "Room{" +
@@ -66,5 +70,17 @@ public class Room {
                 ", price=" + price +
                 ", escapeRoomId=" + escapeRoomId +
                 '}';
+    }
+
+    public Room createNewInstanceWithName(String newName){
+        return new Room(this.id, newName, this.price, this.escapeRoomId);
+    }
+
+    public Room createNewInstanceWithPrice(double newPrice){
+        return new Room(this.id, this.name, newPrice, this.escapeRoomId);
+    }
+
+    public Room createNewInstanceWithEscapeRoomId (int newEscapeRoomId){
+        return new Room(this.id, this.name, this.price, newEscapeRoomId);
     }
 }

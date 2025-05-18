@@ -9,7 +9,7 @@ public interface RoomRepository {
 
     void update(Room room);
 
-    Optional<Object> delete(int id);
+    Optional<Void> delete(int id);
 
     Optional<Room> findById(int id);
 
