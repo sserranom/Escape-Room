@@ -10,10 +10,10 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 
-public class FindEscapeRoomsService {
+public class FindAllEscapeRoomsService {
     private final EscapeRoomRepository repo;
 
-    public FindEscapeRoomsService(EscapeRoomRepository repo) {
+    public FindAllEscapeRoomsService(EscapeRoomRepository repo) {
         this.repo = repo;
     }
 

@@ -1,15 +1,15 @@
-package cat.itacademy.project.api.escaperoom.application;
+package cat.itacademy.project.business_logic.room.application;
 
-import cat.itacademy.project.business_logic.escaperoom.domain.EscapeRoomRepository;
+import cat.itacademy.project.business_logic.room.domain.RoomRepository;
 import cat.itacademy.project.frontend.shared.MenuCommand;
 
 import java.util.Optional;
 
-public class DeleteEscapeRoomService extends MenuCommand<Boolean> {
-    private final EscapeRoomRepository repo;
+public class DeleteRoomService extends MenuCommand<Boolean> {
+    private final RoomRepository repo;
     private final int idToDelete;
 
-    public DeleteEscapeRoomService(int idToDelete, EscapeRoomRepository repo)  {
+    public DeleteRoomService(int idToDelete, RoomRepository repo) {
         this.repo = repo;
         this.idToDelete = idToDelete;
     }

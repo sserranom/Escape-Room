@@ -1,7 +1,6 @@
 package cat.itacademy.project.api.escaperoom.application;
 
-import cat.itacademy.project.business_logic.escaperoom.application.FindEscapeRoomsService;
-import cat.itacademy.project.business_logic.escaperoom.domain.EscapeRoom;
+import cat.itacademy.project.business_logic.escaperoom.application.FindAllEscapeRoomsService;
 import cat.itacademy.project.business_logic.escaperoom.domain.EscapeRoomRepository;
 import cat.itacademy.project.business_logic.escaperoom.infrastructure.EscapeRoomMySQLRepository;
 import cat.itacademy.project.frontend.shared.MenuCommand;
@@ -11,13 +10,13 @@ import cat.itacademy.project.shared.infrastructure.database.mysql.MySqlConnectio
 import java.util.List;
 import java.util.Optional;
 
-public class FindEscapeRoomsController extends MenuCommand<List<EscapeRoomDTO>> {
-    private final FindEscapeRoomsService service;
+public class FindAllEscapeRoomsController extends MenuCommand<List<EscapeRoomDTO>> {
+    private final FindAllEscapeRoomsService service;
 
 
-    public FindEscapeRoomsController() {
+    public FindAllEscapeRoomsController() {
         EscapeRoomRepository repo = new EscapeRoomMySQLRepository(MySqlConnection.getInstance());
-        this.service = new FindEscapeRoomsService(repo);
+        this.service = new FindAllEscapeRoomsService(repo);
     }
 
 

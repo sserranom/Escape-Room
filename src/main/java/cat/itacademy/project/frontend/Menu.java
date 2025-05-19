@@ -1,7 +1,7 @@
 package cat.itacademy.project.frontend;
 
 import cat.itacademy.project.frontend.escaperoom.CreateEscapeRoomMenu;
-import cat.itacademy.project.frontend.escaperoom.FindEscapeRoomsMenu;
+import cat.itacademy.project.frontend.escaperoom.FindAllEscapeRoomsMenu;
 import cat.itacademy.project.frontend.escaperoom.SelectActiveEscapeRoomMenu;
 import cat.itacademy.project.frontend.shared.MenuCommand;
 import cat.itacademy.project.shared.domain.dtos.EscapeRoomDTO;
@@ -11,12 +11,12 @@ import java.util.Optional;
 
 public class Menu extends MenuCommand<Void> {
     private final CreateEscapeRoomMenu createEscapeRoomMenu = new CreateEscapeRoomMenu();
-    FindEscapeRoomsMenu findEscapeRoomsMenu = new FindEscapeRoomsMenu();
+    FindAllEscapeRoomsMenu findAllEscapeRoomsMenu = new FindAllEscapeRoomsMenu();
     private EscapeRoomDTO activeRoom;
     private List<EscapeRoomDTO> existingRooms;
 
     private void getExistingEscapeRooms() {
-        Optional<List<EscapeRoomDTO>> response = findEscapeRoomsMenu.execute();
+        Optional<List<EscapeRoomDTO>> response = findAllEscapeRoomsMenu.execute();
         response.ifPresent(escapeRoomDTOS -> existingRooms = escapeRoomDTOS);
 
     }
