@@ -89,18 +89,18 @@ public class EscapeRoomMySQLRepository implements EscapeRoomRepository {
     }
 
     @Override
-    public List<EscapeRoom> findAll() {
+    public List<EscapeRoomDTO> findAll() {
         String sql = "SELECT  * FROM escape_rooms";
-        List<EscapeRoom> escapeRooms = new ArrayList<>();
+        List<EscapeRoomDTO> escapeRooms = new ArrayList<>();
         try (PreparedStatement preparedStatement = connection.prepareStatement(sql);
              ResultSet rs = preparedStatement.executeQuery()) {
             while (rs.next()) {
-                escapeRooms.add(EscapeRoom.fromDatabase(
+                escapeRooms.add(
                         new EscapeRoomDTO(
                                 rs.getInt("id"),
                                 rs.getString("name"),
                                 rs.getString("url")
-                        )
+
                 ));
             }
         } catch (Exception e) {

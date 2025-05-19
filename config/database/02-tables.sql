@@ -68,8 +68,8 @@ CREATE TABLE puzzle_packs
     puzzle_id INT,
     pack_id   INT,
     PRIMARY KEY (puzzle_id, pack_id),
-    FOREIGN KEY (puzzle_id) REFERENCES puzzles (id) ON DELETE CASCADE,
-    FOREIGN KEY (pack_id) REFERENCES packs (id) ON DELETE CASCADE
+    FOREIGN KEY (puzzle_id) REFERENCES puzzles (id) ON DELETE SET NULL ,
+    FOREIGN KEY (pack_id) REFERENCES packs (id) ON DELETE SET NULL
 );
 
 CREATE TABLE customers
@@ -83,21 +83,20 @@ CREATE TABLE reservations
 (
     id              INT auto_increment PRIMARY KEY,
     customer_id     INT      ,
-    pack_id         INT      NOT NULL,
+    pack_id         INT      ,
     total_price     DECIMAL(10, 2),
     creation_date   DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP(),
-    payment_date    DATETIME NULL,
     escaperoom_date DATETIME NOT NULL,
     FOREIGN KEY (customer_id) REFERENCES customers (id) ON DELETE SET NULL,
-    FOREIGN KEY (pack_id) REFERENCES packs (id) ON DELETE CASCADE
+    FOREIGN KEY (pack_id) REFERENCES packs (id) ON DELETE SET NULL
 );
 
 CREATE TABLE notifications
 (
     id          INT auto_increment PRIMARY KEY,
-    customer_id INT  NOT NULL,
-    message     TEXT NOT NULL,
-    FOREIGN KEY (customer_id) REFERENCES customers (id) ON DELETE CASCADE
+    recipient_name        VARCHAR(255) NOT NULL,
+    recipient_email       VARCHAR(255) NOT NULL,
+    message     TEXT NOT NULL
 );
 
 CREATE TABLE rewards
@@ -105,6 +104,5 @@ CREATE TABLE rewards
     id            INT auto_increment PRIMARY KEY,
     recipient     VARCHAR(50)  NOT NULL,
     description   VARCHAR(255) NOT NULL,
-    emission_date TIMESTAMP,
     delivery_date TIMESTAMP
 );
