@@ -36,7 +36,7 @@ public class RoomMySQLRepository implements RoomRepository {
 
     @Override
     public void update(Room room) {
-        String sql = "UPDATE rooms SET name = ?, price = ?, escaperoo_id = ? WHERE id = ?";
+        String sql = "UPDATE rooms SET name = ?, price = ?, escaperoom_id = ? WHERE id = ?";
         try (PreparedStatement preparedStatement = connection.prepareStatement(sql)){
             preparedStatement.setString(1, room.getName());
             preparedStatement.setDouble(2, room.getPrice());
@@ -114,7 +114,7 @@ public class RoomMySQLRepository implements RoomRepository {
                         new RoomDTO(rs.getInt("id"),
                                 rs.getString("name"),
                                 rs.getDouble("price"),
-                                rs.getInt("escapeRoomId")
+                                rs.getInt("escaperoom_id")
                         )));
             }
         }catch (Exception e){
