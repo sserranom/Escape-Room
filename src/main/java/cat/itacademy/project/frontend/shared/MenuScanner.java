@@ -35,7 +35,10 @@ public class MenuScanner {
             System.out.print("Invalid input. Please enter a number: ");
             scanner.next();
         }
-        return Double.parseDouble(scanner.nextLine());
+        double value = scanner.nextDouble();
+        scanner.nextLine();
+        return value;
+        //return Double.parseDouble(scanner.nextLine());
     }
 
     public static void close() {
