@@ -1,6 +1,9 @@
 package cat.itacademy.project;
 
-import cat.itacademy.project.frontend.theme.CreateThemeMenu;
+import cat.itacademy.project.frontend.Room.CreateRoomMenu;
+import cat.itacademy.project.frontend.Room.FindAllRoomMenu;
+import cat.itacademy.project.frontend.Room.FindRoomByIdMenu;
+import cat.itacademy.project.frontend.Room.UpdateRoomMenu;
 import cat.itacademy.project.frontend.escaperoom.*;
 import cat.itacademy.project.frontend.theme.FindThemeMenu;
 
@@ -34,11 +37,23 @@ public class Main {
 //        DeleteEscapeRoomMenu deleteRomm = new DeleteEscapeRoomMenu();
 //        deleteRomm.execute();
 
-        FindEscapeRoomsMenu findEscapeRoomsMenu = new FindEscapeRoomsMenu();
-        findEscapeRoomsMenu.execute();
+//        FindAllEscapeRoomsMenu findEscapeRoomsMenu = new FindAllEscapeRoomsMenu();
+//        findEscapeRoomsMenu.execute();
+//
+//        FindThemeMenu findThemeMenu = new FindThemeMenu();
+//        findThemeMenu.execute();
 
-        FindThemeMenu findThemeMenu = new FindThemeMenu();
-        findThemeMenu.execute();
+//        CreateRoomMenu createRoomMenu = new CreateRoomMenu();
+//        createRoomMenu.execute();
+
+//        FindAllRoomMenu findAllRoomMenu = new FindAllRoomMenu();
+//        findAllRoomMenu.execute();
+
+//        FindRoomByIdMenu findRoomByIdMenu = new FindRoomByIdMenu();
+//        findRoomByIdMenu.execute();
+
+        UpdateRoomMenu updateRoomMenu = new UpdateRoomMenu();
+        updateRoomMenu.execute();
      
     }
 }

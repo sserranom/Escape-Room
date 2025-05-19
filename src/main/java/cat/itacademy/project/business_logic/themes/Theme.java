@@ -1,6 +1,6 @@
 package cat.itacademy.project.business_logic.themes;
 
-import cat.itacademy.project.business_logic.escaperoom.application.FindEscapeRoomsService;
+import cat.itacademy.project.business_logic.escaperoom.application.FindAllEscapeRoomsService;
 import cat.itacademy.project.business_logic.escaperoom.domain.EscapeRoom;
 import cat.itacademy.project.business_logic.escaperoom.infrastructure.EscapeRoomMySQLRepository;
 import cat.itacademy.project.shared.domain.dtos.CreateThemeDTO;
@@ -56,7 +56,7 @@ public class Theme {
     }
 
     private static EscapeRoom getEscaperoomFromDto(ThemeDTO dto) {
-        FindEscapeRoomsService finder = new FindEscapeRoomsService(new EscapeRoomMySQLRepository(MySqlConnection.getInstance()));
+        FindAllEscapeRoomsService finder = new FindAllEscapeRoomsService(new EscapeRoomMySQLRepository(MySqlConnection.getInstance()));
         List<EscapeRoomDTO> escapeRoomList = finder.findAll();
         EscapeRoom escapeRoom = escapeRoomList.stream()
                 .filter(escapeRoomDTO -> escapeRoomDTO.id() == dto.escapeRoomId())
@@ -66,7 +66,7 @@ public class Theme {
         return escapeRoom;
     }
 private static EscapeRoom getEscaperoomFromDto(CreateThemeDTO dto) {
-        FindEscapeRoomsService finder = new FindEscapeRoomsService(new EscapeRoomMySQLRepository(MySqlConnection.getInstance()));
+        FindAllEscapeRoomsService finder = new FindAllEscapeRoomsService(new EscapeRoomMySQLRepository(MySqlConnection.getInstance()));
         List<EscapeRoomDTO> escapeRoomList = finder.findAll();
         EscapeRoom escapeRoom = escapeRoomList.stream()
                 .filter(escapeRoomDTO -> escapeRoomDTO.id() == dto.escapeRoomId())
