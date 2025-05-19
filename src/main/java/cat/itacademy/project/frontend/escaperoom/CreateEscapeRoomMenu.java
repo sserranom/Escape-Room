@@ -4,29 +4,32 @@ import cat.itacademy.project.api.escaperoom.application.CreateEscapeRoomControll
 import cat.itacademy.project.frontend.shared.MenuCommand;
 import cat.itacademy.project.frontend.shared.MenuScanner;
 import cat.itacademy.project.shared.domain.dtos.CreateEscapeRoomDTO;
+import cat.itacademy.project.shared.domain.dtos.EscapeRoomDTO;
 import cat.itacademy.project.shared.domain.exceptions.AlreadyExistsException;
 import cat.itacademy.project.shared.domain.exceptions.EmptyFieldException;
 
 import java.util.Optional;
 
-public class CreateEscapeRoomMenu extends MenuCommand<Void> {
+public class CreateEscapeRoomMenu extends MenuCommand<EscapeRoomDTO> {
     private String name;
     private String url;
 
 
     @Override
-    public Optional<Void> execute() {
+    public Optional<EscapeRoomDTO> execute() {
+        Optional<EscapeRoomDTO> created = Optional.empty();
+        info("Creating a new escape room...");
         CreateEscapeRoomDTO dto = getUserInfo();
         try {
             CreateEscapeRoomController controller = new CreateEscapeRoomController(dto);
-            controller.execute();
+            created = controller.execute();
             info("Escape room created successfully.");
         } catch (AlreadyExistsException e) {
             error(e.getMessage());
         } catch (Exception e) {
             error("Error: " + e.getMessage());
         }
-        return Optional.empty();
+        return created;
     }
 
     private CreateEscapeRoomDTO getUserInfo() {
