@@ -1,26 +1,23 @@
-package cat.itacademy.project.frontend.escaperoom;
+package cat.itacademy.project.frontend.puzzle;
 
-import cat.itacademy.project.api.escaperoom.application.DeleteEscapeRoomController;
-import cat.itacademy.project.api.escaperoom.application.FindEscapeRoomByIdController;
+import cat.itacademy.project.api.puzzle.DeletePuzzleController;
 import cat.itacademy.project.frontend.shared.MenuCommand;
 import cat.itacademy.project.frontend.shared.MenuScanner;
-import cat.itacademy.project.shared.domain.dtos.EscapeRoomDTO;
 import cat.itacademy.project.shared.domain.exceptions.CustomException;
 
 import java.util.Optional;
 
-public class DeleteEscapeRoomMenu extends MenuCommand<Void> {
+public class DeletePuzzleMenu extends MenuCommand<Void> {
 
     @Override
     public Optional<Void> execute() {
-try {
-    int idToDelete = MenuScanner.readInt("Enter the ID of the escape room to delete: ");
-    DeleteEscapeRoomController controller = new DeleteEscapeRoomController(idToDelete);
-    controller.execute();
-} catch (CustomException e) {
-    error(e.getMessage());
-}
-
+        try {
+            int idToDelete = MenuScanner.readInt("Enter the ID of the puzzle to delete: ");
+            DeletePuzzleController controller = new DeletePuzzleController(idToDelete);
+            controller.execute();
+        } catch (CustomException e) {
+            error(e.getMessage());
+        }
         return Optional.empty();
     }
 }

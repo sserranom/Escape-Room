@@ -1,31 +1,28 @@
-package cat.itacademy.project.api.escaperoom.application;
+package cat.itacademy.project.api.puzzle;
 
-import cat.itacademy.project.business_logic.escaperoom.application.DeleteEscapeRoomService;
-import cat.itacademy.project.business_logic.escaperoom.domain.EscapeRoomRepository;
-import cat.itacademy.project.business_logic.escaperoom.infrastructure.EscapeRoomMySQLRepository;
+import cat.itacademy.project.business_logic.puzzle.application.DeletePuzzleService;
+import cat.itacademy.project.business_logic.puzzle.domain.PuzzleRepository;
+import cat.itacademy.project.business_logic.puzzle.infrastructure.PuzzleMySQLRepository;
 import cat.itacademy.project.shared.domain.Command;
 import cat.itacademy.project.shared.infrastructure.database.mysql.MySqlConnection;
 
 import java.util.Optional;
 
-public class DeleteEscapeRoomController implements Command<Void> {
-    private final DeleteEscapeRoomService service;
+public class DeletePuzzleController implements Command<Void> {
+    private final DeletePuzzleService service;
     private final int idToDelete;
 
-    public DeleteEscapeRoomController(int idToDelete) {
-        EscapeRoomRepository repo = new EscapeRoomMySQLRepository(MySqlConnection.getInstance());
-        this.service = new DeleteEscapeRoomService(idToDelete, repo);
+    public DeletePuzzleController(int idToDelete) {
+        PuzzleRepository repo = new PuzzleMySQLRepository(MySqlConnection.getInstance());
+        this.service = new DeletePuzzleService(idToDelete, repo);
         this.idToDelete = idToDelete;
     }
 
     @Override
     public Optional<Void> execute() {
-//        try {
             service.execute();
             return Optional.empty();
-//        } catch (Exception e) {
-//            error(e.getMessage());
-//            return Optional.of(false);
-//        }
+
+
     }
 }

@@ -1,20 +1,20 @@
-package cat.itacademy.project.api.room;
+package cat.itacademy.project.api.theme;
 
-import cat.itacademy.project.business_logic.room.application.UpdateRoomService;
-import cat.itacademy.project.business_logic.room.domain.RoomRepository;
-import cat.itacademy.project.business_logic.room.infraestructure.RoomMySQLRepository;
+import cat.itacademy.project.business_logic.theme.application.UpdateThemeService;
+import cat.itacademy.project.business_logic.theme.domain.ThemeRepository;
+import cat.itacademy.project.business_logic.theme.infrastructure.ThemeMySQLRepository;
 import cat.itacademy.project.shared.domain.Command;
-import cat.itacademy.project.shared.domain.dtos.UpdateRoomDTO;
+import cat.itacademy.project.shared.domain.dtos.UpdateThemeDTO;
 import cat.itacademy.project.shared.infrastructure.database.mysql.MySqlConnection;
 
 import java.util.Optional;
 
-public class UpdateRoomController implements Command<Void> {
-    private final UpdateRoomService service;
+public class UpdateThemeController implements Command<Void> {
+    private final UpdateThemeService service;
 
-    public UpdateRoomController(UpdateRoomDTO updateRoomDTO) {
-        RoomRepository repo = new RoomMySQLRepository(MySqlConnection.getInstance());
-        this.service = new UpdateRoomService(updateRoomDTO, repo);
+    public UpdateThemeController(UpdateThemeDTO updateThemeDTO) {
+        ThemeRepository repo = new ThemeMySQLRepository(MySqlConnection.getInstance());
+        this.service = new UpdateThemeService(updateThemeDTO, repo);
     }
 
     @Override

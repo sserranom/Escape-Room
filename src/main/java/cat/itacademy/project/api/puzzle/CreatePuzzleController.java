@@ -1,25 +1,25 @@
-package cat.itacademy.project.api.escaperoom.application;
+package cat.itacademy.project.api.puzzle;
 
-import cat.itacademy.project.business_logic.escaperoom.application.CreateEscapeRoomService;
-import cat.itacademy.project.business_logic.escaperoom.domain.EscapeRoomRepository;
-import cat.itacademy.project.business_logic.escaperoom.infrastructure.EscapeRoomMySQLRepository;
+import cat.itacademy.project.business_logic.puzzle.application.CreatePuzzleService;
+import cat.itacademy.project.business_logic.puzzle.domain.PuzzleRepository;
+import cat.itacademy.project.business_logic.puzzle.infrastructure.PuzzleMySQLRepository;
 import cat.itacademy.project.shared.domain.Command;
-import cat.itacademy.project.shared.domain.dtos.CreateEscapeRoomDTO;
-import cat.itacademy.project.shared.domain.dtos.EscapeRoomDTO;
+import cat.itacademy.project.shared.domain.dtos.CreatePuzzleDTO;
+import cat.itacademy.project.shared.domain.dtos.PuzzleDTO;
 import cat.itacademy.project.shared.infrastructure.database.mysql.MySqlConnection;
 
 import java.util.Optional;
 
-public class CreateEscapeRoomController implements Command<EscapeRoomDTO> {
-    private final CreateEscapeRoomService service;
+public class CreatePuzzleController implements Command<PuzzleDTO> {
+    private final CreatePuzzleService service;
 
-    public CreateEscapeRoomController(CreateEscapeRoomDTO createEscapeRoomDTO) {
+    public CreatePuzzleController(CreatePuzzleDTO createPuzzleDTO) {
 
-        EscapeRoomRepository repo = new EscapeRoomMySQLRepository(MySqlConnection.getInstance());
-        this.service = new CreateEscapeRoomService(createEscapeRoomDTO, repo);
+        PuzzleRepository repo = new PuzzleMySQLRepository(MySqlConnection.getInstance());
+        this.service = new CreatePuzzleService(createPuzzleDTO, repo);
     }
 
-    public Optional<EscapeRoomDTO> execute() {
+    public Optional<PuzzleDTO> execute() {
 
         service.execute();
         return Optional.empty();

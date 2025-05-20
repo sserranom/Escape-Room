@@ -1,29 +1,33 @@
 package cat.itacademy.project.frontend.puzzle;
 
-import cat.itacademy.project.api.room.FindRoomByIdController;
+import cat.itacademy.project.api.puzzle.FindPuzzleByIdController;
 import cat.itacademy.project.frontend.shared.MenuCommand;
 import cat.itacademy.project.frontend.shared.MenuScanner;
-import cat.itacademy.project.shared.domain.dtos.RoomDTO;
+import cat.itacademy.project.shared.domain.dtos.PuzzleDTO;
 
 import java.util.Optional;
 
-public class FindRoomByIdMenu extends MenuCommand<Void> {
+public class FindPuzzleByIdMenu extends MenuCommand<Void> {
     @Override
     public Optional<Void> execute() {
         try {
-            int idToFind = MenuScanner.readInt("Enter the ID of the room to find: ");
-            FindRoomByIdController controller = new FindRoomByIdController(idToFind);
-            Optional<Optional<RoomDTO>> roomDTO = controller.execute();
+            int idToFind = MenuScanner.readInt("Enter the ID of the puzzle to find: ");
+            FindPuzzleByIdController controller = new FindPuzzleByIdController(idToFind);
+            Optional<Optional<PuzzleDTO>> puzzleDTO = controller.execute();
 
-            if (roomDTO.isPresent()) {
-                Optional<RoomDTO> foundRoom = roomDTO.get();
-                info("Found room:");
-                info("ID: " + foundRoom.get().id());
-                info("Name: " + foundRoom.get().name());
-                info("Price: " + foundRoom.get().price());
-                info("EscapeRoomID: " + foundRoom.get().escapeRoomId());
+            if (puzzleDTO.isPresent()) {
+                Optional<PuzzleDTO> foundPuzzle = puzzleDTO.get();
+                info("Found puzzle:");
+                info("ID: " + foundPuzzle.get().id());
+                info("Name: " + foundPuzzle.get().name());
+                info("Difficulty: " + foundPuzzle.get().difficulty());
+                info("Room ID: " + foundPuzzle.get().roomId());
+                info("Answer: " + foundPuzzle.get().answer());
+                info("Story: " + foundPuzzle.get().story());
+                info("Theme ID: " + foundPuzzle.get().themeId());
+                info("Price: " + foundPuzzle.get().price());
             } else {
-                error("Room with ID " + idToFind + " not found.");
+                error("Puzzle with ID " + idToFind + " not found.");
             }
 
         } catch (Exception e) {

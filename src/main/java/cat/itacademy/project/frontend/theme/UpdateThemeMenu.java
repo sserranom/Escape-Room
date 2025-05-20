@@ -1,20 +1,20 @@
-package cat.itacademy.project.frontend.puzzle;
+package cat.itacademy.project.frontend.theme;
 
-import cat.itacademy.project.api.puzzle.UpdatePuzzleController;
+import cat.itacademy.project.api.theme.UpdateThemeController;
 import cat.itacademy.project.frontend.shared.MenuCommand;
 import cat.itacademy.project.frontend.shared.MenuScanner;
-import cat.itacademy.project.shared.domain.dtos.UpdatePuzzleDTO;
+import cat.itacademy.project.shared.domain.dtos.UpdateThemeDTO;
 
 import java.util.Optional;
 
-public class UpdatePuzzleMenu extends MenuCommand<Void> {
+public class UpdateThemeMenu extends MenuCommand<Void> {
     @Override
     public Optional<Void> execute() {
         try {
-            UpdatePuzzleDTO dto = getInfo();
-            UpdatePuzzleController controller = new UpdatePuzzleController(dto);
+            UpdateThemeDTO dto = getInfo();
+            UpdateThemeController controller = new UpdateThemeController(dto);
             controller.execute();
-            info("Puzzle with name '" + dto.nameToUpdate() + "' updated successfully.");
+            info("Theme with name '" + dto.nameToUpdate() + "' updated successfully.");
 
         }catch (IllegalArgumentException e){
             error("Error: " + e.getMessage());
@@ -24,23 +24,16 @@ public class UpdatePuzzleMenu extends MenuCommand<Void> {
         return Optional.empty();
     }
 
-    private UpdatePuzzleDTO getInfo(){
+    private UpdateThemeDTO getInfo(){
         String nameToUpdate = MenuScanner.readString("Enter the name of the room to update: ");
         String newName = MenuScanner.readString("Enter the new name: ");
-        String newDifficulty = MenuScanner.readString("Enter the new difficulty: ");
-        int newRoomId = MenuScanner.readInt("Enter the new ID of the room: ");
-        String newAnswer = MenuScanner.readString("Enter the new answer: ");
-        String newStory = MenuScanner.readString("Enter the new story: ");
-        int newThemeId = MenuScanner.readInt("Enter the new ID of the theme: ");
-        double newPrice = MenuScanner.readDouble("Enter the new price: ");
-        return new UpdatePuzzleDTO(
+        String newDescription = MenuScanner.readString("Enter the new description: ");
+        int newEscapeRoomId = MenuScanner.readInt("Enter the new ID of the escape room: ");
+
+        return new UpdateThemeDTO(
                 nameToUpdate,
                 newName.isEmpty() ? null : newName,
-                newDifficulty.isEmpty() ? null : newDifficulty,
-                newRoomId <= 0 ? null : newRoomId,
-                newAnswer.isEmpty() ? null : newAnswer,
-                newStory.isEmpty() ? null : newStory,
-                newThemeId <= 0 ? null : newThemeId,
-                newPrice <= 0 ? null : newPrice);
+                newDescription.isEmpty() ? null : newDescription,
+                newEscapeRoomId <= 0 ? null : newEscapeRoomId);
     }
 }

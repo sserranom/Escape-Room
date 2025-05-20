@@ -1,33 +1,29 @@
-package cat.itacademy.project.frontend.puzzle;
+package cat.itacademy.project.frontend.theme;
 
-import cat.itacademy.project.api.puzzle.FindPuzzleByIdController;
+import cat.itacademy.project.api.theme.FindThemeByIdController;
 import cat.itacademy.project.frontend.shared.MenuCommand;
 import cat.itacademy.project.frontend.shared.MenuScanner;
-import cat.itacademy.project.shared.domain.dtos.PuzzleDTO;
+import cat.itacademy.project.shared.domain.dtos.ThemeDTO;
 
 import java.util.Optional;
 
-public class FindPuzzleByIdMenu extends MenuCommand<Void> {
+public class FindThemeByIdMenu extends MenuCommand<Void> {
     @Override
     public Optional<Void> execute() {
         try {
             int idToFind = MenuScanner.readInt("Enter the ID of the puzzle to find: ");
-            FindPuzzleByIdController controller = new FindPuzzleByIdController(idToFind);
-            Optional<Optional<PuzzleDTO>> puzzleDTO = controller.execute();
+            FindThemeByIdController controller = new FindThemeByIdController(idToFind);
+            Optional<Optional<ThemeDTO>> puzzleDTO = controller.execute();
 
             if (puzzleDTO.isPresent()) {
-                Optional<PuzzleDTO> foundPuzzle = puzzleDTO.get();
+                Optional<ThemeDTO> foundTheme = puzzleDTO.get();
                 info("Found puzzle:");
-                info("ID: " + foundPuzzle.get().id());
-                info("Name: " + foundPuzzle.get().name());
-                info("Difficulty: " + foundPuzzle.get().difficulty());
-                info("Room ID: " + foundPuzzle.get().roomId());
-                info("Answer: " + foundPuzzle.get().answer());
-                info("Story: " + foundPuzzle.get().story());
-                info("Theme ID: " + foundPuzzle.get().themeId());
-                info("Price: " + foundPuzzle.get().price());
+                info("ID: " + foundTheme.get().id());
+                info("Name: " + foundTheme.get().name());
+                info("Description: " + foundTheme.get().description());
+                info("Escape room ID: " + foundTheme.get().escapeRoomId());
             } else {
-                error("Puzzle with ID " + idToFind + " not found.");
+                error("Theme with ID " + idToFind + " not found.");
             }
 
         } catch (Exception e) {

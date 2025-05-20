@@ -1,4 +1,4 @@
-package cat.itacademy.project.business_logic.themes.domain;
+package cat.itacademy.project.business_logic.theme.domain;
 
 
 import cat.itacademy.project.shared.domain.dtos.ThemeDTO;

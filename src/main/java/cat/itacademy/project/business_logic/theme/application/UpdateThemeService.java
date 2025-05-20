@@ -1,7 +1,7 @@
-package cat.itacademy.project.business_logic.themes.application;
+package cat.itacademy.project.business_logic.theme.application;
 
-import cat.itacademy.project.business_logic.themes.domain.Theme;
-import cat.itacademy.project.business_logic.themes.domain.ThemeRepository;
+import cat.itacademy.project.business_logic.theme.domain.Theme;
+import cat.itacademy.project.business_logic.theme.domain.ThemeRepository;
 import cat.itacademy.project.shared.domain.Command;
 import cat.itacademy.project.shared.domain.dtos.ThemeDTO;
 import cat.itacademy.project.shared.domain.dtos.UpdateThemeDTO;
@@ -45,8 +45,8 @@ public class UpdateThemeService implements Command<ThemeDTO> {
             updatedTheme = updatedTheme.createNewInstanceWithName(request.name());
         }
 
-        if (!request.url().equals(themeToUpdate.getUrl()) || !request.url().isBlank()) {
-            updatedTheme = updatedTheme.createNewInstanceWithUrl(request.url());
+        if (!request.description().equals(themeToUpdate.getDescription()) || !request.description().isBlank()) {
+            updatedTheme = updatedTheme.createNewInstanceWithDescription(request.description());
         }
 
             repo.update(updatedTheme);

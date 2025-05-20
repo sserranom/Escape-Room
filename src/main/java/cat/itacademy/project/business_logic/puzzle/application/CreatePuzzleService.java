@@ -1,40 +1,40 @@
-package cat.itacademy.project.business_logic.escaperoom.application;
+package cat.itacademy.project.business_logic.puzzle.application;
 
-import cat.itacademy.project.business_logic.escaperoom.domain.EscapeRoom;
-import cat.itacademy.project.business_logic.escaperoom.domain.EscapeRoomRepository;
+import cat.itacademy.project.business_logic.puzzle.domain.Puzzle;
+import cat.itacademy.project.business_logic.puzzle.domain.PuzzleRepository;
 import cat.itacademy.project.shared.domain.Command;
-import cat.itacademy.project.shared.domain.dtos.CreateEscapeRoomDTO;
-import cat.itacademy.project.shared.domain.dtos.EscapeRoomDTO;
+import cat.itacademy.project.shared.domain.dtos.CreatePuzzleDTO;
+import cat.itacademy.project.shared.domain.dtos.PuzzleDTO;
 import cat.itacademy.project.shared.domain.exceptions.AlreadyExistsException;
 import cat.itacademy.project.shared.domain.exceptions.NotFoundException;
 
 import java.util.Optional;
 
-public final class CreateEscapeRoomService implements Command<EscapeRoomDTO> {
-    private final EscapeRoom escapeRoom;
-    private final EscapeRoomRepository repo;
+public final class CreatePuzzleService implements Command<PuzzleDTO> {
+    private final Puzzle puzzle;
+    private final PuzzleRepository repo;
 
-    public CreateEscapeRoomService(CreateEscapeRoomDTO request, EscapeRoomRepository repo) {
-        this.escapeRoom = EscapeRoom.create(request);
+    public CreatePuzzleService(CreatePuzzleDTO request, PuzzleRepository repo) {
+        this.puzzle = Puzzle.create(request);
         this.repo = repo;
     }
 
-    public Optional<EscapeRoomDTO> execute() {
+    public Optional<PuzzleDTO> execute() {
         ensureDoesNotExist();
-        repo.create(escapeRoom);
-        final EscapeRoom created = getEscapeRoom();
+        repo.create(puzzle);
+        final Puzzle created = getPuzzle();
         return Optional.of(created.toDTO());
     }
 
-    private EscapeRoom getEscapeRoom() {
-        return repo.findByName(escapeRoom.getName())
-                .orElseThrow(() -> new NotFoundException("Escape Room '" + escapeRoom.getName() + "' not found"));
+    private Puzzle getPuzzle() {
+        return repo.findByName(puzzle.getName())
+                .orElseThrow(() -> new NotFoundException("Puzzle '" + puzzle.getName() + "' not found"));
     }
 
     private void ensureDoesNotExist() throws AlreadyExistsException {
-        Optional<EscapeRoom> existing = repo.findByName(escapeRoom.getName());
+        Optional<Puzzle> existing = repo.findByName(puzzle.getName());
         if (existing.isPresent()) {
-            throw new AlreadyExistsException("Escape Room '" + escapeRoom.getName() + "' already exist");
+            throw new AlreadyExistsException("Puzzle '" + puzzle.getName() + "' already exist");
         }
     }
 

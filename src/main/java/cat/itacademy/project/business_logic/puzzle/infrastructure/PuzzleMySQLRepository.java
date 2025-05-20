@@ -1,8 +1,8 @@
-package cat.itacademy.project.business_logic.escaperoom.infrastructure;
+package cat.itacademy.project.business_logic.puzzle.infrastructure;
 
-import cat.itacademy.project.business_logic.escaperoom.domain.EscapeRoom;
-import cat.itacademy.project.business_logic.escaperoom.domain.EscapeRoomRepository;
-import cat.itacademy.project.shared.domain.dtos.EscapeRoomDTO;
+import cat.itacademy.project.business_logic.puzzle.domain.Puzzle;
+import cat.itacademy.project.business_logic.puzzle.domain.PuzzleRepository;
+import cat.itacademy.project.shared.domain.dtos.PuzzleDTO;
 import cat.itacademy.project.shared.domain.exceptions.DatabaseException;
 import cat.itacademy.project.shared.domain.exceptions.NotFoundException;
 
@@ -14,20 +14,27 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class EscapeRoomMySQLRepository implements EscapeRoomRepository {
+public class PuzzleMySQLRepository implements PuzzleRepository {
 
     protected final Connection connection;
 
-    public EscapeRoomMySQLRepository(Connection connection) {
+    public PuzzleMySQLRepository(Connection connection) {
         this.connection = connection;
     }
 
     @Override
-    public void create(EscapeRoom escapeRoom) {
-        String sql = "INSERT INTO escape_rooms (name, url) VALUES (?, ?)";
+    public void create(Puzzle puzzle) {
+        String sql = "INSERT INTO puzzles (name, difficulty, roomId, answer, story, themeId, price) VALUES (?, ?, ?, ?, ?, ?, ?)";
         try (var preparedStatement = connection.prepareStatement(sql)) {
-            preparedStatement.setString(1, escapeRoom.getName());
-            preparedStatement.setString(2, escapeRoom.getUrl());
+            preparedStatement.setString(1, puzzle.getName());
+            preparedStatement.setString(2, puzzle.getDifficulty());
+            preparedStatement.setInt(3, puzzle.getRoomId());
+            preparedStatement.setString(4, puzzle.getAnswer());
+            preparedStatement.setString(5, puzzle.getStory());
+            preparedStatement.setInt(6, puzzle.getThemeId());
+            preparedStatement.setDouble(7, puzzle.getPrice());
+
+
             preparedStatement.executeUpdate();
         } catch (Exception e) {
             throw new DatabaseException("Error saving escape room: " + e.getMessage());
@@ -35,30 +42,39 @@ public class EscapeRoomMySQLRepository implements EscapeRoomRepository {
     }
 
     @Override
-    public void update(EscapeRoom escapeRoom)  {
-        String sql = "UPDATE escape_rooms Set name = ?, url = ? WHERE id = ?";
+    public void update(Puzzle puzzle)  {
+        String sql = "UPDATE puzzles Set name = ?, difficulty = ?, roomId = ?, answer = ?, story = ?, themeId = ?, price = ? WHERE id = ?";
+
         try (var preparedStatement = connection.prepareStatement(sql)){
-            preparedStatement.setString(1, escapeRoom.getName());
-            preparedStatement.setString(2, escapeRoom.getUrl());
-            preparedStatement.setInt(3, escapeRoom.getId());
+
+            preparedStatement.setString(1, puzzle.getName());
+            preparedStatement.setString(2, puzzle.getDifficulty());
+            preparedStatement.setInt(3, puzzle.getRoomId());
+            preparedStatement.setString(4, puzzle.getAnswer());
+            preparedStatement.setString(5, puzzle.getStory());
+            preparedStatement.setInt(6, puzzle.getThemeId());
+            preparedStatement.setDouble(7, puzzle.getPrice());
+
             int rowUpdated = preparedStatement.executeUpdate();
+
             if (rowUpdated == 0){
-                throw new NotFoundException("Escape room with ID " + escapeRoom.getId() + " not found.");
+                throw new NotFoundException("Puzzle with ID " + puzzle.getId() + " not found.");
             }
+
         }catch (SQLException | NotFoundException e){
-            throw new DatabaseException("Error updating escape room: " + e.getMessage());
+            throw new DatabaseException("Error updating puzzle: " + e.getMessage());
         }
 
     }
 
     @Override
     public Optional<Void> delete(int id) {
-        String sql = "DELETE FROM escape_rooms WHERE id = ?";
+        String sql = "DELETE FROM puzzles WHERE id = ?";
         try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             preparedStatement.setInt(1, id);
             int rowsDeleted = preparedStatement.executeUpdate();
             if (rowsDeleted == 0) {
-                throw new NotFoundException("Escape room with ID " + id + " not found.");
+                throw new NotFoundException("Puzzle with ID " + id + " not found.");
             }
             return Optional.empty(); // Indicación explícita de eliminación exitosa
 //            if (rowsDeleted > 0) {
@@ -67,20 +83,29 @@ public class EscapeRoomMySQLRepository implements EscapeRoomRepository {
 //                return Optional.of(false); // Indicación explícita de no encontrado
 //            }
         } catch (SQLException e) {
-            throw new DatabaseException("Error deleting escape room: " + e.getMessage());
+            throw new DatabaseException("Error deleting puzzle: " + e.getMessage());
         }
     }
 
     @Override
-    public Optional<EscapeRoom> findById(int id) {
-        String sql = "SELECT id, name, url FROM escape_rooms WHERE id = ?";
+    public Optional<Puzzle> findById(int id) {
+        String sql = "SELECT id, name, difficulty, roomId, answer, story, themeId, price FROM puzzles WHERE id = ?";
         try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             preparedStatement.setInt(1, id);
             ResultSet rs = preparedStatement.executeQuery();
             if (rs.next()) {
-                return Optional.of(EscapeRoom.fromDatabase(
-                        new EscapeRoomDTO(rs.getInt("id"), rs.getString("name"), rs.getString("url"))
+                return Optional.of(
+                        new Puzzle(
+                            rs.getInt("id"),
+                            rs.getString("name"),
+                            rs.getString("difficulty"),
+                            rs.getInt("roomId"),
+                            rs.getString("answer"),
+                            rs.getString("story"),
+                            rs.getInt("themeId"),
+                            rs.getDouble("price")
                 ));
+
             }
         } catch (SQLException e) {
             throw new DatabaseException("Error finding escape room by id: " + e.getMessage());
@@ -89,29 +114,35 @@ public class EscapeRoomMySQLRepository implements EscapeRoomRepository {
     }
 
     @Override
-    public List<EscapeRoomDTO> findAll() {
-        String sql = "SELECT  * FROM escape_rooms";
-        List<EscapeRoomDTO> escapeRooms = new ArrayList<>();
+    public List<Puzzle> findAll() {
+        List<Puzzle> puzzles = new ArrayList<>();
+        String sql = "SELECT * FROM puzzles";
         try (PreparedStatement preparedStatement = connection.prepareStatement(sql);
              ResultSet rs = preparedStatement.executeQuery()) {
             while (rs.next()) {
-                escapeRooms.add(
-                        new EscapeRoomDTO(
-                                rs.getInt("id"),
-                                rs.getString("name"),
-                                rs.getString("url")
-
+                puzzles.add(Puzzle.fromDatabase(
+                    new PuzzleDTO(
+                        rs.getInt("id"),
+                        rs.getString("name"),
+                        rs.getString("difficulty"),
+                        rs.getInt("roomId"),
+                        rs.getString("answer"),
+                        rs.getString("story"),
+                        rs.getInt("themeId"),
+                        rs.getDouble("price")
+                    )
                 ));
+
             }
         } catch (Exception e) {
             throw new DatabaseException("Error while finding all escape rooms: " + e.getMessage());
         }
-        return escapeRooms;
+        return puzzles;
     }
 
     @Override
-    public Optional<EscapeRoom> findByName(String name) {
-        String sql = "SELECT * FROM escape_rooms WHERE name = ?";
+    public Optional<Puzzle> findByName(String name) {
+        String sql = "SELECT * FROM puzzles WHERE name = ?";
         try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             // Set the "name" parameter in the SQL query
             preparedStatement.setString(1, name);
@@ -119,10 +150,16 @@ public class EscapeRoomMySQLRepository implements EscapeRoomRepository {
             // Execute the query
             ResultSet rs = preparedStatement.executeQuery();
             if (rs.next()) {
-                return Optional.of(EscapeRoom.fromDatabase(
-                        new EscapeRoomDTO(rs.getInt("id"),
+                return Optional.of(Puzzle.fromDatabase(
+                        new PuzzleDTO(
+                                rs.getInt("id"),
                                 rs.getString("name"),
-                                rs.getString("url")
+                                rs.getString("difficulty"),
+                                rs.getInt("roomId"),
+                                rs.getString("answer"),
+                                rs.getString("story"),
+                                rs.getInt("themeId"),
+                                rs.getDouble("price")
                         )));
             }
         } catch (Exception e) {

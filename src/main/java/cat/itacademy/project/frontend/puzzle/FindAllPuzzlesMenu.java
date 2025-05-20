@@ -1,21 +1,21 @@
 package cat.itacademy.project.frontend.puzzle;
 
 import cat.itacademy.project.api.puzzle.FindAllPuzzlesController;
-import cat.itacademy.project.api.puzzle.FindAllPuzzlesController;
 import cat.itacademy.project.business_logic.puzzle.domain.Puzzle;
 import cat.itacademy.project.frontend.shared.MenuCommand;
+import cat.itacademy.project.shared.domain.dtos.PuzzleDTO;
 
 import java.util.List;
 import java.util.Optional;
 
-public class FindAllPuzzleMenu extends MenuCommand<Void> {
+public class FindAllPuzzlesMenu extends MenuCommand<Void> {
     @Override
     public Optional<Void> execute() {
         FindAllPuzzlesController controller = new FindAllPuzzlesController();
-        Optional<List<Puzzle>> result = controller.execute();
+        Optional<List<PuzzleDTO>> result = controller.execute();
 
         if (result.isPresent()){
-            List<Puzzle> puzzles = result.get();
+            List<PuzzleDTO> puzzles = result.get();
             if (puzzles.isEmpty()){
                 info("No puzzles found");
             }

@@ -1,33 +1,30 @@
-package cat.itacademy.project.business_logic.puzzle.application;
+package cat.itacademy.project.business_logic.theme.application;
 
-import cat.itacademy.project.business_logic.puzzle.domain.Puzzle;
-import cat.itacademy.project.business_logic.puzzle.domain.PuzzleRepository;
+import cat.itacademy.project.business_logic.theme.domain.Theme;
+import cat.itacademy.project.business_logic.theme.domain.ThemeRepository;
 import cat.itacademy.project.shared.domain.Command;
-import cat.itacademy.project.shared.domain.dtos.PuzzleDTO;
+import cat.itacademy.project.shared.domain.dtos.ThemeDTO;
 
 import java.util.Optional;
 
-public class FindPuzzleByIdService implements Command<PuzzleDTO> {
-    private final PuzzleRepository repo;
+public class FindThemeByIdService implements Command<ThemeDTO> {
+    private final ThemeRepository repo;
     private final int idToFind;
 
-    public FindPuzzleByIdService(int idToFind, PuzzleRepository repo) {
+    public FindThemeByIdService(int idToFind, ThemeRepository repo) {
         this.repo = repo;
         this.idToFind = idToFind;
     }
 
     @Override
-    public Optional<PuzzleDTO> execute() {
-        Optional<Puzzle> puzzleOptional = repo.findById(idToFind);
-        return puzzleOptional.map(puzzle -> new PuzzleDTO(
-                puzzle.getId(),
-                puzzle.getName(),
-                puzzle.getDifficulty(),
-                puzzle.getRoomId(),
-                puzzle.getAnswer(),
-                puzzle.getStory(),
-                puzzle.getThemeId(),
-                puzzle.getPrice()
+    public Optional<ThemeDTO> execute() {
+        Optional<Theme> themeOptional = repo.findById(idToFind);
+        return themeOptional.map(theme -> new ThemeDTO(
+                theme.getId(),
+                theme.getName(),
+                theme.getDescription(),
+                theme.getEscapeRoomId()
+
         ));
     }
 }

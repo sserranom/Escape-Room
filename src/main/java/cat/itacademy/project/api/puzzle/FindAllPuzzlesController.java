@@ -1,29 +1,29 @@
-package cat.itacademy.project.api.escaperoom.application;
+package cat.itacademy.project.api.puzzle;
 
-import cat.itacademy.project.business_logic.escaperoom.application.FindAllEscapeRoomsService;
-import cat.itacademy.project.business_logic.escaperoom.domain.EscapeRoomRepository;
-import cat.itacademy.project.business_logic.escaperoom.infrastructure.EscapeRoomMySQLRepository;
+import cat.itacademy.project.business_logic.puzzle.application.FindAllPuzzlesService;
+import cat.itacademy.project.business_logic.puzzle.domain.PuzzleRepository;
+import cat.itacademy.project.business_logic.puzzle.infrastructure.PuzzleMySQLRepository;
 import cat.itacademy.project.frontend.shared.MenuCommand;
-import cat.itacademy.project.shared.domain.dtos.EscapeRoomDTO;
+import cat.itacademy.project.shared.domain.dtos.PuzzleDTO;
 import cat.itacademy.project.shared.infrastructure.database.mysql.MySqlConnection;
 
 import java.util.List;
 import java.util.Optional;
 
-public class FindAllEscapeRoomsController extends MenuCommand<List<EscapeRoomDTO>> {
-    private final FindAllEscapeRoomsService service;
+public class FindAllPuzzlesController extends MenuCommand<List<PuzzleDTO>> {
+    private final FindAllPuzzlesService service;
 
 
-    public FindAllEscapeRoomsController() {
-        EscapeRoomRepository repo = new EscapeRoomMySQLRepository(MySqlConnection.getInstance());
-        this.service = new FindAllEscapeRoomsService(repo);
+    public FindAllPuzzlesController() {
+        PuzzleRepository repo = new PuzzleMySQLRepository(MySqlConnection.getInstance());
+        this.service = new FindAllPuzzlesService(repo);
     }
 
 
     @Override
-    public Optional<List<EscapeRoomDTO>> execute() {
-        List<EscapeRoomDTO> escapeRooms = service.findAllRaw();
+    public Optional<List<PuzzleDTO>> execute() {
+        List<PuzzleDTO> puzzle = service.findAllRaw();
 
-        return Optional.of(escapeRooms);
+        return Optional.of(puzzle);
     }
 }

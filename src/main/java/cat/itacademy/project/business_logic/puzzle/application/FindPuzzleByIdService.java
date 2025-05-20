@@ -1,29 +1,33 @@
-package cat.itacademy.project.business_logic.room.application;
+package cat.itacademy.project.business_logic.puzzle.application;
 
-import cat.itacademy.project.business_logic.room.domain.Room;
-import cat.itacademy.project.business_logic.room.domain.RoomRepository;
+import cat.itacademy.project.business_logic.puzzle.domain.Puzzle;
+import cat.itacademy.project.business_logic.puzzle.domain.PuzzleRepository;
 import cat.itacademy.project.shared.domain.Command;
-import cat.itacademy.project.shared.domain.dtos.RoomDTO;
+import cat.itacademy.project.shared.domain.dtos.PuzzleDTO;
 
 import java.util.Optional;
 
-public class FindRoomByIdService implements Command<RoomDTO> {
-    private final RoomRepository repo;
+public class FindPuzzleByIdService implements Command<PuzzleDTO> {
+    private final PuzzleRepository repo;
     private final int idToFind;
 
-    public FindRoomByIdService(int idToFind, RoomRepository repo) {
+    public FindPuzzleByIdService(int idToFind, PuzzleRepository repo) {
         this.repo = repo;
         this.idToFind = idToFind;
     }
 
     @Override
-    public Optional<RoomDTO> execute() {
-        Optional<Room> roomOptional = repo.findById(idToFind);
-        return roomOptional.map(room -> new RoomDTO(
-                room.getId(),
-                room.getName(),
-                room.getPrice(),
-                room.getEscapeRoomId()
+    public Optional<PuzzleDTO> execute() {
+        Optional<Puzzle> puzzleOptional = repo.findById(idToFind);
+        return puzzleOptional.map(puzzle -> new PuzzleDTO(
+                puzzle.getId(),
+                puzzle.getName(),
+                puzzle.getDifficulty(),
+                puzzle.getRoomId(),
+                puzzle.getAnswer(),
+                puzzle.getStory(),
+                puzzle.getThemeId(),
+                puzzle.getPrice()
         ));
     }
 }

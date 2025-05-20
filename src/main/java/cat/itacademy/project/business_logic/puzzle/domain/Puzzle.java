@@ -1,26 +1,44 @@
-package cat.itacademy.project.business_logic.room.domain;
+package cat.itacademy.project.business_logic.puzzle.domain;
 
-import cat.itacademy.project.shared.domain.dtos.CreateRoomDTO;
-import cat.itacademy.project.shared.domain.dtos.RoomDTO;
+import cat.itacademy.project.shared.domain.dtos.CreatePuzzleDTO;
+import cat.itacademy.project.shared.domain.dtos.PuzzleDTO;
 
-public class Room {
+public class Puzzle {
     private int id;
     private String name;
+    private String difficulty;
+    private int roomId;
+    private String answer;
+    private String story;
+    private int themeId;
     private double price;
-    private int escapeRoomId;
 
-    public Room(int id, String name, double price, int escapeRoomId) {
+
+    public Puzzle(int id, String name, String difficulty, int roomId, String answer, String story, int themeId, double price) {
         this.id = id;
         this.name = name;
+        this.difficulty = difficulty;
+        this.roomId = roomId;
+        this.answer = answer;
+        this.story = story;
+        this.themeId = themeId;
         this.price = price;
-        this.escapeRoomId = escapeRoomId;
     }
 
-    public Room(String name, double price, int escapeRoomId) {
+    public Puzzle(String name, String difficulty, int roomId, String answer, String story, int themeId, double price) {
         this.name = name;
+        this.difficulty = difficulty;
+        this.roomId = roomId;
+        this.answer = answer;
+        this.story = story;
+        this.themeId = themeId;
         this.price = price;
-        this.escapeRoomId = escapeRoomId;
     }
+
+    public PuzzleDTO toDTO() {
+        return new PuzzleDTO(id, name, difficulty, roomId, answer, story, themeId, price);
+    }
+
 
     public int getId() {
         return id;
@@ -30,57 +48,113 @@ public class Room {
         return name;
     }
 
+    public String getDifficulty() {
+        return difficulty;
+    }
+
+    public int getRoomId() {
+        return roomId;
+    }
+
+    public String getAnswer() {
+        return answer;
+    }
+
+    public String getStory() {
+        return story;
+    }
+
+    public int getThemeId() {
+        return themeId;
+    }
+
     public double getPrice() {
         return price;
     }
 
-    public int getEscapeRoomId() {
-        return escapeRoomId;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public void setName(String name) {
         this.name = name;
     }
 
+    public void setDifficulty(String difficulty) {
+        this.difficulty = difficulty;
+    }
+
+    public void setRoomId(int roomId) {
+        this.roomId = roomId;
+    }
+
+    public void setAnswer(String answer) {
+        this.answer = answer;
+    }
+
+    public void setStory(String story) {
+        this.story = story;
+    }
+
+    public void setThemeId(int themeId) {
+        this.themeId = themeId;
+    }
+
     public void setPrice(double price) {
         this.price = price;
     }
 
-    public void setEscapeRoomId(int escapeRoomId) {
-        this.escapeRoomId = escapeRoomId;
+
+    public static Puzzle create(CreatePuzzleDTO dto) {
+        return new Puzzle(dto.name(), dto.difficulty(), dto.roomId(), dto.answer(), dto.story(), dto.themeId(), dto.price());
     }
 
-    public static Room create (CreateRoomDTO dto){
-        return new Room(dto.name(), dto.price(), dto.escapeRoomId());
+    public static Puzzle fromDatabase(PuzzleDTO dto) {
+        return new Puzzle(dto.id(), dto.name(), dto.difficulty(), dto.roomId(), dto.answer(), dto.story(), dto.themeId(), dto.price());
     }
 
-    public static Room fromDatabase(RoomDTO dto){
-        return new Room(dto.id(), dto.name(), dto.price(), dto.escapeRoomId());
-    }
-
-    public RoomDTO toDTO(){
-        return new RoomDTO(id, name, price, escapeRoomId);
-    }
 
     @Override
     public String toString() {
-        return "Room{" +
+        return "Puzzle{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
+                ", difficulty='" + difficulty + '\'' +
+                ", roomID=" + roomId +
+                ", answer='" + answer + '\'' +
+                ", story='" + story + '\'' +
+                ", themeId=" + themeId +
                 ", price=" + price +
-                ", escapeRoomId=" + escapeRoomId +
                 '}';
     }
 
-    public Room createNewInstanceWithName(String newName){
-        return new Room(this.id, newName, this.price, this.escapeRoomId);
+    public Puzzle createNewInstanceWithName(String newName) {
+        return new Puzzle(this.id, newName, this.difficulty, this.roomId, this.answer, this.story, this.themeId, this.price);
     }
 
-    public Room createNewInstanceWithPrice(double newPrice){
-        return new Room(this.id, this.name, newPrice, this.escapeRoomId);
+    public Puzzle createNewInstanceWithDifficulty(String newDifficulty) {
+        return new Puzzle(this.id, this.name, newDifficulty, this.roomId, this.answer, this.story, this.themeId, this.price);
     }
 
-    public Room createNewInstanceWithEscapeRoomId (int newEscapeRoomId){
-        return new Room(this.id, this.name, this.price, newEscapeRoomId);
+    public Puzzle createNewInstanceWithRoomId(int newRoomId) {
+        return new Puzzle(this.id, this.name, this.difficulty, newRoomId, this.answer, this.story, this.themeId, this.price);
     }
+
+    public Puzzle createNewInstanceWithAnswer(String newAnswer) {
+        return new Puzzle(this.id, this.name, this.difficulty, this.roomId, newAnswer, this.story, this.themeId, this.price);
+    }
+
+    public Puzzle createNewInstanceWithStory(String newStory) {
+        return new Puzzle(this.id, this.name, this.difficulty, this.roomId, this.answer, newStory, this.themeId, this.price);
+    }
+
+    public Puzzle createNewInstanceWithThemeId(int newThemeId) {
+        return new Puzzle(this.id, this.name, this.difficulty, this.roomId, this.answer, this.story, newThemeId, this.price);
+    }
+
+    public Puzzle createNewInstanceWithPrice(double newPrice) {
+        return new Puzzle(this.id, this.name, this.difficulty, this.roomId, this.answer, this.story, this.themeId, newPrice);
+    }
+
+
 }

@@ -7,7 +7,7 @@ import cat.itacademy.project.shared.domain.dtos.ThemeDTO;
 import java.util.List;
 import java.util.Optional;
 
-public class FindThemeMenu extends MenuCommand<Void> {
+public class FindAllThemesMenu extends MenuCommand<Void> {
 
     @Override
     public Optional<Void> execute() {

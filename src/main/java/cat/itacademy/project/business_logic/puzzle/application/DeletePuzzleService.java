@@ -1,15 +1,15 @@
-package cat.itacademy.project.business_logic.room.application;
+package cat.itacademy.project.business_logic.puzzle.application;
 
-import cat.itacademy.project.business_logic.room.domain.RoomRepository;
+import cat.itacademy.project.business_logic.puzzle.domain.PuzzleRepository;
 import cat.itacademy.project.frontend.shared.MenuCommand;
 
 import java.util.Optional;
 
-public class DeleteRoomService extends MenuCommand<Boolean> {
-    private final RoomRepository repo;
+public class DeletePuzzleService extends MenuCommand<Boolean> {
+    private final PuzzleRepository repo;
     private final int idToDelete;
 
-    public DeleteRoomService(int idToDelete, RoomRepository repo) {
+    public DeletePuzzleService(int idToDelete, PuzzleRepository repo) {
         this.repo = repo;
         this.idToDelete = idToDelete;
     }

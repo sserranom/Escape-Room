@@ -1,21 +1,22 @@
-package cat.itacademy.project.business_logic.room.domain;
+package cat.itacademy.project.business_logic.puzzle.domain;
+
+import cat.itacademy.project.business_logic.puzzle.domain.Puzzle;
 
 import java.util.List;
 import java.util.Optional;
 
-public interface RoomRepository {
+public interface PuzzleRepository {
 
-    void create(Room room);
+    void create(Puzzle puzzle);
 
-    void update(Room room);
+    void update(Puzzle puzzle);
 
     Optional<Void> delete(int id);
 
-    Optional<Room> findById(int id);
+    Optional<Puzzle> findById(int id);
 
-    List<Room> findAll();
+    List<Puzzle> findAll();
 
-    Optional<Room> findByName(String name);
+    Optional<Puzzle> findByName(String name);
 
-    Optional<Room> findAllByEscapeRoomId(int escapeRoomId);
 }
