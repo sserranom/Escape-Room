@@ -42,8 +42,27 @@ public class ThemeMySQLRepository implements ThemeRepository {
     }
 
     @Override
-    public Optional<Theme> findById(int id) {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public Optional<ThemeDTO> findById(int id) {
+//        throw new UnsupportedOperationException("Not supported yet.");
+        String sql = "SELECT * FROM themes WHERE id = ?";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+            // Set the "id" parameter in the SQL query
+            preparedStatement.setInt(1, id);
+
+            // Execute the query
+            ResultSet rs = preparedStatement.executeQuery();
+            if (rs.next()) {
+                return Optional.of(new ThemeDTO(
+                        rs.getInt("id"),
+                        rs.getString("name"),
+                        rs.getString("description"),
+                        rs.getInt("escaperoom_id")
+                ));
+            }
+        } catch (Exception e) {
+            throw new DatabaseException("Error while finding theme: " + e.getMessage());
+        }
+        return null;
     }
 
     @Override

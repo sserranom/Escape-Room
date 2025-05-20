@@ -3,13 +3,12 @@ package cat.itacademy.project.business_logic.room.application;
 import cat.itacademy.project.business_logic.room.domain.Room;
 import cat.itacademy.project.business_logic.room.domain.RoomRepository;
 import cat.itacademy.project.shared.domain.Command;
-import cat.itacademy.project.shared.domain.dtos.RoomDTO;
-import cat.itacademy.project.shared.domain.dtos.UpdateRoomDTO;
+import cat.itacademy.project.shared.domain.dtos.room.RoomDTO;
+import cat.itacademy.project.shared.domain.dtos.room.UpdateRoomDTO;
 import cat.itacademy.project.shared.domain.exceptions.AlreadyExistsException;
 import cat.itacademy.project.shared.domain.exceptions.EmptyFieldException;
 import cat.itacademy.project.shared.domain.exceptions.NotFoundException;
 
-import java.rmi.AlreadyBoundException;
 import java.util.Optional;
 
 public class UpdateRoomService implements Command<RoomDTO> {
@@ -23,22 +22,22 @@ public class UpdateRoomService implements Command<RoomDTO> {
 
     @Override
     public Optional<RoomDTO> execute() {
-        if (request.name() == null || request.name().isBlank()){
+        if (request.name() == null || request.name().isBlank()) {
             throw new EmptyFieldException("Field 'name' cannot be empty.");
         }
 
-        Optional<Room> existingOptional = repo.findByName(request.nameToUpdate());
+        Optional<RoomDTO> existingOptional = repo.findByName(request.nameToUpdate());
 
-        if (existingOptional.isEmpty()){
+        if (existingOptional.isEmpty()) {
             throw new NotFoundException("Room with name '" + request.nameToUpdate() + "' does not exist.");
         }
 
-        Room roomToUpdate = existingOptional.get();
+        Room roomToUpdate = Room.fromDatabase(existingOptional.get());
         Room updatedRoom = roomToUpdate;
 
         if (!request.name().equals(roomToUpdate.getName()) || !request.name().isBlank()) {
-            Optional<Room> existingWithNewName = repo.findByName((request.name()));
-            if (existingWithNewName.isPresent() && !Integer.valueOf(existingWithNewName.get().getId()).equals(roomToUpdate.getId())){
+            Optional<RoomDTO> existingWithNewName = repo.findByName((request.name()));
+            if (existingWithNewName.isPresent() && !Integer.valueOf(existingWithNewName.get().id()).equals(roomToUpdate.getId())) {
                 throw new AlreadyExistsException("Room with name '" + request.name() + "' already exist.");
             }
             updatedRoom = updatedRoom.createNewInstanceWithName(request.name());
@@ -48,7 +47,7 @@ public class UpdateRoomService implements Command<RoomDTO> {
             updatedRoom = updatedRoom.createNewInstanceWithPrice(request.price());
         }
 
-        if (request.escapeRoomId() > 0 && request.escapeRoomId() != roomToUpdate.getEscapeRoomId()) {
+        if (request.escapeRoomId() > 0 && request.escapeRoomId() != roomToUpdate.getTheme_id()) {
             updatedRoom = updatedRoom.createNewInstanceWithEscapeRoomId(request.escapeRoomId());
         }
 

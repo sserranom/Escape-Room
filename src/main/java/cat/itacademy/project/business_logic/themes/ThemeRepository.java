@@ -1,6 +1,8 @@
 package cat.itacademy.project.business_logic.themes;
 
 
+import cat.itacademy.project.shared.domain.dtos.ThemeDTO;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -11,7 +13,7 @@ public interface ThemeRepository {
 
     void delete(int id);
 
-    Optional<Theme> findById(int id);
+    Optional<ThemeDTO> findById(int id);
 
     List<Theme> findAll();
 

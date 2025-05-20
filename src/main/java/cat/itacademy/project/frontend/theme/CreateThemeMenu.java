@@ -1,9 +1,9 @@
 package cat.itacademy.project.frontend.theme;
 
 import cat.itacademy.project.api.theme.CreateThemeController;
-import cat.itacademy.project.shared.domain.dtos.CreateThemeDTO;
 import cat.itacademy.project.frontend.shared.MenuCommand;
 import cat.itacademy.project.frontend.shared.MenuScanner;
+import cat.itacademy.project.shared.domain.dtos.CreateThemeDTO;
 import cat.itacademy.project.shared.domain.exceptions.EmptyFieldException;
 
 import java.util.Optional;
@@ -20,6 +20,7 @@ public class CreateThemeMenu extends MenuCommand<Void> {
         controller.execute();
         return Optional.empty();
     }
+
     public CreateThemeDTO getUSerInfo() {
 
 

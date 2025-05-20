@@ -5,7 +5,7 @@ import cat.itacademy.project.frontend.shared.MenuCommand;
 
 import java.util.Optional;
 
-public class DeleteRoomService extends MenuCommand<Boolean> {
+public class DeleteRoomService extends MenuCommand<Void> {
     private final RoomRepository repo;
     private final int idToDelete;
 
@@ -15,8 +15,8 @@ public class DeleteRoomService extends MenuCommand<Boolean> {
     }
 
     @Override
-    public Optional<Boolean> execute() {
-        Optional<Void> result = repo.delete(idToDelete);
-        return Optional.of(!result.isEmpty());
+    public Optional<Void> execute() {
+        repo.delete(idToDelete);
+        return Optional.empty();
     }
 }

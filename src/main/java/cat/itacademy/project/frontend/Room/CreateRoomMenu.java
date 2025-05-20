@@ -3,15 +3,15 @@ package cat.itacademy.project.frontend.Room;
 import cat.itacademy.project.api.room.CreateRoomController;
 import cat.itacademy.project.frontend.shared.MenuCommand;
 import cat.itacademy.project.frontend.shared.MenuScanner;
-import cat.itacademy.project.shared.domain.dtos.CreateEscapeRoomDTO;
-import cat.itacademy.project.shared.domain.dtos.CreateRoomDTO;
-import cat.itacademy.project.shared.domain.exceptions.AlreadyExistsException;
+import cat.itacademy.project.shared.domain.dtos.room.CreateRoomDTO;
 import cat.itacademy.project.shared.domain.exceptions.EmptyFieldException;
+import cat.itacademy.project.shared.domain.exceptions.InvalidDificultyException;
 
 import java.util.Optional;
 
 public class CreateRoomMenu extends MenuCommand<Void> {
     private String name;
+    private String difficulty;
     private double price;
     private int escapeRoomId;
 
@@ -32,12 +32,20 @@ public class CreateRoomMenu extends MenuCommand<Void> {
                 name = MenuScanner.readString("Enter the name of the room: ");
                 price = MenuScanner.readDouble("Enter the price of the room: ");
                 escapeRoomId = MenuScanner.readInt("Enter the id of the escape room: ");
+                int level = MenuScanner.readInt("Please select difficulty: 1 - Easy, 2 - Medium, 3 - Hard");
+                switch (level) {
+                    case 1 -> difficulty = "easy";
+                    case 2 -> difficulty = "medium";
+                    case 3 -> difficulty = "hard";
+                    default -> error("Invalid difficulty level. Please select 1, 2, or 3.");
+
+                }
             } catch (EmptyFieldException e) {
                 error("Error: Name or price cannot be empty.");
-            } catch (Exception e) {
-                error("Invalid input. price must be a number" + e.getMessage());
+            } catch (InvalidDificultyException e) {
+                error(e.getMessage());
             }
         }
-        return new CreateRoomDTO(name, price, escapeRoomId);
+        return new CreateRoomDTO(name, price, difficulty, escapeRoomId);
     }
 }

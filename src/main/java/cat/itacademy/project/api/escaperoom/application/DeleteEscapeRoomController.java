@@ -20,12 +20,7 @@ public class DeleteEscapeRoomController implements Command<Void> {
 
     @Override
     public Optional<Void> execute() {
-//        try {
-            service.execute();
-            return Optional.empty();
-//        } catch (Exception e) {
-//            error(e.getMessage());
-//            return Optional.of(false);
-//        }
+        service.execute();
+        return Optional.empty();
     }
 }

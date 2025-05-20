@@ -1,9 +1,6 @@
 package cat.itacademy.project;
 
 import cat.itacademy.project.frontend.Menu;
-import cat.itacademy.project.frontend.theme.CreateThemeMenu;
-import cat.itacademy.project.frontend.escaperoom.*;
-import cat.itacademy.project.frontend.theme.FindThemeMenu;
 
 public class Main {
     public static void main(String[] args) {

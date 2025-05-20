@@ -1,11 +1,9 @@
 package cat.itacademy.project.frontend.Room;
 
-import cat.itacademy.project.api.escaperoom.application.FindEscapeRoomByIdController;
 import cat.itacademy.project.api.room.FindRoomByIdController;
 import cat.itacademy.project.frontend.shared.MenuCommand;
 import cat.itacademy.project.frontend.shared.MenuScanner;
-import cat.itacademy.project.shared.domain.dtos.EscapeRoomDTO;
-import cat.itacademy.project.shared.domain.dtos.RoomDTO;
+import cat.itacademy.project.shared.domain.dtos.room.RoomDTO;
 
 import java.util.Optional;
 
@@ -19,11 +17,7 @@ public class FindRoomByIdMenu extends MenuCommand<Void> {
 
             if (roomDTO.isPresent()) {
                 Optional<RoomDTO> foundRoom = roomDTO.get();
-                info("Found room:");
-                info("ID: " + foundRoom.get().id());
-                info("Name: " + foundRoom.get().name());
-                info("Price: " + foundRoom.get().price());
-                info("EscapeRoomID: " + foundRoom.get().escapeRoomId());
+                RoomPrinter.print(foundRoom.get());
             } else {
                 error("Room with ID " + idToFind + " not found.");
             }
