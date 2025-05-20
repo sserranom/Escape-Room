@@ -42,10 +42,10 @@ public class PuzzleMySQLRepository implements PuzzleRepository {
     }
 
     @Override
-    public void update(Puzzle puzzle)  {
+    public void update(Puzzle puzzle) {
         String sql = "UPDATE puzzles Set name = ?, difficulty = ?, roomId = ?, answer = ?, story = ?, themeId = ?, price = ? WHERE id = ?";
 
-        try (var preparedStatement = connection.prepareStatement(sql)){
+        try (var preparedStatement = connection.prepareStatement(sql)) {
 
             preparedStatement.setString(1, puzzle.getName());
             preparedStatement.setString(2, puzzle.getDifficulty());
@@ -57,11 +57,11 @@ public class PuzzleMySQLRepository implements PuzzleRepository {
 
             int rowUpdated = preparedStatement.executeUpdate();
 
-            if (rowUpdated == 0){
+            if (rowUpdated == 0) {
                 throw new NotFoundException("Puzzle with ID " + puzzle.getId() + " not found.");
             }
 
-        }catch (SQLException | NotFoundException e){
+        } catch (SQLException | NotFoundException e) {
             throw new DatabaseException("Error updating puzzle: " + e.getMessage());
         }
 
@@ -96,15 +96,15 @@ public class PuzzleMySQLRepository implements PuzzleRepository {
             if (rs.next()) {
                 return Optional.of(
                         new Puzzle(
-                            rs.getInt("id"),
-                            rs.getString("name"),
-                            rs.getString("difficulty"),
-                            rs.getInt("roomId"),
-                            rs.getString("answer"),
-                            rs.getString("story"),
-                            rs.getInt("themeId"),
-                            rs.getDouble("price")
-                ));
+                                rs.getInt("id"),
+                                rs.getString("name"),
+                                rs.getString("difficulty"),
+                                rs.getInt("roomId"),
+                                rs.getString("answer"),
+                                rs.getString("story"),
+                                rs.getInt("themeId"),
+                                rs.getDouble("price")
+                        ));
 
             }
         } catch (SQLException e) {
@@ -114,43 +114,13 @@ public class PuzzleMySQLRepository implements PuzzleRepository {
     }
 
     @Override
-    public List<Puzzle> findAll() {
-        List<Puzzle> puzzles = new ArrayList<>();
+    public List<PuzzleDTO> findAll() {
+        List<PuzzleDTO> puzzles = new ArrayList<>();
         String sql = "SELECT * FROM puzzles";
         try (PreparedStatement preparedStatement = connection.prepareStatement(sql);
              ResultSet rs = preparedStatement.executeQuery()) {
             while (rs.next()) {
-                puzzles.add(Puzzle.fromDatabase(
-                    new PuzzleDTO(
-                        rs.getInt("id"),
-                        rs.getString("name"),
-                        rs.getString("difficulty"),
-                        rs.getInt("roomId"),
-                        rs.getString("answer"),
-                        rs.getString("story"),
-                        rs.getInt("themeId"),
-                        rs.getDouble("price")
-                    )
-                ));
-
-            }
-        } catch (Exception e) {
-            throw new DatabaseException("Error while finding all escape rooms: " + e.getMessage());
-        }
-        return puzzles;
-    }
-
-    @Override
-    public Optional<Puzzle> findByName(String name) {
-        String sql = "SELECT * FROM puzzles WHERE name = ?";
-        try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
-            // Set the "name" parameter in the SQL query
-            preparedStatement.setString(1, name);
-
-            // Execute the query
-            ResultSet rs = preparedStatement.executeQuery();
-            if (rs.next()) {
-                return Optional.of(Puzzle.fromDatabase(
+                puzzles.add(
                         new PuzzleDTO(
                                 rs.getInt("id"),
                                 rs.getString("name"),
@@ -160,7 +130,37 @@ public class PuzzleMySQLRepository implements PuzzleRepository {
                                 rs.getString("story"),
                                 rs.getInt("themeId"),
                                 rs.getDouble("price")
-                        )));
+
+                        ));
+
+            }
+        } catch (Exception e) {
+            throw new DatabaseException("Error while finding all escape rooms: " + e.getMessage());
+        }
+        return puzzles;
+    }
+
+    @Override
+    public Optional<PuzzleDTO> findByName(String name) {
+        String sql = "SELECT * FROM puzzles WHERE name = ?";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+            // Set the "name" parameter in the SQL query
+            preparedStatement.setString(1, name);
+
+            // Execute the query
+            ResultSet rs = preparedStatement.executeQuery();
+            if (rs.next()) {
+                return Optional.of(
+                        new PuzzleDTO(
+                                rs.getInt("id"),
+                                rs.getString("name"),
+                                rs.getString("difficulty"),
+                                rs.getInt("roomId"),
+                                rs.getString("answer"),
+                                rs.getString("story"),
+                                rs.getInt("themeId"),
+                                rs.getDouble("price")
+                        ));
             }
         } catch (Exception e) {
             throw new DatabaseException("Error while finding escape room: " + e.getMessage());

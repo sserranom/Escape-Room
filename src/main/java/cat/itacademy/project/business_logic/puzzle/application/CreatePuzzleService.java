@@ -22,17 +22,17 @@ public final class CreatePuzzleService implements Command<PuzzleDTO> {
     public Optional<PuzzleDTO> execute() {
         ensureDoesNotExist();
         repo.create(puzzle);
-        final Puzzle created = getPuzzle();
-        return Optional.of(created.toDTO());
+        final PuzzleDTO created = getPuzzle();
+        return Optional.of(created);
     }
 
-    private Puzzle getPuzzle() {
+    private PuzzleDTO getPuzzle() {
         return repo.findByName(puzzle.getName())
                 .orElseThrow(() -> new NotFoundException("Puzzle '" + puzzle.getName() + "' not found"));
     }
 
     private void ensureDoesNotExist() throws AlreadyExistsException {
-        Optional<Puzzle> existing = repo.findByName(puzzle.getName());
+        Optional<PuzzleDTO> existing = repo.findByName(puzzle.getName());
         if (existing.isPresent()) {
             throw new AlreadyExistsException("Puzzle '" + puzzle.getName() + "' already exist");
         }

@@ -18,13 +18,7 @@ public class FindThemeByIdService implements Command<ThemeDTO> {
 
     @Override
     public Optional<ThemeDTO> execute() {
-        Optional<Theme> themeOptional = repo.findById(idToFind);
-        return themeOptional.map(theme -> new ThemeDTO(
-                theme.getId(),
-                theme.getName(),
-                theme.getDescription(),
-                theme.getEscapeRoomId()
+        return repo.findById(idToFind);
 
-        ));
     }
 }

@@ -1,6 +1,7 @@
 package cat.itacademy.project.business_logic.puzzle.domain;
 
 import cat.itacademy.project.business_logic.puzzle.domain.Puzzle;
+import cat.itacademy.project.shared.domain.dtos.PuzzleDTO;
 
 import java.util.List;
 import java.util.Optional;
@@ -15,8 +16,8 @@ public interface PuzzleRepository {
 
     Optional<Puzzle> findById(int id);
 
-    List<Puzzle> findAll();
+    List<PuzzleDTO> findAll();
 
-    Optional<Puzzle> findByName(String name);
+    Optional<PuzzleDTO> findByName(String name);
 
 }

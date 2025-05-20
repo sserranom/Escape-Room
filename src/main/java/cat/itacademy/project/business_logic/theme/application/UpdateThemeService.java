@@ -37,19 +37,19 @@ public class UpdateThemeService implements Command<ThemeDTO> {
         Theme updatedTheme = themeToUpdate;
 
 
-        if (!request.name().equals(themeToUpdate.getName()) || !request.name().isBlank()) {
-            Optional<Theme> existingWithNewName = repo.findByName(request.name());
-            if (existingWithNewName.isPresent() && !Integer.valueOf(existingWithNewName.get().getId()).equals(themeToUpdate.getId())) {
-                throw new AlreadyExistsException("Escape room with name '" + request.name() + "' already exists.");
-            }
-            updatedTheme = updatedTheme.createNewInstanceWithName(request.name());
-        }
-
-        if (!request.description().equals(themeToUpdate.getDescription()) || !request.description().isBlank()) {
-            updatedTheme = updatedTheme.createNewInstanceWithDescription(request.description());
-        }
-
-            repo.update(updatedTheme);
+//        if (!request.name().equals(themeToUpdate.getName()) || !request.name().isBlank()) {
+//            Optional<Theme> existingWithNewName = repo.findByName(request.name());
+//            if (existingWithNewName.isPresent() && !Integer.valueOf(existingWithNewName.get().()).equals(themeToUpdate.getId())) {
+//                throw new AlreadyExistsException("Escape room with name '" + request.name() + "' already exists.");
+//            }
+//            updatedTheme = updatedTheme.createNewInstanceWithName(request.name());
+//        }
+//
+//        if (!request.description().equals(themeToUpdate.getDescription()) || !request.description().isBlank()) {
+//            updatedTheme = updatedTheme.createNewInstanceWithDescription(request.description());
+//        }
+//
+//            repo.update(updatedTheme);
         return Optional.of(updatedTheme.toDTO());
 
     }

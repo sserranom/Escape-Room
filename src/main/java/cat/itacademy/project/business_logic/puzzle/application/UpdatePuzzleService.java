@@ -26,18 +26,18 @@ public class UpdatePuzzleService implements Command<PuzzleDTO> {
             throw new EmptyFieldException("Field 'name' cannot be empty.");
         }
 
-        Optional<Puzzle> existingOptional = repo.findByName(request.nameToUpdate());
+        Optional<PuzzleDTO> existingOptional = repo.findByName(request.nameToUpdate());
 
         if (existingOptional.isEmpty()){
             throw new NotFoundException("Puzzle with name '" + request.nameToUpdate() + "' does not exist.");
         }
 
-        Puzzle puzzleToUpdate = existingOptional.get();
+        Puzzle puzzleToUpdate = Puzzle.fromDatabase(existingOptional.get()) ;
         Puzzle updatedPuzzle = puzzleToUpdate;
 
         if (!request.name().equals(puzzleToUpdate.getName()) || !request.name().isBlank()) {
-            Optional<Puzzle> existingWithNewName = repo.findByName((request.name()));
-            if (existingWithNewName.isPresent() && !Integer.valueOf(existingWithNewName.get().getId()).equals(puzzleToUpdate.getId())){
+            Optional<PuzzleDTO> existingWithNewName = repo.findByName((request.name()));
+            if (existingWithNewName.isPresent() && !Integer.valueOf(existingWithNewName.get().id()).equals(puzzleToUpdate.getId())){
                 throw new AlreadyExistsException("Puzzle with name '" + request.name() + "' already exist.");
             }
             updatedPuzzle = updatedPuzzle.createNewInstanceWithName(request.name());

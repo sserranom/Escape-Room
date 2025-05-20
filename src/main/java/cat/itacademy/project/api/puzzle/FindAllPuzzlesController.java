@@ -22,7 +22,7 @@ public class FindAllPuzzlesController extends MenuCommand<List<PuzzleDTO>> {
 
     @Override
     public Optional<List<PuzzleDTO>> execute() {
-        List<PuzzleDTO> puzzle = service.findAllRaw();
+        List<PuzzleDTO> puzzle = service.findAll();
 
         return Optional.of(puzzle);
     }
