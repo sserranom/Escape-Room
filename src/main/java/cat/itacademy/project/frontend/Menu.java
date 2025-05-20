@@ -2,9 +2,10 @@ package cat.itacademy.project.frontend;
 
 import cat.itacademy.project.frontend.escaperoom.CreateEscapeRoomMenu;
 import cat.itacademy.project.frontend.escaperoom.FindAllEscapeRoomsMenu;
+import cat.itacademy.project.frontend.escaperoom.ManageEscapeRoomMenu;
 import cat.itacademy.project.frontend.escaperoom.SelectActiveEscapeRoomMenu;
 import cat.itacademy.project.frontend.shared.MenuCommand;
-import cat.itacademy.project.shared.domain.dtos.EscapeRoomDTO;
+import cat.itacademy.project.shared.domain.dtos.escape_room.EscapeRoomDTO;
 
 import java.util.List;
 import java.util.Optional;
@@ -22,6 +23,17 @@ public class Menu extends MenuCommand<Void> {
     }
 
     public Optional<Void> execute() {
+        setupCurrentRoom();
+        while (true) {
+            ManageEscapeRoomMenu manageEscapeRoomMenu = new ManageEscapeRoomMenu(activeRoom);
+            manageEscapeRoomMenu.execute();
+
+        }
+
+
+    }
+
+    private void setupCurrentRoom() {
         getExistingEscapeRooms();
         if (existingRooms.isEmpty()) {
             Optional<EscapeRoomDTO> response = createEscapeRoomMenu.execute();
@@ -33,10 +45,5 @@ public class Menu extends MenuCommand<Void> {
                 selected.ifPresent(escapeRoomDTO -> activeRoom = escapeRoomDTO);
             }
         }
-
-
-        return Optional.empty();
-
-
     }
 }

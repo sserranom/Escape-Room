@@ -3,8 +3,8 @@ package cat.itacademy.project.business_logic.escaperoom.application;
 import cat.itacademy.project.business_logic.escaperoom.domain.EscapeRoom;
 import cat.itacademy.project.business_logic.escaperoom.domain.EscapeRoomRepository;
 import cat.itacademy.project.shared.domain.Command;
-import cat.itacademy.project.shared.domain.dtos.CreateEscapeRoomDTO;
-import cat.itacademy.project.shared.domain.dtos.EscapeRoomDTO;
+import cat.itacademy.project.shared.domain.dtos.escape_room.CreateEscapeRoomDTO;
+import cat.itacademy.project.shared.domain.dtos.escape_room.EscapeRoomDTO;
 import cat.itacademy.project.shared.domain.exceptions.AlreadyExistsException;
 import cat.itacademy.project.shared.domain.exceptions.NotFoundException;
 
@@ -21,7 +21,7 @@ public final class CreateEscapeRoomService implements Command<EscapeRoomDTO> {
 
     public Optional<EscapeRoomDTO> execute() {
         ensureDoesNotExist();
-        repo.create(escapeRoom);
+        repo.create(new CreateEscapeRoomDTO(escapeRoom.getName(),escapeRoom.getUrl()));
         final EscapeRoom created = getEscapeRoom();
         return Optional.of(created.toDTO());
     }

@@ -2,7 +2,7 @@ package cat.itacademy.project.frontend.escaperoom;
 
 import cat.itacademy.project.frontend.shared.MenuCommand;
 import cat.itacademy.project.frontend.shared.MenuScanner;
-import cat.itacademy.project.shared.domain.dtos.EscapeRoomDTO;
+import cat.itacademy.project.shared.domain.dtos.escape_room.EscapeRoomDTO;
 
 import java.util.List;
 import java.util.Optional;
@@ -13,7 +13,6 @@ public class SelectActiveEscapeRoomMenu extends MenuCommand<EscapeRoomDTO> {
     public SelectActiveEscapeRoomMenu(List<EscapeRoomDTO> escapeRoomDTOS) {
         this.escapeRoomDTOS = escapeRoomDTOS;
     }
-
 
 
     @Override
