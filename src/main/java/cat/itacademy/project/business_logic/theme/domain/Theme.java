@@ -1,4 +1,4 @@
-package cat.itacademy.project.business_logic.themes;
+package cat.itacademy.project.business_logic.themes.domain;
 
 import cat.itacademy.project.business_logic.escaperoom.application.FindAllEscapeRoomsService;
 import cat.itacademy.project.business_logic.escaperoom.domain.EscapeRoom;

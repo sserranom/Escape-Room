@@ -1,5 +1,7 @@
-package cat.itacademy.project.business_logic.themes;
+package cat.itacademy.project.business_logic.themes.application;
 
+import cat.itacademy.project.business_logic.themes.domain.Theme;
+import cat.itacademy.project.business_logic.themes.domain.ThemeRepository;
 import cat.itacademy.project.shared.domain.dtos.CreateThemeDTO;
 
 public class CreateNewThemeService {
