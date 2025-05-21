@@ -7,12 +7,14 @@ import cat.itacademy.project.shared.domain.dtos.escape_room.CreateEscapeRoomDTO;
 import cat.itacademy.project.shared.domain.dtos.escape_room.EscapeRoomDTO;
 import cat.itacademy.project.shared.domain.exceptions.AlreadyExistsException;
 import cat.itacademy.project.shared.domain.exceptions.NotFoundException;
+import cat.itacademy.project.shared.events.EventManager;
 
 import java.util.Optional;
 
 public final class CreateEscapeRoomService implements Command<EscapeRoomDTO> {
     private final EscapeRoom escapeRoom;
     private final EscapeRoomRepository repo;
+    private final EventManager events;
 
     public CreateEscapeRoomService(CreateEscapeRoomDTO request, EscapeRoomRepository repo) {
         this.escapeRoom = EscapeRoom.create(request);

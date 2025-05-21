@@ -12,14 +12,21 @@ import java.util.Optional;
 
 public class Menu extends MenuCommand<Void> {
     private final CreateEscapeRoomMenu createEscapeRoomMenu = new CreateEscapeRoomMenu();
+
     FindAllEscapeRoomsMenu findAllEscapeRoomsMenu = new FindAllEscapeRoomsMenu();
     private EscapeRoomDTO activeRoom;
     private List<EscapeRoomDTO> existingRooms;
-
     private void getExistingEscapeRooms() {
         Optional<List<EscapeRoomDTO>> response = findAllEscapeRoomsMenu.execute();
         response.ifPresent(escapeRoomDTOS -> existingRooms = escapeRoomDTOS);
 
+    }
+
+    public void addRoom(EscapeRoomDTO escapeRoomDTO) {
+        existingRooms.add(escapeRoomDTO);
+    }
+    public void setActiveRoom(EscapeRoomDTO activeRoom) {
+        this.activeRoom = activeRoom;
     }
 
     public Optional<Void> execute() {
