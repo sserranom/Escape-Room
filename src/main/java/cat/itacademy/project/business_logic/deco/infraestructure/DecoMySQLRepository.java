@@ -102,7 +102,7 @@ public class DecoMySQLRepository implements DecoRepository {
                                 rs.getInt("id"),
                                 rs.getString("name"),
                                 rs.getString("description"),
-                                String.valueOf(rs.getType()),
+                                rs.getString("type"),
                                 rs.getInt("escaperoom_id"),
                                 rs.getDouble("price")
 

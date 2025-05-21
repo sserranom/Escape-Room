@@ -1,16 +1,24 @@
 package cat.itacademy.project.frontend.escaperoom;
 
+import cat.itacademy.project.frontend.Room.ManageRoomMenu;
 import cat.itacademy.project.frontend.shared.MenuCommand;
 import cat.itacademy.project.frontend.shared.MenuScanner;
 import cat.itacademy.project.shared.domain.dtos.escape_room.EscapeRoomDTO;
+import cat.itacademy.project.shared.domain.dtos.room.RoomDTO;
 
 import java.util.Optional;
 
 public class ManageEscapeRoomMenu extends MenuCommand<EscapeRoomDTO> {
     private final EscapeRoomDTO escapeRoomDTO;
+    private RoomDTO roomDTO;
 
     public ManageEscapeRoomMenu(EscapeRoomDTO escapeRoomDTO) {
         this.escapeRoomDTO = escapeRoomDTO;
+    }
+
+    public ManageEscapeRoomMenu(EscapeRoomDTO escapeRoomDTO, RoomDTO roomDTO) {
+        this.escapeRoomDTO = escapeRoomDTO;
+        this.roomDTO = roomDTO;
     }
 
     @Override
@@ -32,6 +40,11 @@ public class ManageEscapeRoomMenu extends MenuCommand<EscapeRoomDTO> {
                 DeleteEscapeRoomMenu deleteEscapeRoomMenu = new DeleteEscapeRoomMenu(escapeRoomDTO);
                 deleteEscapeRoomMenu.execute();
                 break;
+
+            case 4:
+                log("Manage rooms: ");
+                ManageRoomMenu manageRoomMenu = new ManageRoomMenu(roomDTO);
+                manageRoomMenu.execute();
             default:
                 error("Invalid choice. Please try again.");
                 break;

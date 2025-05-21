@@ -12,11 +12,11 @@ public class FindAllRoomMenu extends MenuCommand<List<RoomDTO>> {
     public Optional<List<RoomDTO>> execute() {
         FindAllRoomsController controller = new FindAllRoomsController();
         Optional<List<RoomDTO>> result = controller.execute();
-        if (result.isEmpty()) {
-            info("No rooms Found.");
+        if (result.get().isEmpty()) {
+            error("No rooms Found.");
         } else {
             info("List of Rooms: ");
-            result.get().forEach(room -> log("hola"));
+            result.get().forEach(RoomPrinter::print);
         }
 
         return result;

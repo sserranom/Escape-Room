@@ -1,20 +1,17 @@
 package cat.itacademy.project.business_logic.deco.domain;
 
-import cat.itacademy.project.business_logic.room.domain.Room;
 import cat.itacademy.project.shared.domain.dtos.deco.CreateDecoDTO;
 import cat.itacademy.project.shared.domain.dtos.deco.DecoDTO;
-import cat.itacademy.project.shared.domain.dtos.room.CreateRoomDTO;
-import cat.itacademy.project.shared.domain.dtos.room.RoomDTO;
 
 public class Deco {
     private int id;
     private String name;
     private String description;
-    private Type type;
+    private String type;
     private int escapeRoomId;
     private double price;
 
-    public Deco(int id, String name, String description, Type type, int escapeRoomId, double price) {
+    public Deco(int id, String name, String description, String type, int escapeRoomId, double price) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -23,7 +20,7 @@ public class Deco {
         this.price = price;
     }
 
-    public Deco(String name, String description, Type type, int escapeRoomId, double price) {
+    public Deco(String name, String description, String type, int escapeRoomId, double price) {
         this.name = name;
         this.description = description;
         this.type = type;
@@ -51,7 +48,7 @@ public class Deco {
         return description;
     }
 
-    public Type getType() {
+    public String getType() {
         return type;
     }
 
@@ -75,7 +72,7 @@ public class Deco {
         this.price = price;
     }
 
-    public void setType(Type type) {
+    public void setType(String type) {
         this.type = type;
     }
 
@@ -107,7 +104,7 @@ public class Deco {
         return new Deco(this.id, this.name, newDescription, this.type, this.escapeRoomId, this.price);
     }
 
-    public Deco createNewInstanceWithType(Type newType) {
+    public Deco createNewInstanceWithType(String newType) {
         return new Deco(this.id, this.name, this.description, newType, this.escapeRoomId, this.price);
     }
 

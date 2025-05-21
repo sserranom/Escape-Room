@@ -13,7 +13,7 @@ public class CreateRoomMenu extends MenuCommand<Void> {
     private String name;
     private String difficulty;
     private double price;
-    private int escapeRoomId;
+    private int theme_id;
 
     @Override
     public Optional<Void> execute() {
@@ -21,18 +21,18 @@ public class CreateRoomMenu extends MenuCommand<Void> {
 
         CreateRoomController controller = new CreateRoomController(dto);
         controller.execute();
-        info("Escape room created successfully.");
+        info("Room created successfully.");
         return Optional.empty();
     }
 
     private CreateRoomDTO getUserInfo() {
 
-        while (name == null || price <= 0 || escapeRoomId <= 0) {
+        while (name == null || price <= 0 || theme_id <= 0) {
             try {
                 name = MenuScanner.readString("Enter the name of the room: ");
                 price = MenuScanner.readDouble("Enter the price of the room: ");
-                escapeRoomId = MenuScanner.readInt("Enter the id of the escape room: ");
-                int level = MenuScanner.readInt("Please select difficulty: 1 - Easy, 2 - Medium, 3 - Hard");
+                theme_id = MenuScanner.readInt("Enter the id of the Theme : ");
+                int level = MenuScanner.readInt("Please select difficulty: 1 - Easy, 2 - Medium, 3 - Hard: ");
                 switch (level) {
                     case 1 -> difficulty = "easy";
                     case 2 -> difficulty = "medium";
@@ -46,6 +46,6 @@ public class CreateRoomMenu extends MenuCommand<Void> {
                 error(e.getMessage());
             }
         }
-        return new CreateRoomDTO(name, price, difficulty, escapeRoomId);
+        return new CreateRoomDTO(name, price, difficulty, theme_id);
     }
 }

@@ -73,12 +73,15 @@ public class RoomMySQLRepository implements RoomRepository {
 
     @Override
     public Optional<RoomDTO> findById(int id) {
-        String sql = "SELECT id, name, difficulty, price, theme_id FROM rooms WHERE id = ?";
+        String sql = "SELECT r.id, r.name, r.difficulty, r.price, r.theme_id, t.name AS themeName " +
+                "FROM rooms r " +
+                "JOIN themes t ON r.theme_id = t.id " +
+                "WHERE r.id = ?";
         try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             preparedStatement.setInt(1, id);
             ResultSet rs = preparedStatement.executeQuery();
             if (rs.next()) {
-                return Optional.of(new RoomDTO(rs.getInt("id"), rs.getString("name"), rs.getString("difficulty"), rs.getDouble("price"), rs.getInt("theme_id")));
+                return Optional.of(new RoomDTO(rs.getInt("id"), rs.getString("name"), rs.getString("difficulty"), rs.getDouble("price"), rs.getInt("theme_id"), rs.getString("themeName")));
             }
         } catch (SQLException e) {
             throw new DatabaseException("Error finding room by id: " + e.getMessage());
@@ -89,7 +92,9 @@ public class RoomMySQLRepository implements RoomRepository {
     @Override
     public List<RoomDTO> findAll() {
         List<RoomDTO> rooms = new ArrayList<>();
-        String sql = "SELECT id, name, difficulty, price, theme_id FROM rooms";
+        String sql = "SELECT r.id, r.name, r.difficulty, r.price, r.theme_id, t.name AS themeName " +
+                "FROM rooms r " +
+                "JOIN themes t ON r.theme_id = t.id ";
         try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             ResultSet rs = preparedStatement.executeQuery();
             while (rs.next()) {
@@ -99,7 +104,8 @@ public class RoomMySQLRepository implements RoomRepository {
                                 rs.getString("name"),
                                 rs.getString("difficulty"),
                                 rs.getDouble("price"),
-                                rs.getInt("theme_id")
+                                rs.getInt("theme_id"),
+                                rs.getString("themeName")
 
                         ));
             }
@@ -111,7 +117,10 @@ public class RoomMySQLRepository implements RoomRepository {
 
     @Override
     public Optional<RoomDTO> findByName(String name) {
-        String sql = "SELECT * FROM rooms WHERE name = ?";
+        String sql = "SELECT r.id, r.name, r.difficulty, r.price, r.theme_id, t.name AS themeName " +
+                "FROM rooms r " +
+                "JOIN themes t ON r.theme_id = t.id " +
+                "WHERE r.name = ?";
         try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             preparedStatement.setString(1, name);
             ResultSet rs = preparedStatement.executeQuery();
@@ -121,7 +130,8 @@ public class RoomMySQLRepository implements RoomRepository {
                                 rs.getString("name"),
                                 rs.getString("difficulty"),
                                 rs.getDouble("price"),
-                                rs.getInt("theme_id")
+                                rs.getInt("theme_id"),
+                                rs.getString("themeName")
                         ));
             }
         } catch (Exception e) {
@@ -133,7 +143,10 @@ public class RoomMySQLRepository implements RoomRepository {
     @Override
     public Optional<Room> findAllByThemerId(int escapeRoomId) {
         List<Room> rooms = new ArrayList<>();
-        String sql = "SELECT id, name, price, theme_id FROM rooms WHERE theme_id = ?";
+        String sql = "SELECT r.id, r.name, r.difficulty, r.price, r.theme_id, t.name AS themeName " +
+                "FROM rooms r " +
+                "JOIN themes t ON r.theme_id = t.id " +
+                "WHERE r.theme_id = ?";;
         try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             preparedStatement.setInt(1, escapeRoomId);
             ResultSet rs = preparedStatement.executeQuery();
@@ -144,7 +157,8 @@ public class RoomMySQLRepository implements RoomRepository {
                                 rs.getString("name"),
                                 rs.getString("difficulty"),
                                 rs.getDouble("price"),
-                                rs.getInt(escapeRoomId)
+                                rs.getInt("theme_id"),
+                                rs.getString("themeName")
                         )));
             }
         } catch (Exception e) {
