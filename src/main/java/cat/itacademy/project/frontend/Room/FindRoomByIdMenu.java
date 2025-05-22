@@ -4,7 +4,6 @@ import cat.itacademy.project.api.room.FindRoomByIdController;
 import cat.itacademy.project.frontend.shared.MenuCommand;
 import cat.itacademy.project.frontend.shared.MenuScanner;
 import cat.itacademy.project.shared.domain.dtos.room.RoomDTO;
-
 import java.util.Optional;
 
 public class FindRoomByIdMenu extends MenuCommand<Void> {

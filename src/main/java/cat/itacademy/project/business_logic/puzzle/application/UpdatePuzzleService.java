@@ -3,8 +3,8 @@ package cat.itacademy.project.business_logic.puzzle.application;
 import cat.itacademy.project.business_logic.puzzle.domain.Puzzle;
 import cat.itacademy.project.business_logic.puzzle.domain.PuzzleRepository;
 import cat.itacademy.project.shared.domain.Command;
-import cat.itacademy.project.shared.domain.dtos.PuzzleDTO;
-import cat.itacademy.project.shared.domain.dtos.UpdatePuzzleDTO;
+import cat.itacademy.project.shared.domain.dtos.puzzle.PuzzleDTO;
+import cat.itacademy.project.shared.domain.dtos.puzzle.UpdatePuzzleDTO;
 import cat.itacademy.project.shared.domain.exceptions.AlreadyExistsException;
 import cat.itacademy.project.shared.domain.exceptions.EmptyFieldException;
 import cat.itacademy.project.shared.domain.exceptions.NotFoundException;
@@ -32,42 +32,18 @@ public class UpdatePuzzleService implements Command<PuzzleDTO> {
             throw new NotFoundException("Puzzle with name '" + request.nameToUpdate() + "' does not exist.");
         }
 
-        Puzzle puzzleToUpdate = Puzzle.fromDatabase(existingOptional.get()) ;
-        Puzzle updatedPuzzle = puzzleToUpdate;
+        Puzzle puzzle = Puzzle.fromDatabase(existingOptional.get());
 
-        if (!request.name().equals(puzzleToUpdate.getName()) || !request.name().isBlank()) {
-            Optional<PuzzleDTO> existingWithNewName = repo.findByName((request.name()));
-            if (existingWithNewName.isPresent() && !Integer.valueOf(existingWithNewName.get().id()).equals(puzzleToUpdate.getId())){
-                throw new AlreadyExistsException("Puzzle with name '" + request.name() + "' already exist.");
-            }
-            updatedPuzzle = updatedPuzzle.createNewInstanceWithName(request.name());
-        }
+        puzzle.setName(!request.name().isBlank() ? request.name() : puzzle.getName());
+        puzzle.setDifficulty(!request.difficulty().isBlank() ? request.difficulty() : puzzle.getDifficulty());
+        puzzle.setRoomId(request.roomId() > 0 ? request.roomId() : puzzle.getRoomId());
+        puzzle.setAnswer(!request.answer().isBlank() ? request.answer() : puzzle.getAnswer());
+        puzzle.setStory(!request.story().isBlank() ? request.story() : puzzle.getStory());
+        puzzle.setThemeId(request.themeId() > 0 ? request.themeId() : puzzle.getThemeId());
+        puzzle.setPrice(request.price() > 0 ? request.price() : puzzle.getPrice());
 
-        if (request.difficulty() != null && !request.difficulty().isBlank() && !request.difficulty().equals(puzzleToUpdate.getDifficulty())) {
-            updatedPuzzle = updatedPuzzle.createNewInstanceWithDifficulty(request.difficulty());
-        }
-        if (request.roomId() > 0 && request.roomId() != puzzleToUpdate.getRoomId()) {
-            updatedPuzzle = updatedPuzzle.createNewInstanceWithRoomId(request.roomId());
-        }
-
-        if (request.answer() != null && !request.answer().isBlank() && !request.answer().equals(puzzleToUpdate.getAnswer())) {
-            updatedPuzzle = updatedPuzzle.createNewInstanceWithAnswer(request.answer());
-        }
-
-        if (request.story() != null && !request.story().isBlank() && !request.story().equals(puzzleToUpdate.getStory())) {
-            updatedPuzzle = updatedPuzzle.createNewInstanceWithStory(request.story());
-        }
-
-        if (request.themeId() > 0 && request.themeId() != puzzleToUpdate.getThemeId()) {
-            updatedPuzzle = updatedPuzzle.createNewInstanceWithThemeId(request.themeId());
-        }
-
-        if (request.price() > 0 && request.price() != puzzleToUpdate.getPrice()) {
-            updatedPuzzle = updatedPuzzle.createNewInstanceWithPrice(request.price());
-        }
-
-        repo.update(updatedPuzzle);
-        return Optional.of(updatedPuzzle.toDTO());
+        repo.update(puzzle);
+        return Optional.of(puzzle.toDTO());
 
     }
 }

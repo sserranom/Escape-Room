@@ -3,7 +3,9 @@ package cat.itacademy.project.frontend.puzzle;
 import cat.itacademy.project.api.puzzle.FindPuzzleByIdController;
 import cat.itacademy.project.frontend.shared.MenuCommand;
 import cat.itacademy.project.frontend.shared.MenuScanner;
-import cat.itacademy.project.shared.domain.dtos.PuzzleDTO;
+import cat.itacademy.project.frontend.theme.ThemePrinter;
+import cat.itacademy.project.shared.domain.dtos.puzzle.PuzzleDTO;
+import cat.itacademy.project.shared.domain.dtos.theme.ThemeDTO;
 
 import java.util.Optional;
 
@@ -17,15 +19,7 @@ public class FindPuzzleByIdMenu extends MenuCommand<Void> {
 
             if (puzzleDTO.isPresent()) {
                 Optional<PuzzleDTO> foundPuzzle = puzzleDTO.get();
-                info("Found puzzle:");
-                info("ID: " + foundPuzzle.get().id());
-                info("Name: " + foundPuzzle.get().name());
-                info("Difficulty: " + foundPuzzle.get().difficulty());
-                info("Room ID: " + foundPuzzle.get().roomId());
-                info("Answer: " + foundPuzzle.get().answer());
-                info("Story: " + foundPuzzle.get().story());
-                info("Theme ID: " + foundPuzzle.get().themeId());
-                info("Price: " + foundPuzzle.get().price());
+                PuzzlePrinter.print(foundPuzzle.get());
             } else {
                 error("Puzzle with ID " + idToFind + " not found.");
             }

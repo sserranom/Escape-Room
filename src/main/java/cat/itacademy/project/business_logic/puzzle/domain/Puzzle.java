@@ -1,7 +1,7 @@
 package cat.itacademy.project.business_logic.puzzle.domain;
 
-import cat.itacademy.project.shared.domain.dtos.CreatePuzzleDTO;
-import cat.itacademy.project.shared.domain.dtos.PuzzleDTO;
+import cat.itacademy.project.shared.domain.dtos.puzzle.CreatePuzzleDTO;
+import cat.itacademy.project.shared.domain.dtos.puzzle.PuzzleDTO;
 
 public class Puzzle {
     private int id;

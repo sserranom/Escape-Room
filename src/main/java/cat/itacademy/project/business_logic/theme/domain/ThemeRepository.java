@@ -1,7 +1,7 @@
 package cat.itacademy.project.business_logic.theme.domain;
 
 
-import cat.itacademy.project.shared.domain.dtos.ThemeDTO;
+import cat.itacademy.project.shared.domain.dtos.theme.ThemeDTO;
 
 import java.util.List;
 import java.util.Optional;
