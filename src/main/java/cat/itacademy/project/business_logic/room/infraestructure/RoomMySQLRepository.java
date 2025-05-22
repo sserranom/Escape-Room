@@ -46,7 +46,8 @@ public class RoomMySQLRepository implements RoomRepository {
             preparedStatement.setString(1, room.getName());
             preparedStatement.setDouble(2, room.getPrice());
             preparedStatement.setString(3, room.getDifficulty());
-            preparedStatement.setInt(4, room.getId());
+            preparedStatement.setInt(4, room.getTheme_id());
+            preparedStatement.setInt(5, room.getId());
             preparedStatement.executeUpdate();
 
         } catch (SQLException e) {

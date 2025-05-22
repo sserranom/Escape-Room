@@ -37,8 +37,8 @@ public class UpdateRoomMenu extends MenuCommand<Void> {
 
         }
         double newPrice = MenuScanner.readDouble("Enter the new Price: ");
-        int newEscapeRoomId = MenuScanner.readInt("Enter the new ID of the Escape Room: ");
+        int newThemeId= MenuScanner.readInt("Enter the new ID of the theme: ");
 
-        return new UpdateRoomDTO(nameToUpdate, newName.isEmpty() ? null : newName, newDifficulty, newPrice <= 0 ? null : newPrice, newEscapeRoomId <= 0 ? null : newEscapeRoomId);
+        return new UpdateRoomDTO(nameToUpdate, newName.isEmpty() ? null : newName, newDifficulty, newPrice <= 0 ? null : newPrice, newThemeId <= 0 ? null : newThemeId);
     }
 }

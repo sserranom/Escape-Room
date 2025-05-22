@@ -5,7 +5,7 @@ import cat.itacademy.project.shared.domain.exceptions.InvalidDificultyException;
 
 import java.util.stream.Stream;
 
-public record UpdateRoomDTO(String nameToUpdate, String name, String difficulty, double price, int escapeRoomId) {
+public record UpdateRoomDTO(String nameToUpdate, String name, String difficulty, double price, int themeId) {
     public UpdateRoomDTO {
 
         if (nameToUpdate == null || nameToUpdate.isBlank()) {

@@ -70,16 +70,9 @@ public class Room {
         return new RoomDTO(id, name, difficulty, price, theme_id, themeName);
     }
 
-//    @Override
-//    public String toString() {
-//        return "Room{" +
-//                "id=" + id +
-//                ", name='" + name + '\'' +
-//                ", price=" + price +
-//                ", escapeRoomId=" + theme_id +
-//                '}';
-//    }
-
+    public void setDifficulty(String value){
+        this.difficulty = value;
+    }
 
     @Override
     public String toString() {
@@ -93,17 +86,7 @@ public class Room {
                 '}';
     }
 
-    public Room createNewInstanceWithName(String newName) {
-        return new Room(newName, this.difficulty, this.price, this.theme_id);
-    }
 
-    public Room createNewInstanceWithPrice(double newPrice) {
-        return new Room(this.name, this.difficulty, newPrice, this.theme_id);
-    }
-
-    public Room createNewInstanceWithEscapeRoomId(int newEscapeRoomId) {
-        return new Room(this.name, this.difficulty, this.price, newEscapeRoomId);
-    }
 
     public String getDifficulty() {
         return this.difficulty;

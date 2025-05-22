@@ -91,7 +91,7 @@ public class Deco {
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
                 ", type=" + type +
-                ", escapeRoomId=" + escapeRoomId +
+                ", themeId=" + escapeRoomId +
                 ", price=" + price +
                 '}';
     }
