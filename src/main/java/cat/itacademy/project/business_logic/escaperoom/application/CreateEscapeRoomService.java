@@ -14,7 +14,7 @@ import java.util.Optional;
 public final class CreateEscapeRoomService implements Command<EscapeRoomDTO> {
     private final EscapeRoom escapeRoom;
     private final EscapeRoomRepository repo;
-    private final EventManager events;
+//    private final EventManager events;
 
     public CreateEscapeRoomService(CreateEscapeRoomDTO request, EscapeRoomRepository repo) {
         this.escapeRoom = EscapeRoom.create(request);
