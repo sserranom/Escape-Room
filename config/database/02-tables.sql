@@ -88,18 +88,3 @@ CREATE TABLE reservations
     FOREIGN KEY (puzzle_id) REFERENCES puzzles (id) ON DELETE SET NULL
 );
 
-CREATE TABLE notifications
-(
-    id              INT auto_increment PRIMARY KEY,
-    recipient_name  VARCHAR(255) NOT NULL,
-    recipient_email VARCHAR(255) NOT NULL,
-    message         TEXT         NOT NULL
-);
-
-CREATE TABLE rewards
-(
-    id            INT auto_increment PRIMARY KEY,
-    recipient     VARCHAR(50)  NOT NULL,
-    description   VARCHAR(255) NOT NULL,
-    delivery_date TIMESTAMP
-);
