@@ -39,7 +39,8 @@ public class UpdateRoomService implements Command<RoomDTO> {
         room.setPrice(
                 request.price() > 0 && request.price() != room.getPrice()? request.price() : room.getPrice()
         );
-        room.setTheme_id(room.getTheme_id() != request.themeId() && request.themeId() > 0 ? request.themeId() : room.getTheme_id());
+        room.setTheme_id(
+                room.getTheme_id() != request.themeId() && request.themeId() > 0 ? request.themeId() : room.getTheme_id());
 
         room.setDifficulty(request.difficulty().isBlank() ? room.getDifficulty() : request.difficulty());
 

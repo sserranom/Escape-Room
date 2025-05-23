@@ -50,9 +50,10 @@ public class DecoMySQLRepository implements DecoRepository {
         try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             preparedStatement.setString(1, deco.getName());
             preparedStatement.setString(2, deco.getDescription());
-            preparedStatement.setString(3, String.valueOf(deco.getType()));
+            preparedStatement.setString(3, deco.getType());
             preparedStatement.setInt(4, deco.getEscapeRoomId());
             preparedStatement.setDouble(5, deco.getPrice());
+            preparedStatement.setInt(6, deco.getId());
             preparedStatement.executeUpdate();
 
         } catch (SQLException e) {
@@ -85,7 +86,7 @@ public class DecoMySQLRepository implements DecoRepository {
                 return Optional.of(new DecoDTO(rs.getInt("id"), rs.getString("name"), rs.getString("description"), rs.getString("type"), rs.getInt("escaperoom_id"), rs.getDouble("price")));
             }
         } catch (SQLException e) {
-            throw new DatabaseException("Error finding room by id: " + e.getMessage());
+            throw new DatabaseException("Error finding decorative item by id: " + e.getMessage());
         }
         return Optional.empty();
     }
@@ -93,7 +94,7 @@ public class DecoMySQLRepository implements DecoRepository {
     @Override
     public List<DecoDTO> findAll() {
         List<DecoDTO> decoObjs = new ArrayList<>();
-        String sql = "SELECT id, name, description, type, escaperoom_id, price FROM rooms";
+        String sql = "SELECT id, name, description, type, escaperoom_id, price FROM deco";
         try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             ResultSet rs = preparedStatement.executeQuery();
             while (rs.next()) {
@@ -126,7 +127,7 @@ public class DecoMySQLRepository implements DecoRepository {
                                 rs.getString("name"),
                                 rs.getString("description"),
                                 String.valueOf(rs.getType()),
-                                rs.getInt("escaperrom_id"),
+                                rs.getInt("escaperoom_id"),
                                 rs.getDouble("price")
 
                         ));

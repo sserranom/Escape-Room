@@ -72,7 +72,7 @@ public class Deco {
         this.price = price;
     }
 
-    public void setType(String type) {
+    public void setType(String value) {
         this.type = type;
     }
 
@@ -96,23 +96,5 @@ public class Deco {
                 '}';
     }
 
-    public Deco createNewInstanceWithName(String newName) {
-        return new Deco(this.id, newName, this.description, this.type, this.escapeRoomId, this.price);
-    }
 
-    public Deco createNewInstanceWithDescription(String newDescription) {
-        return new Deco(this.id, this.name, newDescription, this.type, this.escapeRoomId, this.price);
-    }
-
-    public Deco createNewInstanceWithType(String newType) {
-        return new Deco(this.id, this.name, this.description, newType, this.escapeRoomId, this.price);
-    }
-
-    public Deco createNewInstanceWithEscapeRoomId(int newEscapeRoomId) {
-        return new Deco(this.id, this.name, this.description, this.type, newEscapeRoomId, this.price);
-    }
-
-    public Deco createNewInstanceWithPrice(double newPrice) {
-        return new Deco(this.id, this.name, this.description, this.type, this.escapeRoomId, newPrice);
-    }
 }
