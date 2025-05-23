@@ -8,16 +8,26 @@ CREATE TABLE escape_rooms
 (
     id   INT auto_increment PRIMARY KEY,
     name VARCHAR(255) UNIQUE NOT NULL,
-    url  VARCHAR(100) NOT NULL
+    url  VARCHAR(100)        NOT NULL
 );
 
 CREATE TABLE themes
 (
-    id          INT auto_increment PRIMARY KEY,
-    name        VARCHAR(255) NOT NULL,
-    description VARCHAR(255) NOT NULL,
-    escaperoom_id INT NOT NULL,
+    id            INT auto_increment PRIMARY KEY,
+    name          VARCHAR(255) NOT NULL,
+    description   VARCHAR(255) NOT NULL,
+    escaperoom_id INT          NOT NULL,
     FOREIGN KEY (escaperoom_id) REFERENCES escape_rooms (id) ON DELETE CASCADE
+);
+
+CREATE TABLE rooms
+(
+    id         INT auto_increment PRIMARY KEY,
+    name       VARCHAR(255)                    NOT NULL,
+    price      DECIMAL(10, 2)                  NOT NULL,
+    difficulty ENUM ('easy', 'medium', 'hard') NOT NULL,
+    theme_id   INT                             NOT NULL,
+    FOREIGN KEY (theme_id) REFERENCES themes (id) ON DELETE CASCADE
 );
 
 CREATE TABLE deco
@@ -26,78 +36,64 @@ CREATE TABLE deco
     name          VARCHAR(255)                      NOT NULL,
     description   VARCHAR(255)                      NOT NULL,
     type          ENUM ('furniture', 'garnishment') NOT NULL,
-    theme_id      INT                               NOT NULL,
     escaperoom_id INT                               NOT NULL,
     price         DECIMAL(10, 2)                    NOT NULL,
-    FOREIGN KEY (escaperoom_id) REFERENCES escape_rooms (id) ON DELETE CASCADE,
-    FOREIGN KEY (theme_id) REFERENCES themes (id) ON DELETE CASCADE
+    FOREIGN KEY (escaperoom_id) REFERENCES escape_rooms (id) ON DELETE CASCADE
 );
 
-CREATE TABLE rooms
+CREATE TABLE deco_inventory
 (
     id            INT auto_increment PRIMARY KEY,
-    name          VARCHAR(255)   NOT NULL,
-    price         DECIMAL(10, 2) NOT NULL,
-    escaperoom_id INT            NOT NULL,
-    FOREIGN KEY (escaperoom_id) REFERENCES escape_rooms (id) ON DELETE CASCADE
+    escaperoom_id INT NOT NULL,
+    deco_id       INT NOT NULL,
+    room_id       INT,
+    FOREIGN KEY (room_id) REFERENCES rooms (id) ON DELETE SET NULL,
+    FOREIGN KEY (escaperoom_id) REFERENCES escape_rooms (id),
+    FOREIGN KEY (deco_id) REFERENCES deco (id)
+
 );
 
 CREATE TABLE puzzles
 (
-    id         INT auto_increment PRIMARY KEY,
-    name       VARCHAR(255)                    NOT NULL,
-    difficulty ENUM ('easy', 'medium', 'hard') NOT NULL,
-    room_id    INT                             NOT NULL,
-    answer     VARCHAR(255)                    NOT NULL,
-    story      TEXT                            NOT NULL,
-    theme_id   INT                             NOT NULL,
-    price      DECIMAL(10, 2)                  NOT NULL,
-    FOREIGN KEY (room_id) REFERENCES rooms (id) ON DELETE CASCADE,
+    id       INT auto_increment PRIMARY KEY,
+    name     VARCHAR(255)   NOT NULL,
+    theme_id INT            NOT NULL,
+    room_id  INT,
+    answer   VARCHAR(255)   NOT NULL,
+    story    TEXT           NOT NULL,
+    price    DECIMAL(10, 2) NOT NULL,
+    FOREIGN KEY (room_id) REFERENCES rooms (id) ON DELETE SET NULL,
     FOREIGN KEY (theme_id) REFERENCES themes (id) ON DELETE CASCADE
 );
 
-CREATE TABLE packs
-(
-    id   INT auto_increment PRIMARY KEY,
-    name VARCHAR(255) NOT NULL
-);
 
-CREATE TABLE puzzle_packs
-(
-    name      VARCHAR(255) NOT NULL,
-    puzzle_id INT,
-    pack_id   INT,
-    PRIMARY KEY (puzzle_id, pack_id),
-    FOREIGN KEY (puzzle_id) REFERENCES puzzles (id) ON DELETE CASCADE,
-    FOREIGN KEY (pack_id) REFERENCES packs (id) ON DELETE CASCADE
-);
 
 CREATE TABLE customers
 (
-    id    INT auto_increment PRIMARY KEY,
-    name  VARCHAR(255) NOT NULL,
-    email VARCHAR(255) NOT NULL
+    id            INT auto_increment PRIMARY KEY,
+    name          VARCHAR(255) NOT NULL,
+    email         VARCHAR(255) NOT NULL,
+    is_subscribed BOOLEAN      NOT NULL
 );
 
 CREATE TABLE reservations
 (
     id              INT auto_increment PRIMARY KEY,
-    customer_id     INT      ,
-    pack_id         INT      NOT NULL,
+    customer_id     INT,
+    puzzle_id       INT,
     total_price     DECIMAL(10, 2),
     creation_date   DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP(),
-    payment_date    DATETIME NULL,
-    escaperoom_date DATETIME NOT NULL,
+    completion_date DATETIME,
     FOREIGN KEY (customer_id) REFERENCES customers (id) ON DELETE SET NULL,
-    FOREIGN KEY (pack_id) REFERENCES packs (id) ON DELETE CASCADE
+    FOREIGN KEY (puzzle_id) REFERENCES puzzles (id) ON DELETE SET NULL
 );
 
 CREATE TABLE notifications
 (
-    id          INT auto_increment PRIMARY KEY,
-    customer_id INT  NOT NULL,
-    message     TEXT NOT NULL,
-    FOREIGN KEY (customer_id) REFERENCES customers (id) ON DELETE CASCADE
+    id              INT auto_increment PRIMARY KEY,
+    recipient_name  VARCHAR(255) NOT NULL,
+    recipient_email VARCHAR(255) NOT NULL,
+    message         TEXT         NOT NULL
 );
 
 CREATE TABLE rewards
@@ -105,6 +101,5 @@ CREATE TABLE rewards
     id            INT auto_increment PRIMARY KEY,
     recipient     VARCHAR(50)  NOT NULL,
     description   VARCHAR(255) NOT NULL,
-    emission_date TIMESTAMP,
     delivery_date TIMESTAMP
 );

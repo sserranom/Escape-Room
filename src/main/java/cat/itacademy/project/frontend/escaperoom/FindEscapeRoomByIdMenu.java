@@ -3,7 +3,7 @@ package cat.itacademy.project.frontend.escaperoom;
 import cat.itacademy.project.api.escaperoom.application.FindEscapeRoomByIdController;
 import cat.itacademy.project.frontend.shared.MenuCommand;
 import cat.itacademy.project.frontend.shared.MenuScanner;
-import cat.itacademy.project.shared.domain.dtos.EscapeRoomDTO;
+import cat.itacademy.project.shared.domain.dtos.escape_room.EscapeRoomDTO;
 
 import java.util.Optional;
 

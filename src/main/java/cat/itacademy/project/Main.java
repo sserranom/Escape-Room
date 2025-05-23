@@ -1,11 +1,6 @@
 package cat.itacademy.project;
 
-import cat.itacademy.project.frontend.Room.CreateRoomMenu;
-import cat.itacademy.project.frontend.Room.FindAllRoomMenu;
-import cat.itacademy.project.frontend.Room.FindRoomByIdMenu;
-import cat.itacademy.project.frontend.Room.UpdateRoomMenu;
-import cat.itacademy.project.frontend.escaperoom.*;
-import cat.itacademy.project.frontend.theme.FindThemeMenu;
+import cat.itacademy.project.frontend.Menu;
 
 public class Main {
     public static void main(String[] args) {
@@ -37,23 +32,13 @@ public class Main {
 //        DeleteEscapeRoomMenu deleteRomm = new DeleteEscapeRoomMenu();
 //        deleteRomm.execute();
 
-//        FindAllEscapeRoomsMenu findEscapeRoomsMenu = new FindAllEscapeRoomsMenu();
+//        FindEscapeRoomsMenu findEscapeRoomsMenu = new FindEscapeRoomsMenu();
 //        findEscapeRoomsMenu.execute();
 //
 //        FindThemeMenu findThemeMenu = new FindThemeMenu();
 //        findThemeMenu.execute();
-
-//        CreateRoomMenu createRoomMenu = new CreateRoomMenu();
-//        createRoomMenu.execute();
-
-//        FindAllRoomMenu findAllRoomMenu = new FindAllRoomMenu();
-//        findAllRoomMenu.execute();
-
-//        FindRoomByIdMenu findRoomByIdMenu = new FindRoomByIdMenu();
-//        findRoomByIdMenu.execute();
-
-        UpdateRoomMenu updateRoomMenu = new UpdateRoomMenu();
-        updateRoomMenu.execute();
-     
+//
+        Menu menu = new Menu();
+        menu.execute();
     }
 }

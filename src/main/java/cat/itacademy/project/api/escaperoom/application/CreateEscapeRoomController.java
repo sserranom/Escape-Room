@@ -4,12 +4,13 @@ import cat.itacademy.project.business_logic.escaperoom.application.CreateEscapeR
 import cat.itacademy.project.business_logic.escaperoom.domain.EscapeRoomRepository;
 import cat.itacademy.project.business_logic.escaperoom.infrastructure.EscapeRoomMySQLRepository;
 import cat.itacademy.project.shared.domain.Command;
-import cat.itacademy.project.shared.domain.dtos.CreateEscapeRoomDTO;
+import cat.itacademy.project.shared.domain.dtos.escape_room.CreateEscapeRoomDTO;
+import cat.itacademy.project.shared.domain.dtos.escape_room.EscapeRoomDTO;
 import cat.itacademy.project.shared.infrastructure.database.mysql.MySqlConnection;
 
 import java.util.Optional;
 
-public class CreateEscapeRoomController implements Command<Void> {
+public class CreateEscapeRoomController implements Command<EscapeRoomDTO> {
     private final CreateEscapeRoomService service;
 
     public CreateEscapeRoomController(CreateEscapeRoomDTO createEscapeRoomDTO) {
@@ -18,7 +19,7 @@ public class CreateEscapeRoomController implements Command<Void> {
         this.service = new CreateEscapeRoomService(createEscapeRoomDTO, repo);
     }
 
-    public Optional<Void> execute() {
+    public Optional<EscapeRoomDTO> execute() {
 
         service.execute();
         return Optional.empty();

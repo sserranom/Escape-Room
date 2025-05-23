@@ -1,25 +1,38 @@
 package cat.itacademy.project.business_logic.room.domain;
 
-import cat.itacademy.project.shared.domain.dtos.CreateRoomDTO;
-import cat.itacademy.project.shared.domain.dtos.RoomDTO;
+import cat.itacademy.project.shared.domain.dtos.room.CreateRoomDTO;
+import cat.itacademy.project.shared.domain.dtos.room.RoomDTO;
 
 public class Room {
     private int id;
     private String name;
     private double price;
-    private int escapeRoomId;
+    private int theme_id;
+    private String difficulty;
+    private String themeName;
 
-    public Room(int id, String name, double price, int escapeRoomId) {
+    public Room(int id, String name, String difficulty, double price, int theme_id, String themeName) {
         this.id = id;
         this.name = name;
+        this.difficulty = difficulty;
         this.price = price;
-        this.escapeRoomId = escapeRoomId;
+        this.theme_id = theme_id;
+        this.themeName = themeName;
     }
 
-    public Room(String name, double price, int escapeRoomId) {
+    public Room(String name, String difficulty, double price, int theme_id) {
         this.name = name;
         this.price = price;
-        this.escapeRoomId = escapeRoomId;
+        this.theme_id = theme_id;
+        this.difficulty = difficulty;
+    }
+
+    public static Room create(CreateRoomDTO dto) {
+        return new Room(dto.name(), dto.difficulty(), dto.price(), dto.themeId());
+    }
+
+    public static Room fromDatabase(RoomDTO dto) {
+        return new Room(dto.id(), dto.name(), dto.difficulty(), dto.price(), dto.themeId(), dto.themeName());
     }
 
     public int getId() {
@@ -30,36 +43,35 @@ public class Room {
         return name;
     }
 
-    public double getPrice() {
-        return price;
-    }
-
-    public int getEscapeRoomId() {
-        return escapeRoomId;
-    }
-
     public void setName(String name) {
         this.name = name;
+    }
+
+    public double getPrice() {
+        return price;
     }
 
     public void setPrice(double price) {
         this.price = price;
     }
 
-    public void setEscapeRoomId(int escapeRoomId) {
-        this.escapeRoomId = escapeRoomId;
+    public int getTheme_id() {
+        return theme_id;
+    }
+    public String getThemeName(){
+        return themeName;
     }
 
-    public static Room create (CreateRoomDTO dto){
-        return new Room(dto.name(), dto.price(), dto.escapeRoomId());
+    public void setTheme_id(int themeId) {
+        this.theme_id = themeId;
     }
 
-    public static Room fromDatabase(RoomDTO dto){
-        return new Room(dto.id(), dto.name(), dto.price(), dto.escapeRoomId());
+    public RoomDTO toDTO() {
+        return new RoomDTO(id, name, difficulty, price, theme_id, themeName);
     }
 
-    public RoomDTO toDTO(){
-        return new RoomDTO(id, name, price, escapeRoomId);
+    public void setDifficulty(String value){
+        this.difficulty = value;
     }
 
     @Override
@@ -68,19 +80,15 @@ public class Room {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", price=" + price +
-                ", escapeRoomId=" + escapeRoomId +
+                ", theme_id=" + theme_id +
+                ", difficulty='" + difficulty + '\'' +
+                ", themeName='" + themeName + '\'' +
                 '}';
     }
 
-    public Room createNewInstanceWithName(String newName){
-        return new Room(this.id, newName, this.price, this.escapeRoomId);
-    }
 
-    public Room createNewInstanceWithPrice(double newPrice){
-        return new Room(this.id, this.name, newPrice, this.escapeRoomId);
-    }
 
-    public Room createNewInstanceWithEscapeRoomId (int newEscapeRoomId){
-        return new Room(this.id, this.name, this.price, newEscapeRoomId);
+    public String getDifficulty() {
+        return this.difficulty;
     }
 }
