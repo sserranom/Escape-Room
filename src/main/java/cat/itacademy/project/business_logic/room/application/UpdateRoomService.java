@@ -5,7 +5,6 @@ import cat.itacademy.project.business_logic.room.domain.RoomRepository;
 import cat.itacademy.project.shared.domain.Command;
 import cat.itacademy.project.shared.domain.dtos.room.RoomDTO;
 import cat.itacademy.project.shared.domain.dtos.room.UpdateRoomDTO;
-import cat.itacademy.project.shared.domain.exceptions.AlreadyExistsException;
 import cat.itacademy.project.shared.domain.exceptions.EmptyFieldException;
 import cat.itacademy.project.shared.domain.exceptions.NotFoundException;
 
@@ -32,27 +31,21 @@ public class UpdateRoomService implements Command<RoomDTO> {
             throw new NotFoundException("Room with name '" + request.nameToUpdate() + "' does not exist.");
         }
 
-        Room roomToUpdate = Room.fromDatabase(existingOptional.get());
-        Room updatedRoom = roomToUpdate;
+        Room room = Room.fromDatabase(existingOptional.get());
 
-        if (!request.name().equals(roomToUpdate.getName()) || !request.name().isBlank()) {
-            Optional<RoomDTO> existingWithNewName = repo.findByName((request.name()));
-            if (existingWithNewName.isPresent() && !Integer.valueOf(existingWithNewName.get().id()).equals(roomToUpdate.getId())) {
-                throw new AlreadyExistsException("Room with name '" + request.name() + "' already exist.");
-            }
-            updatedRoom = updatedRoom.createNewInstanceWithName(request.name());
-        }
+        room.setName(
+                request.name().isBlank()? room.getName() : request.name()
+        );
+        room.setPrice(
+                request.price() > 0 && request.price() != room.getPrice()? request.price() : room.getPrice()
+        );
+        room.setTheme_id(
+                room.getTheme_id() != request.themeId() && request.themeId() > 0 ? request.themeId() : room.getTheme_id());
 
-        if (request.price() > 0 && request.price() != roomToUpdate.getPrice()) {
-            updatedRoom = updatedRoom.createNewInstanceWithPrice(request.price());
-        }
+        room.setDifficulty(request.difficulty().isBlank() ? room.getDifficulty() : request.difficulty());
 
-        if (request.escapeRoomId() > 0 && request.escapeRoomId() != roomToUpdate.getTheme_id()) {
-            updatedRoom = updatedRoom.createNewInstanceWithEscapeRoomId(request.escapeRoomId());
-        }
-
-        repo.update(updatedRoom);
-        return Optional.of(updatedRoom.toDTO());
+        repo.update(room);
+        return Optional.of(room.toDTO());
 
     }
 }
