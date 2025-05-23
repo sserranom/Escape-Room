@@ -4,7 +4,7 @@ import cat.itacademy.project.business_logic.theme.application.CreateNewThemeServ
 import cat.itacademy.project.business_logic.theme.domain.ThemeRepository;
 import cat.itacademy.project.business_logic.theme.infrastructure.ThemeMySQLRepository;
 import cat.itacademy.project.shared.domain.Command;
-import cat.itacademy.project.shared.domain.dtos.CreateThemeDTO;
+import cat.itacademy.project.shared.domain.dtos.theme.CreateThemeDTO;
 import cat.itacademy.project.shared.infrastructure.database.mysql.MySqlConnection;
 
 import java.util.Optional;
@@ -19,6 +19,7 @@ public class CreateThemeController implements Command<Void> {
     }
 
     public Optional<Void> execute() {
+
         service.execute();
         return Optional.empty();
     }

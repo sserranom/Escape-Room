@@ -8,7 +8,7 @@ import cat.itacademy.project.shared.domain.dtos.escape_room.UpdateEscapeRoomDTO;
 
 import java.util.Optional;
 
-public class UpdateEscapeRoomMenu extends MenuCommand<Void> {
+public class UpdateEscapeRoomMenu extends MenuCommand<EscapeRoomDTO> {
     private final EscapeRoomDTO escapeRoomDTO;
 
     public UpdateEscapeRoomMenu(EscapeRoomDTO escapeRoomDTO) {
@@ -17,13 +17,13 @@ public class UpdateEscapeRoomMenu extends MenuCommand<Void> {
 
 
     @Override
-    public Optional<Void> execute() {
+    public Optional<EscapeRoomDTO> execute() {
         try {
             UpdateEscapeRoomDTO dto = getInfo();
             UpdateEscapeRoomController controller = new UpdateEscapeRoomController(dto);
-            controller.execute();
+            Optional<EscapeRoomDTO> updated = controller.execute();
             info("Escape room with name '" + dto.nameToUpdate() + "' updated successfully.");
-
+            return updated;
         } catch (IllegalArgumentException e) {
             error("Error: " + e.getMessage());
         } catch (Exception e) {

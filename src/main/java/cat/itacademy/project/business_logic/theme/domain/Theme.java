@@ -3,8 +3,8 @@ package cat.itacademy.project.business_logic.theme.domain;
 import cat.itacademy.project.business_logic.escaperoom.application.FindAllEscapeRoomsService;
 import cat.itacademy.project.business_logic.escaperoom.domain.EscapeRoom;
 import cat.itacademy.project.business_logic.escaperoom.infrastructure.EscapeRoomMySQLRepository;
-import cat.itacademy.project.shared.domain.dtos.CreateThemeDTO;
-import cat.itacademy.project.shared.domain.dtos.ThemeDTO;
+import cat.itacademy.project.shared.domain.dtos.theme.CreateThemeDTO;
+import cat.itacademy.project.shared.domain.dtos.theme.ThemeDTO;
 import cat.itacademy.project.shared.domain.dtos.escape_room.EscapeRoomDTO;
 import cat.itacademy.project.shared.infrastructure.database.mysql.MySqlConnection;
 

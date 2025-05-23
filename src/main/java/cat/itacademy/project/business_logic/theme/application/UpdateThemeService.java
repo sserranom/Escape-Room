@@ -3,9 +3,8 @@ package cat.itacademy.project.business_logic.theme.application;
 import cat.itacademy.project.business_logic.theme.domain.Theme;
 import cat.itacademy.project.business_logic.theme.domain.ThemeRepository;
 import cat.itacademy.project.shared.domain.Command;
-import cat.itacademy.project.shared.domain.dtos.ThemeDTO;
-import cat.itacademy.project.shared.domain.dtos.UpdateThemeDTO;
-import cat.itacademy.project.shared.domain.exceptions.AlreadyExistsException;
+import cat.itacademy.project.shared.domain.dtos.theme.ThemeDTO;
+import cat.itacademy.project.shared.domain.dtos.theme.UpdateThemeDTO;
 import cat.itacademy.project.shared.domain.exceptions.EmptyFieldException;
 import cat.itacademy.project.shared.domain.exceptions.NotFoundException;
 
@@ -26,7 +25,6 @@ public class UpdateThemeService implements Command<ThemeDTO> {
             throw new EmptyFieldException("Field 'name' cannot be empty.");
         }
 
-
         Optional<Theme> existingOptional = repo.findByName(request.nameToUpdate());
 
         if (existingOptional.isEmpty()) {
@@ -36,20 +34,6 @@ public class UpdateThemeService implements Command<ThemeDTO> {
         Theme themeToUpdate = existingOptional.get();
         Theme updatedTheme = themeToUpdate;
 
-
-//        if (!request.name().equals(themeToUpdate.getName()) || !request.name().isBlank()) {
-//            Optional<Theme> existingWithNewName = repo.findByName(request.name());
-//            if (existingWithNewName.isPresent() && !Integer.valueOf(existingWithNewName.get().()).equals(themeToUpdate.getId())) {
-//                throw new AlreadyExistsException("Escape room with name '" + request.name() + "' already exists.");
-//            }
-//            updatedTheme = updatedTheme.createNewInstanceWithName(request.name());
-//        }
-//
-//        if (!request.description().equals(themeToUpdate.getDescription()) || !request.description().isBlank()) {
-//            updatedTheme = updatedTheme.createNewInstanceWithDescription(request.description());
-//        }
-//
-//            repo.update(updatedTheme);
         return Optional.of(updatedTheme.toDTO());
 
     }

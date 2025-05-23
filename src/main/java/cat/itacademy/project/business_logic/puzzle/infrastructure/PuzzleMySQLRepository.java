@@ -2,7 +2,7 @@ package cat.itacademy.project.business_logic.puzzle.infrastructure;
 
 import cat.itacademy.project.business_logic.puzzle.domain.Puzzle;
 import cat.itacademy.project.business_logic.puzzle.domain.PuzzleRepository;
-import cat.itacademy.project.shared.domain.dtos.PuzzleDTO;
+import cat.itacademy.project.shared.domain.dtos.puzzle.PuzzleDTO;
 import cat.itacademy.project.shared.domain.exceptions.DatabaseException;
 import cat.itacademy.project.shared.domain.exceptions.NotFoundException;
 
@@ -88,14 +88,14 @@ public class PuzzleMySQLRepository implements PuzzleRepository {
     }
 
     @Override
-    public Optional<Puzzle> findById(int id) {
+    public Optional<PuzzleDTO> findById(int id) {
         String sql = "SELECT id, name, difficulty, roomId, answer, story, themeId, price FROM puzzles WHERE id = ?";
         try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             preparedStatement.setInt(1, id);
             ResultSet rs = preparedStatement.executeQuery();
             if (rs.next()) {
                 return Optional.of(
-                        new Puzzle(
+                        new PuzzleDTO(
                                 rs.getInt("id"),
                                 rs.getString("name"),
                                 rs.getString("difficulty"),

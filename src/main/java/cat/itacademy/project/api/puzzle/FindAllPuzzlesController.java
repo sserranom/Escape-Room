@@ -3,14 +3,14 @@ package cat.itacademy.project.api.puzzle;
 import cat.itacademy.project.business_logic.puzzle.application.FindAllPuzzlesService;
 import cat.itacademy.project.business_logic.puzzle.domain.PuzzleRepository;
 import cat.itacademy.project.business_logic.puzzle.infrastructure.PuzzleMySQLRepository;
-import cat.itacademy.project.frontend.shared.MenuCommand;
-import cat.itacademy.project.shared.domain.dtos.PuzzleDTO;
+import cat.itacademy.project.shared.domain.Command;
+import cat.itacademy.project.shared.domain.dtos.puzzle.PuzzleDTO;
 import cat.itacademy.project.shared.infrastructure.database.mysql.MySqlConnection;
 
 import java.util.List;
 import java.util.Optional;
 
-public class FindAllPuzzlesController extends MenuCommand<List<PuzzleDTO>> {
+public class FindAllPuzzlesController implements Command<List<PuzzleDTO>> {
     private final FindAllPuzzlesService service;
 
 

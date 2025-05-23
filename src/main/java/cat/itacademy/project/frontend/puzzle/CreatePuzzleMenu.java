@@ -3,7 +3,7 @@ package cat.itacademy.project.frontend.puzzle;
 import cat.itacademy.project.api.puzzle.CreatePuzzleController;
 import cat.itacademy.project.frontend.shared.MenuCommand;
 import cat.itacademy.project.frontend.shared.MenuScanner;
-import cat.itacademy.project.shared.domain.dtos.CreatePuzzleDTO;
+import cat.itacademy.project.shared.domain.dtos.puzzle.CreatePuzzleDTO;
 import cat.itacademy.project.shared.domain.exceptions.EmptyFieldException;
 
 import java.util.Optional;

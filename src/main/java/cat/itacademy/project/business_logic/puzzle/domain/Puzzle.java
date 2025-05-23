@@ -1,7 +1,7 @@
 package cat.itacademy.project.business_logic.puzzle.domain;
 
-import cat.itacademy.project.shared.domain.dtos.CreatePuzzleDTO;
-import cat.itacademy.project.shared.domain.dtos.PuzzleDTO;
+import cat.itacademy.project.shared.domain.dtos.puzzle.CreatePuzzleDTO;
+import cat.itacademy.project.shared.domain.dtos.puzzle.PuzzleDTO;
 
 public class Puzzle {
     private int id;
@@ -128,33 +128,6 @@ public class Puzzle {
                 '}';
     }
 
-    public Puzzle createNewInstanceWithName(String newName) {
-        return new Puzzle(this.id, newName, this.difficulty, this.roomId, this.answer, this.story, this.themeId, this.price);
-    }
-
-    public Puzzle createNewInstanceWithDifficulty(String newDifficulty) {
-        return new Puzzle(this.id, this.name, newDifficulty, this.roomId, this.answer, this.story, this.themeId, this.price);
-    }
-
-    public Puzzle createNewInstanceWithRoomId(int newRoomId) {
-        return new Puzzle(this.id, this.name, this.difficulty, newRoomId, this.answer, this.story, this.themeId, this.price);
-    }
-
-    public Puzzle createNewInstanceWithAnswer(String newAnswer) {
-        return new Puzzle(this.id, this.name, this.difficulty, this.roomId, newAnswer, this.story, this.themeId, this.price);
-    }
-
-    public Puzzle createNewInstanceWithStory(String newStory) {
-        return new Puzzle(this.id, this.name, this.difficulty, this.roomId, this.answer, newStory, this.themeId, this.price);
-    }
-
-    public Puzzle createNewInstanceWithThemeId(int newThemeId) {
-        return new Puzzle(this.id, this.name, this.difficulty, this.roomId, this.answer, this.story, newThemeId, this.price);
-    }
-
-    public Puzzle createNewInstanceWithPrice(double newPrice) {
-        return new Puzzle(this.id, this.name, this.difficulty, this.roomId, this.answer, this.story, this.themeId, newPrice);
-    }
 
 
 }

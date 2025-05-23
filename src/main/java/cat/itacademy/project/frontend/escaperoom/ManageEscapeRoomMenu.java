@@ -1,7 +1,9 @@
 package cat.itacademy.project.frontend.escaperoom;
 
+
 import cat.itacademy.project.frontend.Room.ManageRoomMenu;
 import cat.itacademy.project.frontend.deco.ManageDecoMenu;
+import cat.itacademy.project.frontend.Menu;
 import cat.itacademy.project.frontend.shared.MenuCommand;
 import cat.itacademy.project.frontend.shared.MenuScanner;
 import cat.itacademy.project.shared.domain.dtos.deco.DecoDTO;
@@ -38,7 +40,11 @@ public class ManageEscapeRoomMenu extends MenuCommand<EscapeRoomDTO> {
             case 2:
                 log("Update escape room details:");
                 UpdateEscapeRoomMenu updateEscapeRoomMenu = new UpdateEscapeRoomMenu(escapeRoomDTO);
-                updateEscapeRoomMenu.execute();
+                Optional<EscapeRoomDTO> updated = updateEscapeRoomMenu.execute();
+                updated.ifPresent(escapeRoomDTO -> {
+                    Menu.setActiveRoom(escapeRoomDTO);
+                    Menu.updateExistingRooms(escapeRoomDTO);
+                });
                 break;
 
             case 3:
