@@ -1,5 +1,9 @@
 package cat.itacademy.project.business_logic.customer.domain;
 
+import cat.itacademy.project.shared.domain.dtos.customer.CreateCustomerDTO;
+import cat.itacademy.project.shared.domain.dtos.customer.CustomerDTO;
+import cat.itacademy.project.shared.domain.dtos.room.RoomDTO;
+
 public class Customer {
     private int id;
     private String name;
@@ -49,6 +53,18 @@ public class Customer {
 
     public void setSubscribed(Boolean subscribed) {
         isSubscribed = subscribed;
+    }
+
+    public static Customer create(CreateCustomerDTO dto){
+        return new Customer(dto.name(), dto.email(), dto.isSubscribed());
+    }
+
+    public static Customer fromDatabase(CustomerDTO dto){
+        return new Customer(dto.id(), dto.name(), dto.email(), dto.isSubscribed());
+    }
+
+    public CustomerDTO toDTO() {
+        return new CustomerDTO(id, name, email, isSubscribed);
     }
 
     @Override

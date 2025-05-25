@@ -37,7 +37,7 @@ public class CustomerMySQLRepository implements CustomerRepository {
 
     @Override
     public void update(Customer customer) {
-        String sql = "UPDATE customer set name = ?, email = ?, is_subscribed = ? WHERE id = ?";
+        String sql = "UPDATE customers set name = ?, email = ?, is_subscribed = ? WHERE id = ?";
         try (PreparedStatement preparedStatement = connection.prepareStatement(sql)){
             preparedStatement.setString(1,  customer.getName());
             preparedStatement.setString(2, customer.getEmail());
@@ -104,8 +104,9 @@ public class CustomerMySQLRepository implements CustomerRepository {
         return Optional.empty();
     }
 
+
     @Override
-    public Optional<CustomerDTO> findAllByEmail(String email) {
+    public Optional<CustomerDTO> findByEmail(String email) {
         String sql = "SELECT * FROM customers WHERE email = ?";
         try (PreparedStatement preparedStatement = connection.prepareStatement(sql)){
             preparedStatement.setString(1, email);
@@ -118,7 +119,7 @@ public class CustomerMySQLRepository implements CustomerRepository {
                 ));
             }
         }catch (Exception e){
-            throw  new DatabaseException("Error while findind customer: " + e.getMessage());
+            throw  new DatabaseException("Error while finding customer: " + e.getMessage());
         }
         return Optional.empty();
     }
