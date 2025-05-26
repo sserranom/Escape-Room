@@ -3,7 +3,6 @@ package cat.itacademy.project.api.theme;
 import cat.itacademy.project.business_logic.theme.application.FindAllThemesService;
 import cat.itacademy.project.business_logic.theme.domain.ThemeRepository;
 import cat.itacademy.project.business_logic.theme.infrastructure.ThemeMySQLRepository;
-import cat.itacademy.project.shared.domain.Command;
 import cat.itacademy.project.shared.domain.dtos.theme.ThemeDTO;
 import cat.itacademy.project.shared.infrastructure.database.mysql.MySqlConnection;
 

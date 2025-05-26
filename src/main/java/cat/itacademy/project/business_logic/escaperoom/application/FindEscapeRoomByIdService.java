@@ -1,7 +1,6 @@
 package cat.itacademy.project.business_logic.escaperoom.application;
 
 import cat.itacademy.project.business_logic.escaperoom.domain.EscapeRoomRepository;
-import cat.itacademy.project.shared.domain.Command;
 import cat.itacademy.project.shared.domain.dtos.escape_room.EscapeRoomDTO;
 
 import java.util.Optional;

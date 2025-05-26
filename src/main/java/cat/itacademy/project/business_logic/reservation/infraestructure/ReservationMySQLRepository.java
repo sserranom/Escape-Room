@@ -2,6 +2,7 @@ package cat.itacademy.project.business_logic.reservation.infraestructure;
 
 import cat.itacademy.project.business_logic.reservation.domain.Reservation;
 import cat.itacademy.project.business_logic.reservation.domain.ReservationRepository;
+import cat.itacademy.project.shared.domain.dtos.reservation.ReservationDTO;
 import cat.itacademy.project.shared.domain.exceptions.DatabaseException;
 
 import java.sql.*;
@@ -17,64 +18,118 @@ public class ReservationMySQLRepository implements ReservationRepository {
         this.connection = connection;
     }
     @Override
-    public void create(Reservation reservation) {
+    public void create(ReservationDTO reservation) {
 
-        String SQL = "INSERT INTO reservations (customer_id, puzzle_id, total_price, completion_date) VALUES (?, ?, ?, ?)";
-        try (PreparedStatement preparedStatement = connection.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS)) {
-            if (reservation.getCustomerId() != null) {
-                preparedStatement.setInt(1, reservation.getCustomerId());
-            } else {
-                preparedStatement.setNull(1, java.sql.Types.INTEGER);
-            }
-            if (reservation.getPuzzleId() != null) {
-                preparedStatement.setInt(2, reservation.getPuzzleId());
-            } else {
-                preparedStatement.setNull(2, java.sql.Types.INTEGER);
-            }
-            preparedStatement.setDouble(3, reservation.getTotalPrice());
-            if (reservation.getCompletionDate() != null) {
-                preparedStatement.setTimestamp(4, Timestamp.valueOf(reservation.getCompletionDate()));
-            } else {
-                preparedStatement.setNull(4, java.sql.Types.TIMESTAMP);
-            }
+        String sql = "INSERT INTO reservations (customer_id, puzzle_id, total_price, completion_date) VALUES (?, ?, ?, ?)";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+            preparedStatement.setInt(1, reservation.customerId());
+            preparedStatement.setInt(2, reservation.puzzleId());
+            preparedStatement.setDouble(3, reservation.totalPrice());
+            preparedStatement.setNull(4, Types.TIMESTAMP);
             preparedStatement.executeUpdate();
-
-            ResultSet generatedKeys = preparedStatement.getGeneratedKeys();
-            if (generatedKeys.next()) {
-                reservation.setId(generatedKeys.getInt(1));
-            }
-            Optional<Reservation> savedReservation = findById(reservation.getId());
-            savedReservation.ifPresent(r -> reservation.setCreationDate(r.getCreationDate()));
-
-        } catch (SQLException e) {
+        }catch (SQLException e){
             throw new DatabaseException("Error creating reservation: " + e.getMessage());
         }
+
     }
 
 
     @Override
-    public Optional<Reservation> findById(int id) {
-        String SQL = "SELECT id, customer_id, puzzle_id, total_price, creation_date, completion_date FROM reservations WHERE id = ?";
-        try (PreparedStatement preparedStatement = connection.prepareStatement(SQL)) {
+    public Optional<ReservationDTO> findById(int id) {
+        String sql = "SELECT " +
+                "r.id, " +
+                "r.customer_id, " +
+                "c.name AS customer_name, " +
+                "r.puzzle_id, " +
+                "p.name AS puzzle_name, " +
+                "r.total_price, " +
+                "r.creation_date, " +
+                "r.completion_date " +
+                "FROM reservations r " +
+                "LEFT JOIN customers c ON r.customer_id = c.id " +
+                "LEFT JOIN puzzles p ON r.puzzle_id = p.id " +
+                "WHERE r.id = ?";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             preparedStatement.setInt(1, id);
             ResultSet rs = preparedStatement.executeQuery();
             if (rs.next()) {
-                return Optional.of(mapResultSetToReservation(rs));
+
+                Timestamp creationTimestamp = rs.getTimestamp("creation_date");
+                LocalDateTime creationDate = (creationTimestamp != null) ? creationTimestamp.toLocalDateTime() : null;
+
+                Timestamp completionTimestamp = rs.getTimestamp("completion_date");
+                LocalDateTime completionDate = (completionTimestamp != null) ? completionTimestamp.toLocalDateTime() : null;
+
+                Integer customerId = rs.getObject("customer_id", Integer.class);
+                String customerName = rs.getString("customer_name");
+                if (rs.wasNull()) customerName = null;
+
+                Integer puzzleId = rs.getObject("puzzle_id", Integer.class);
+                String puzzleName = rs.getString("puzzle_name");
+                if (rs.wasNull()) puzzleName = null;
+
+                return Optional.of(new ReservationDTO(
+                        rs.getInt("id"),
+                        customerId,
+                        customerName,
+                        puzzleId,
+                        puzzleName,
+                        rs.getDouble("total_price"),
+                        creationDate,
+                        completionDate
+                ));
             }
         } catch (SQLException e) {
-            throw new DatabaseException("Error finding reservation by ID: " + e.getMessage());
+            throw new DatabaseException("Error finding reservation by id: " + e.getMessage());
         }
         return Optional.empty();
     }
 
     @Override
-    public List<Reservation> findAll() {
-        String SQL = "SELECT id, customer_id, puzzle_id, total_price, creation_date, completion_date FROM reservations";
-        List<Reservation> reservations = new ArrayList<>();
-        try (PreparedStatement preparedStatement = connection.prepareStatement(SQL)) {
+    public List<ReservationDTO> findAll() {
+        List<ReservationDTO> reservations = new ArrayList<>();
+        String sql = "SELECT " +
+                "r.id, " +
+                "r.customer_id, " +
+                "c.name AS customer_name, " +
+                "r.puzzle_id, " +
+                "p.name AS puzzle_name, " +
+                "r.total_price, " +
+                "r.creation_date, " +
+                "r.completion_date " +
+                "FROM reservations r " +
+                "LEFT JOIN customers c ON r.customer_id = c.id " +
+                "LEFT JOIN puzzles p ON r.puzzle_id = p.id";
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             ResultSet rs = preparedStatement.executeQuery();
             while (rs.next()) {
-                reservations.add(mapResultSetToReservation(rs));
+
+                Timestamp creationTimestamp = rs.getTimestamp("creation_date");
+                LocalDateTime creationDate = (creationTimestamp != null) ? creationTimestamp.toLocalDateTime() : null;
+
+                Timestamp completionTimestamp = rs.getTimestamp("completion_date");
+                LocalDateTime completionDate = (completionTimestamp != null) ? completionTimestamp.toLocalDateTime() : null;
+
+                Integer customerId = rs.getObject("customer_id", Integer.class);
+                String customerName = rs.getString("customer_name");
+                if (rs.wasNull()) customerName = null;
+
+                Integer puzzleId = rs.getObject("puzzle_id", Integer.class);
+                String puzzleName = rs.getString("puzzle_name");
+                if (rs.wasNull()) puzzleName = null;
+
+                reservations.add(
+                        new ReservationDTO(
+                                rs.getInt("id"),
+                                customerId,
+                                customerName,
+                                puzzleId,
+                                puzzleName,
+                                rs.getDouble("total_price"),
+                                creationDate,
+                                completionDate
+                        ));
             }
         } catch (SQLException e) {
             throw new DatabaseException("Error finding all reservations: " + e.getMessage());

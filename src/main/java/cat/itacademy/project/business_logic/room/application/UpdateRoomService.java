@@ -2,7 +2,6 @@ package cat.itacademy.project.business_logic.room.application;
 
 import cat.itacademy.project.business_logic.room.domain.Room;
 import cat.itacademy.project.business_logic.room.domain.RoomRepository;
-import cat.itacademy.project.shared.domain.Command;
 import cat.itacademy.project.shared.domain.dtos.room.RoomDTO;
 import cat.itacademy.project.shared.domain.dtos.room.UpdateRoomDTO;
 import cat.itacademy.project.shared.domain.exceptions.EmptyFieldException;

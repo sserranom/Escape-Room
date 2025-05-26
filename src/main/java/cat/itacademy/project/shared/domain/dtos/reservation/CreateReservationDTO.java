@@ -1,6 +1,6 @@
 package cat.itacademy.project.shared.domain.dtos.reservation;
 
-import java.math.BigDecimal;
+
 import java.time.LocalDateTime;
 
 public record CreateReservationDTO(Integer customerId, Integer puzzleId, LocalDateTime completionDate) {

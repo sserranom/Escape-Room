@@ -3,7 +3,6 @@ package cat.itacademy.project.api.room;
 import cat.itacademy.project.business_logic.room.application.CreateRoomService;
 import cat.itacademy.project.business_logic.room.domain.RoomRepository;
 import cat.itacademy.project.business_logic.room.infraestructure.RoomMySQLRepository;
-import cat.itacademy.project.shared.domain.Command;
 import cat.itacademy.project.shared.domain.dtos.room.CreateRoomDTO;
 import cat.itacademy.project.shared.infrastructure.database.mysql.MySqlConnection;
 
@@ -14,7 +13,7 @@ public class CreateRoomController implements Command<Void> {
 
     public CreateRoomController(CreateRoomDTO createRoomDTO) {
         RoomRepository repo = new RoomMySQLRepository(MySqlConnection.getInstance());
-        this.service = new CreateRoomService(createRoomDTO, repo);
+        this.service = new CreateRoomService(repo);
     }
 
     @Override

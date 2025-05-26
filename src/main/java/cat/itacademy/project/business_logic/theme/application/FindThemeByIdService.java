@@ -1,7 +1,6 @@
 package cat.itacademy.project.business_logic.theme.application;
 
 import cat.itacademy.project.business_logic.theme.domain.ThemeRepository;
-import cat.itacademy.project.shared.domain.Command;
 import cat.itacademy.project.shared.domain.dtos.theme.ThemeDTO;
 
 import java.util.Optional;

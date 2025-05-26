@@ -1,15 +1,17 @@
 package cat.itacademy.project.business_logic.reservation.domain;
 
+import cat.itacademy.project.shared.domain.dtos.reservation.ReservationDTO;
+
 import java.util.List;
 import java.util.Optional;
 
 public interface ReservationRepository {
 
-    void create(Reservation reservation);
+    void create(ReservationDTO reservation);
 
-    Optional<Reservation> findById(int id);
+    Optional<ReservationDTO> findById(int id);
 
-    List<Reservation> findAll();
+    List<ReservationDTO> findAll();
 
     List<Reservation> findAllByCustomerId(int customerId);
 

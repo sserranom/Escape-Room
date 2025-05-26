@@ -1,7 +1,6 @@
 package cat.itacademy.project.business_logic.customer.application;
 
 import cat.itacademy.project.business_logic.customer.domain.CustomerRepository;
-import cat.itacademy.project.shared.domain.Command;
 import cat.itacademy.project.shared.domain.dtos.customer.CustomerDTO;
 
 import java.util.Optional;
