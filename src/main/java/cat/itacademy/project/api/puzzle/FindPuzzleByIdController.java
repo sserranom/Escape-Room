@@ -11,18 +11,15 @@ import java.util.Optional;
 
 public class FindPuzzleByIdController extends MenuCommand<Optional<PuzzleDTO>> {
     private final FindPuzzleByIdService service;
-    private final int idToFind;
 
-    public FindPuzzleByIdController(int idToFind) {
+    public FindPuzzleByIdController() {
         PuzzleRepository repo = new PuzzleMySQLRepository(MySqlConnection.getInstance());
-        this.service = new FindPuzzleByIdService(idToFind, repo);
-        this.idToFind = idToFind;
+        this.service = new FindPuzzleByIdService( repo);
     }
 
-    @Override
-    public Optional<Optional<PuzzleDTO>> execute() {
+    public Optional<Optional<PuzzleDTO>> execute(int idToFind) {
         try {
-            return Optional.ofNullable(service.execute());
+            return Optional.ofNullable(service.execute(idToFind));
         } catch (Exception e) {
             error("An unexpected error occurred: " + e.getMessage());
             return Optional.empty();

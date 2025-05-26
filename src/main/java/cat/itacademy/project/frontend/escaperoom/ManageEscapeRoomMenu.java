@@ -9,13 +9,16 @@ import cat.itacademy.project.frontend.shared.MenuScanner;
 import cat.itacademy.project.shared.domain.dtos.deco.DecoDTO;
 import cat.itacademy.project.shared.domain.dtos.escape_room.EscapeRoomDTO;
 import cat.itacademy.project.shared.domain.dtos.room.RoomDTO;
+import cat.itacademy.project.shared.domain.events.EventManager;
 
+import java.util.List;
 import java.util.Optional;
 
 public class ManageEscapeRoomMenu extends MenuCommand<EscapeRoomDTO> {
     private final EscapeRoomDTO escapeRoomDTO;
     private RoomDTO roomDTO;
     private DecoDTO decoDTO;
+    private final EventManager eventManager = new EventManager(List.of("puzzle.published", "escape_room.updated"));
 
     public ManageEscapeRoomMenu(EscapeRoomDTO escapeRoomDTO) {
         this.escapeRoomDTO = escapeRoomDTO;
@@ -39,7 +42,7 @@ public class ManageEscapeRoomMenu extends MenuCommand<EscapeRoomDTO> {
 
             case 2:
                 log("Update escape room details:");
-                UpdateEscapeRoomMenu updateEscapeRoomMenu = new UpdateEscapeRoomMenu(escapeRoomDTO);
+                UpdateEscapeRoomMenu updateEscapeRoomMenu = new UpdateEscapeRoomMenu(escapeRoomDTO, eventManager);
                 Optional<EscapeRoomDTO> updated = updateEscapeRoomMenu.execute();
                 updated.ifPresent(escapeRoomDTO -> {
                     Menu.setActiveRoom(escapeRoomDTO);

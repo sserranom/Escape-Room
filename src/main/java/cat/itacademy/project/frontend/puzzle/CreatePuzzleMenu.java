@@ -22,8 +22,8 @@ public class CreatePuzzleMenu extends MenuCommand<Void> {
     public Optional<Void> execute() {
         CreatePuzzleDTO dto = getUserInfo();
 
-        CreatePuzzleController controller = new CreatePuzzleController(dto);
-        controller.execute();
+        CreatePuzzleController controller = new CreatePuzzleController();
+        controller.execute(dto);
         info("Puzzle created successfully.");
         return Optional.empty();
     }

@@ -11,8 +11,8 @@ public class FindThemeByIdMenu extends MenuCommand<Void> {
     public Optional<Void> execute() {
         try {
             int idToFind = MenuScanner.readInt("Enter the ID of the puzzle to find: ");
-            FindThemeByIdController controller = new FindThemeByIdController(idToFind);
-            Optional<Optional <ThemeDTO>> themeDTO = controller.execute();
+            FindThemeByIdController controller = new FindThemeByIdController();
+            Optional<Optional <ThemeDTO>> themeDTO = controller.execute(idToFind);
 
             if (themeDTO.isPresent()) {
                 Optional<ThemeDTO> foundTheme = themeDTO.get();

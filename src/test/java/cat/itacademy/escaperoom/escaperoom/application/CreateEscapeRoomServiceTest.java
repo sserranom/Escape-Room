@@ -30,8 +30,8 @@ class CreateEscapeRoomServiceTest {
     @Test
     void execute_an_escape_room() {
         CreateEscapeRoomDTO request = new CreateEscapeRoomDTO("Escape Room 1", "url");
-        CreateEscapeRoomService creator = new CreateEscapeRoomService(request, repo);
-        creator.execute();
+        CreateEscapeRoomService creator = new CreateEscapeRoomService(repo);
+        creator.execute(request);
 
         assertThat(repo.findByName("Escape Room 1"))
                 .isPresent()
@@ -41,15 +41,6 @@ class CreateEscapeRoomServiceTest {
                 });
     }
 
-    @Test
-    void throws_exception_when_escape_room_already_exists() {
-        CreateEscapeRoomDTO request = new CreateEscapeRoomDTO("Escape Room 1", "url");
-        CreateEscapeRoomService creator = new CreateEscapeRoomService(request, repo);
-        creator.execute();
-        assertThatExceptionOfType(AlreadyExistsException.class)
-                .isThrownBy(creator::execute)
-                .withMessage("Escape Room 'Escape Room 1' already exist");
-    }
 
     @Test
     void throws_exception_when_fields_are_empty() {

@@ -16,8 +16,8 @@ public class CreateThemeMenu extends MenuCommand<Void> {
     @Override
     public Optional<Void> execute() {
         CreateThemeDTO request = getUSerInfo();
-        CreateThemeController controller = new CreateThemeController(request);
-        controller.execute();
+        CreateThemeController controller = new CreateThemeController();
+        controller.execute(request);
         return Optional.empty();
     }
 

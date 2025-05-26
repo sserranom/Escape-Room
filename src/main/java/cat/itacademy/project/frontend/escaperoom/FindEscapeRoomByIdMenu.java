@@ -13,8 +13,8 @@ public class FindEscapeRoomByIdMenu extends MenuCommand<Void> {
     public Optional<Void> execute() {
         try {
             int idToFind = MenuScanner.readInt("Enter the ID of the escape room to find: ");
-            FindEscapeRoomByIdController controller = new FindEscapeRoomByIdController(idToFind);
-            Optional<Optional<EscapeRoomDTO>> escapeRoomDTO = controller.execute();
+            FindEscapeRoomByIdController controller = new FindEscapeRoomByIdController();
+            Optional<Optional<EscapeRoomDTO>> escapeRoomDTO = controller.execute(idToFind);
 
             if (escapeRoomDTO.isPresent()) {
                 Optional<EscapeRoomDTO> foundRoom = escapeRoomDTO.get();

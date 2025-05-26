@@ -12,8 +12,8 @@ public class UpdateThemeMenu extends MenuCommand<Void> {
     public Optional<Void> execute() {
         try {
             UpdateThemeDTO dto = getInfo();
-            UpdateThemeController controller = new UpdateThemeController(dto);
-            controller.execute();
+            UpdateThemeController controller = new UpdateThemeController();
+            controller.execute(dto);
             info("Theme with name '" + dto.nameToUpdate() + "' updated successfully.");
 
         }catch (IllegalArgumentException e){

@@ -2,33 +2,28 @@ package cat.itacademy.project.business_logic.puzzle.application;
 
 import cat.itacademy.project.business_logic.puzzle.domain.Puzzle;
 import cat.itacademy.project.business_logic.puzzle.domain.PuzzleRepository;
-import cat.itacademy.project.shared.domain.Command;
 import cat.itacademy.project.shared.domain.dtos.puzzle.PuzzleDTO;
 import cat.itacademy.project.shared.domain.dtos.puzzle.UpdatePuzzleDTO;
-import cat.itacademy.project.shared.domain.exceptions.AlreadyExistsException;
 import cat.itacademy.project.shared.domain.exceptions.EmptyFieldException;
 import cat.itacademy.project.shared.domain.exceptions.NotFoundException;
 
 import java.util.Optional;
 
-public class UpdatePuzzleService implements Command<PuzzleDTO> {
-    private final UpdatePuzzleDTO request;
+public class UpdatePuzzleService {
     private final PuzzleRepository repo;
 
-    public UpdatePuzzleService(UpdatePuzzleDTO request, PuzzleRepository repo) {
-        this.request = request;
+    public UpdatePuzzleService(PuzzleRepository repo) {
         this.repo = repo;
     }
 
-    @Override
-    public Optional<PuzzleDTO> execute() {
-        if (request.name() == null || request.name().isBlank()){
+    public Optional<PuzzleDTO> execute(UpdatePuzzleDTO request) {
+        if (request.name() == null || request.name().isBlank()) {
             throw new EmptyFieldException("Field 'name' cannot be empty.");
         }
 
         Optional<PuzzleDTO> existingOptional = repo.findByName(request.nameToUpdate());
 
-        if (existingOptional.isEmpty()){
+        if (existingOptional.isEmpty()) {
             throw new NotFoundException("Puzzle with name '" + request.nameToUpdate() + "' does not exist.");
         }
 

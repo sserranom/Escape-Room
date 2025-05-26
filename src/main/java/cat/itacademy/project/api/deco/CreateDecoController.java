@@ -3,7 +3,6 @@ package cat.itacademy.project.api.deco;
 import cat.itacademy.project.business_logic.deco.application.CreateDecoService;
 import cat.itacademy.project.business_logic.deco.domain.DecoRepository;
 import cat.itacademy.project.business_logic.deco.infraestructure.DecoMySQLRepository;
-import cat.itacademy.project.shared.domain.Command;
 import cat.itacademy.project.shared.domain.dtos.deco.CreateDecoDTO;
 import cat.itacademy.project.shared.infrastructure.database.mysql.MySqlConnection;
 

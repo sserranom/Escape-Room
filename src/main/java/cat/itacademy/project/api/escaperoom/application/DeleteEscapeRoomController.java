@@ -3,24 +3,20 @@ package cat.itacademy.project.api.escaperoom.application;
 import cat.itacademy.project.business_logic.escaperoom.application.DeleteEscapeRoomService;
 import cat.itacademy.project.business_logic.escaperoom.domain.EscapeRoomRepository;
 import cat.itacademy.project.business_logic.escaperoom.infrastructure.EscapeRoomMySQLRepository;
-import cat.itacademy.project.shared.domain.Command;
 import cat.itacademy.project.shared.infrastructure.database.mysql.MySqlConnection;
 
 import java.util.Optional;
 
-public class DeleteEscapeRoomController implements Command<Void> {
+public class DeleteEscapeRoomController  {
     private final DeleteEscapeRoomService service;
-    private final int idToDelete;
 
-    public DeleteEscapeRoomController(int idToDelete) {
+    public DeleteEscapeRoomController() {
         EscapeRoomRepository repo = new EscapeRoomMySQLRepository(MySqlConnection.getInstance());
-        this.service = new DeleteEscapeRoomService(idToDelete, repo);
-        this.idToDelete = idToDelete;
+        this.service = new DeleteEscapeRoomService( repo);
     }
 
-    @Override
-    public Optional<Void> execute() {
-        service.execute();
+    public Optional<Void> execute(int idToDelete) {
+        service.execute(idToDelete);
         return Optional.empty();
     }
 }

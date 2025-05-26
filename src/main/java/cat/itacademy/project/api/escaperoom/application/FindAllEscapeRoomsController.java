@@ -10,7 +10,7 @@ import cat.itacademy.project.shared.infrastructure.database.mysql.MySqlConnectio
 import java.util.List;
 import java.util.Optional;
 
-public class FindAllEscapeRoomsController extends MenuCommand<List<EscapeRoomDTO>> {
+public class FindAllEscapeRoomsController  {
     private final FindAllEscapeRoomsService service;
 
 
@@ -20,7 +20,6 @@ public class FindAllEscapeRoomsController extends MenuCommand<List<EscapeRoomDTO
     }
 
 
-    @Override
     public Optional<List<EscapeRoomDTO>> execute() {
         List<EscapeRoomDTO> escapeRooms = service.findAll();
 

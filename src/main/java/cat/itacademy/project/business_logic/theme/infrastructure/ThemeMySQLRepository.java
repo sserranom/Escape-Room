@@ -2,6 +2,7 @@ package cat.itacademy.project.business_logic.theme.infrastructure;
 
 import cat.itacademy.project.business_logic.theme.domain.Theme;
 import cat.itacademy.project.business_logic.theme.domain.ThemeRepository;
+import cat.itacademy.project.shared.domain.dtos.theme.CreateThemeDTO;
 import cat.itacademy.project.shared.domain.dtos.theme.ThemeDTO;
 import cat.itacademy.project.shared.domain.exceptions.DatabaseException;
 
@@ -21,12 +22,12 @@ public class ThemeMySQLRepository implements ThemeRepository {
     }
 
     @Override
-    public void create(Theme theme) {
+    public void create(CreateThemeDTO theme) {
         String sql = "INSERT INTO themes (name, description, escaperoom_id) VALUES (?, ?, ?)";
         try (var preparedStatement = connection.prepareStatement(sql)) {
-            preparedStatement.setString(1, theme.getName());
-            preparedStatement.setString(2, theme.getDescription());
-            preparedStatement.setInt(3, theme.getEscapeRoom().getId());
+            preparedStatement.setString(1, theme.name());
+            preparedStatement.setString(2, theme.description());
+            preparedStatement.setInt(3, theme.escapeRoomId());
             preparedStatement.executeUpdate();
         } catch (Exception e) {
             throw new DatabaseException("Error saving theme: " + e.getMessage());

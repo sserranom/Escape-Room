@@ -2,7 +2,6 @@ package cat.itacademy.project.business_logic.deco.application;
 
 import cat.itacademy.project.business_logic.deco.domain.Deco;
 import cat.itacademy.project.business_logic.deco.domain.DecoRepository;
-import cat.itacademy.project.shared.domain.Command;
 import cat.itacademy.project.shared.domain.dtos.deco.DecoDTO;
 import cat.itacademy.project.shared.domain.dtos.deco.UpdateDecoDTO;
 import cat.itacademy.project.shared.domain.exceptions.EmptyFieldException;

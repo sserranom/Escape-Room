@@ -12,8 +12,8 @@ public class UpdatePuzzleMenu extends MenuCommand<Void> {
     public Optional<Void> execute() {
         try {
             UpdatePuzzleDTO dto = getInfo();
-            UpdatePuzzleController controller = new UpdatePuzzleController(dto);
-            controller.execute();
+            UpdatePuzzleController controller = new UpdatePuzzleController();
+            controller.execute(dto);
             info("Puzzle with name '" + dto.nameToUpdate() + "' updated successfully.");
 
         }catch (IllegalArgumentException e){

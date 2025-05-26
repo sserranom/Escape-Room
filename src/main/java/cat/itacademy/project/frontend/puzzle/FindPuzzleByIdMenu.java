@@ -14,8 +14,8 @@ public class FindPuzzleByIdMenu extends MenuCommand<Void> {
     public Optional<Void> execute() {
         try {
             int idToFind = MenuScanner.readInt("Enter the ID of the puzzle to find: ");
-            FindPuzzleByIdController controller = new FindPuzzleByIdController(idToFind);
-            Optional<Optional<PuzzleDTO>> puzzleDTO = controller.execute();
+            FindPuzzleByIdController controller = new FindPuzzleByIdController();
+            Optional<Optional<PuzzleDTO>> puzzleDTO = controller.execute(idToFind);
 
             if (puzzleDTO.isPresent()) {
                 Optional<PuzzleDTO> foundPuzzle = puzzleDTO.get();

@@ -5,13 +5,14 @@ import cat.itacademy.project.frontend.shared.MenuCommand;
 import cat.itacademy.project.frontend.shared.MenuScanner;
 import cat.itacademy.project.shared.domain.dtos.escape_room.EscapeRoomDTO;
 import cat.itacademy.project.shared.domain.dtos.escape_room.UpdateEscapeRoomDTO;
+import cat.itacademy.project.shared.domain.events.EventManager;
 
 import java.util.Optional;
 
 public class UpdateEscapeRoomMenu extends MenuCommand<EscapeRoomDTO> {
     private final EscapeRoomDTO escapeRoomDTO;
-
-    public UpdateEscapeRoomMenu(EscapeRoomDTO escapeRoomDTO) {
+    private final EventManager eventManager;
+    public UpdateEscapeRoomMenu(EscapeRoomDTO escapeRoomDTO, EventManager eventManager) {
         this.escapeRoomDTO = escapeRoomDTO;
     }
 
@@ -20,8 +21,8 @@ public class UpdateEscapeRoomMenu extends MenuCommand<EscapeRoomDTO> {
     public Optional<EscapeRoomDTO> execute() {
         try {
             UpdateEscapeRoomDTO dto = getInfo();
-            UpdateEscapeRoomController controller = new UpdateEscapeRoomController(dto);
-            Optional<EscapeRoomDTO> updated = controller.execute();
+            UpdateEscapeRoomController controller = new UpdateEscapeRoomController( eventManager);
+            Optional<EscapeRoomDTO> updated = controller.execute(dto);
             info("Escape room with name '" + dto.nameToUpdate() + "' updated successfully.");
             return updated;
         } catch (IllegalArgumentException e) {
