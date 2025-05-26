@@ -9,17 +9,17 @@ import cat.itacademy.project.shared.domain.exceptions.NotFoundException;
 
 import java.util.Optional;
 
-public class UpdateRoomService implements Command<RoomDTO> {
-    private final UpdateRoomDTO request;
+public class UpdateRoomService {
+
     private final RoomRepository repo;
 
-    public UpdateRoomService(UpdateRoomDTO request, RoomRepository repo) {
-        this.request = request;
+    public UpdateRoomService( RoomRepository repo) {
+
         this.repo = repo;
     }
 
-    @Override
-    public Optional<RoomDTO> execute() {
+
+    public Optional<RoomDTO> execute(UpdateRoomDTO request) {
         if (request.name() == null || request.name().isBlank()) {
             throw new EmptyFieldException("Field 'name' cannot be empty.");
         }
