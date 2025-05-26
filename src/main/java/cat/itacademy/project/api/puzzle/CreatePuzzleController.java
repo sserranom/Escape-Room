@@ -6,7 +6,7 @@ import cat.itacademy.project.business_logic.puzzle.infrastructure.PuzzleMySQLRep
 import cat.itacademy.project.shared.domain.dtos.puzzle.CreatePuzzleDTO;
 import cat.itacademy.project.shared.infrastructure.database.mysql.MySqlConnection;
 
-public class CreatePuzzleController  {
+public class CreatePuzzleController {
     private final CreatePuzzleService service;
 
     public CreatePuzzleController() {

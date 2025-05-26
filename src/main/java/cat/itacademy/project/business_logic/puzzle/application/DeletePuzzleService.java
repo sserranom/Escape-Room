@@ -3,7 +3,7 @@ package cat.itacademy.project.business_logic.puzzle.application;
 import cat.itacademy.project.business_logic.puzzle.domain.PuzzleRepository;
 
 
-public class DeletePuzzleService  {
+public class DeletePuzzleService {
     private final PuzzleRepository repo;
 
     public DeletePuzzleService(PuzzleRepository repo) {
@@ -11,6 +11,6 @@ public class DeletePuzzleService  {
     }
 
     public void execute(int idToDelete) {
-         repo.delete(idToDelete);
+        repo.delete(idToDelete);
     }
 }

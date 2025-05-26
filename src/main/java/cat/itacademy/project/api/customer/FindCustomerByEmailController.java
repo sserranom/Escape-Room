@@ -21,10 +21,10 @@ public class FindCustomerByEmailController extends MenuCommand<Optional<Customer
 
     @Override
     public Optional<Optional<CustomerDTO>> execute() {
-        try{
+        try {
             return Optional.ofNullable(service.execute());
-        }catch (Exception e){
-            error ("An unexpected error ocurred: " + e.getMessage());
+        } catch (Exception e) {
+            error("An unexpected error ocurred: " + e.getMessage());
             return Optional.empty();
         }
 

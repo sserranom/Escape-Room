@@ -10,11 +10,11 @@ import cat.itacademy.project.shared.domain.exceptions.NotFoundException;
 
 import java.util.Optional;
 
-public class UpdateEscapeRoomService  {
+public class UpdateEscapeRoomService {
     private final EscapeRoomRepository repo;
 
 
-    public UpdateEscapeRoomService( EscapeRoomRepository repo) {
+    public UpdateEscapeRoomService(EscapeRoomRepository repo) {
         this.repo = repo;
     }
 

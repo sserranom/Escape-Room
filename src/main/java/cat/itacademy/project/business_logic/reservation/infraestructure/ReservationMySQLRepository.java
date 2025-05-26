@@ -14,9 +14,10 @@ import java.util.Optional;
 public class ReservationMySQLRepository implements ReservationRepository {
     private final Connection connection;
 
-    public ReservationMySQLRepository(Connection connection){
+    public ReservationMySQLRepository(Connection connection) {
         this.connection = connection;
     }
+
     @Override
     public void create(ReservationDTO reservation) {
 
@@ -27,7 +28,7 @@ public class ReservationMySQLRepository implements ReservationRepository {
             preparedStatement.setDouble(3, reservation.totalPrice());
             preparedStatement.setNull(4, Types.TIMESTAMP);
             preparedStatement.executeUpdate();
-        }catch (SQLException e){
+        } catch (SQLException e) {
             throw new DatabaseException("Error creating reservation: " + e.getMessage());
         }
 

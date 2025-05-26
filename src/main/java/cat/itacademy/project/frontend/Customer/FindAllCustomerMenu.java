@@ -12,10 +12,10 @@ public class FindAllCustomerMenu extends MenuCommand<List<CustomerDTO>> {
     public Optional<List<CustomerDTO>> execute() {
         FindAllCustomerController controller = new FindAllCustomerController();
         Optional<List<CustomerDTO>> result = controller.execute();
-        if (result.get().isEmpty()){
+        if (result.get().isEmpty()) {
             error("No customer found.");
-        }else{
-            info ("List of Customers: ");
+        } else {
+            info("List of Customers: ");
             result.get().forEach(CustomerPrinter::print);
         }
         return result;

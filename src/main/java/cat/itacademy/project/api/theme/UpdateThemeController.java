@@ -8,15 +8,14 @@ import cat.itacademy.project.shared.infrastructure.database.mysql.MySqlConnectio
 
 import java.util.Optional;
 
-public class UpdateThemeController  {
+public class UpdateThemeController {
     private final UpdateThemeService service;
 
     public UpdateThemeController() {
         ThemeRepository repo = new ThemeMySQLRepository(MySqlConnection.getInstance());
-        this.service = new UpdateThemeService( repo);
+        this.service = new UpdateThemeService(repo);
     }
 
-    @Override
     public Optional<Void> execute(UpdateThemeDTO request) {
         service.execute(request);
         return Optional.empty();

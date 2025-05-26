@@ -6,7 +6,7 @@ import cat.itacademy.project.shared.domain.dtos.theme.CreateThemeDTO;
 public class CreateNewThemeService {
     private final ThemeRepository repo;
 
-    public CreateNewThemeService( ThemeRepository repo) {
+    public CreateNewThemeService(ThemeRepository repo) {
         this.repo = repo;
     }
 

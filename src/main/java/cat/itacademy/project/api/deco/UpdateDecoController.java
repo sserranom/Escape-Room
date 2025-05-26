@@ -8,7 +8,7 @@ import cat.itacademy.project.shared.infrastructure.database.mysql.MySqlConnectio
 
 import java.util.Optional;
 
-public class UpdateDecoController implements Command<Void> {
+public class UpdateDecoController {
     private final UpdateDecoService service;
 
     public UpdateDecoController(UpdateDecoDTO updateDecoDTO) {
@@ -16,7 +16,6 @@ public class UpdateDecoController implements Command<Void> {
         this.service = new UpdateDecoService(updateDecoDTO, repo);
     }
 
-    @Override
     public Optional<Void> execute() {
         service.execute();
         return Optional.empty();

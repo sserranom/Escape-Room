@@ -7,12 +7,12 @@ import cat.itacademy.project.shared.infrastructure.database.mysql.MySqlConnectio
 
 import java.util.Optional;
 
-public class DeleteEscapeRoomController  {
+public class DeleteEscapeRoomController {
     private final DeleteEscapeRoomService service;
 
     public DeleteEscapeRoomController() {
         EscapeRoomRepository repo = new EscapeRoomMySQLRepository(MySqlConnection.getInstance());
-        this.service = new DeleteEscapeRoomService( repo);
+        this.service = new DeleteEscapeRoomService(repo);
     }
 
     public Optional<Void> execute(int idToDelete) {

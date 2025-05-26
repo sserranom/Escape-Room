@@ -9,7 +9,7 @@ import cat.itacademy.project.shared.infrastructure.database.mysql.MySqlConnectio
 import java.util.List;
 import java.util.Optional;
 
-public class FindAllThemesController  {
+public class FindAllThemesController {
     private final FindAllThemesService service;
 
     public FindAllThemesController() {

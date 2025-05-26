@@ -10,17 +10,17 @@ import java.util.Optional;
 public class FindCustomerByIdMenu extends MenuCommand<Void> {
     @Override
     public Optional<Void> execute() {
-        try{
+        try {
             int idToFind = MenuScanner.readInt("Enter the ID of the customer to find: ");
             FindCustomerByIdController controller = new FindCustomerByIdController(idToFind);
             Optional<Optional<CustomerDTO>> customerDTO = controller.execute();
-            if(customerDTO.isPresent()){
+            if (customerDTO.isPresent()) {
                 Optional<CustomerDTO> foundCustomer = customerDTO.get();
                 CustomerPrinter.print(foundCustomer.get());
-            }else{
+            } else {
                 error("Customer with ID " + idToFind + " not found.");
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             error("An unexpected error ocurred: " + e.getMessage());
 
         }

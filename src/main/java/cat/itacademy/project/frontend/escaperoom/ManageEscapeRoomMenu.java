@@ -2,9 +2,9 @@ package cat.itacademy.project.frontend.escaperoom;
 
 
 import cat.itacademy.project.frontend.Customer.ManageCustomerMenu;
+import cat.itacademy.project.frontend.Menu;
 import cat.itacademy.project.frontend.Room.ManageRoomMenu;
 import cat.itacademy.project.frontend.deco.ManageDecoMenu;
-import cat.itacademy.project.frontend.Menu;
 import cat.itacademy.project.frontend.shared.MenuCommand;
 import cat.itacademy.project.frontend.shared.MenuScanner;
 import cat.itacademy.project.shared.domain.dtos.customer.CustomerDTO;
@@ -18,10 +18,10 @@ import java.util.Optional;
 
 public class ManageEscapeRoomMenu extends MenuCommand<EscapeRoomDTO> {
     private final EscapeRoomDTO escapeRoomDTO;
+    private final EventManager eventManager = new EventManager(List.of("puzzle.published", "escape_room.updated"));
     private RoomDTO roomDTO;
     private DecoDTO decoDTO;
     private CustomerDTO customerDTO;
-    private final EventManager eventManager = new EventManager(List.of("puzzle.published", "escape_room.updated"));
 
     public ManageEscapeRoomMenu(EscapeRoomDTO escapeRoomDTO) {
         this.escapeRoomDTO = escapeRoomDTO;

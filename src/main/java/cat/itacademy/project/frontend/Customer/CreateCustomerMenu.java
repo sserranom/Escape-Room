@@ -9,9 +9,9 @@ import cat.itacademy.project.shared.domain.exceptions.EmptyFieldException;
 import java.util.Optional;
 
 public class CreateCustomerMenu extends MenuCommand<Void> {
-   private String name;
-   private String email;
-   private boolean isSubscribed;
+    private String name;
+    private String email;
+    private boolean isSubscribed;
 
     @Override
     public Optional<Void> execute() {
@@ -23,13 +23,13 @@ public class CreateCustomerMenu extends MenuCommand<Void> {
         return Optional.empty();
     }
 
-    private CreateCustomerDTO getUserInfo(){
-        while(name == null || email == null){
-            try{
+    private CreateCustomerDTO getUserInfo() {
+        while (name == null || email == null) {
+            try {
                 name = MenuScanner.readString("Enter the name of the customer: ");
                 email = MenuScanner.readString("Enter the email of the customer: ");
                 isSubscribed = MenuScanner.readBoolean("Is the client subscribed? YES / NO: ");
-            }catch (EmptyFieldException e){
+            } catch (EmptyFieldException e) {
                 error("Error: fields cannot be empty.");
             }
         }

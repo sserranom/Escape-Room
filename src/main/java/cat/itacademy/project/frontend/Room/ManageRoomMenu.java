@@ -1,7 +1,6 @@
 package cat.itacademy.project.frontend.Room;
 
 import cat.itacademy.project.frontend.Menu;
-import cat.itacademy.project.frontend.escaperoom.ManageEscapeRoomMenu;
 import cat.itacademy.project.frontend.shared.MenuCommand;
 import cat.itacademy.project.frontend.shared.MenuScanner;
 import cat.itacademy.project.shared.domain.dtos.room.RoomDTO;
@@ -19,9 +18,9 @@ public class ManageRoomMenu extends MenuCommand<RoomDTO> {
     public Optional<RoomDTO> execute() {
         int choice = getUserInput();
 
-        switch (choice){
+        switch (choice) {
             case 1:
-                log ("Create Room: ");
+                log("Create Room: ");
                 CreateRoomMenu createRoomMenu = new CreateRoomMenu();
                 createRoomMenu.execute();
                 break;
@@ -48,7 +47,7 @@ public class ManageRoomMenu extends MenuCommand<RoomDTO> {
         return Optional.ofNullable(roomDTO);
     }
 
-    private int getUserInput(){
+    private int getUserInput() {
         log("1. Create new Room ");
         log("2. Update Room details ");
         log("3. View Room details");

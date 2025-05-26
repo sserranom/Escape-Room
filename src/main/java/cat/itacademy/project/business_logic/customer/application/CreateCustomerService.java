@@ -16,7 +16,7 @@ public class CreateCustomerService {
         this.repo = repo;
     }
 
-    public void execute(){
+    public void execute() {
         ensureDoesNotExist();
         repo.create(customer);
     }

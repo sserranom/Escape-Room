@@ -12,11 +12,11 @@ import cat.itacademy.project.shared.domain.exceptions.NotFoundException;
 
 import java.util.Optional;
 
-public class UpdateThemeService  {
+public class UpdateThemeService {
     private final ThemeRepository repo;
 
 
-    public UpdateThemeService( ThemeRepository repo) {
+    public UpdateThemeService(ThemeRepository repo) {
         this.repo = repo;
     }
 
@@ -34,8 +34,8 @@ public class UpdateThemeService  {
         Theme theme = existingOptional.get();
         if (request.escapeRoomId() > 0 && request.escapeRoomId() != theme.getEscapeRoom().getId()) {
             try {
-               EscapeRoomDTO response = new FindEscapeRoomByIdController().execute(request.escapeRoomId()).get();
-               theme.setEscapeRoom(EscapeRoom.fromDatabase(response));
+                EscapeRoomDTO response = new FindEscapeRoomByIdController().execute(request.escapeRoomId()).get();
+                theme.setEscapeRoom(EscapeRoom.fromDatabase(response));
             } catch (Exception e) {
                 throw new NotFoundException("Escape room with id '" + request.escapeRoomId() + "' does not exist.");
             }

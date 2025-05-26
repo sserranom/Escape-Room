@@ -8,7 +8,7 @@ import cat.itacademy.project.shared.infrastructure.database.mysql.MySqlConnectio
 
 import java.util.Optional;
 
-public class CreateCustomerController  implements Command<Void> {
+public class CreateCustomerController {
     private final CreateCustomerService service;
 
     public CreateCustomerController(CreateCustomerDTO createCustomerDTO) {
@@ -16,7 +16,6 @@ public class CreateCustomerController  implements Command<Void> {
         this.service = new CreateCustomerService(createCustomerDTO, repo);
     }
 
-    @Override
     public Optional<Void> execute() {
         service.execute();
         return Optional.empty();

@@ -58,20 +58,17 @@ public class Room {
     public int getTheme_id() {
         return theme_id;
     }
-    public String getThemeName(){
-        return themeName;
-    }
 
     public void setTheme_id(int themeId) {
         this.theme_id = themeId;
     }
 
-    public RoomDTO toDTO() {
-        return new RoomDTO(id, name, difficulty, price, theme_id, themeName);
+    public String getThemeName() {
+        return themeName;
     }
 
-    public void setDifficulty(String value){
-        this.difficulty = value;
+    public RoomDTO toDTO() {
+        return new RoomDTO(id, name, difficulty, price, theme_id, themeName);
     }
 
     @Override
@@ -86,9 +83,11 @@ public class Room {
                 '}';
     }
 
-
-
     public String getDifficulty() {
         return this.difficulty;
+    }
+
+    public void setDifficulty(String value) {
+        this.difficulty = value;
     }
 }

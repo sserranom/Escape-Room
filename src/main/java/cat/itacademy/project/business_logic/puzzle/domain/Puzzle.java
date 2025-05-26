@@ -35,76 +35,6 @@ public class Puzzle {
         this.price = price;
     }
 
-    public PuzzleDTO toDTO() {
-        return new PuzzleDTO(id, name, difficulty, roomId, answer, story, themeId, price);
-    }
-
-
-    public int getId() {
-        return id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getDifficulty() {
-        return difficulty;
-    }
-
-    public int getRoomId() {
-        return roomId;
-    }
-
-    public String getAnswer() {
-        return answer;
-    }
-
-    public String getStory() {
-        return story;
-    }
-
-    public int getThemeId() {
-        return themeId;
-    }
-
-    public double getPrice() {
-        return price;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setDifficulty(String difficulty) {
-        this.difficulty = difficulty;
-    }
-
-    public void setRoomId(int roomId) {
-        this.roomId = roomId;
-    }
-
-    public void setAnswer(String answer) {
-        this.answer = answer;
-    }
-
-    public void setStory(String story) {
-        this.story = story;
-    }
-
-    public void setThemeId(int themeId) {
-        this.themeId = themeId;
-    }
-
-    public void setPrice(double price) {
-        this.price = price;
-    }
-
-
     public static Puzzle create(CreatePuzzleDTO dto) {
         return new Puzzle(dto.name(), dto.difficulty(), dto.roomId(), dto.answer(), dto.story(), dto.themeId(), dto.price());
     }
@@ -113,6 +43,73 @@ public class Puzzle {
         return new Puzzle(dto.id(), dto.name(), dto.difficulty(), dto.roomId(), dto.answer(), dto.story(), dto.themeId(), dto.price());
     }
 
+    public PuzzleDTO toDTO() {
+        return new PuzzleDTO(id, name, difficulty, roomId, answer, story, themeId, price);
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getDifficulty() {
+        return difficulty;
+    }
+
+    public void setDifficulty(String difficulty) {
+        this.difficulty = difficulty;
+    }
+
+    public int getRoomId() {
+        return roomId;
+    }
+
+    public void setRoomId(int roomId) {
+        this.roomId = roomId;
+    }
+
+    public String getAnswer() {
+        return answer;
+    }
+
+    public void setAnswer(String answer) {
+        this.answer = answer;
+    }
+
+    public String getStory() {
+        return story;
+    }
+
+    public void setStory(String story) {
+        this.story = story;
+    }
+
+    public int getThemeId() {
+        return themeId;
+    }
+
+    public void setThemeId(int themeId) {
+        this.themeId = themeId;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
 
     @Override
     public String toString() {
@@ -127,7 +124,6 @@ public class Puzzle {
                 ", price=" + price +
                 '}';
     }
-
 
 
 }

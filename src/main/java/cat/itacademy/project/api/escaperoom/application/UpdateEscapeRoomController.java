@@ -14,14 +14,13 @@ public class UpdateEscapeRoomController {
     private final UpdateEscapeRoomService service;
     private final EventManager eventManager;
 
-    public UpdateEscapeRoomController( EventManager eventManager) {
+    public UpdateEscapeRoomController(EventManager eventManager) {
         EscapeRoomRepository repo = new EscapeRoomMySQLRepository(MySqlConnection.getInstance());
         this.service = new UpdateEscapeRoomService(repo);
         this.eventManager = eventManager;
 
     }
 
-    @Override
     public Optional<EscapeRoomDTO> execute(UpdateEscapeRoomDTO updateEscapeRoomDTO) {
         Optional<EscapeRoomDTO> result = service.execute(updateEscapeRoomDTO);
         eventManager.publish("escape_room.updated", result.orElse(null));

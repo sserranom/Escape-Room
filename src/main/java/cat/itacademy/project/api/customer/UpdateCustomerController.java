@@ -8,7 +8,7 @@ import cat.itacademy.project.shared.infrastructure.database.mysql.MySqlConnectio
 
 import java.util.Optional;
 
-public class UpdateCustomerController implements Command<Void> {
+public class UpdateCustomerController {
     private final UpdateCustomerService service;
 
     public UpdateCustomerController(UpdateCustomerDTO updateCustomerDTO) {
@@ -16,7 +16,6 @@ public class UpdateCustomerController implements Command<Void> {
         this.service = new UpdateCustomerService(updateCustomerDTO, repo);
     }
 
-    @Override
     public Optional<Void> execute() {
         service.execute();
         return Optional.empty();

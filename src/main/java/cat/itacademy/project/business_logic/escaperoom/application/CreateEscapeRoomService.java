@@ -9,11 +9,11 @@ import cat.itacademy.project.shared.domain.exceptions.NotFoundException;
 
 import java.util.Optional;
 
-public final class CreateEscapeRoomService  {
-    private  EscapeRoom escapeRoom;
+public final class CreateEscapeRoomService {
     private final EscapeRoomRepository repo;
+    private EscapeRoom escapeRoom;
 
-    public CreateEscapeRoomService( EscapeRoomRepository repo) {
+    public CreateEscapeRoomService(EscapeRoomRepository repo) {
 
         this.repo = repo;
     }
@@ -21,7 +21,7 @@ public final class CreateEscapeRoomService  {
     public Optional<EscapeRoomDTO> execute(CreateEscapeRoomDTO request) {
         this.escapeRoom = EscapeRoom.create(request);
         ensureDoesNotExist();
-        repo.create(new CreateEscapeRoomDTO(escapeRoom.getName(),escapeRoom.getUrl()));
+        repo.create(new CreateEscapeRoomDTO(escapeRoom.getName(), escapeRoom.getUrl()));
         final EscapeRoom created = getEscapeRoom();
         return Optional.of(created.toDTO());
     }

@@ -23,5 +23,5 @@ public record UpdateThemeDTO(String nameToUpdate, String name, String descriptio
 
 
     }
-    }
+}
 

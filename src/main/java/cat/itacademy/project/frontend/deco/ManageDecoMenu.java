@@ -1,14 +1,13 @@
 package cat.itacademy.project.frontend.deco;
 
 import cat.itacademy.project.frontend.Menu;
-import cat.itacademy.project.frontend.Room.UpdateRoomMenu;
 import cat.itacademy.project.frontend.shared.MenuCommand;
 import cat.itacademy.project.frontend.shared.MenuScanner;
 import cat.itacademy.project.shared.domain.dtos.deco.DecoDTO;
 
 import java.util.Optional;
 
-public class ManageDecoMenu  extends MenuCommand<DecoDTO> {
+public class ManageDecoMenu extends MenuCommand<DecoDTO> {
     private final DecoDTO decoDTO;
 
     public ManageDecoMenu(DecoDTO decoDTO) {
@@ -19,7 +18,7 @@ public class ManageDecoMenu  extends MenuCommand<DecoDTO> {
     public Optional<DecoDTO> execute() {
         int choice = getUserImput();
 
-        switch (choice){
+        switch (choice) {
             case 1:
                 log("Create decorative Item: ");
                 CreateDecoMenu createDecoMenu = new CreateDecoMenu();
@@ -48,7 +47,7 @@ public class ManageDecoMenu  extends MenuCommand<DecoDTO> {
         return Optional.ofNullable(decoDTO);
     }
 
-    private int getUserImput(){
+    private int getUserImput() {
         log("1. Create new Decorative Item ");
         log("2. Update Decorative Item ");
         log("3. View Decotarive Item details ");

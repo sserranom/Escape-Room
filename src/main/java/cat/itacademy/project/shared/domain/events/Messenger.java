@@ -17,9 +17,9 @@ public class Messenger {
     }
 
     public void execute(String topic, dto message) {
-        if (customers.isEmpty()) {
-            throw new IllegalStateException("No customers available to notify.");
-        }
+//        if (customers.isEmpty()) {
+//            throw new IllegalStateException("No customers available to notify.");
+//        }
         publisher.publish(topic, message);
     }
 }

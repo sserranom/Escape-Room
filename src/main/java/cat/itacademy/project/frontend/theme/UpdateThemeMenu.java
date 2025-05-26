@@ -16,15 +16,15 @@ public class UpdateThemeMenu extends MenuCommand<Void> {
             controller.execute(dto);
             info("Theme with name '" + dto.nameToUpdate() + "' updated successfully.");
 
-        }catch (IllegalArgumentException e){
+        } catch (IllegalArgumentException e) {
             error("Error: " + e.getMessage());
-        }catch (Exception e){
+        } catch (Exception e) {
             error("An unexpected error occurred: " + e.getMessage());
         }
         return Optional.empty();
     }
 
-    private UpdateThemeDTO getInfo(){
+    private UpdateThemeDTO getInfo() {
         String nameToUpdate = MenuScanner.readString("Enter the name of the theme to update: ");
         String newName = MenuScanner.readString("Enter the new name: ");
         String newDescription = MenuScanner.readString("Enter the new description: ");

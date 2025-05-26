@@ -1,11 +1,9 @@
 package cat.itacademy.project.frontend.deco;
 
 import cat.itacademy.project.api.deco.UpdateDecoController;
-import cat.itacademy.project.api.room.UpdateRoomController;
 import cat.itacademy.project.frontend.shared.MenuCommand;
 import cat.itacademy.project.frontend.shared.MenuScanner;
 import cat.itacademy.project.shared.domain.dtos.deco.UpdateDecoDTO;
-import cat.itacademy.project.shared.domain.dtos.room.UpdateRoomDTO;
 
 import java.util.Optional;
 
@@ -41,6 +39,6 @@ public class UpdateDecoMenu extends MenuCommand<Void> {
         int newEscapeRoomId = MenuScanner.readInt("Enter the new ID of the Escape Room: ");
         double newPrice = MenuScanner.readDouble("Enter the new Price: ");
 
-        return new UpdateDecoDTO(nameToUpdate, newName.isEmpty() ? null : newName, newDescription, newType, newEscapeRoomId <= 0 ? null : newEscapeRoomId,  newPrice <= 0 ? null : newPrice );
+        return new UpdateDecoDTO(nameToUpdate, newName.isEmpty() ? null : newName, newDescription, newType, newEscapeRoomId <= 0 ? null : newEscapeRoomId, newPrice <= 0 ? null : newPrice);
     }
 }

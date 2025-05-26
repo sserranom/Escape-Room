@@ -5,7 +5,7 @@ import cat.itacademy.project.shared.domain.dtos.puzzle.PuzzleDTO;
 
 import java.util.Optional;
 
-public class FindPuzzleByIdService  {
+public class FindPuzzleByIdService {
     private final PuzzleRepository repo;
 
     public FindPuzzleByIdService(PuzzleRepository repo) {

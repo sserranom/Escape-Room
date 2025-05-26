@@ -5,7 +5,7 @@ import cat.itacademy.project.shared.domain.dtos.customer.CustomerDTO;
 
 import java.util.Optional;
 
-public class FindCustomerByIdService implements Command<CustomerDTO> {
+public class FindCustomerByIdService {
     private final CustomerRepository repo;
     private final int idToFind;
 
@@ -14,7 +14,6 @@ public class FindCustomerByIdService implements Command<CustomerDTO> {
         this.idToFind = idToFind;
     }
 
-    @Override
     public Optional<CustomerDTO> execute() {
         return repo.findById(idToFind);
     }

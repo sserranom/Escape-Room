@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 public class FindAllDecoController extends MenuCommand<List<DecoDTO>> {
-   private final FindAllDecoService service;
+    private final FindAllDecoService service;
 
     public FindAllDecoController() {
         DecoRepository repo = new DecoMySQLRepository(MySqlConnection.getInstance());

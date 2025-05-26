@@ -147,7 +147,8 @@ public class RoomMySQLRepository implements RoomRepository {
         String sql = "SELECT r.id, r.name, r.difficulty, r.price, r.theme_id, t.name AS themeName " +
                 "FROM rooms r " +
                 "JOIN themes t ON r.theme_id = t.id " +
-                "WHERE r.theme_id = ?";;
+                "WHERE r.theme_id = ?";
+        ;
         try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             preparedStatement.setInt(1, escapeRoomId);
             ResultSet rs = preparedStatement.executeQuery();

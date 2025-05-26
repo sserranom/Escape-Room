@@ -4,7 +4,6 @@ import cat.itacademy.escaperoom.escaperoom.EscapeRoomMySQLTestRepository;
 import cat.itacademy.escaperoom.escaperoom.infrastructure.MySqlTestConnection;
 import cat.itacademy.project.business_logic.escaperoom.application.CreateEscapeRoomService;
 import cat.itacademy.project.shared.domain.dtos.escape_room.CreateEscapeRoomDTO;
-import cat.itacademy.project.shared.domain.exceptions.AlreadyExistsException;
 import cat.itacademy.project.shared.domain.exceptions.EmptyFieldException;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;

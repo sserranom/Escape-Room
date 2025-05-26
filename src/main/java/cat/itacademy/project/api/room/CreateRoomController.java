@@ -6,8 +6,6 @@ import cat.itacademy.project.business_logic.room.infraestructure.RoomMySQLReposi
 import cat.itacademy.project.shared.domain.dtos.room.CreateRoomDTO;
 import cat.itacademy.project.shared.infrastructure.database.mysql.MySqlConnection;
 
-import java.util.Optional;
-
 public class CreateRoomController {
     private final CreateRoomService service;
 

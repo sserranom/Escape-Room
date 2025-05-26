@@ -13,7 +13,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.Scanner;
 
 public class CustomerMySQLRepository implements CustomerRepository {
     private final Connection connection;
@@ -25,12 +24,12 @@ public class CustomerMySQLRepository implements CustomerRepository {
     @Override
     public void create(CreateCustomerDTO customer) {
         String sql = "INSERT INTO customers (name, email, is_subscribed) VALUES (?, ?, ?)";
-        try (PreparedStatement preparedStatement = connection.prepareStatement(sql)){
+        try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             preparedStatement.setString(1, customer.name());
             preparedStatement.setString(2, customer.email());
             preparedStatement.setBoolean(3, customer.isSubscribed());
             preparedStatement.executeUpdate();
-        }catch (SQLException e){
+        } catch (SQLException e) {
             throw new DatabaseException("Error creating Customer: " + e.getMessage());
         }
     }
@@ -38,13 +37,13 @@ public class CustomerMySQLRepository implements CustomerRepository {
     @Override
     public void update(Customer customer) {
         String sql = "UPDATE customers set name = ?, email = ?, is_subscribed = ? WHERE id = ?";
-        try (PreparedStatement preparedStatement = connection.prepareStatement(sql)){
-            preparedStatement.setString(1,  customer.getName());
+        try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+            preparedStatement.setString(1, customer.getName());
             preparedStatement.setString(2, customer.getEmail());
             preparedStatement.setBoolean(3, customer.getSubscribed());
             preparedStatement.setInt(4, customer.getId());
             preparedStatement.executeUpdate();
-        }catch (SQLException e){
+        } catch (SQLException e) {
             throw new DatabaseException("Error updating customer: " + e.getMessage());
         }
     }
@@ -52,14 +51,14 @@ public class CustomerMySQLRepository implements CustomerRepository {
     @Override
     public Optional<CustomerDTO> findById(int id) {
         String sql = "SELECT id, name, email, is_subscribed FROM custumers WHERE id = ?";
-        try (PreparedStatement preparedStatement = connection.prepareStatement(sql)){
+        try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             preparedStatement.setInt(1, id);
             ResultSet rs = preparedStatement.executeQuery();
-            if (rs.next()){
+            if (rs.next()) {
                 return Optional.of(new CustomerDTO(rs.getInt("id"), rs.getString("name"), rs.getString("email"), rs.getBoolean("is_subscribed")));
             }
 
-        }catch (SQLException e){
+        } catch (SQLException e) {
             throw new DatabaseException("Error finding customer by id: " + e.getMessage());
         }
         return Optional.empty();
@@ -69,9 +68,9 @@ public class CustomerMySQLRepository implements CustomerRepository {
     public List<CustomerDTO> findAll() {
         List<CustomerDTO> customers = new ArrayList<>();
         String sql = "SELECT id, name, email, is_subscribed FROM customers";
-        try (PreparedStatement preparedStatement = connection.prepareStatement(sql)){
+        try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             ResultSet rs = preparedStatement.executeQuery();
-            while (rs.next()){
+            while (rs.next()) {
                 customers.add(new CustomerDTO(
                         rs.getInt("id"),
                         rs.getString("name"),
@@ -79,7 +78,7 @@ public class CustomerMySQLRepository implements CustomerRepository {
                         rs.getBoolean("is_subscribed")
                 ));
             }
-        }catch (SQLException e){
+        } catch (SQLException e) {
             throw new DatabaseException("Error findig all customer: " + e.getMessage());
         }
         return customers;
@@ -88,18 +87,18 @@ public class CustomerMySQLRepository implements CustomerRepository {
     @Override
     public Optional<CustomerDTO> findByName(String name) {
         String sql = "SELECT * FROM customers WHERE name = ?";
-        try (PreparedStatement preparedStatement = connection.prepareStatement(sql)){
+        try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             preparedStatement.setString(1, name);
             ResultSet rs = preparedStatement.executeQuery();
-            if (rs.next()){
+            if (rs.next()) {
                 return Optional.of(new CustomerDTO(rs.getInt("id"),
                         rs.getString("name"),
                         rs.getString("email"),
                         rs.getBoolean("is_subscribed")
-                        ));
+                ));
             }
-        }catch (Exception e){
-            throw  new DatabaseException("Error while findind customer: " + e.getMessage());
+        } catch (Exception e) {
+            throw new DatabaseException("Error while findind customer: " + e.getMessage());
         }
         return Optional.empty();
     }
@@ -108,18 +107,18 @@ public class CustomerMySQLRepository implements CustomerRepository {
     @Override
     public Optional<CustomerDTO> findByEmail(String email) {
         String sql = "SELECT * FROM customers WHERE email = ?";
-        try (PreparedStatement preparedStatement = connection.prepareStatement(sql)){
+        try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             preparedStatement.setString(1, email);
             ResultSet rs = preparedStatement.executeQuery();
-            if (rs.next()){
+            if (rs.next()) {
                 return Optional.of(new CustomerDTO(rs.getInt("id"),
                         rs.getString("name"),
                         rs.getString("email"),
                         rs.getBoolean("is_subscribed")
                 ));
             }
-        }catch (Exception e){
-            throw  new DatabaseException("Error while finding customer: " + e.getMessage());
+        } catch (Exception e) {
+            throw new DatabaseException("Error while finding customer: " + e.getMessage());
         }
         return Optional.empty();
     }

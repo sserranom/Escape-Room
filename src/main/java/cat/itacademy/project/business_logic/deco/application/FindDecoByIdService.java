@@ -5,7 +5,7 @@ import cat.itacademy.project.shared.domain.dtos.deco.DecoDTO;
 
 import java.util.Optional;
 
-public class FindDecoByIdService implements Command<DecoDTO> {
+public class FindDecoByIdService {
     private final DecoRepository repo;
     private final int idToFind;
 
@@ -14,7 +14,6 @@ public class FindDecoByIdService implements Command<DecoDTO> {
         this.idToFind = idToFind;
     }
 
-    @Override
     public Optional<DecoDTO> execute() {
         return repo.findById(idToFind);
     }

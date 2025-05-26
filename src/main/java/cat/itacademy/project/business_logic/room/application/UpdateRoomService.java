@@ -13,7 +13,7 @@ public class UpdateRoomService {
 
     private final RoomRepository repo;
 
-    public UpdateRoomService( RoomRepository repo) {
+    public UpdateRoomService(RoomRepository repo) {
 
         this.repo = repo;
     }
@@ -33,10 +33,10 @@ public class UpdateRoomService {
         Room room = Room.fromDatabase(existingOptional.get());
 
         room.setName(
-                request.name().isBlank()? room.getName() : request.name()
+                request.name().isBlank() ? room.getName() : request.name()
         );
         room.setPrice(
-                request.price() > 0 && request.price() != room.getPrice()? request.price() : room.getPrice()
+                request.price() > 0 && request.price() != room.getPrice() ? request.price() : room.getPrice()
         );
         room.setTheme_id(
                 room.getTheme_id() != request.themeId() && request.themeId() > 0 ? request.themeId() : room.getTheme_id());

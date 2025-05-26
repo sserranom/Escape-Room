@@ -7,7 +7,7 @@ import cat.itacademy.project.shared.infrastructure.database.mysql.MySqlConnectio
 
 import java.util.Optional;
 
-public class DeleteDecoController implements Command<Void> {
+public class DeleteDecoController {
     private final DeleteDecoService service;
     private final int idToDelete;
 
@@ -17,7 +17,6 @@ public class DeleteDecoController implements Command<Void> {
         this.idToDelete = idToDelete;
     }
 
-    @Override
     public Optional<Void> execute() {
         service.execute();
         return Optional.empty();

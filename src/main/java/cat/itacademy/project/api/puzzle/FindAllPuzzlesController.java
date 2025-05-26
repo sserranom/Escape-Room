@@ -9,7 +9,7 @@ import cat.itacademy.project.shared.infrastructure.database.mysql.MySqlConnectio
 import java.util.List;
 import java.util.Optional;
 
-public class FindAllPuzzlesController  {
+public class FindAllPuzzlesController {
     private final FindAllPuzzlesService service;
 
 

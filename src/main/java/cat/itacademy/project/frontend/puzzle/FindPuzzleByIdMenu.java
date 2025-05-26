@@ -3,9 +3,7 @@ package cat.itacademy.project.frontend.puzzle;
 import cat.itacademy.project.api.puzzle.FindPuzzleByIdController;
 import cat.itacademy.project.frontend.shared.MenuCommand;
 import cat.itacademy.project.frontend.shared.MenuScanner;
-import cat.itacademy.project.frontend.theme.ThemePrinter;
 import cat.itacademy.project.shared.domain.dtos.puzzle.PuzzleDTO;
-import cat.itacademy.project.shared.domain.dtos.theme.ThemeDTO;
 
 import java.util.Optional;
 

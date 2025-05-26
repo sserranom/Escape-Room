@@ -12,20 +12,20 @@ public class CreateRoomService {
     private final RoomRepository repo;
     private Room room;
 
-    public CreateRoomService( RoomRepository repo){
+    public CreateRoomService(RoomRepository repo) {
         this.repo = repo;
     }
 
-    public void execute(CreateRoomDTO createRoomDTO){
+    public void execute(CreateRoomDTO createRoomDTO) {
         this.room = Room.create(createRoomDTO);
         ensureDoesNotExist();
         repo.create(createRoomDTO);
 
     }
 
-    private void ensureDoesNotExist(){
+    private void ensureDoesNotExist() {
         Optional<RoomDTO> existing = repo.findByName(room.getName());
-        if (existing.isPresent()){
+        if (existing.isPresent()) {
             throw new AlreadyExistsException("Room " + room.getName() + " Already exist");
         }
     }

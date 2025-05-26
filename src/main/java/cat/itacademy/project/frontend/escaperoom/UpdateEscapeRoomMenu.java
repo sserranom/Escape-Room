@@ -12,8 +12,10 @@ import java.util.Optional;
 public class UpdateEscapeRoomMenu extends MenuCommand<EscapeRoomDTO> {
     private final EscapeRoomDTO escapeRoomDTO;
     private final EventManager eventManager;
+
     public UpdateEscapeRoomMenu(EscapeRoomDTO escapeRoomDTO, EventManager eventManager) {
         this.escapeRoomDTO = escapeRoomDTO;
+        this.eventManager = eventManager;
     }
 
 
@@ -21,7 +23,7 @@ public class UpdateEscapeRoomMenu extends MenuCommand<EscapeRoomDTO> {
     public Optional<EscapeRoomDTO> execute() {
         try {
             UpdateEscapeRoomDTO dto = getInfo();
-            UpdateEscapeRoomController controller = new UpdateEscapeRoomController( eventManager);
+            UpdateEscapeRoomController controller = new UpdateEscapeRoomController(eventManager);
             Optional<EscapeRoomDTO> updated = controller.execute(dto);
             info("Escape room with name '" + dto.nameToUpdate() + "' updated successfully.");
             return updated;

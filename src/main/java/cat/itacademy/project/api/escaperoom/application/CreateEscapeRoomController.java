@@ -9,13 +9,13 @@ import cat.itacademy.project.shared.infrastructure.database.mysql.MySqlConnectio
 
 import java.util.Optional;
 
-public class CreateEscapeRoomController  {
+public class CreateEscapeRoomController {
     private final CreateEscapeRoomService service;
 
     public CreateEscapeRoomController() {
 
         EscapeRoomRepository repo = new EscapeRoomMySQLRepository(MySqlConnection.getInstance());
-        this.service = new CreateEscapeRoomService( repo);
+        this.service = new CreateEscapeRoomService(repo);
     }
 
     public Optional<EscapeRoomDTO> execute(CreateEscapeRoomDTO createEscapeRoomDTO) {

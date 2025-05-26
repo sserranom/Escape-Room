@@ -9,7 +9,7 @@ import cat.itacademy.project.shared.domain.exceptions.NotFoundException;
 
 import java.util.Optional;
 
-public final class CreatePuzzleService  {
+public final class CreatePuzzleService {
     private final PuzzleRepository repo;
 
     public CreatePuzzleService(PuzzleRepository repo) {
@@ -19,7 +19,7 @@ public final class CreatePuzzleService  {
 
     public Optional<PuzzleDTO> execute(CreatePuzzleDTO request) {
         Puzzle puzzle = Puzzle.create(request);
-        ensureDoesNotExist();
+        ensureDoesNotExist(request.name());
         repo.create(puzzle);
         final PuzzleDTO created = getPuzzle(puzzle.getName());
         return Optional.of(created);
@@ -27,13 +27,13 @@ public final class CreatePuzzleService  {
 
     private PuzzleDTO getPuzzle(String name) {
         return repo.findByName(name)
-                .orElseThrow(() -> new NotFoundException("Puzzle '" + puzzle.getName() + "' not found"));
+                .orElseThrow(() -> new NotFoundException("Puzzle '" + name + "' not found"));
     }
 
-    private void ensureDoesNotExist() throws AlreadyExistsException {
-        Optional<PuzzleDTO> existing = repo.findByName(puzzle.getName());
+    private void ensureDoesNotExist(String name) throws AlreadyExistsException {
+        Optional<PuzzleDTO> existing = repo.findByName(name);
         if (existing.isPresent()) {
-            throw new AlreadyExistsException("Puzzle '" + puzzle.getName() + "' already exist");
+            throw new AlreadyExistsException("Puzzle '" + name + "' already exist");
         }
     }
 

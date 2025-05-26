@@ -5,7 +5,7 @@ import cat.itacademy.project.business_logic.escaperoom.domain.EscapeRoomReposito
 public class DeleteEscapeRoomService {
     private final EscapeRoomRepository repo;
 
-    public DeleteEscapeRoomService( EscapeRoomRepository repo) {
+    public DeleteEscapeRoomService(EscapeRoomRepository repo) {
         this.repo = repo;
     }
 

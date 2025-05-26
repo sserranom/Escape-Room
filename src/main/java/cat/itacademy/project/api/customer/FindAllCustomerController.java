@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 public class FindAllCustomerController extends MenuCommand<List<CustomerDTO>> {
-   private final FindAllCustomerService service;
+    private final FindAllCustomerService service;
 
     public FindAllCustomerController() {
         CustomerRepository repo = new CustomerMySQLRepository(MySqlConnection.getInstance());

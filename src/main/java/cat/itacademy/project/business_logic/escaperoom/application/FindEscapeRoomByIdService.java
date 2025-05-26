@@ -5,10 +5,10 @@ import cat.itacademy.project.shared.domain.dtos.escape_room.EscapeRoomDTO;
 
 import java.util.Optional;
 
-public class FindEscapeRoomByIdService  {
+public class FindEscapeRoomByIdService {
     private final EscapeRoomRepository repo;
 
-    public FindEscapeRoomByIdService( EscapeRoomRepository repo) {
+    public FindEscapeRoomByIdService(EscapeRoomRepository repo) {
         this.repo = repo;
     }
 

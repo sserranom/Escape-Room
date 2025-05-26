@@ -6,14 +6,12 @@ import cat.itacademy.project.business_logic.room.infraestructure.RoomMySQLReposi
 import cat.itacademy.project.shared.domain.dtos.room.UpdateRoomDTO;
 import cat.itacademy.project.shared.infrastructure.database.mysql.MySqlConnection;
 
-import java.util.Optional;
-
-public class UpdateRoomController  {
+public class UpdateRoomController {
     private final UpdateRoomService service;
 
     public UpdateRoomController() {
         RoomRepository repo = new RoomMySQLRepository(MySqlConnection.getInstance());
-        this.service = new UpdateRoomService( repo);
+        this.service = new UpdateRoomService(repo);
     }
 
 

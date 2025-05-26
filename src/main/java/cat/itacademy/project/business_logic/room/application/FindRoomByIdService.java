@@ -5,7 +5,7 @@ import cat.itacademy.project.shared.domain.dtos.room.RoomDTO;
 
 import java.util.Optional;
 
-public class FindRoomByIdService  {
+public class FindRoomByIdService {
     private final RoomRepository repo;
 
     public FindRoomByIdService(RoomRepository repo) {

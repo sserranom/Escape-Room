@@ -12,7 +12,7 @@ public class FindAllCustomerService {
         this.repo = repo;
     }
 
-    public List<CustomerDTO> findAll(){
+    public List<CustomerDTO> findAll() {
         return repo.findAll();
     }
 }

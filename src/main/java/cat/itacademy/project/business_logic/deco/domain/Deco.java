@@ -44,43 +44,43 @@ public class Deco {
         return name;
     }
 
-    public String getDescription() {
-        return description;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public int getEscapeRoomId() {
-        return escapeRoomId;
-    }
-
-    public double getPrice() {
-        return price;
-    }
-
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
     }
 
     public void setDescription(String description) {
         this.description = description;
     }
 
-    public void setPrice(double price) {
-        this.price = price;
+    public String getType() {
+        return type;
     }
 
     public void setType(String value) {
         this.type = type;
     }
 
+    public int getEscapeRoomId() {
+        return escapeRoomId;
+    }
+
     public void setEscapeRoomId(int escapeRoomId) {
         this.escapeRoomId = escapeRoomId;
     }
 
-    public  DecoDTO toDTO(){
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    public DecoDTO toDTO() {
         return new DecoDTO(id, name, description, type, escapeRoomId, price);
     }
 

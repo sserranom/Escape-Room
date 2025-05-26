@@ -12,7 +12,7 @@ public class CreateThemeController {
     public CreateThemeController() {
 
         ThemeRepository repo = new ThemeMySQLRepository(MySqlConnection.getInstance());
-        this.service = new CreateNewThemeService( repo);
+        this.service = new CreateNewThemeService(repo);
     }
 
     public void execute(CreateThemeDTO createThemeDTO) {

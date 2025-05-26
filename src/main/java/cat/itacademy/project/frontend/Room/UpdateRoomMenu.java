@@ -37,7 +37,7 @@ public class UpdateRoomMenu extends MenuCommand<Void> {
 
         }
         double newPrice = MenuScanner.readDouble("Enter the new Price: ");
-        int newThemeId= MenuScanner.readInt("Enter the new ID of the theme: ");
+        int newThemeId = MenuScanner.readInt("Enter the new ID of the theme: ");
 
         return new UpdateRoomDTO(nameToUpdate, newName.isEmpty() ? null : newName, newDifficulty, newPrice <= 0 ? null : newPrice, newThemeId <= 0 ? null : newThemeId);
     }

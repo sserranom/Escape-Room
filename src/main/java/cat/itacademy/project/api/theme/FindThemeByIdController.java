@@ -13,12 +13,12 @@ public class FindThemeByIdController {
 
     public FindThemeByIdController() {
         ThemeRepository repo = new ThemeMySQLRepository(MySqlConnection.getInstance());
-        this.service = new FindThemeByIdService( repo);
+        this.service = new FindThemeByIdService(repo);
     }
 
     public Optional<Optional<ThemeDTO>> execute(int idToFind) {
         try {
-            return Optional.ofNullable(service.execute( idToFind));
+            return Optional.ofNullable(service.execute(idToFind));
         } catch (Exception e) {
             return Optional.empty();
         }

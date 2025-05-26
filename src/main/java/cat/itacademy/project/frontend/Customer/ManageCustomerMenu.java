@@ -8,7 +8,7 @@ import cat.itacademy.project.shared.domain.dtos.customer.CustomerDTO;
 import java.util.Optional;
 
 public class ManageCustomerMenu extends MenuCommand<CustomerDTO> {
-   private final CustomerDTO customerDTO;
+    private final CustomerDTO customerDTO;
 
     public ManageCustomerMenu(CustomerDTO customerDTO) {
         this.customerDTO = customerDTO;
@@ -18,7 +18,7 @@ public class ManageCustomerMenu extends MenuCommand<CustomerDTO> {
     public Optional<CustomerDTO> execute() {
         int choice = getUserInput();
 
-        switch(choice){
+        switch (choice) {
             case 1:
                 log("Create a new Customer: ");
                 CreateCustomerMenu createCustomerMenu = new CreateCustomerMenu();
@@ -52,7 +52,7 @@ public class ManageCustomerMenu extends MenuCommand<CustomerDTO> {
         return Optional.ofNullable(customerDTO);
     }
 
-    private int getUserInput(){
+    private int getUserInput() {
         log("1. Creat a new Customer ");
         log("2. Update customers details ");
         log("3. Find customer by email ");
