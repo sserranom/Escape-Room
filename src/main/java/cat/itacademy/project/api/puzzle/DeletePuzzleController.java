@@ -3,7 +3,6 @@ package cat.itacademy.project.api.puzzle;
 import cat.itacademy.project.business_logic.puzzle.application.DeletePuzzleService;
 import cat.itacademy.project.business_logic.puzzle.domain.PuzzleRepository;
 import cat.itacademy.project.business_logic.puzzle.infrastructure.PuzzleMySQLRepository;
-import cat.itacademy.project.shared.domain.Command;
 import cat.itacademy.project.shared.infrastructure.database.mysql.MySqlConnection;
 
 import java.util.Optional;

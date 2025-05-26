@@ -2,7 +2,6 @@ package cat.itacademy.project.business_logic.room.application;
 
 import cat.itacademy.project.business_logic.room.domain.Room;
 import cat.itacademy.project.business_logic.room.domain.RoomRepository;
-import cat.itacademy.project.shared.domain.Command;
 import cat.itacademy.project.shared.domain.dtos.room.RoomDTO;
 import cat.itacademy.project.shared.domain.dtos.room.UpdateRoomDTO;
 import cat.itacademy.project.shared.domain.exceptions.EmptyFieldException;
@@ -10,17 +9,17 @@ import cat.itacademy.project.shared.domain.exceptions.NotFoundException;
 
 import java.util.Optional;
 
-public class UpdateRoomService implements Command<RoomDTO> {
-    private final UpdateRoomDTO request;
+public class UpdateRoomService {
+
     private final RoomRepository repo;
 
-    public UpdateRoomService(UpdateRoomDTO request, RoomRepository repo) {
-        this.request = request;
+    public UpdateRoomService( RoomRepository repo) {
+
         this.repo = repo;
     }
 
-    @Override
-    public Optional<RoomDTO> execute() {
+
+    public Optional<RoomDTO> execute(UpdateRoomDTO request) {
         if (request.name() == null || request.name().isBlank()) {
             throw new EmptyFieldException("Field 'name' cannot be empty.");
         }

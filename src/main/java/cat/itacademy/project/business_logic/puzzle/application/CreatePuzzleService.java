@@ -2,7 +2,6 @@ package cat.itacademy.project.business_logic.puzzle.application;
 
 import cat.itacademy.project.business_logic.puzzle.domain.Puzzle;
 import cat.itacademy.project.business_logic.puzzle.domain.PuzzleRepository;
-import cat.itacademy.project.shared.domain.Command;
 import cat.itacademy.project.shared.domain.dtos.puzzle.CreatePuzzleDTO;
 import cat.itacademy.project.shared.domain.dtos.puzzle.PuzzleDTO;
 import cat.itacademy.project.shared.domain.exceptions.AlreadyExistsException;

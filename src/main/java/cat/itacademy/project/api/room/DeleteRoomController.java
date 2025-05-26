@@ -3,24 +3,22 @@ package cat.itacademy.project.api.room;
 import cat.itacademy.project.business_logic.room.application.DeleteRoomService;
 import cat.itacademy.project.business_logic.room.domain.RoomRepository;
 import cat.itacademy.project.business_logic.room.infraestructure.RoomMySQLRepository;
-import cat.itacademy.project.shared.domain.Command;
 import cat.itacademy.project.shared.infrastructure.database.mysql.MySqlConnection;
 
 import java.util.Optional;
 
-public class DeleteRoomController implements Command<Void> {
+public class DeleteRoomController {
     private final DeleteRoomService service;
-    private final int idToDelete;
 
-    public DeleteRoomController(int idToDelete) {
+
+    public DeleteRoomController() {
         RoomRepository repo = new RoomMySQLRepository(MySqlConnection.getInstance());
-        this.service = new DeleteRoomService(idToDelete, repo);
-        this.idToDelete = idToDelete;
+        this.service = new DeleteRoomService(repo);
+
     }
 
-    @Override
-    public Optional<Void> execute() {
-        service.execute();
+    public Optional<Void> execute(int id) {
+        service.execute(id);
         return Optional.empty();
     }
 }

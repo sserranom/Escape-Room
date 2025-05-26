@@ -9,23 +9,20 @@ import cat.itacademy.project.shared.infrastructure.database.mysql.MySqlConnectio
 
 import java.util.Optional;
 
-public class FindRoomByIdController extends MenuCommand<Optional<RoomDTO>> {
+public class FindRoomByIdController  {
     private final FindRoomByIdService service;
-    private final int idToFind;
 
-    public FindRoomByIdController(int idToFind) {
+
+    public FindRoomByIdController() {
         RoomRepository repo = new RoomMySQLRepository(MySqlConnection.getInstance());
-        this.service = new FindRoomByIdService(idToFind, repo);
-        this.idToFind = idToFind;
+        this.service = new FindRoomByIdService( repo);
+
     }
 
-    @Override
-    public Optional<Optional<RoomDTO>> execute() {
-        try {
-            return Optional.ofNullable(service.execute());
-        } catch (Exception e) {
-            error("An unexpected error ocurred: " + e.getMessage());
-            return Optional.empty();
-        }
+
+    public Optional<RoomDTO> execute(int id) {
+
+            return service.execute(id);
+
     }
 }
