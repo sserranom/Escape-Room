@@ -12,8 +12,8 @@ public class UpdateRoomMenu extends MenuCommand<Void> {
     public Optional<Void> execute() {
         try {
             UpdateRoomDTO dto = getInfo();
-            UpdateRoomController controller = new UpdateRoomController(dto);
-            controller.execute();
+            UpdateRoomController controller = new UpdateRoomController();
+            controller.execute(dto);
             info("Room with name '" + dto.nameToUpdate() + "' updated successfully.");
 
         } catch (IllegalArgumentException e) {

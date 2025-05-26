@@ -4,7 +4,6 @@ import cat.itacademy.project.api.escaperoom.application.FindEscapeRoomByIdContro
 import cat.itacademy.project.business_logic.escaperoom.domain.EscapeRoom;
 import cat.itacademy.project.business_logic.theme.domain.Theme;
 import cat.itacademy.project.business_logic.theme.domain.ThemeRepository;
-import cat.itacademy.project.frontend.escaperoom.FindEscapeRoomByIdMenu;
 import cat.itacademy.project.shared.domain.dtos.escape_room.EscapeRoomDTO;
 import cat.itacademy.project.shared.domain.dtos.theme.ThemeDTO;
 import cat.itacademy.project.shared.domain.dtos.theme.UpdateThemeDTO;

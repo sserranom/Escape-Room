@@ -7,19 +7,18 @@ import cat.itacademy.project.shared.infrastructure.database.mysql.MySqlConnectio
 
 import java.util.Optional;
 
-public class DeleteRoomController implements Command<Void> {
+public class DeleteRoomController {
     private final DeleteRoomService service;
-    private final int idToDelete;
 
-    public DeleteRoomController(int idToDelete) {
+
+    public DeleteRoomController() {
         RoomRepository repo = new RoomMySQLRepository(MySqlConnection.getInstance());
-        this.service = new DeleteRoomService(idToDelete, repo);
-        this.idToDelete = idToDelete;
+        this.service = new DeleteRoomService(repo);
+
     }
 
-    @Override
-    public Optional<Void> execute() {
-        service.execute();
+    public Optional<Void> execute(int id) {
+        service.execute(id);
         return Optional.empty();
     }
 }

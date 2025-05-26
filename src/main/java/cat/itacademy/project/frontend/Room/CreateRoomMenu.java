@@ -19,8 +19,8 @@ public class CreateRoomMenu extends MenuCommand<Void> {
     public Optional<Void> execute() {
         CreateRoomDTO dto = getUserInfo();
 
-        CreateRoomController controller = new CreateRoomController(dto);
-        controller.execute();
+        CreateRoomController controller = new CreateRoomController();
+        controller.execute(dto);
         info("Room created successfully.");
         return Optional.empty();
     }

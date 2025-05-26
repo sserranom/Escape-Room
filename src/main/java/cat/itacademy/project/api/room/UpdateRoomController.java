@@ -8,17 +8,17 @@ import cat.itacademy.project.shared.infrastructure.database.mysql.MySqlConnectio
 
 import java.util.Optional;
 
-public class UpdateRoomController implements Command<Void> {
+public class UpdateRoomController  {
     private final UpdateRoomService service;
 
-    public UpdateRoomController(UpdateRoomDTO updateRoomDTO) {
+    public UpdateRoomController() {
         RoomRepository repo = new RoomMySQLRepository(MySqlConnection.getInstance());
-        this.service = new UpdateRoomService(updateRoomDTO, repo);
+        this.service = new UpdateRoomService( repo);
     }
 
-    @Override
-    public Optional<Void> execute() {
-        service.execute();
-        return Optional.empty();
+
+    public void execute(UpdateRoomDTO request) {
+        service.execute(request);
+
     }
 }

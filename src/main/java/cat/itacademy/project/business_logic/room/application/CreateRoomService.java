@@ -9,23 +9,25 @@ import cat.itacademy.project.shared.domain.exceptions.AlreadyExistsException;
 import java.util.Optional;
 
 public class CreateRoomService {
-    private final CreateRoomDTO room;
     private final RoomRepository repo;
+    private Room room;
 
-    public CreateRoomService(CreateRoomDTO request, RoomRepository repo) {
-        this.room = request;
+    public CreateRoomService( RoomRepository repo){
         this.repo = repo;
     }
 
-    public void execute() {
+    public void execute(CreateRoomDTO createRoomDTO){
+        this.room = Room.create(createRoomDTO);
         ensureDoesNotExist();
-        repo.create(room);
+        repo.create(createRoomDTO);
+
     }
 
-    private void ensureDoesNotExist() throws AlreadyExistsException {
-        Optional<RoomDTO> existing = repo.findByName(room.name());
-        if (existing.isPresent()) {
-            throw new AlreadyExistsException("Room " + room.name() + " already exist");
+    private void ensureDoesNotExist(){
+        Optional<RoomDTO> existing = repo.findByName(room.getName());
+        if (existing.isPresent()){
+            throw new AlreadyExistsException("Room " + room.getName() + " Already exist");
         }
     }
+
 }

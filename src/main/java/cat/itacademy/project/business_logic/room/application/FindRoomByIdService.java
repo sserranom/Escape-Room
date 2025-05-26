@@ -5,18 +5,15 @@ import cat.itacademy.project.shared.domain.dtos.room.RoomDTO;
 
 import java.util.Optional;
 
-public class FindRoomByIdService implements Command<RoomDTO> {
+public class FindRoomByIdService  {
     private final RoomRepository repo;
-    private final int idToFind;
 
-    public FindRoomByIdService(int idToFind, RoomRepository repo) {
+    public FindRoomByIdService(RoomRepository repo) {
         this.repo = repo;
-        this.idToFind = idToFind;
     }
 
-    @Override
-    public Optional<RoomDTO> execute() {
-        return repo.findById(idToFind);
+    public Optional<RoomDTO> execute(int id) {
+        return repo.findById(id);
 
     }
 }
