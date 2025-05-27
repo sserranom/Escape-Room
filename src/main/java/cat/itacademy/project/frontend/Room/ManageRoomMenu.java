@@ -1,50 +1,50 @@
 package cat.itacademy.project.frontend.Room;
 
-import cat.itacademy.project.frontend.Menu;
 import cat.itacademy.project.frontend.shared.MenuCommand;
 import cat.itacademy.project.frontend.shared.MenuScanner;
-import cat.itacademy.project.shared.domain.dtos.room.RoomDTO;
 
 import java.util.Optional;
 
-public class ManageRoomMenu extends MenuCommand<RoomDTO> {
-    private final RoomDTO roomDTO;
+public class ManageRoomMenu extends MenuCommand<Void> {
 
-    public ManageRoomMenu(RoomDTO roomDTO) {
-        this.roomDTO = roomDTO;
-    }
+
 
     @Override
-    public Optional<RoomDTO> execute() {
+    public Optional<Void> execute() {
         int choice = getUserInput();
+        boolean isRunning = true;
+        while (isRunning) {
 
-        switch (choice) {
-            case 1:
-                log("Create Room: ");
-                CreateRoomMenu createRoomMenu = new CreateRoomMenu();
-                createRoomMenu.execute();
-                break;
+            switch (choice) {
+                case 1:
+                    log("Create Room: ");
+                    CreateRoomMenu createRoomMenu = new CreateRoomMenu();
+                    createRoomMenu.execute();
+                    break;
 
-            case 2:
-                log("Update Room details: ");
-                UpdateRoomMenu updateRoomMenu = new UpdateRoomMenu();
-                updateRoomMenu.execute();
-                break;
+                case 2:
+                    log("Update Room details: ");
+                    UpdateRoomMenu updateRoomMenu = new UpdateRoomMenu();
+                    updateRoomMenu.execute();
+                    break;
 
-            case 3:
-                log("Room Details: ");
-                FindAllRoomMenu findAllRoomMenu = new FindAllRoomMenu();
-                findAllRoomMenu.execute();
-                break;
+                case 3:
+                    log("Room Details: ");
+                    FindAllRoomMenu findAllRoomMenu = new FindAllRoomMenu();
+                    findAllRoomMenu.execute();
+                    break;
 
-            case 4:
-                log("Back: ");
-                Menu menu = new Menu();
-                menu.execute();
-                break;
+                case 4:
+                    log("Back: ");
+                    isRunning = false;
+                    break;
+                default:
+                    error("Invalid choice. Please try again.");
+                    choice = getUserInput();
 
+            }
         }
-        return Optional.ofNullable(roomDTO);
+        return Optional.empty();
     }
 
     private int getUserInput() {

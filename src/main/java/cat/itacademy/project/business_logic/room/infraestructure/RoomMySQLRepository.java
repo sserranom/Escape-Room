@@ -142,7 +142,7 @@ public class RoomMySQLRepository implements RoomRepository {
     }
 
     @Override
-    public Optional<Room> findAllByThemerId(int escapeRoomId) {
+    public Optional<Room> findAllByThemerId(int themeId) {
         List<Room> rooms = new ArrayList<>();
         String sql = "SELECT r.id, r.name, r.difficulty, r.price, r.theme_id, t.name AS themeName " +
                 "FROM rooms r " +
@@ -150,7 +150,7 @@ public class RoomMySQLRepository implements RoomRepository {
                 "WHERE r.theme_id = ?";
         ;
         try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
-            preparedStatement.setInt(1, escapeRoomId);
+            preparedStatement.setInt(1, themeId);
             ResultSet rs = preparedStatement.executeQuery();
 
             if (rs.next()) {
@@ -167,5 +167,31 @@ public class RoomMySQLRepository implements RoomRepository {
             throw new DatabaseException("Error finding rooms by escaperoom id: " + e.getMessage());
         }
         return Optional.empty();
+    }
+    public List<RoomDTO> findAllByEscaperoomId(int escapeRoomId) {
+        List<RoomDTO> rooms = new ArrayList<>();
+        String sql = "SELECT r.id, r.name, r.difficulty, r.price, r.theme_id, t.name AS themeName " +
+                "FROM rooms r " +
+                "JOIN themes t ON r.theme_id = t.id " +
+                "JOIN  escape_rooms e ON t.escaperoom_id = e.id " +
+                "WHERE e.id = ?";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+            preparedStatement.setInt(1, escapeRoomId);
+            ResultSet rs = preparedStatement.executeQuery();
+            while (rs.next()) {
+                rooms.add(
+                        new RoomDTO(
+                                rs.getInt("id"),
+                                rs.getString("name"),
+                                rs.getString("difficulty"),
+                                rs.getDouble("price"),
+                                rs.getInt("theme_id"),
+                                rs.getString("themeName")
+                        ));
+            }
+        } catch (SQLException e) {
+            throw new DatabaseException("Error finding all rooms by escaperoom id: " + e.getMessage());
+        }
+        return rooms;
     }
 }

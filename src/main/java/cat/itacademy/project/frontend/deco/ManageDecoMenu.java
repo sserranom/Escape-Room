@@ -7,44 +7,49 @@ import cat.itacademy.project.shared.domain.dtos.deco.DecoDTO;
 
 import java.util.Optional;
 
-public class ManageDecoMenu extends MenuCommand<DecoDTO> {
-    private final DecoDTO decoDTO;
+public class ManageDecoMenu extends MenuCommand<Void> {
 
-    public ManageDecoMenu(DecoDTO decoDTO) {
-        this.decoDTO = decoDTO;
+    public ManageDecoMenu() {
     }
 
     @Override
-    public Optional<DecoDTO> execute() {
+    public Optional<Void> execute() {
         int choice = getUserImput();
+        boolean isRunning = true;
 
-        switch (choice) {
-            case 1:
-                log("Create decorative Item: ");
-                CreateDecoMenu createDecoMenu = new CreateDecoMenu();
-                createDecoMenu.execute();
-                break;
+        while (isRunning) {
 
-            case 2:
-                log("Update decorative Item: ");
-                UpdateDecoMenu updateDecoMenu = new UpdateDecoMenu();
-                updateDecoMenu.execute();
-                break;
+            switch (choice) {
+                case 1:
+                    log("Create decorative Item: ");
+                    CreateDecoMenu createDecoMenu = new CreateDecoMenu();
+                    createDecoMenu.execute();
+                    break;
 
-            case 3:
-                log("Show all decorative Items: ");
-                FindAllDecoMenu findAllDecoMenu = new FindAllDecoMenu();
-                findAllDecoMenu.execute();
-                break;
+                case 2:
+                    log("Update decorative Item: ");
+                    UpdateDecoMenu updateDecoMenu = new UpdateDecoMenu();
+                    updateDecoMenu.execute();
+                    break;
 
-            case 4:
-                log("Back: ");
-                Menu menu = new Menu();
-                menu.execute();
-                break;
+                case 3:
+                    log("Show all decorative Items: ");
+                    FindAllDecoMenu findAllDecoMenu = new FindAllDecoMenu();
+                    findAllDecoMenu.execute();
+                    break;
 
+                case 4:
+                    log("Back: ");
+                    isRunning = false;
+                    break;
+                default:
+                    error("Invalid choice. Please try again.");
+                    choice = getUserImput();
+
+            }
         }
-        return Optional.ofNullable(decoDTO);
+
+        return Optional.empty();
     }
 
     private int getUserImput() {

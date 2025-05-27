@@ -1,9 +1,16 @@
 package cat.itacademy.project.business_logic.escaperoom.infrastructure;
 
+import cat.itacademy.project.business_logic.deco.infraestructure.DecoMySQLRepository;
 import cat.itacademy.project.business_logic.escaperoom.domain.EscapeRoom;
 import cat.itacademy.project.business_logic.escaperoom.domain.EscapeRoomRepository;
+import cat.itacademy.project.business_logic.puzzle.infrastructure.PuzzleMySQLRepository;
+import cat.itacademy.project.business_logic.room.infraestructure.RoomMySQLRepository;
+import cat.itacademy.project.shared.domain.dtos.deco.DecoDTO;
 import cat.itacademy.project.shared.domain.dtos.escape_room.CreateEscapeRoomDTO;
 import cat.itacademy.project.shared.domain.dtos.escape_room.EscapeRoomDTO;
+import cat.itacademy.project.shared.domain.dtos.escape_room.EscapeRoomInventoryDto;
+import cat.itacademy.project.shared.domain.dtos.puzzle.PuzzleDTO;
+import cat.itacademy.project.shared.domain.dtos.room.RoomDTO;
 import cat.itacademy.project.shared.domain.exceptions.DatabaseException;
 import cat.itacademy.project.shared.domain.exceptions.NotFoundException;
 
@@ -125,5 +132,14 @@ public class EscapeRoomMySQLRepository implements EscapeRoomRepository {
             throw new DatabaseException("Error while finding escape room: " + e.getMessage());
         }
         return Optional.empty();
+    }
+
+    @Override
+    public EscapeRoomInventoryDto findInventoryByEscapeRoomId(int escapeRoomId) {
+        List<RoomDTO> rooms = new RoomMySQLRepository(this.connection).findAllByEscaperoomId(escapeRoomId);
+        List<PuzzleDTO> puzzles = new PuzzleMySQLRepository(this.connection).findAllByEscapeRoomId(escapeRoomId);
+        List<DecoDTO> decos = new DecoMySQLRepository(this.connection).findAllByEscapeRoomId(escapeRoomId);
+
+        return new EscapeRoomInventoryDto(rooms, puzzles, decos);
     }
 }
