@@ -4,6 +4,7 @@ import cat.itacademy.project.business_logic.puzzle.domain.Puzzle;
 import cat.itacademy.project.business_logic.puzzle.domain.PuzzleRepository;
 import cat.itacademy.project.shared.domain.dtos.puzzle.PuzzleDTO;
 import cat.itacademy.project.shared.domain.dtos.puzzle.UpdatePuzzleDTO;
+import cat.itacademy.project.shared.domain.events.EventManager;
 import cat.itacademy.project.shared.domain.exceptions.EmptyFieldException;
 import cat.itacademy.project.shared.domain.exceptions.NotFoundException;
 
@@ -11,6 +12,7 @@ import java.util.Optional;
 
 public class UpdatePuzzleService {
     private final PuzzleRepository repo;
+    private final EventManager eventManager = EventManager.getInstance();
 
     public UpdatePuzzleService(PuzzleRepository repo) {
         this.repo = repo;
@@ -38,6 +40,9 @@ public class UpdatePuzzleService {
         puzzle.setPrice(request.price() > 0 ? request.price() : puzzle.getPrice());
 
         repo.update(puzzle);
+        if (puzzle.isPublishable()){
+            eventManager.publish("puzzle.published", puzzle.toDTO());
+        }
         return Optional.of(puzzle.toDTO());
 
     }

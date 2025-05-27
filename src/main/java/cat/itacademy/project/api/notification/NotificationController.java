@@ -1,20 +1,32 @@
 package cat.itacademy.project.api.notification;
 
+import cat.itacademy.project.business_logic.notification.application.CreateNotificationService;
+import cat.itacademy.project.business_logic.notification.domain.NotificationRepository;
+import cat.itacademy.project.business_logic.notification.infrastructure.NotificationMongoRepository;
+import cat.itacademy.project.shared.domain.dtos.DTO;
 import cat.itacademy.project.shared.domain.dtos.notification.NotificationDTO;
+import cat.itacademy.project.shared.domain.dtos.puzzle.PuzzleDTO;
 
 import java.util.logging.Logger;
 
 public class NotificationController {
-    private static final Logger logger = Logger.getLogger(NotificationController.class.getName());
+ private CreateNotificationService service;
+ private NotificationRepository repo;
 
-    public static void send(NotificationDTO notificationDTO) {
+    public NotificationController() {
+        this.repo = new NotificationMongoRepository(cat.itacademy.project.shared.infrastructure.database.mongodb.MongoDBConnection.getInstance());
+        this.service = new CreateNotificationService();
+    }
+
+    public  void send(DTO eventDto) {
         if (notificationDTO == null) {
             throw new IllegalArgumentException("NotificationDTO cannot be null");
         }
+        PuzzleDTO puzzleDTO = (PuzzleDTO) eventDto;
         String notificationContent = String.format(
                 "=== Sending Notification ===%nTo: %s <%s>%nMessage: %s%n===========================",
-                notificationDTO.recipientName(), notificationDTO.recipientEmail(), notificationDTO.message()
+                p.recipientName(), notificationDTO.recipientEmail(), notificationDTO.message()
         );
-        logger.info(notificationContent);
+        System.out.println(notificationContent);
     }
 }
