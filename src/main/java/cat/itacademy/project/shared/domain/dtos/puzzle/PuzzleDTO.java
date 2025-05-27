@@ -1,10 +1,11 @@
 package cat.itacademy.project.shared.domain.dtos.puzzle;
 
+import cat.itacademy.project.shared.domain.dtos.DTO;
 import cat.itacademy.project.shared.domain.exceptions.EmptyFieldException;
 
 
 public record PuzzleDTO(int id, String name, String difficulty, int roomId, String answer, String story, int themeId,
-                        double price) {
+                        double price) implements DTO {
     public PuzzleDTO {
         if (name == null || name.isBlank()) {
             throw new EmptyFieldException("Name cannot be null or empty");

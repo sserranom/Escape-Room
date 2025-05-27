@@ -1,6 +1,6 @@
 package cat.itacademy.project.shared.domain.events;
 
-import cat.itacademy.project.shared.domain.dtos.dto;
+import cat.itacademy.project.shared.domain.dtos.DTO;
 
 import java.util.List;
 import java.util.Map;
@@ -43,7 +43,7 @@ public class EventManager {
         }
     }
 
-    public void publish(String topic, dto message) {
+    public void publish(String topic, DTO message) {
         List<EventListener> subscribers = listeners.get(topic);
         if (subscribers != null) {
             for (EventListener listener : subscribers) {

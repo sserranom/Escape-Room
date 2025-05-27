@@ -1,4 +1,4 @@
 package cat.itacademy.project.shared.domain.dtos;
 
-public interface dto {
+public interface DTO {
 }

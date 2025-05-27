@@ -1,6 +1,6 @@
 package cat.itacademy.escaperoom.shared.domain.events;
 
-import cat.itacademy.project.shared.domain.dtos.dto;
+import cat.itacademy.project.shared.domain.dtos.DTO;
 import cat.itacademy.project.shared.domain.events.EventListener;
 import cat.itacademy.project.shared.domain.events.EventManager;
 import org.junit.jupiter.api.Test;
@@ -96,7 +96,7 @@ class EventManagerTest {
         assertEquals(threadCount, listener.getUpdateCount());
     }
 
-    private record TestDTO(String message) implements dto {
+    private record TestDTO(String message) implements DTO {
     }
 
     private static class TestListener implements EventListener {
@@ -104,7 +104,7 @@ class EventManagerTest {
         private String lastMessage;
 
         @Override
-        public void update(String topic, dto dto) {
+        public void update(String topic, DTO dto) {
             updateCount.incrementAndGet();
             if (dto instanceof TestDTO) {
                 lastMessage = ((TestDTO) dto).message();
