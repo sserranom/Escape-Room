@@ -10,15 +10,13 @@ import cat.itacademy.project.shared.domain.exceptions.NotFoundException;
 import java.util.Optional;
 
 public class UpdateCustomerService {
-    private final UpdateCustomerDTO request;
     private final CustomerRepository repo;
 
-    public UpdateCustomerService(UpdateCustomerDTO request, CustomerRepository repo) {
-        this.request = request;
+    public UpdateCustomerService( CustomerRepository repo) {
         this.repo = repo;
     }
 
-    public Optional<CustomerDTO> execute() {
+    public Optional<CustomerDTO> execute(UpdateCustomerDTO request) {
         if (request.name() == null || request.name().isBlank()) {
             throw new EmptyFieldException("Field 'name' cannot be empty.");
         }

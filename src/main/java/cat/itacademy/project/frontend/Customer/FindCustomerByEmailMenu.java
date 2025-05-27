@@ -12,11 +12,10 @@ public class FindCustomerByEmailMenu extends MenuCommand<Void> {
     public Optional<Void> execute() {
         try {
             String emailToFind = MenuScanner.readString("Enter the email customer to find: ");
-            FindCustomerByEmailController controller = new FindCustomerByEmailController(emailToFind);
-            Optional<Optional<CustomerDTO>> customerDTO = controller.execute();
+            FindCustomerByEmailController controller = new FindCustomerByEmailController();
+            Optional<CustomerDTO> customerDTO = controller.execute(emailToFind);
             if (customerDTO.isPresent()) {
-                Optional<CustomerDTO> foundCustomer = customerDTO.get();
-                CustomerPrinter.print(foundCustomer.get());
+                CustomerPrinter.print(customerDTO.get());
             } else {
                 error("Custmer with email " + emailToFind + " not found.");
             }

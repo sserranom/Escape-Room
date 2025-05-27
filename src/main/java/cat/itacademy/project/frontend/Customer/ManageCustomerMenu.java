@@ -53,7 +53,7 @@ public class ManageCustomerMenu extends MenuCommand<CustomerDTO> {
     }
 
     private int getUserInput() {
-        log("1. Creat a new Customer ");
+        log("1. Create a new Customer ");
         log("2. Update customers details ");
         log("3. Find customer by email ");
         log("4. View customer details ");

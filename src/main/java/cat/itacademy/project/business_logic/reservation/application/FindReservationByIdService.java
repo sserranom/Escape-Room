@@ -7,22 +7,16 @@ import cat.itacademy.project.shared.domain.exceptions.NotFoundException;
 import java.util.Optional;
 
 public class FindReservationByIdService {
-    private final ReservationRepository reservationRepo;
-    private final int reservationId;
+    private final ReservationRepository repo;
 
-    public FindReservationByIdService(int reservationId, ReservationRepository reservationRepo) {
-        this.reservationId = reservationId;
-        this.reservationRepo = reservationRepo;
+
+    public FindReservationByIdService(ReservationRepository repo) {
+
+        this.repo= repo;
     }
 
-    public Optional<ReservationDTO> execute() throws NotFoundException {
+    public Optional<ReservationDTO> execute(int id){
 
-        Optional<ReservationDTO> reservation = reservationRepo.findById(reservationId);
-
-        if (reservation.isEmpty()) {
-            throw new NotFoundException("Reservation with ID " + reservationId + " not found.");
-        }
-
-        return reservation;
+        return repo.findById(id);
     }
 }

@@ -7,14 +7,12 @@ import java.util.Optional;
 
 public class FindCustomerByEmailService {
     private final CustomerRepository repo;
-    private final String emailToFind;
 
-    public FindCustomerByEmailService(CustomerRepository repo, String emailToFind) {
+    public FindCustomerByEmailService(CustomerRepository repo) {
         this.repo = repo;
-        this.emailToFind = emailToFind;
     }
 
-    public Optional<CustomerDTO> execute() {
-        return repo.findByEmail(emailToFind);
+    public Optional<CustomerDTO> execute(String email) {
+        return repo.findByEmail(email);
     }
 }

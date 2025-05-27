@@ -12,8 +12,8 @@ public class UpdateCustomerMenu extends MenuCommand<Void> {
     public Optional<Void> execute() {
         try {
             UpdateCustomerDTO dto = getInfo();
-            UpdateCustomerController controller = new UpdateCustomerController(dto);
-            controller.execute();
+            UpdateCustomerController controller = new UpdateCustomerController();
+            controller.execute(dto);
             info("Customer with name '" + dto.nameToUpdate() + "' updated successfully.");
         } catch (IllegalArgumentException e) {
             error("Error: " + e.getMessage());

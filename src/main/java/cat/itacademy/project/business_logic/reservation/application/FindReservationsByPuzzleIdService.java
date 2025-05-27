@@ -3,23 +3,19 @@ package cat.itacademy.project.business_logic.reservation.application;
 import cat.itacademy.project.business_logic.reservation.domain.Reservation;
 import cat.itacademy.project.business_logic.reservation.domain.ReservationRepository;
 import cat.itacademy.project.frontend.shared.MenuCommand;
+import cat.itacademy.project.shared.domain.dtos.reservation.ReservationDTO;
 
 import java.util.List;
 import java.util.Optional;
 
-public class FindReservationsByPuzzleIdService extends MenuCommand<List<Reservation>> {
-    private final ReservationRepository reservationRepo;
-    private final int puzzleId;
+public class FindReservationsByPuzzleIdService {
+    private final ReservationRepository repo;
 
-    public FindReservationsByPuzzleIdService(int puzzleId, ReservationRepository reservationRepo) {
-        this.puzzleId = puzzleId;
-        this.reservationRepo = reservationRepo;
+    public FindReservationsByPuzzleIdService(ReservationRepository repo) {
+        this.repo = repo;
     }
 
-    @Override
-    public Optional<List<Reservation>> execute() {
-
-        List<Reservation> reservations = reservationRepo.findAllByPuzzleId(puzzleId);
-        return Optional.of(reservations);
+    public Optional<List<ReservationDTO>> execute(int id) {
+        return repo.findAllByPuzzleId(id);
     }
 }

@@ -3,16 +3,16 @@ package cat.itacademy.project.business_logic.customer.application;
 import cat.itacademy.project.business_logic.customer.domain.CustomerRepository;
 import cat.itacademy.project.shared.domain.dtos.customer.CustomerDTO;
 
-import java.util.Optional;
+import java.util.List;
 
-public class FindCustomerByIdService {
+public class FindAllCustomerSubscribedService {
     private final CustomerRepository repo;
 
-    public FindCustomerByIdService(CustomerRepository repo) {
+    public FindAllCustomerSubscribedService(CustomerRepository repo) {
         this.repo = repo;
     }
 
-    public Optional<CustomerDTO> execute(int id) {
-        return repo.findById(id);
+    public List<CustomerDTO> FindAllCustomerSubscribed() {
+        return repo.FindAllCustomerSubscribed();
     }
 }

@@ -17,8 +17,8 @@ public class CreateCustomerMenu extends MenuCommand<Void> {
     public Optional<Void> execute() {
         CreateCustomerDTO dto = getUserInfo();
 
-        CreateCustomerController controller = new CreateCustomerController(dto);
-        controller.execute();
+        CreateCustomerController controller = new CreateCustomerController();
+        controller.execute(dto);
         info("Customer created successfully.");
         return Optional.empty();
     }

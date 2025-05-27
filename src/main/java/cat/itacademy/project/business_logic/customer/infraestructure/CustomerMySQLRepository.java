@@ -122,4 +122,24 @@ public class CustomerMySQLRepository implements CustomerRepository {
         }
         return Optional.empty();
     }
+
+    @Override
+    public List<CustomerDTO> FindAllCustomerSubscribed() {
+        List<CustomerDTO> customers = new ArrayList<>();
+        String sql = "SELECT id, name, email, is_subscribed FROM customers WHERE is_subscribed = true";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+            ResultSet rs = preparedStatement.executeQuery();
+            while (rs.next()) {
+                customers.add(new CustomerDTO(
+                        rs.getInt("id"),
+                        rs.getString("name"),
+                        rs.getString("email"),
+                        rs.getBoolean("is_subscribed")
+                ));
+            }
+        } catch (SQLException e) {
+            throw new DatabaseException("Error findig all customer: " + e.getMessage());
+        }
+        return customers;
+    }
 }

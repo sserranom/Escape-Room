@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface CustomerRepository {
-    void create(CreateCustomerDTO deco);
+    void create(CreateCustomerDTO customer);
 
     void update(Customer customer);
 
@@ -18,4 +18,6 @@ public interface CustomerRepository {
     Optional<CustomerDTO> findByName(String name);
 
     Optional<CustomerDTO> findByEmail(String email);
+
+    List<CustomerDTO> FindAllCustomerSubscribed();
 }
