@@ -1,25 +1,30 @@
 package cat.itacademy.project.business_logic.reservation.application;
 
-public class CreateReservationService {
+import cat.itacademy.project.business_logic.puzzle.domain.PuzzleRepository;
+import cat.itacademy.project.business_logic.reservation.domain.Reservation;
+import cat.itacademy.project.business_logic.reservation.domain.ReservationRepository;
+import cat.itacademy.project.business_logic.room.domain.RoomRepository;
+import cat.itacademy.project.shared.domain.dtos.reservation.CreateReservationDTO;
 
-//    private final CreateReservationDTO reservation;
-//    private final ReservationRepository repo;
-//
-//    public CreateReservationService(CreateReservationDTO reservation, ReservationRepository repo) {
-//        this.reservation = reservation;
-//        this.repo = repo;
-//    }
-//
-//
-//    public void execute() {
-//        ensureDoesNotExist();
-//        repo.create(reservation);
-//    }
-//
-//    private void ensureDoesNotExist() throws AlreadyExistsException {
-//        Optional<ReservationDTO> existing = repo.findByName(reservation.name());
-//        if (existing.isPresent()) {
-//            throw new AlreadyExistsException("Customer " + customer.name() + " already exist");
-//        }
-//    }
+public class CreateReservationService {
+    private final ReservationRepository reservationRepo;
+    private final PuzzleRepository puzzleRepo;
+    private final RoomRepository roomRepo;
+
+    public CreateReservationService(ReservationRepository reservationRepo, PuzzleRepository puzzleRepo, RoomRepository roomRepo) {
+        this.reservationRepo = reservationRepo;
+        this.puzzleRepo = puzzleRepo;
+        this.roomRepo = roomRepo;
+    }
+
+    public void execute(CreateReservationDTO request){
+        Reservation newReservation = new Reservation(
+                request.customerId(),
+                request.puzzleId(),
+                request.completionDate(),
+                puzzleRepo,
+                roomRepo
+        );
+        reservationRepo.create(newReservation);
+    }
 }

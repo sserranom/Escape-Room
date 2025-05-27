@@ -9,23 +9,17 @@ import cat.itacademy.project.shared.infrastructure.database.mysql.MySqlConnectio
 
 import java.util.Optional;
 
-public class FindCustomerByIdController extends MenuCommand<Optional<CustomerDTO>> {
+public class FindCustomerByIdController {
     private final FindCustomerByIdService service;
-    private final int idToFind;
 
-    public FindCustomerByIdController(int idToFind) {
+    public FindCustomerByIdController() {
         CustomerRepository repo = new CustomerMySQLRepository(MySqlConnection.getInstance());
-        this.service = new FindCustomerByIdService(repo, idToFind);
-        this.idToFind = idToFind;
+        this.service = new FindCustomerByIdService(repo);
     }
 
-    @Override
-    public Optional<Optional<CustomerDTO>> execute() {
-        try {
-            return Optional.ofNullable(service.execute());
-        } catch (Exception e) {
-            error("An unexpected error ocurred: " + e.getMessage());
-            return Optional.empty();
+    public Optional<CustomerDTO> execute(int id) {
+
+            return service.execute(id);
         }
-    }
+
 }

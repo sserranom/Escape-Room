@@ -12,11 +12,10 @@ public class FindCustomerByIdMenu extends MenuCommand<Void> {
     public Optional<Void> execute() {
         try {
             int idToFind = MenuScanner.readInt("Enter the ID of the customer to find: ");
-            FindCustomerByIdController controller = new FindCustomerByIdController(idToFind);
-            Optional<Optional<CustomerDTO>> customerDTO = controller.execute();
+            FindCustomerByIdController controller = new FindCustomerByIdController();
+            Optional<CustomerDTO> customerDTO = controller.execute(idToFind);
             if (customerDTO.isPresent()) {
-                Optional<CustomerDTO> foundCustomer = customerDTO.get();
-                CustomerPrinter.print(foundCustomer.get());
+                CustomerPrinter.print(customerDTO.get());
             } else {
                 error("Customer with ID " + idToFind + " not found.");
             }

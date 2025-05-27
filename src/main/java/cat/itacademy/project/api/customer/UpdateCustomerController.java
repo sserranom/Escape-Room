@@ -11,13 +11,12 @@ import java.util.Optional;
 public class UpdateCustomerController {
     private final UpdateCustomerService service;
 
-    public UpdateCustomerController(UpdateCustomerDTO updateCustomerDTO) {
+    public UpdateCustomerController() {
         CustomerRepository repo = new CustomerMySQLRepository(MySqlConnection.getInstance());
-        this.service = new UpdateCustomerService(updateCustomerDTO, repo);
+        this.service = new UpdateCustomerService(repo);
     }
 
-    public Optional<Void> execute() {
-        service.execute();
-        return Optional.empty();
+    public void execute(UpdateCustomerDTO request) {
+        service.execute(request);
     }
 }
