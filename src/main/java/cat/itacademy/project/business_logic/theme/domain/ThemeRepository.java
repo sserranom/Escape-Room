@@ -16,7 +16,7 @@ public interface ThemeRepository {
 
     Optional<ThemeDTO> findById(int id);
 
-    List<Theme> findAll();
+    List<ThemeDTO> findAll(int escapeRoomId);
 
     Optional<Theme> findByName(String name);
 }
