@@ -1,13 +1,18 @@
 package cat.itacademy.project.frontend.puzzle;
 
 import cat.itacademy.project.frontend.shared.MenuCommand;
+import cat.itacademy.project.shared.domain.dtos.puzzle.CreatePuzzleDTO;
+import cat.itacademy.project.shared.domain.dtos.puzzle.UpdatePuzzleDTO;
 import cat.itacademy.project.frontend.shared.MenuScanner;
+
 
 import java.util.Optional;
 
 public class ManagePuzzleMenu extends MenuCommand<Void> {
     @Override
     public Optional<Void> execute() {
+
+
         boolean isRunning = true;
         while (isRunning) {
             int choice = getUserInput();
@@ -40,6 +45,7 @@ public class ManagePuzzleMenu extends MenuCommand<Void> {
                     error("Invalid choice. Please try again.");
             }
         }
+
         return Optional.empty();
     }
 

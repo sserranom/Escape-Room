@@ -19,7 +19,7 @@ public class FindAllCustomerSubscribedController {
     }
 
     public Optional<List<CustomerDTO>> execute() {
-        List<CustomerDTO> customers = service.FindAllCustomerSubscribed();
+        List<CustomerDTO> customers = service.execute();
         return Optional.of(customers);
     }
 }

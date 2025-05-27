@@ -24,7 +24,7 @@ public class PuzzleMySQLRepository implements PuzzleRepository {
 
     @Override
     public void create(Puzzle puzzle) {
-        String sql = "INSERT INTO puzzles (name,  room_id, answer, story, theme_id, price) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO puzzles (name,  room_id, answer, story, theme_id, price) VALUES (?, ?, ?, ?, ?, ?)";
         try (var preparedStatement = connection.prepareStatement(sql)) {
             preparedStatement.setString(1, puzzle.getName());
             preparedStatement.setInt(2, puzzle.getRoomId());
@@ -52,6 +52,7 @@ public class PuzzleMySQLRepository implements PuzzleRepository {
             preparedStatement.setString(4, puzzle.getStory());
             preparedStatement.setInt(5, puzzle.getThemeId());
             preparedStatement.setDouble(6, puzzle.getPrice());
+            preparedStatement.setInt(7, puzzle.getId());
 
             int rowUpdated = preparedStatement.executeUpdate();
 

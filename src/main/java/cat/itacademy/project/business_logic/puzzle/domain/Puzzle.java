@@ -108,7 +108,9 @@ public class Puzzle {
     public void setPrice(double price) {
         this.price = price;
     }
-
+    public boolean isPublishable(){
+        return !name.isBlank() && !difficulty.isBlank() && roomId > 0 && !answer.isBlank() && !story.isBlank() && themeId > 0 && price > 0;
+    }
     @Override
     public String toString() {
         return "Puzzle{" +
