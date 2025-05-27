@@ -69,25 +69,26 @@ public class ThemeMySQLRepository implements ThemeRepository {
     }
 
     @Override
-    public List<Theme> findAll() {
-        String sql = "SELECT * FROM themes";
-        List<Theme> themes = new ArrayList<>();
-        try (PreparedStatement preparedStatement = connection.prepareStatement(sql);
-             ResultSet rs = preparedStatement.executeQuery()) {
+    public List<ThemeDTO> findAll(int escapeRoomId) {
+        String sql = "SELECT id, name, description, escaperoom_id FROM themes" +
+                " WHERE escaperoom_id = ?";
+        List<ThemeDTO> themes = new ArrayList<>();
+        try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+            preparedStatement.setInt(1, escapeRoomId);
+
+            ResultSet rs = preparedStatement.executeQuery();
             while (rs.next()) {
-                themes.add(Theme.fromDatabase(
-                        new ThemeDTO(
-                                rs.getInt("id"),
-                                rs.getString("name"),
-                                rs.getString("description"),
-                                rs.getInt("escaperoom_id")
-                        )
+                themes.add(new ThemeDTO(
+                        rs.getInt("id"),
+                        rs.getString("name"),
+                        rs.getString("description"),
+                        rs.getInt("escaperoom_id")
                 ));
             }
+            return themes;
         } catch (Exception e) {
             throw new DatabaseException("Error while finding all themes: " + e.getMessage());
         }
-        return themes;
     }
 
     @Override
@@ -105,7 +106,7 @@ public class ThemeMySQLRepository implements ThemeRepository {
                                 rs.getInt("id"),
                                 rs.getString("name"),
                                 rs.getString("description"),
-                                rs.getInt("EscapeRoomId")
+                                rs.getInt("escaperoom_id")
                         )));
             }
         } catch (Exception e) {

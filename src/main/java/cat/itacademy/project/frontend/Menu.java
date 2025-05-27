@@ -21,6 +21,11 @@ public class Menu extends MenuCommand<Void> {
         existingRooms.add(escapeRoomDTO);
     }
 
+    public static EscapeRoomDTO activeRoom() {
+        return activeRoom;
+    }
+
+
     public static void setActiveRoom(EscapeRoomDTO dto) {
         activeRoom = dto;
     }
@@ -40,8 +45,9 @@ public class Menu extends MenuCommand<Void> {
     }
 
     public Optional<Void> execute() {
-        setupCurrentRoom();
+
         while (true) {
+            setupCurrentRoom();
             ManageEscapeRoomMenu manageEscapeRoomMenu = new ManageEscapeRoomMenu(activeRoom);
             manageEscapeRoomMenu.execute();
 

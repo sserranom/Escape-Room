@@ -18,9 +18,9 @@ public class FindAllThemesController {
     }
 
 
-    public Optional<List<ThemeDTO>> execute() {
+    public Optional<List<ThemeDTO>> execute(int escapeRoomId) {
 
-        List<ThemeDTO> themes = service.findAll();
+        List<ThemeDTO> themes = service.findAll(escapeRoomId);
 
         return Optional.of(themes);
     }
