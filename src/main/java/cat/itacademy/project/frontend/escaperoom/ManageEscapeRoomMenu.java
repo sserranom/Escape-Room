@@ -3,10 +3,9 @@ package cat.itacademy.project.frontend.escaperoom;
 
 import cat.itacademy.project.frontend.Customer.ManageCustomerMenu;
 import cat.itacademy.project.frontend.Menu;
-import cat.itacademy.project.frontend.Room.ManageRoomMenu;
-import cat.itacademy.project.frontend.deco.ManageDecoMenu;
 import cat.itacademy.project.frontend.shared.MenuCommand;
 import cat.itacademy.project.frontend.shared.MenuScanner;
+import cat.itacademy.project.frontend.theme.ManageThemeMenu;
 import cat.itacademy.project.shared.domain.dtos.customer.CustomerDTO;
 import cat.itacademy.project.shared.domain.dtos.deco.DecoDTO;
 import cat.itacademy.project.shared.domain.dtos.escape_room.EscapeRoomDTO;
@@ -16,20 +15,13 @@ import java.util.Optional;
 
 public class ManageEscapeRoomMenu extends MenuCommand<EscapeRoomDTO> {
     private final EscapeRoomDTO escapeRoomDTO;
-    private RoomDTO roomDTO;
-    private DecoDTO decoDTO;
-    private CustomerDTO customerDTO;
+
 
     public ManageEscapeRoomMenu(EscapeRoomDTO escapeRoomDTO) {
         this.escapeRoomDTO = escapeRoomDTO;
     }
 
-    public ManageEscapeRoomMenu(EscapeRoomDTO escapeRoomDTO, RoomDTO roomDTO, DecoDTO decoDTO, CustomerDTO customerDTO) {
-        this.escapeRoomDTO = escapeRoomDTO;
-        this.roomDTO = roomDTO;
-        this.decoDTO = decoDTO;
-        this.customerDTO = customerDTO;
-    }
+
 
     @Override
     public Optional<EscapeRoomDTO> execute() {
@@ -50,18 +42,26 @@ public class ManageEscapeRoomMenu extends MenuCommand<EscapeRoomDTO> {
                     Menu.updateExistingRooms(escapeRoomDTO);
                 });
                 break;
-
             case 3:
-                log("Manage rooms: ");
-                ManageRoomMenu manageRoomMenu = new ManageRoomMenu(roomDTO);
-                manageRoomMenu.execute();
+                log("Manage Themes: ");
+                ManageThemeMenu manageThemeMenu = new ManageThemeMenu(escapeRoomDTO);
+                manageThemeMenu.execute();
                 break;
 
-            case 4:
-                log("Manage Decorative Items: ");
-                ManageDecoMenu manageDecoMenu = new ManageDecoMenu(decoDTO);
-                manageDecoMenu.execute();
-                break;
+//            case 3:
+//                log("Manage rooms: ");
+//                ManageRoomMenu manageRoomMenu = new ManageRoomMenu(roomDTO);
+//                manageRoomMenu.execute();
+//                break;
+
+//            case 4:
+//                log("Manage Decorative Items: ");
+//                ManageDecoMenu manageDecoMenu = new ManageDecoMenu();
+//                manageDecoMenu.execute();
+//                break;
+            case 9:
+                log("Show inventory:");
+                ListEscapeRoomInventoryMenu listEscapeRoomInventoryMenu = new ListEscapeRoomInventoryMenu(escapeRoomDTO);
 
             case 10:
                 log("Delete escape room:");
@@ -71,7 +71,7 @@ public class ManageEscapeRoomMenu extends MenuCommand<EscapeRoomDTO> {
 
             case 11:
                 log("Manage Customers: ");
-                ManageCustomerMenu manageCustomerMenu = new ManageCustomerMenu(customerDTO);
+                ManageCustomerMenu manageCustomerMenu = new ManageCustomerMenu();
                 manageCustomerMenu.execute();
                 break;
             default:
@@ -84,15 +84,16 @@ public class ManageEscapeRoomMenu extends MenuCommand<EscapeRoomDTO> {
     private int getUserInput() {
         log("1. View escape room details");
         log("2. Update escape room details");
-        log("3. Manage Rooms");
-        log("4. Manage Decorative Items");
-        log("5. Manage Themes");
-        log("6. Manage puzzles");
-        log("7. Manage packs");
-        log("8. Manage reservations");
-        log("9. Show inventory");
-        log("10. Delete escape room");
-        log("11. Manage Customers");
+        log("3. Manage Themes");
+//        log("4. Manage Rooms");
+//        log("5. Manage Decorative Items");
+//        log("6. Manage puzzles");
+        log("4. Manage reservations");
+        log("5. Show inventory");
+        log("6. Show total worth");
+        log("7. Delete escape room");
+        log("8. Manage Customers");
+        log("0. Exit");
 
         return MenuScanner.readInt("Please enter your choice: ");
     }

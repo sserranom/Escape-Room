@@ -137,15 +137,15 @@ public class DecoMySQLRepository implements DecoRepository {
     }
 
     @Override
-    public Optional<Deco> findAllByEscapeRoomId(int escapeRoomId) {
-        List<Deco> decoObjs = new ArrayList<>();
+    public List<DecoDTO> findAllByEscapeRoomId(int escapeRoomId) {
+        List<DecoDTO> decoObjs = new ArrayList<>();
         String sql = "SELECT id, name, description, type, escaperoom_id, price FROM deco WHERE escaperoom_id = ?";
         try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             preparedStatement.setInt(1, escapeRoomId);
             ResultSet rs = preparedStatement.executeQuery();
 
             if (rs.next()) {
-                return Optional.of(Deco.fromDatabase(
+                decoObjs.add(
                         new DecoDTO(rs.getInt("id"),
                                 rs.getString("name"),
                                 rs.getString("description"),
@@ -153,11 +153,13 @@ public class DecoMySQLRepository implements DecoRepository {
                                 rs.getInt(escapeRoomId),
                                 rs.getDouble("price")
 
-                        )));
+                        ));
             }
         } catch (Exception e) {
             throw new DatabaseException("Error finding decoObjs by escaperoom id: " + e.getMessage());
         }
-        return Optional.empty();
+        return decoObjs;
     }
+
+
 }

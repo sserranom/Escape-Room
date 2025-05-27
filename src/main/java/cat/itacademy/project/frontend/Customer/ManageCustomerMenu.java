@@ -7,15 +7,13 @@ import cat.itacademy.project.shared.domain.dtos.customer.CustomerDTO;
 
 import java.util.Optional;
 
-public class ManageCustomerMenu extends MenuCommand<CustomerDTO> {
-    private final CustomerDTO customerDTO;
+public class ManageCustomerMenu extends MenuCommand<Void> {
 
-    public ManageCustomerMenu(CustomerDTO customerDTO) {
-        this.customerDTO = customerDTO;
+    public ManageCustomerMenu() {
     }
 
     @Override
-    public Optional<CustomerDTO> execute() {
+    public Optional<Void> execute() {
         int choice = getUserInput();
 
         switch (choice) {
@@ -49,7 +47,7 @@ public class ManageCustomerMenu extends MenuCommand<CustomerDTO> {
                 menu.execute();
                 break;
         }
-        return Optional.ofNullable(customerDTO);
+        return Optional.empty();
     }
 
     private int getUserInput() {
