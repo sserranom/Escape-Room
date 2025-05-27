@@ -88,6 +88,8 @@ public class RoomMySQLRepository implements RoomRepository {
             throw new DatabaseException("Error finding room by id: " + e.getMessage());
         }
         return Optional.empty();
+
+
     }
 
     @Override
@@ -142,30 +144,31 @@ public class RoomMySQLRepository implements RoomRepository {
     }
 
     @Override
-    public Optional<Room> findAllByThemerId(int escapeRoomId) {
-        List<Room> rooms = new ArrayList<>();
+    public List<RoomDTO> findAllByThemerId(int themeId) {
+        List<RoomDTO> rooms = new ArrayList<>();
+
         String sql = "SELECT r.id, r.name, r.difficulty, r.price, r.theme_id, t.name AS themeName " +
                 "FROM rooms r " +
                 "JOIN themes t ON r.theme_id = t.id " +
                 "WHERE r.theme_id = ?";
-        ;
+
         try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
-            preparedStatement.setInt(1, escapeRoomId);
+            preparedStatement.setInt(1, themeId);
             ResultSet rs = preparedStatement.executeQuery();
 
-            if (rs.next()) {
-                return Optional.of(Room.fromDatabase(
+            while (rs.next()) {
+                rooms.add(
                         new RoomDTO(rs.getInt("id"),
                                 rs.getString("name"),
                                 rs.getString("difficulty"),
                                 rs.getDouble("price"),
                                 rs.getInt("theme_id"),
                                 rs.getString("themeName")
-                        )));
+                        ));
             }
-        } catch (Exception e) {
-            throw new DatabaseException("Error finding rooms by escaperoom id: " + e.getMessage());
+        } catch (SQLException e) {
+            throw new DatabaseException("Error finding rooms by theme id: " + e.getMessage());
         }
-        return Optional.empty();
+        return rooms;
     }
 }

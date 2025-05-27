@@ -10,13 +10,14 @@ import cat.itacademy.project.shared.domain.dtos.reservation.ReservationDTO;
 import cat.itacademy.project.shared.domain.dtos.room.RoomDTO;
 import cat.itacademy.project.shared.domain.dtos.theme.ThemeDTO;
 import cat.itacademy.project.shared.domain.exceptions.NotFoundException;
+import cat.itacademy.project.shared.domain.exceptions.PuzzleWithoutRoomException;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class Reservation {
 
-    private int id;
+    private Integer id;
     private Integer customerId;
     private Integer puzzleId;
     private double totalPrice;
@@ -125,25 +126,6 @@ public class Reservation {
         this.completionDate = completionDate;
     }
 
-    private double calculateTotalPrice(Integer puzzleId, PuzzleRepository puzzleRepo, RoomRepository roomRepo) { // ¡Cambiado a RoomRepository!
-        if (puzzleId == null) {
-            throw new IllegalArgumentException("Puzzle ID is required to calculate total price.");
-        }
-
-        PuzzleDTO puzzle = puzzleRepo.findById(puzzleId)
-                .orElseThrow(() -> new NotFoundException("Puzzle with ID " + puzzleId + " not found."));
-
-        double puzzlePrice = puzzle.price();
-
-        double roomPrice = 0.0;
-        if (puzzle.roomId() <= 0) {
-            RoomDTO room = roomRepo.findById(puzzle.roomId()) // Usar roomRepo
-                    .orElseThrow(() -> new NotFoundException("Room with ID " + puzzle.roomId() + " not found for puzzle."));
-            roomPrice = room.price();
-        }
-
-        return puzzlePrice + roomPrice;
-    }
 
     @Override
     public String toString() {
@@ -156,4 +138,46 @@ public class Reservation {
                 ", completionDate=" + completionDate +
                 '}';
     }
+
+//    private double calculateTotalPrice(Integer puzzleId, PuzzleRepository puzzleRepo, RoomRepository roomRepo) {
+//        PuzzleDTO puzzle = puzzleRepo.findById(puzzleId)
+//                .orElseThrow(() -> new NotFoundException("Puzzle with ID " + puzzleId + " not found."));
+//
+//        double puzzlePrice = puzzle.price();
+//        double roomPrice = 0.0;
+//
+//        if (puzzle.room_id() != 0) {
+//
+//            RoomDTO room = roomRepo.findById(puzzle.room_id())
+//                    .orElseThrow(() -> new NotFoundException("Room with ID " + puzzle.room_id() + " not found for puzzle."));
+//
+//            roomPrice = room.price();
+//        }
+//
+//        double finalTotalPrice = puzzlePrice + roomPrice;
+//
+//        return finalTotalPrice;
+//    }
+
+    private double calculateTotalPrice(Integer puzzleId, PuzzleRepository puzzleRepo, RoomRepository roomRepo) {
+        PuzzleDTO puzzle = puzzleRepo.findById(puzzleId)
+                .orElseThrow(() -> new NotFoundException("Puzzle with ID " + puzzleId + " not found."));
+
+        if (puzzle.room_id() == 0) {
+            throw new PuzzleWithoutRoomException("Puzzle with ID " + puzzle.id() + " does not have an assigned room.");
+        }
+
+        double puzzlePrice = puzzle.price();
+        double roomPrice = 0.0;
+
+        RoomDTO room = roomRepo.findById(puzzle.room_id())
+                .orElseThrow(() -> new NotFoundException("Room with ID " + puzzle.room_id() + " not found for puzzle."));
+
+        roomPrice = room.price();
+
+        double finalTotalPrice = puzzlePrice + roomPrice;
+
+        return finalTotalPrice;
+    }
+
 }

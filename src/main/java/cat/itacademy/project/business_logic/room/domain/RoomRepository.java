@@ -20,5 +20,5 @@ public interface RoomRepository {
 
     Optional<RoomDTO> findByName(String name);
 
-    Optional<Room> findAllByThemerId(int escapeRoomId);
+    List<RoomDTO> findAllByThemerId(int escapeRoomId);
 }

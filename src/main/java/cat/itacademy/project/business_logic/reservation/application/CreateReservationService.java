@@ -11,13 +11,16 @@ public class CreateReservationService {
     private final PuzzleRepository puzzleRepo;
     private final RoomRepository roomRepo;
 
-    public CreateReservationService(ReservationRepository reservationRepo, PuzzleRepository puzzleRepo, RoomRepository roomRepo) {
+    public CreateReservationService(ReservationRepository reservationRepo,
+                                    PuzzleRepository puzzleRepo,
+                                    RoomRepository roomRepo) {
         this.reservationRepo = reservationRepo;
         this.puzzleRepo = puzzleRepo;
         this.roomRepo = roomRepo;
     }
 
     public void execute(CreateReservationDTO request){
+
         Reservation newReservation = new Reservation(
                 request.customerId(),
                 request.puzzleId(),

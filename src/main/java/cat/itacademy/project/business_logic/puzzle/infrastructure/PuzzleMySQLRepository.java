@@ -24,15 +24,14 @@ public class PuzzleMySQLRepository implements PuzzleRepository {
 
     @Override
     public void create(Puzzle puzzle) {
-        String sql = "INSERT INTO puzzles (name, difficulty, roomId, answer, story, themeId, price) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO puzzles (name, room_id, answer, story, theme_id, price) VALUES (?, ?, ?, ?, ?, ?, ?)";
         try (var preparedStatement = connection.prepareStatement(sql)) {
             preparedStatement.setString(1, puzzle.getName());
-            preparedStatement.setString(2, puzzle.getDifficulty());
-            preparedStatement.setInt(3, puzzle.getRoomId());
-            preparedStatement.setString(4, puzzle.getAnswer());
-            preparedStatement.setString(5, puzzle.getStory());
-            preparedStatement.setInt(6, puzzle.getThemeId());
-            preparedStatement.setDouble(7, puzzle.getPrice());
+            preparedStatement.setInt(2, puzzle.getRoomId());
+            preparedStatement.setString(3, puzzle.getAnswer());
+            preparedStatement.setString(4, puzzle.getStory());
+            preparedStatement.setInt(5, puzzle.getThemeId());
+            preparedStatement.setDouble(6, puzzle.getPrice());
 
 
             preparedStatement.executeUpdate();
@@ -43,17 +42,16 @@ public class PuzzleMySQLRepository implements PuzzleRepository {
 
     @Override
     public void update(Puzzle puzzle) {
-        String sql = "UPDATE puzzles Set name = ?, difficulty = ?, roomId = ?, answer = ?, story = ?, themeId = ?, price = ? WHERE id = ?";
+        String sql = "UPDATE puzzles Set name = ?, room_id = ?, answer = ?, story = ?, theme_id = ?, price = ? WHERE id = ?";
 
         try (var preparedStatement = connection.prepareStatement(sql)) {
 
             preparedStatement.setString(1, puzzle.getName());
-            preparedStatement.setString(2, puzzle.getDifficulty());
-            preparedStatement.setInt(3, puzzle.getRoomId());
-            preparedStatement.setString(4, puzzle.getAnswer());
-            preparedStatement.setString(5, puzzle.getStory());
-            preparedStatement.setInt(6, puzzle.getThemeId());
-            preparedStatement.setDouble(7, puzzle.getPrice());
+            preparedStatement.setInt(2, puzzle.getRoomId());
+            preparedStatement.setString(3, puzzle.getAnswer());
+            preparedStatement.setString(4, puzzle.getStory());
+            preparedStatement.setInt(5, puzzle.getThemeId());
+            preparedStatement.setDouble(6, puzzle.getPrice());
 
             int rowUpdated = preparedStatement.executeUpdate();
 
@@ -89,7 +87,7 @@ public class PuzzleMySQLRepository implements PuzzleRepository {
 
     @Override
     public Optional<PuzzleDTO> findById(int id) {
-        String sql = "SELECT id, name, difficulty, roomId, answer, story, themeId, price FROM puzzles WHERE id = ?";
+        String sql = "SELECT id, name, room_id, answer, story, theme_id, price FROM puzzles WHERE id = ?";
         try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             preparedStatement.setInt(1, id);
             ResultSet rs = preparedStatement.executeQuery();
@@ -98,11 +96,10 @@ public class PuzzleMySQLRepository implements PuzzleRepository {
                         new PuzzleDTO(
                                 rs.getInt("id"),
                                 rs.getString("name"),
-                                rs.getString("difficulty"),
-                                rs.getInt("roomId"),
+                                rs.getInt("room_id"),
                                 rs.getString("answer"),
                                 rs.getString("story"),
-                                rs.getInt("themeId"),
+                                rs.getInt("theme_id"),
                                 rs.getDouble("price")
                         ));
 
@@ -124,11 +121,10 @@ public class PuzzleMySQLRepository implements PuzzleRepository {
                         new PuzzleDTO(
                                 rs.getInt("id"),
                                 rs.getString("name"),
-                                rs.getString("difficulty"),
-                                rs.getInt("roomId"),
+                                rs.getInt("room_id"),
                                 rs.getString("answer"),
                                 rs.getString("story"),
-                                rs.getInt("themeId"),
+                                rs.getInt("theme_id"),
                                 rs.getDouble("price")
 
                         ));
@@ -154,11 +150,10 @@ public class PuzzleMySQLRepository implements PuzzleRepository {
                         new PuzzleDTO(
                                 rs.getInt("id"),
                                 rs.getString("name"),
-                                rs.getString("difficulty"),
-                                rs.getInt("roomId"),
+                                rs.getInt("room_id"),
                                 rs.getString("answer"),
                                 rs.getString("story"),
-                                rs.getInt("themeId"),
+                                rs.getInt("theme_id"),
                                 rs.getDouble("price")
                         ));
             }

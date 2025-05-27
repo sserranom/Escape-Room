@@ -5,11 +5,13 @@ import cat.itacademy.project.frontend.Customer.ManageCustomerMenu;
 import cat.itacademy.project.frontend.Menu;
 import cat.itacademy.project.frontend.Room.ManageRoomMenu;
 import cat.itacademy.project.frontend.deco.ManageDecoMenu;
+import cat.itacademy.project.frontend.reservation.ManageReservationMenu;
 import cat.itacademy.project.frontend.shared.MenuCommand;
 import cat.itacademy.project.frontend.shared.MenuScanner;
 import cat.itacademy.project.shared.domain.dtos.customer.CustomerDTO;
 import cat.itacademy.project.shared.domain.dtos.deco.DecoDTO;
 import cat.itacademy.project.shared.domain.dtos.escape_room.EscapeRoomDTO;
+import cat.itacademy.project.shared.domain.dtos.reservation.ReservationDTO;
 import cat.itacademy.project.shared.domain.dtos.room.RoomDTO;
 import cat.itacademy.project.shared.domain.events.EventManager;
 
@@ -23,6 +25,7 @@ public class ManageEscapeRoomMenu extends MenuCommand<EscapeRoomDTO> {
     private DecoDTO decoDTO;
     private CustomerDTO customerDTO;
 
+
     public ManageEscapeRoomMenu(EscapeRoomDTO escapeRoomDTO) {
         this.escapeRoomDTO = escapeRoomDTO;
     }
@@ -32,6 +35,7 @@ public class ManageEscapeRoomMenu extends MenuCommand<EscapeRoomDTO> {
         this.roomDTO = roomDTO;
         this.decoDTO = decoDTO;
         this.customerDTO = customerDTO;
+
     }
 
     @Override
@@ -77,6 +81,11 @@ public class ManageEscapeRoomMenu extends MenuCommand<EscapeRoomDTO> {
                 ManageCustomerMenu manageCustomerMenu = new ManageCustomerMenu(customerDTO);
                 manageCustomerMenu.execute();
                 break;
+
+            case 12:
+                log("Manage Reservation: ");
+                ManageReservationMenu manageReservationMenu = new ManageReservationMenu();
+                manageReservationMenu.execute();
             default:
                 error("Invalid choice. Please try again.");
                 break;
@@ -96,6 +105,7 @@ public class ManageEscapeRoomMenu extends MenuCommand<EscapeRoomDTO> {
         log("9. Show inventory");
         log("10. Delete escape room");
         log("11. Manage Customers");
+        log("12. Manage Reservation");
 
         return MenuScanner.readInt("Please enter your choice: ");
     }

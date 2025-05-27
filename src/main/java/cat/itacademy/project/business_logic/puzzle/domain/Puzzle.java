@@ -14,10 +14,9 @@ public class Puzzle {
     private double price;
 
 
-    public Puzzle(int id, String name, String difficulty, int roomId, String answer, String story, int themeId, double price) {
+    public Puzzle(int id, String name, int roomId, String answer, String story, int themeId, double price) {
         this.id = id;
         this.name = name;
-        this.difficulty = difficulty;
         this.roomId = roomId;
         this.answer = answer;
         this.story = story;
@@ -40,11 +39,11 @@ public class Puzzle {
     }
 
     public static Puzzle fromDatabase(PuzzleDTO dto) {
-        return new Puzzle(dto.id(), dto.name(), dto.difficulty(), dto.roomId(), dto.answer(), dto.story(), dto.themeId(), dto.price());
+        return new Puzzle(dto.id(), dto.name(),  dto.room_id(), dto.answer(), dto.story(), dto.theme_id(), dto.price());
     }
 
     public PuzzleDTO toDTO() {
-        return new PuzzleDTO(id, name, difficulty, roomId, answer, story, themeId, price);
+        return new PuzzleDTO(id, name,  roomId, answer, story, themeId, price);
     }
 
     public int getId() {
