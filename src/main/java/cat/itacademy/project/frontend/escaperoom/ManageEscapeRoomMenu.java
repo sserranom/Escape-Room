@@ -6,10 +6,7 @@ import cat.itacademy.project.frontend.Menu;
 import cat.itacademy.project.frontend.shared.MenuCommand;
 import cat.itacademy.project.frontend.shared.MenuScanner;
 import cat.itacademy.project.frontend.theme.ManageThemeMenu;
-import cat.itacademy.project.shared.domain.dtos.customer.CustomerDTO;
-import cat.itacademy.project.shared.domain.dtos.deco.DecoDTO;
 import cat.itacademy.project.shared.domain.dtos.escape_room.EscapeRoomDTO;
-import cat.itacademy.project.shared.domain.dtos.room.RoomDTO;
 
 import java.util.Optional;
 
@@ -22,62 +19,60 @@ public class ManageEscapeRoomMenu extends MenuCommand<EscapeRoomDTO> {
     }
 
 
-
     @Override
     public Optional<EscapeRoomDTO> execute() {
-        int choice = getUserInput();
+        boolean isRunning = true;
+        while (isRunning) {
+            int choice = getUserInput();
 
-        switch (choice) {
-            case 1:
-                log("Escape room details:");
-                EscapeRoomPrinter.print(escapeRoomDTO);
-                break;
+            switch (choice) {
+                case 1:
+                    log("Escape room details:");
+                    EscapeRoomPrinter.print(escapeRoomDTO);
+                    break;
 
-            case 2:
-                log("Update escape room details:");
-                UpdateEscapeRoomMenu updateEscapeRoomMenu = new UpdateEscapeRoomMenu(escapeRoomDTO);
-                Optional<EscapeRoomDTO> updated = updateEscapeRoomMenu.execute();
-                updated.ifPresent(escapeRoomDTO -> {
-                    Menu.setActiveRoom(escapeRoomDTO);
-                    Menu.updateExistingRooms(escapeRoomDTO);
-                });
-                break;
-            case 3:
-                log("Manage Themes: ");
-                ManageThemeMenu manageThemeMenu = new ManageThemeMenu(escapeRoomDTO);
-                manageThemeMenu.execute();
-                break;
+                case 2:
+                    log("Update escape room details:");
+                    UpdateEscapeRoomMenu updateEscapeRoomMenu = new UpdateEscapeRoomMenu(escapeRoomDTO);
+                    Optional<EscapeRoomDTO> updated = updateEscapeRoomMenu.execute();
+                    updated.ifPresent(escapeRoomDTO -> {
+                        Menu.setActiveRoom(escapeRoomDTO);
+                        Menu.updateExistingRooms(escapeRoomDTO);
+                    });
+                    break;
+                case 3:
+                    log("Manage Themes: ");
+                    ManageThemeMenu manageThemeMenu = new ManageThemeMenu(escapeRoomDTO);
+                    manageThemeMenu.execute();
+                    break;
 
-//            case 3:
-//                log("Manage rooms: ");
-//                ManageRoomMenu manageRoomMenu = new ManageRoomMenu(roomDTO);
-//                manageRoomMenu.execute();
-//                break;
+                case 9:
+                    log("Show inventory:");
+                    ListEscapeRoomInventoryMenu listEscapeRoomInventoryMenu = new ListEscapeRoomInventoryMenu(escapeRoomDTO);
+                    break;
 
-//            case 4:
-//                log("Manage Decorative Items: ");
-//                ManageDecoMenu manageDecoMenu = new ManageDecoMenu();
-//                manageDecoMenu.execute();
-//                break;
-            case 9:
-                log("Show inventory:");
-                ListEscapeRoomInventoryMenu listEscapeRoomInventoryMenu = new ListEscapeRoomInventoryMenu(escapeRoomDTO);
+                case 10:
+                    log("Delete escape room:");
+                    DeleteEscapeRoomMenu deleteEscapeRoomMenu = new DeleteEscapeRoomMenu(escapeRoomDTO);
+                    deleteEscapeRoomMenu.execute();
+                    break;
 
-            case 10:
-                log("Delete escape room:");
-                DeleteEscapeRoomMenu deleteEscapeRoomMenu = new DeleteEscapeRoomMenu(escapeRoomDTO);
-                deleteEscapeRoomMenu.execute();
-                break;
-
-            case 11:
-                log("Manage Customers: ");
-                ManageCustomerMenu manageCustomerMenu = new ManageCustomerMenu();
-                manageCustomerMenu.execute();
-                break;
-            default:
-                error("Invalid choice. Please try again.");
-                break;
+                case 11:
+                    log("Manage Customers: ");
+                    ManageCustomerMenu manageCustomerMenu = new ManageCustomerMenu();
+                    manageCustomerMenu.execute();
+                    break;
+                case 0:
+                    log("Exiting to main menu.");
+                    Menu.setActiveRoom(null);
+                    isRunning = false;
+                    break;
+                default:
+                    error("Invalid choice. Please try again.");
+                    break;
+            }
         }
+
         return Optional.of(escapeRoomDTO);
     }
 

@@ -1,6 +1,7 @@
 package cat.itacademy.project.frontend.theme;
 
 import cat.itacademy.project.api.theme.FindAllThemesController;
+import cat.itacademy.project.frontend.Menu;
 import cat.itacademy.project.frontend.shared.MenuCommand;
 import cat.itacademy.project.shared.domain.dtos.theme.ThemeDTO;
 
@@ -13,7 +14,7 @@ public class FindAllThemesMenu extends MenuCommand<Void> {
     public Optional<Void> execute() {
 
         FindAllThemesController controller = new FindAllThemesController();
-        Optional<List<ThemeDTO>> result = controller.execute();
+        Optional<List<ThemeDTO>> result = controller.execute(Menu.activeRoom().id());
         if (result.get().isEmpty()) {
             info("No themes found.");
         } else {
