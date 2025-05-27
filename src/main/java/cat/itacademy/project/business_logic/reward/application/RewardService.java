@@ -20,7 +20,6 @@ public class RewardService {
 
         EmailSender.send(recipient, description, deliveryDate);
 
-
         rewardRepository.save(reward);
     }
 }

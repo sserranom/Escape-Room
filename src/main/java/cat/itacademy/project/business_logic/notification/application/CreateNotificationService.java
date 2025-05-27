@@ -11,7 +11,6 @@ public class CreateNotificationService {
         this.notificationRepository = notificationRepository;
     }
 
-
     public void execute(CreateNotificationDTO notification) {
         notificationRepository.create(notification);
     }
