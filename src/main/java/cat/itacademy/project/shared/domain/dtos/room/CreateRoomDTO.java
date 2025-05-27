@@ -1,12 +1,13 @@
 package cat.itacademy.project.shared.domain.dtos.room;
 
+import cat.itacademy.project.shared.domain.dtos.dto;
 import cat.itacademy.project.shared.domain.exceptions.EmptyFieldException;
 import cat.itacademy.project.shared.domain.exceptions.InvalidDificultyException;
 import cat.itacademy.project.shared.domain.exceptions.InvalidPriceException;
 
 import java.util.stream.Stream;
 
-public record CreateRoomDTO(String name, double price, String difficulty, int themeId) {
+public record CreateRoomDTO(String name, double price, String difficulty, int themeId) implements dto {
     public CreateRoomDTO {
         if (name == null || name.isBlank()) {
             throw new EmptyFieldException("Name Cannot be null or empty");

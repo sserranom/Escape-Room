@@ -9,7 +9,8 @@ public class Messenger {
 
 
     public Messenger(EventManager publisher) {
-        this.publisher = new EventManager(List.of("customer", "order", "product"));
+        this.publisher = EventManager.getInstance();
+        this.publisher.registerTopics(List.of("customer", "order", "product"));
     }
 
     public void subscribe(String topic, EventListener listener) {

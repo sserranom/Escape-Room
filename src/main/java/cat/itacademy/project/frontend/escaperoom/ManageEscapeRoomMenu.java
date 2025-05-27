@@ -18,7 +18,6 @@ import java.util.Optional;
 
 public class ManageEscapeRoomMenu extends MenuCommand<EscapeRoomDTO> {
     private final EscapeRoomDTO escapeRoomDTO;
-    private final EventManager eventManager = new EventManager(List.of("puzzle.published", "escape_room.updated"));
     private RoomDTO roomDTO;
     private DecoDTO decoDTO;
     private CustomerDTO customerDTO;
@@ -46,7 +45,7 @@ public class ManageEscapeRoomMenu extends MenuCommand<EscapeRoomDTO> {
 
             case 2:
                 log("Update escape room details:");
-                UpdateEscapeRoomMenu updateEscapeRoomMenu = new UpdateEscapeRoomMenu(escapeRoomDTO, eventManager);
+                UpdateEscapeRoomMenu updateEscapeRoomMenu = new UpdateEscapeRoomMenu(escapeRoomDTO);
                 Optional<EscapeRoomDTO> updated = updateEscapeRoomMenu.execute();
                 updated.ifPresent(escapeRoomDTO -> {
                     Menu.setActiveRoom(escapeRoomDTO);
