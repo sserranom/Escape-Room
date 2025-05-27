@@ -11,9 +11,7 @@ import cat.itacademy.project.shared.domain.dtos.customer.CustomerDTO;
 import cat.itacademy.project.shared.domain.dtos.deco.DecoDTO;
 import cat.itacademy.project.shared.domain.dtos.escape_room.EscapeRoomDTO;
 import cat.itacademy.project.shared.domain.dtos.room.RoomDTO;
-import cat.itacademy.project.shared.domain.events.EventManager;
 
-import java.util.List;
 import java.util.Optional;
 
 public class ManageEscapeRoomMenu extends MenuCommand<EscapeRoomDTO> {

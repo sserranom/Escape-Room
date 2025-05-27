@@ -5,7 +5,6 @@ import cat.itacademy.project.business_logic.escaperoom.domain.EscapeRoomReposito
 import cat.itacademy.project.business_logic.escaperoom.infrastructure.EscapeRoomMySQLRepository;
 import cat.itacademy.project.shared.domain.dtos.escape_room.EscapeRoomDTO;
 import cat.itacademy.project.shared.domain.dtos.escape_room.UpdateEscapeRoomDTO;
-import cat.itacademy.project.shared.domain.events.EventManager;
 import cat.itacademy.project.shared.infrastructure.database.mysql.MySqlConnection;
 
 import java.util.Optional;

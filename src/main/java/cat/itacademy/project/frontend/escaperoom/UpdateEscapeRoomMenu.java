@@ -5,7 +5,6 @@ import cat.itacademy.project.frontend.shared.MenuCommand;
 import cat.itacademy.project.frontend.shared.MenuScanner;
 import cat.itacademy.project.shared.domain.dtos.escape_room.EscapeRoomDTO;
 import cat.itacademy.project.shared.domain.dtos.escape_room.UpdateEscapeRoomDTO;
-import cat.itacademy.project.shared.domain.events.EventManager;
 
 import java.util.Optional;
 
