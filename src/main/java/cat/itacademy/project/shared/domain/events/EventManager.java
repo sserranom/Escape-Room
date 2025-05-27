@@ -27,7 +27,6 @@ public class EventManager {
         return instance;
     }
 
-    // Register topics
     public void registerTopics(List<String> topics) {
         for (String topic : topics) {
             if (!listeners.containsKey(topic)) {
