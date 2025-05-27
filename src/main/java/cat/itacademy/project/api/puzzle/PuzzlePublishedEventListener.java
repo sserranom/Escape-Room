@@ -6,15 +6,17 @@ import cat.itacademy.project.shared.domain.dtos.puzzle.PuzzleDTO;
 import cat.itacademy.project.shared.domain.events.EventListener;
 
 public class PuzzlePublishedEventListener implements EventListener {
-    NotificationController controller = new NotificationController();
+    private NotificationController notificationController;
+
+    public PuzzlePublishedEventListener() {
+        this.notificationController = new NotificationController();
+    }
+
     @Override
     public void update(String topic, DTO data) {
         PuzzleDTO puzzleDTO = (PuzzleDTO) data;
-        controller.send(
-               puzzleDTO
-        );
+        notificationController.send(puzzleDTO);
         System.out.println("Puzzle published: " + puzzleDTO);
+
     }
-
-
 }

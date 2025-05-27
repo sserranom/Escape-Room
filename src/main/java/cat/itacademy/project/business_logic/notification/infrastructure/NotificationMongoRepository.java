@@ -22,7 +22,7 @@ public class NotificationMongoRepository implements NotificationRepository {
 
 
     public NotificationMongoRepository(MongoDatabase database) {
-        this.collection = database.getCollection("rewards");
+        this.collection = database.getCollection("notifications");
     }
 
     @Override
