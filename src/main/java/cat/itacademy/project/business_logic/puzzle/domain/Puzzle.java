@@ -26,6 +26,7 @@ public class Puzzle {
 
     public Puzzle(String name, int roomId, String answer, String story, int themeId, double price) {
         this.name = name;
+        this.difficulty = difficulty;
         this.roomId = roomId;
         this.answer = answer;
         this.story = story;
