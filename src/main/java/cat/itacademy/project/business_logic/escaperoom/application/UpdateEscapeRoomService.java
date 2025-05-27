@@ -2,7 +2,6 @@ package cat.itacademy.project.business_logic.escaperoom.application;
 
 import cat.itacademy.project.business_logic.escaperoom.domain.EscapeRoom;
 import cat.itacademy.project.business_logic.escaperoom.domain.EscapeRoomRepository;
-import cat.itacademy.project.shared.domain.Command;
 import cat.itacademy.project.shared.domain.dtos.escape_room.EscapeRoomDTO;
 import cat.itacademy.project.shared.domain.dtos.escape_room.UpdateEscapeRoomDTO;
 import cat.itacademy.project.shared.domain.exceptions.AlreadyExistsException;
@@ -11,17 +10,15 @@ import cat.itacademy.project.shared.domain.exceptions.NotFoundException;
 
 import java.util.Optional;
 
-public class UpdateEscapeRoomService implements Command<EscapeRoomDTO> {
-    private final UpdateEscapeRoomDTO request;
+public class UpdateEscapeRoomService {
     private final EscapeRoomRepository repo;
 
 
-    public UpdateEscapeRoomService(UpdateEscapeRoomDTO request, EscapeRoomRepository repo) {
-        this.request = request;
+    public UpdateEscapeRoomService(EscapeRoomRepository repo) {
         this.repo = repo;
     }
 
-    public Optional<EscapeRoomDTO> execute() {
+    public Optional<EscapeRoomDTO> execute(UpdateEscapeRoomDTO request) {
         if (request.name() == null || request.name().isBlank()) {
             throw new EmptyFieldException("Field 'name' cannot be empty.");
         }

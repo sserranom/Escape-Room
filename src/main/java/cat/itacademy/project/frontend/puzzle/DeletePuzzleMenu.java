@@ -13,8 +13,8 @@ public class DeletePuzzleMenu extends MenuCommand<Void> {
     public Optional<Void> execute() {
         try {
             int idToDelete = MenuScanner.readInt("Enter the ID of the puzzle to delete: ");
-            DeletePuzzleController controller = new DeletePuzzleController(idToDelete);
-            controller.execute();
+            DeletePuzzleController controller = new DeletePuzzleController();
+            controller.execute(idToDelete);
         } catch (CustomException e) {
             error(e.getMessage());
         }

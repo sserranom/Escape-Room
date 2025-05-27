@@ -21,8 +21,8 @@ public class CreateEscapeRoomMenu extends MenuCommand<EscapeRoomDTO> {
         info("Creating a new escape room...");
         CreateEscapeRoomDTO dto = getUserInfo();
         try {
-            CreateEscapeRoomController controller = new CreateEscapeRoomController(dto);
-            created = controller.execute();
+            CreateEscapeRoomController controller = new CreateEscapeRoomController();
+            created = controller.execute(dto);
             info("Escape room created successfully.");
         } catch (AlreadyExistsException e) {
             error(e.getMessage());

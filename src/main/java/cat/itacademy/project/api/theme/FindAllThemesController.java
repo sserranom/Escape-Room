@@ -3,14 +3,13 @@ package cat.itacademy.project.api.theme;
 import cat.itacademy.project.business_logic.theme.application.FindAllThemesService;
 import cat.itacademy.project.business_logic.theme.domain.ThemeRepository;
 import cat.itacademy.project.business_logic.theme.infrastructure.ThemeMySQLRepository;
-import cat.itacademy.project.shared.domain.Command;
 import cat.itacademy.project.shared.domain.dtos.theme.ThemeDTO;
 import cat.itacademy.project.shared.infrastructure.database.mysql.MySqlConnection;
 
 import java.util.List;
 import java.util.Optional;
 
-public class FindAllThemesController implements Command<List<ThemeDTO>> {
+public class FindAllThemesController {
     private final FindAllThemesService service;
 
     public FindAllThemesController() {
@@ -19,7 +18,6 @@ public class FindAllThemesController implements Command<List<ThemeDTO>> {
     }
 
 
-    @Override
     public Optional<List<ThemeDTO>> execute() {
 
         List<ThemeDTO> themes = service.findAll();

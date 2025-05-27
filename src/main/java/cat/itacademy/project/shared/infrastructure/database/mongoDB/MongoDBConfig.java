@@ -1,4 +1,4 @@
-package cat.itacademy.project.shared.infrastructure.database.mongoDB;
+package cat.itacademy.project.shared.infrastructure.database.mongodb;
 
 import io.github.cdimascio.dotenv.Dotenv;
 

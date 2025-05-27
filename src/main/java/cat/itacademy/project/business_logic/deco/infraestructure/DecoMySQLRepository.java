@@ -2,10 +2,8 @@ package cat.itacademy.project.business_logic.deco.infraestructure;
 
 import cat.itacademy.project.business_logic.deco.domain.Deco;
 import cat.itacademy.project.business_logic.deco.domain.DecoRepository;
-import cat.itacademy.project.business_logic.room.domain.Room;
 import cat.itacademy.project.shared.domain.dtos.deco.CreateDecoDTO;
 import cat.itacademy.project.shared.domain.dtos.deco.DecoDTO;
-import cat.itacademy.project.shared.domain.dtos.room.RoomDTO;
 import cat.itacademy.project.shared.domain.exceptions.DatabaseException;
 import cat.itacademy.project.shared.domain.exceptions.NotFoundException;
 

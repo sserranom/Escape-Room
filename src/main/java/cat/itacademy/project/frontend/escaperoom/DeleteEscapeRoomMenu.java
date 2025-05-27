@@ -17,8 +17,8 @@ public class DeleteEscapeRoomMenu extends MenuCommand<Void> {
     @Override
     public Optional<Void> execute() {
         try {
-            DeleteEscapeRoomController controller = new DeleteEscapeRoomController(escapeRoomDTO.id());
-            controller.execute();
+            DeleteEscapeRoomController controller = new DeleteEscapeRoomController();
+            controller.execute(escapeRoomDTO.id());
         } catch (CustomException e) {
             error(e.getMessage());
         }

@@ -1,11 +1,8 @@
 package cat.itacademy.project.frontend.deco;
 
 import cat.itacademy.project.api.deco.FindAllDecoController;
-import cat.itacademy.project.api.room.FindAllRoomsController;
-import cat.itacademy.project.frontend.Room.RoomPrinter;
 import cat.itacademy.project.frontend.shared.MenuCommand;
 import cat.itacademy.project.shared.domain.dtos.deco.DecoDTO;
-import cat.itacademy.project.shared.domain.dtos.room.RoomDTO;
 
 import java.util.List;
 import java.util.Optional;

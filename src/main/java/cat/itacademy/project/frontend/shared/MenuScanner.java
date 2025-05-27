@@ -2,6 +2,9 @@ package cat.itacademy.project.frontend.shared;
 
 import cat.itacademy.project.shared.domain.exceptions.EmptyFieldException;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
 public class MenuScanner {
@@ -39,6 +42,46 @@ public class MenuScanner {
         scanner.nextLine();
         return value;
         //return Double.parseDouble(scanner.nextLine());
+    }
+
+    public static boolean readBoolean(String message) {
+        System.out.print(message + " (yes/no, true/false, 1/0): ");
+        while (true) {
+            String input = scanner.nextLine().trim().toLowerCase();
+            switch (input) {
+                case "true":
+                case "yes":
+                case "y":
+                case "1":
+                    return true;
+                case "false":
+                case "no":
+                case "n":
+                case "0":
+                    return false;
+                default:
+                    System.out.print("Invalid input. Please enter yes/no, true/false, or 1/0: ");
+            }
+        }
+    }
+
+    public static LocalDate readDate(String message) {
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        LocalDate date = null;
+        String input;
+
+        while (date == null) {
+            System.out.print(message);
+            input = scanner.nextLine().trim();
+
+            try {
+                date = LocalDate.parse(input, formatter);
+            } catch (DateTimeParseException e) {
+                System.out.println("Invalid date format or value. Please enter the date in 'dd/MM/yyyy' format (e.g., 25/12/2024).");
+            }
+        }
+        return date;
     }
 
     public static void close() {

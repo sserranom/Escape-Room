@@ -22,15 +22,15 @@ public class CreatePuzzleMenu extends MenuCommand<Void> {
     public Optional<Void> execute() {
         CreatePuzzleDTO dto = getUserInfo();
 
-        CreatePuzzleController controller = new CreatePuzzleController(dto);
-        controller.execute();
+        CreatePuzzleController controller = new CreatePuzzleController();
+        controller.execute(dto);
         info("Puzzle created successfully.");
         return Optional.empty();
     }
 
     private CreatePuzzleDTO getUserInfo() {
 
-        while (name == null || difficulty ==null || roomId <= 0 || answer == null || story == null || themeId <= 0 || price <= 0) {
+        while (name == null || difficulty == null || roomId <= 0 || answer == null || story == null || themeId <= 0 || price <= 0) {
             try {
                 name = MenuScanner.readString("Enter the name of the puzzle: ");
                 difficulty = MenuScanner.readString("Enter the difficulty of the puzzle: ");

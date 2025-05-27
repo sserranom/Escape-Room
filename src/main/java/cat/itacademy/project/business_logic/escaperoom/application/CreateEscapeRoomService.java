@@ -2,28 +2,26 @@ package cat.itacademy.project.business_logic.escaperoom.application;
 
 import cat.itacademy.project.business_logic.escaperoom.domain.EscapeRoom;
 import cat.itacademy.project.business_logic.escaperoom.domain.EscapeRoomRepository;
-import cat.itacademy.project.shared.domain.Command;
 import cat.itacademy.project.shared.domain.dtos.escape_room.CreateEscapeRoomDTO;
 import cat.itacademy.project.shared.domain.dtos.escape_room.EscapeRoomDTO;
 import cat.itacademy.project.shared.domain.exceptions.AlreadyExistsException;
 import cat.itacademy.project.shared.domain.exceptions.NotFoundException;
-import cat.itacademy.project.shared.events.EventManager;
 
 import java.util.Optional;
 
-public final class CreateEscapeRoomService implements Command<EscapeRoomDTO> {
-    private final EscapeRoom escapeRoom;
+public final class CreateEscapeRoomService {
     private final EscapeRoomRepository repo;
-//    private final EventManager events;
+    private EscapeRoom escapeRoom;
 
-    public CreateEscapeRoomService(CreateEscapeRoomDTO request, EscapeRoomRepository repo) {
-        this.escapeRoom = EscapeRoom.create(request);
+    public CreateEscapeRoomService(EscapeRoomRepository repo) {
+
         this.repo = repo;
     }
 
-    public Optional<EscapeRoomDTO> execute() {
+    public Optional<EscapeRoomDTO> execute(CreateEscapeRoomDTO request) {
+        this.escapeRoom = EscapeRoom.create(request);
         ensureDoesNotExist();
-        repo.create(new CreateEscapeRoomDTO(escapeRoom.getName(),escapeRoom.getUrl()));
+        repo.create(new CreateEscapeRoomDTO(escapeRoom.getName(), escapeRoom.getUrl()));
         final EscapeRoom created = getEscapeRoom();
         return Optional.of(created.toDTO());
     }

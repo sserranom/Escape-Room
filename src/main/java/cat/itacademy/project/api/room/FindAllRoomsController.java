@@ -1,17 +1,15 @@
 package cat.itacademy.project.api.room;
 
 import cat.itacademy.project.business_logic.room.application.FindAllRoomService;
-import cat.itacademy.project.business_logic.room.domain.Room;
 import cat.itacademy.project.business_logic.room.domain.RoomRepository;
 import cat.itacademy.project.business_logic.room.infraestructure.RoomMySQLRepository;
-import cat.itacademy.project.frontend.shared.MenuCommand;
 import cat.itacademy.project.shared.domain.dtos.room.RoomDTO;
 import cat.itacademy.project.shared.infrastructure.database.mysql.MySqlConnection;
 
 import java.util.List;
 import java.util.Optional;
 
-public class FindAllRoomsController extends MenuCommand<List<RoomDTO>> {
+public class FindAllRoomsController {
     private final FindAllRoomService service;
 
     public FindAllRoomsController() {
@@ -19,7 +17,6 @@ public class FindAllRoomsController extends MenuCommand<List<RoomDTO>> {
         this.service = new FindAllRoomService(repo);
     }
 
-    @Override
     public Optional<List<RoomDTO>> execute() {
         List<RoomDTO> rooms = service.findAll();
 

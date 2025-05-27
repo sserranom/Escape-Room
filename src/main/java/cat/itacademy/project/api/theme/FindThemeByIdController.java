@@ -3,28 +3,23 @@ package cat.itacademy.project.api.theme;
 import cat.itacademy.project.business_logic.theme.application.FindThemeByIdService;
 import cat.itacademy.project.business_logic.theme.domain.ThemeRepository;
 import cat.itacademy.project.business_logic.theme.infrastructure.ThemeMySQLRepository;
-import cat.itacademy.project.frontend.shared.MenuCommand;
 import cat.itacademy.project.shared.domain.dtos.theme.ThemeDTO;
 import cat.itacademy.project.shared.infrastructure.database.mysql.MySqlConnection;
 
 import java.util.Optional;
 
-public class FindThemeByIdController extends MenuCommand<Optional<ThemeDTO>>{
+public class FindThemeByIdController {
     private final FindThemeByIdService service;
-    private final int idToFind;
 
-    public FindThemeByIdController(int idToFind) {
+    public FindThemeByIdController() {
         ThemeRepository repo = new ThemeMySQLRepository(MySqlConnection.getInstance());
-        this.service = new FindThemeByIdService(idToFind, repo);
-        this.idToFind = idToFind;
+        this.service = new FindThemeByIdService(repo);
     }
 
-    @Override
-    public Optional<Optional<ThemeDTO>> execute() {
+    public Optional<Optional<ThemeDTO>> execute(int idToFind) {
         try {
-            return Optional.ofNullable(service.execute());
+            return Optional.ofNullable(service.execute(idToFind));
         } catch (Exception e) {
-            error("An unexpected error ocurred: " + e.getMessage());
             return Optional.empty();
         }
     }

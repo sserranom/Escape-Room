@@ -12,19 +12,19 @@ public class UpdatePuzzleMenu extends MenuCommand<Void> {
     public Optional<Void> execute() {
         try {
             UpdatePuzzleDTO dto = getInfo();
-            UpdatePuzzleController controller = new UpdatePuzzleController(dto);
-            controller.execute();
+            UpdatePuzzleController controller = new UpdatePuzzleController();
+            controller.execute(dto);
             info("Puzzle with name '" + dto.nameToUpdate() + "' updated successfully.");
 
-        }catch (IllegalArgumentException e){
+        } catch (IllegalArgumentException e) {
             error("Error: " + e.getMessage());
-        }catch (Exception e){
+        } catch (Exception e) {
             error("An unexpected error occurred: " + e.getMessage());
         }
         return Optional.empty();
     }
 
-    private UpdatePuzzleDTO getInfo(){
+    private UpdatePuzzleDTO getInfo() {
         String nameToUpdate = MenuScanner.readString("Enter the name of the room to update: ");
         String newName = MenuScanner.readString("Enter the new name: ");
         String newDifficulty = MenuScanner.readString("Enter the new difficulty: ");

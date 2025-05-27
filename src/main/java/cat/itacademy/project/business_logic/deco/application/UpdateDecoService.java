@@ -2,7 +2,6 @@ package cat.itacademy.project.business_logic.deco.application;
 
 import cat.itacademy.project.business_logic.deco.domain.Deco;
 import cat.itacademy.project.business_logic.deco.domain.DecoRepository;
-import cat.itacademy.project.shared.domain.Command;
 import cat.itacademy.project.shared.domain.dtos.deco.DecoDTO;
 import cat.itacademy.project.shared.domain.dtos.deco.UpdateDecoDTO;
 import cat.itacademy.project.shared.domain.exceptions.EmptyFieldException;
@@ -10,7 +9,7 @@ import cat.itacademy.project.shared.domain.exceptions.NotFoundException;
 
 import java.util.Optional;
 
-public class UpdateDecoService implements Command<DecoDTO> {
+public class UpdateDecoService {
 
     private final UpdateDecoDTO request;
     private final DecoRepository repo;
@@ -20,7 +19,6 @@ public class UpdateDecoService implements Command<DecoDTO> {
         this.repo = repo;
     }
 
-    @Override
     public Optional<DecoDTO> execute() {
         if (request.name() == null || request.name().isBlank()) {
             throw new EmptyFieldException("Field 'name' cannot be empty.");
@@ -35,15 +33,15 @@ public class UpdateDecoService implements Command<DecoDTO> {
         Deco deco = Deco.fromDatabase(existingOptional.get());
 
         deco.setName(
-                request.name().isBlank()? deco.getName() : request.name()
+                request.name().isBlank() ? deco.getName() : request.name()
         );
 
         deco.setDescription(
-                request.description().isBlank()? deco.getDescription() : request.description()
+                request.description().isBlank() ? deco.getDescription() : request.description()
         );
 
         deco.setType(
-                request.type().isBlank()? deco.getType() : request.type()
+                request.type().isBlank() ? deco.getType() : request.type()
         );
 
         deco.setEscapeRoomId(
@@ -51,7 +49,7 @@ public class UpdateDecoService implements Command<DecoDTO> {
         );
 
         deco.setPrice(
-                request.price() > 0 && request.price() != deco.getPrice()? request.price() : deco.getPrice()
+                request.price() > 0 && request.price() != deco.getPrice() ? request.price() : deco.getPrice()
         );
 
 //        Deco decoToUpdate = Deco.fromDatabase(existingOptional.get());

@@ -1,20 +1,23 @@
-package cat.itacademy.project.shared.infrastructure.database.mongoDB;
+package cat.itacademy.project.shared.infrastructure.database.mongodb;
 
+
+import com.mongodb.client.MongoClient;
+import com.mongodb.client.MongoClients;
 
 public class MongoDBConnection {
 
     private static final String CONNECTION_STRING = MongoDBConfig.getString();
-    private static volatile com.mongodb.client.MongoClient instance;
+    private static volatile MongoClient instance;
 
     private MongoDBConnection() {
     }
 
-    private static com.mongodb.client.MongoClient createConnection() {
-        return com.mongodb.client.MongoClients.create(MongoDBConnection.CONNECTION_STRING);
+    private static MongoClient createConnection() {
+        return MongoClients.create(MongoDBConnection.CONNECTION_STRING);
     }
 
-    public static com.mongodb.client.MongoClient getInstance() {
-        com.mongodb.client.MongoClient result = instance;
+    public static MongoClient getInstance() {
+        MongoClient result = instance;
         if (result != null) {
             return result;
         }

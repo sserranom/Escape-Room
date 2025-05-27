@@ -12,8 +12,8 @@ public class UpdateRoomMenu extends MenuCommand<Void> {
     public Optional<Void> execute() {
         try {
             UpdateRoomDTO dto = getInfo();
-            UpdateRoomController controller = new UpdateRoomController(dto);
-            controller.execute();
+            UpdateRoomController controller = new UpdateRoomController();
+            controller.execute(dto);
             info("Room with name '" + dto.nameToUpdate() + "' updated successfully.");
 
         } catch (IllegalArgumentException e) {
@@ -37,7 +37,7 @@ public class UpdateRoomMenu extends MenuCommand<Void> {
 
         }
         double newPrice = MenuScanner.readDouble("Enter the new Price: ");
-        int newThemeId= MenuScanner.readInt("Enter the new ID of the theme: ");
+        int newThemeId = MenuScanner.readInt("Enter the new ID of the theme: ");
 
         return new UpdateRoomDTO(nameToUpdate, newName.isEmpty() ? null : newName, newDifficulty, newPrice <= 0 ? null : newPrice, newThemeId <= 0 ? null : newThemeId);
     }

@@ -12,23 +12,19 @@ import java.util.List;
 import java.util.Optional;
 
 public class Menu extends MenuCommand<Void> {
-    private final CreateEscapeRoomMenu createEscapeRoomMenu = new CreateEscapeRoomMenu();
-
-    FindAllEscapeRoomsMenu findAllEscapeRoomsMenu = new FindAllEscapeRoomsMenu();
-    private static EscapeRoomDTO activeRoom;
     private static final List<EscapeRoomDTO> existingRooms = new ArrayList<>();
-    private void getExistingEscapeRooms() {
-        Optional<List<EscapeRoomDTO>> response = findAllEscapeRoomsMenu.execute();
-        response.ifPresent(existingRooms::addAll);
-
-    }
+    private static EscapeRoomDTO activeRoom;
+    private final CreateEscapeRoomMenu createEscapeRoomMenu = new CreateEscapeRoomMenu();
+    FindAllEscapeRoomsMenu findAllEscapeRoomsMenu = new FindAllEscapeRoomsMenu();
 
     public static void addRoom(EscapeRoomDTO escapeRoomDTO) {
         existingRooms.add(escapeRoomDTO);
     }
+
     public static void setActiveRoom(EscapeRoomDTO dto) {
         activeRoom = dto;
     }
+
     public static void updateExistingRooms(EscapeRoomDTO escapeRoomDTO) {
         existingRooms.forEach(room -> {
             if (room.id() == escapeRoomDTO.id()) {
@@ -36,6 +32,13 @@ public class Menu extends MenuCommand<Void> {
             }
         });
     }
+
+    private void getExistingEscapeRooms() {
+        Optional<List<EscapeRoomDTO>> response = findAllEscapeRoomsMenu.execute();
+        response.ifPresent(existingRooms::addAll);
+
+    }
+
     public Optional<Void> execute() {
         setupCurrentRoom();
         while (true) {

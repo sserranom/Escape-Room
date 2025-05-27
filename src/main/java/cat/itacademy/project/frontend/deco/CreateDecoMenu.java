@@ -1,11 +1,9 @@
 package cat.itacademy.project.frontend.deco;
 
 import cat.itacademy.project.api.deco.CreateDecoController;
-import cat.itacademy.project.api.room.CreateRoomController;
 import cat.itacademy.project.frontend.shared.MenuCommand;
 import cat.itacademy.project.frontend.shared.MenuScanner;
 import cat.itacademy.project.shared.domain.dtos.deco.CreateDecoDTO;
-import cat.itacademy.project.shared.domain.dtos.room.CreateRoomDTO;
 import cat.itacademy.project.shared.domain.exceptions.EmptyFieldException;
 import cat.itacademy.project.shared.domain.exceptions.InvalidDificultyException;
 
@@ -29,7 +27,7 @@ public class CreateDecoMenu extends MenuCommand<Void> {
 
     private CreateDecoDTO getUserInfo() {
 
-        while (name == null || description == null || escapeRoomId <= 0 || price <= 0 ) {
+        while (name == null || description == null || escapeRoomId <= 0 || price <= 0) {
             try {
                 name = MenuScanner.readString("Enter the name of the Decorative Item: ");
                 description = MenuScanner.readString("Enter the descripcion of the decorative item: ");
