@@ -16,6 +16,7 @@ public class UpdatePuzzleController {
     }
 
     public void execute(UpdatePuzzleDTO updatePuzzleDTO) {
+
         service.execute(updatePuzzleDTO);
 
 

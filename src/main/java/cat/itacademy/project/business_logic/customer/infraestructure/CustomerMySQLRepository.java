@@ -50,7 +50,7 @@ public class CustomerMySQLRepository implements CustomerRepository {
 
     @Override
     public Optional<CustomerDTO> findById(int id) {
-        String sql = "SELECT id, name, email, is_subscribed FROM custumers WHERE id = ?";
+        String sql = "SELECT id, name, email, is_subscribed FROM customers WHERE id = ?";
         try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             preparedStatement.setInt(1, id);
             ResultSet rs = preparedStatement.executeQuery();
@@ -98,7 +98,7 @@ public class CustomerMySQLRepository implements CustomerRepository {
                 ));
             }
         } catch (Exception e) {
-            throw new DatabaseException("Error while findind customer: " + e.getMessage());
+            throw new DatabaseException("Error while finding customer: " + e.getMessage());
         }
         return Optional.empty();
     }

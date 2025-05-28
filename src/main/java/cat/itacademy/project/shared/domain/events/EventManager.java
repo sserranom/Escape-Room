@@ -1,30 +1,53 @@
 package cat.itacademy.project.shared.domain.events;
 
-import cat.itacademy.project.shared.domain.dtos.dto;
+import cat.itacademy.project.shared.domain.dtos.DTO;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class EventManager {
-    private final Map<String, List<EventListener>> listeners = new HashMap<>();
+    private static final Map<String, List<EventListener>> listeners = new ConcurrentHashMap<>();
+    private static volatile EventManager instance;
 
-    public EventManager(List<String> topics) {
+    // Private constructor to prevent direct instantiation
+    private EventManager() {
+    }
+
+    // Thread-safe singleton implementation with double-checked locking
+    public static EventManager getInstance() {
+        if (instance == null) {
+            synchronized (EventManager.class) {
+                if (instance == null) {
+                    instance = new EventManager();
+                }
+            }
+        }
+        return instance;
+    }
+
+    public void registerTopics(List<String> topics) {
         for (String topic : topics) {
-            listeners.put(topic, new ArrayList<>());
+            if (!listeners.containsKey(topic)) {
+                listeners.put(topic, new CopyOnWriteArrayList<>());
+            }
         }
     }
 
-    public void subscribe(String topic, EventListener stockEventListener) {
+    public void subscribe(String topic, EventListener listener) {
         List<EventListener> subscribers = listeners.get(topic);
-        subscribers.add(stockEventListener);
+        if (subscribers != null) {
+            subscribers.add(listener);
+        }
     }
 
-    public void publish(String topic, dto message) {
+    public void publish(String topic, DTO message) {
         List<EventListener> subscribers = listeners.get(topic);
-        for (EventListener stockEventListener : subscribers) {
-            stockEventListener.update(topic, message);
+        if (subscribers != null) {
+            for (EventListener listener : subscribers) {
+                listener.update(topic, message);
+            }
         }
     }
 }

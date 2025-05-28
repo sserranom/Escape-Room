@@ -20,5 +20,5 @@ public interface DecoRepository {
 
     Optional<DecoDTO> findByName(String name);
 
-    Optional<Deco> findAllByEscapeRoomId(int escapeRoomId);
+    List<DecoDTO> findAllByEscapeRoomId(int escapeRoomId);
 }

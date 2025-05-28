@@ -22,12 +22,18 @@ public class Theme {
         this.description = description;
         this.escapeRoom = escapeRoom;
     }
+    private Theme(int id, String name, String description, EscapeRoom escapeRoom) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.escapeRoom = escapeRoom;
+    }
 
     public static Theme fromDatabase(ThemeDTO dto) {
 
         EscapeRoom escapeRoom = getEscaperoomFromDto(dto);
 
-        return new Theme(dto.name(), dto.description(), escapeRoom);
+        return new Theme(dto.id(), dto.name(), dto.description(), escapeRoom);
     }
 
     private static EscapeRoom getEscaperoomFromDto(ThemeDTO dto) {
@@ -80,7 +86,7 @@ public class Theme {
     }
 
     public ThemeDTO toDTO() {
-        return new ThemeDTO(this.id, name, description, escapeRoom.getId());
+        return new ThemeDTO(id, name, description, escapeRoom.getId());
     }
 
     @Override

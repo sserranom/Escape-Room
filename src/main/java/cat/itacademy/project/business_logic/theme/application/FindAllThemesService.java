@@ -15,10 +15,7 @@ public class FindAllThemesService {
         this.repo = repo;
     }
 
-    public List<ThemeDTO> findAll() {
-        return repo.findAll()
-                .stream()
-                .map(Theme::toDTO)
-                .toList();
+    public List<ThemeDTO> findAll(int escapeRoomId) {
+        return repo.findAll(escapeRoomId);
     }
 }

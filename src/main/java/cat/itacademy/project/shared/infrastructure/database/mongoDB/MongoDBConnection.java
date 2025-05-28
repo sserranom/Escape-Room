@@ -3,6 +3,7 @@ package cat.itacademy.project.shared.infrastructure.database.mongodb;
 
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
+import com.mongodb.client.MongoDatabase;
 
 public class MongoDBConnection {
 
@@ -27,5 +28,11 @@ public class MongoDBConnection {
             }
             return instance;
         }
+    }
+    public static MongoDatabase getDatabase(
+
+    ) {
+        MongoClient mongoClient = getInstance();
+        return mongoClient.getDatabase("escape_room");
     }
 }

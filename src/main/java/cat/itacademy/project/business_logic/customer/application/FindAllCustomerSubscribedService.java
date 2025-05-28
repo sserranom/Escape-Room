@@ -12,7 +12,7 @@ public class FindAllCustomerSubscribedService {
         this.repo = repo;
     }
 
-    public List<CustomerDTO> FindAllCustomerSubscribed() {
+    public List<CustomerDTO> execute() {
         return repo.FindAllCustomerSubscribed();
     }
 }

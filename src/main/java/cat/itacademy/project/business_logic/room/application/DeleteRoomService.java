@@ -8,7 +8,6 @@ public class DeleteRoomService {
 
     public DeleteRoomService(RoomRepository repo) {
         this.repo = repo;
-
     }
 
 
