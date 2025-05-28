@@ -150,7 +150,7 @@ public class DecoMySQLRepository implements DecoRepository {
                                 rs.getString("name"),
                                 rs.getString("description"),
                                 rs.getString("type"),
-                                rs.getInt(escapeRoomId),
+                                escapeRoomId,
                                 rs.getDouble("price")
 
                         ));
