@@ -4,12 +4,14 @@ import cat.itacademy.project.business_logic.customer.domain.CustomerRepository;
 import cat.itacademy.project.business_logic.puzzle.domain.PuzzleRepository;
 import cat.itacademy.project.business_logic.reservation.domain.Reservation;
 import cat.itacademy.project.business_logic.reservation.domain.ReservationRepository;
+import cat.itacademy.project.business_logic.room.domain.RoomDecoRepository;
 import cat.itacademy.project.business_logic.room.domain.RoomRepository;
 import cat.itacademy.project.shared.domain.dtos.reservation.ReservationDTO;
 import cat.itacademy.project.shared.domain.dtos.reservation.UpdateReservationDTO;
 import cat.itacademy.project.shared.domain.exceptions.NotFoundException;
 import cat.itacademy.project.shared.domain.exceptions.PuzzleWithoutRoomException;
 
+import java.time.LocalDate;
 import java.util.Optional;
 
 public class UpdateReservationService {
@@ -17,12 +19,14 @@ public class UpdateReservationService {
     private final CustomerRepository customerRepo;
     private final PuzzleRepository puzzleRepo;
     private final RoomRepository roomRepo;
+    private final RoomDecoRepository roomDecoRepo;
 
-    public UpdateReservationService(ReservationRepository repo, CustomerRepository customerRepo, PuzzleRepository puzzleRepo, RoomRepository roomRepo) {
+    public UpdateReservationService(ReservationRepository repo, CustomerRepository customerRepo, PuzzleRepository puzzleRepo, RoomRepository roomRepo, RoomDecoRepository roomDecoRepo) {
         this.repo = repo;
         this.customerRepo = customerRepo;
         this.puzzleRepo = puzzleRepo;
         this.roomRepo = roomRepo;
+        this.roomDecoRepo = roomDecoRepo;
     }
 
     public Optional<Reservation> execute(UpdateReservationDTO request) {
@@ -63,7 +67,7 @@ public class UpdateReservationService {
             if (!request.id_puzzle().equals(existingReservation.getPuzzleId())) {
                 existingReservation.setPuzzleId(request.id_puzzle());
                 try {
-                    existingReservation.recalculateTotalPrice(puzzleRepo, roomRepo);
+                    existingReservation.recalculateTotalPrice(puzzleRepo, roomRepo, roomDecoRepo);
                 } catch (NotFoundException e) {
                     throw new NotFoundException("Could not find puzzle or room details for new puzzle ID " + existingReservation.getPuzzleId() + ": " + e.getMessage());
                 } catch (PuzzleWithoutRoomException e) {
@@ -74,7 +78,7 @@ public class UpdateReservationService {
 
         if (request.completionDate() != null) {
             if (!request.completionDate().equals(existingReservation.getCompletionDate())) {
-                existingReservation.setCompletionDate(request.completionDate().atStartOfDay());
+                existingReservation.setCompletionDate(LocalDate.from(request.completionDate().atStartOfDay()));
             }
         }
         repo.update(existingReservation);

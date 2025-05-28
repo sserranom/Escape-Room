@@ -1,19 +1,19 @@
 package cat.itacademy.project.business_logic.reservation.domain;
 
-import cat.itacademy.project.business_logic.escaperoom.domain.EscapeRoomRepository;
 import cat.itacademy.project.business_logic.puzzle.domain.PuzzleRepository;
 import cat.itacademy.project.business_logic.room.domain.RoomRepository;
-import cat.itacademy.project.shared.domain.dtos.escape_room.EscapeRoomDTO;
+import cat.itacademy.project.business_logic.room.domain.RoomDecoRepository;
+import cat.itacademy.project.shared.domain.dtos.deco.DecoDTO;
 import cat.itacademy.project.shared.domain.dtos.puzzle.PuzzleDTO;
 import cat.itacademy.project.shared.domain.dtos.reservation.CreateReservationDTO;
 import cat.itacademy.project.shared.domain.dtos.reservation.ReservationDTO;
 import cat.itacademy.project.shared.domain.dtos.room.RoomDTO;
-import cat.itacademy.project.shared.domain.dtos.theme.ThemeDTO;
 import cat.itacademy.project.shared.domain.exceptions.NotFoundException;
 import cat.itacademy.project.shared.domain.exceptions.PuzzleWithoutRoomException;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 
 public class Reservation {
 
@@ -21,10 +21,10 @@ public class Reservation {
     private Integer customerId;
     private Integer puzzleId;
     private double totalPrice;
-    private LocalDateTime creationDate;
-    private LocalDateTime completionDate;
+    private LocalDate creationDate;
+    private LocalDate completionDate;
 
-    public Reservation(int id, Integer customerId, Integer puzzleId, double totalPrice, LocalDateTime creationDate, LocalDateTime completionDate) {
+    public Reservation(int id, Integer customerId, Integer puzzleId, double totalPrice, LocalDate creationDate, LocalDate completionDate) {
         this.id = id;
         this.customerId = customerId;
         this.puzzleId = puzzleId;
@@ -34,13 +34,13 @@ public class Reservation {
     }
 
     public Reservation(Integer customerId, Integer puzzleId, LocalDate completionDate,
-                       PuzzleRepository puzzleRepo, RoomRepository roomRepo) {
+                       PuzzleRepository puzzleRepo, RoomRepository roomRepo, RoomDecoRepository roomDecoRepo) {
         this.customerId = customerId;
         this.puzzleId = puzzleId;
-        this.creationDate = LocalDateTime.now();
-        this.completionDate = (completionDate != null) ? completionDate.atStartOfDay() : null;
+        this.creationDate = LocalDate.now();
+        this.completionDate = (completionDate != null) ? LocalDate.from(completionDate.atStartOfDay()) : null;
 
-        this.totalPrice = calculateTotalPrice(puzzleId, puzzleRepo, roomRepo);
+        this.totalPrice = calculateTotalPrice(puzzleId, puzzleRepo, roomRepo, roomDecoRepo);
     }
 
     public static Reservation fromDatabase(ReservationDTO reservationDTO) {
@@ -48,84 +48,48 @@ public class Reservation {
                 reservationDTO.id(),
                 reservationDTO.customerId(),
                 reservationDTO.puzzleId(),
-                reservationDTO.total_price(),
+                reservationDTO.totalPrice(),
                 reservationDTO.creation_date(),
                 reservationDTO.completionDate()
         );
     }
 
-    public static Reservation fromCreateDTO(CreateReservationDTO createDTO, PuzzleRepository puzzleRepo, RoomRepository roomRepo) {
+    public static Reservation fromCreateDTO(CreateReservationDTO createDTO, PuzzleRepository puzzleRepo, RoomRepository roomRepo, RoomDecoRepository roomDecoRepo) {
         return new Reservation(
                 createDTO.customerId(),
                 createDTO.puzzleId(),
                 createDTO.completionDate(),
                 puzzleRepo,
-                roomRepo
+                roomRepo,
+                roomDecoRepo
         );
     }
 
     public ReservationDTO toDTO() {
-
         return new ReservationDTO(
                 this.id,
                 this.customerId,
-    null,
+                null,
                 this.puzzleId,
-      null,
+                null,
                 this.totalPrice,
                 this.creationDate,
                 this.completionDate
         );
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public Integer getCustomerId() {
-        return customerId;
-    }
-
-    public void setCustomerId(Integer customerId) {
-        this.customerId = customerId;
-    }
-
-    public Integer getPuzzleId() {
-        return puzzleId;
-    }
-
-    public void setPuzzleId(Integer puzzleId) {
-        this.puzzleId = puzzleId;
-    }
-
-    public double getTotalPrice() {
-        return totalPrice;
-    }
-
-    public void setTotalPrice(double totalPrice) {
-        this.totalPrice = totalPrice;
-    }
-
-    public LocalDateTime getCreationDate() {
-        return creationDate;
-    }
-
-    public void setCreationDate(LocalDateTime creationDate) {
-        this.creationDate = creationDate;
-    }
-
-    public LocalDateTime getCompletionDate() {
-        return completionDate;
-    }
-
-    public void setCompletionDate(LocalDateTime completionDate) {
-        this.completionDate = completionDate;
-    }
-
+    public int getId() { return id; }
+    public void setId(int id) { this.id = id; }
+    public Integer getCustomerId() { return customerId; }
+    public void setCustomerId(Integer customerId) { this.customerId = customerId; }
+    public Integer getPuzzleId() { return puzzleId; }
+    public void setPuzzleId(Integer puzzleId) { this.puzzleId = puzzleId; }
+    public double getTotalPrice() { return totalPrice; }
+    public void setTotalPrice(double totalPrice) { this.totalPrice = totalPrice; }
+    public LocalDate getCreationDate() { return creationDate; }
+    public void setCreationDate(LocalDate creationDate) { this.creationDate = creationDate; }
+    public LocalDate getCompletionDate() { return completionDate; }
+    public void setCompletionDate(LocalDate completionDate) { this.completionDate = completionDate; }
 
     @Override
     public String toString() {
@@ -139,27 +103,9 @@ public class Reservation {
                 '}';
     }
 
-//    private double calculateTotalPrice(Integer puzzleId, PuzzleRepository puzzleRepo, RoomRepository roomRepo) {
-//        PuzzleDTO puzzle = puzzleRepo.findById(puzzleId)
-//                .orElseThrow(() -> new NotFoundException("Puzzle with ID " + puzzleId + " not found."));
-//
-//        double puzzlePrice = puzzle.price();
-//        double roomPrice = 0.0;
-//
-//        if (puzzle.room_id() != 0) {
-//
-//            RoomDTO room = roomRepo.findById(puzzle.room_id())
-//                    .orElseThrow(() -> new NotFoundException("Room with ID " + puzzle.room_id() + " not found for puzzle."));
-//
-//            roomPrice = room.price();
-//        }
-//
-//        double finalTotalPrice = puzzlePrice + roomPrice;
-//
-//        return finalTotalPrice;
-//    }
 
-    private double calculateTotalPrice(Integer puzzleId, PuzzleRepository puzzleRepo, RoomRepository roomRepo) {
+    private double calculateTotalPrice(Integer puzzleId, PuzzleRepository puzzleRepo, RoomRepository roomRepo, RoomDecoRepository roomDecoRepo) {
+
         PuzzleDTO puzzle = puzzleRepo.findById(puzzleId)
                 .orElseThrow(() -> new NotFoundException("Puzzle with ID " + puzzleId + " not found."));
 
@@ -168,21 +114,25 @@ public class Reservation {
         }
 
         double puzzlePrice = puzzle.price();
-        double roomPrice = 0.0;
 
         RoomDTO room = roomRepo.findById(puzzle.roomId())
                 .orElseThrow(() -> new NotFoundException("Room with ID " + puzzle.roomId() + " not found for puzzle."));
 
-        roomPrice = room.price();
+        double roomPrice = room.price();
 
-        double finalTotalPrice = puzzlePrice + roomPrice;
+        double decoTotalPrice = 0.0;
+        List<DecoDTO> decosInRoom = roomDecoRepo.findDecosByRoomId(room.id());
+
+        for (DecoDTO deco : decosInRoom) {
+            decoTotalPrice += deco.price();
+        }
+
+        double finalTotalPrice = puzzlePrice + roomPrice + decoTotalPrice;
 
         return finalTotalPrice;
     }
 
-    public void recalculateTotalPrice(PuzzleRepository puzzleRepo, RoomRepository roomRepo) {
-
-        this.setTotalPrice(calculateTotalPrice(this.puzzleId, puzzleRepo, roomRepo));
+    public void recalculateTotalPrice(PuzzleRepository puzzleRepo, RoomRepository roomRepo, RoomDecoRepository roomDecoRepo) {
+        this.setTotalPrice(calculateTotalPrice(this.puzzleId, puzzleRepo, roomRepo, roomDecoRepo));
     }
-
 }
