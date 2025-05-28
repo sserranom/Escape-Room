@@ -65,29 +65,21 @@ public class ManageEscapeRoomMenu extends MenuCommand<EscapeRoomDTO> {
                     ManageCustomerMenu manageCustomerMenu = new ManageCustomerMenu();
                     manageCustomerMenu.execute();
                     break;
-                case 0:
-                    log("Exiting to main menu.");
-                    Menu.setActiveRoom(null);
-                    isRunning = false;
-                    break;
-                default:
-                    error("Invalid choice. Please try again.");
-                    break;
 
-            case 11:
-                log("Manage Customers: ");
-                ManageCustomerMenu manageCustomerMenu = new ManageCustomerMenu(customerDTO);
-                manageCustomerMenu.execute();
-                break;
 
             case 12:
                 log("Manage Reservation: ");
                 ManageReservationMenu manageReservationMenu = new ManageReservationMenu();
                 manageReservationMenu.execute();
+                case 0:
+                    log("Exiting to main menu.");
+                    Menu.setActiveRoom(null);
+                    isRunning = false;
+                    break;
             default:
                 error("Invalid choice. Please try again.");
                 break;
-        }
+        }}
 
         return Optional.of(escapeRoomDTO);
     }
