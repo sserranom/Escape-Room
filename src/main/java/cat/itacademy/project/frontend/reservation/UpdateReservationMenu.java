@@ -1,129 +1,81 @@
 package cat.itacademy.project.frontend.reservation;
 
 import cat.itacademy.project.api.reservation.UpdateReservationController;
-import cat.itacademy.project.business_logic.reservation.application.UpdateReservationService;
 import cat.itacademy.project.frontend.shared.MenuCommand;
 import cat.itacademy.project.frontend.shared.MenuScanner;
-import cat.itacademy.project.shared.domain.dtos.reservation.ReservationDTO;
 import cat.itacademy.project.shared.domain.dtos.reservation.UpdateReservationDTO;
-import cat.itacademy.project.shared.domain.exceptions.DatabaseException;
 import cat.itacademy.project.shared.domain.exceptions.NotFoundException;
-import cat.itacademy.project.shared.domain.exceptions.PuzzleWithoutRoomException;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Optional;
 
-public class UpdateReservationMenu  extends MenuCommand<Void> {
-    private final UpdateReservationController updateReservationController;
-    private final UpdateReservationService reservationService;
+public class UpdateReservationMenu extends MenuCommand<Void> {
 
-    // Constructor que recibe las dependencias
-    public UpdateReservationMenu(UpdateReservationController updateReservationController, UpdateReservationService reservationService) {
-        this.updateReservationController = updateReservationController;
-        this.reservationService = reservationService;
+    public UpdateReservationMenu() {
     }
 
     @Override
     public Optional<Void> execute() {
-        info("\n--- Update Reservation ---"); // Usamos info()
         try {
-            // getInfo ahora lanza excepciones si el ID es inválido o la reserva no existe
             UpdateReservationDTO dto = getInfo();
-
-            // Si llegamos aquí, dto no es null y la reserva fue encontrada
-            updateReservationController.execute(dto);
+            UpdateReservationController controller = new UpdateReservationController();
+            controller.execute(dto);
             info("Reservation with ID '" + dto.id() + "' updated successfully.");
 
+        } catch (NotFoundException e) {
+            error("Error: " + e.getMessage());
         } catch (IllegalArgumentException e) {
-            error("Input error: " + e.getMessage());
-        } catch (NotFoundException e) { // Capturadas si la reserva no existe o el cliente/puzzle no se encuentra
-            error("Update failed: " + e.getMessage());
-        } catch (PuzzleWithoutRoomException e) { // Capturada si el Puzzle no tiene Room al recalcular precio
-            error("Update failed: " + e.getMessage());
-        } catch (DatabaseException e) {
-            error("A database error occurred during update: " + e.getMessage());
-        } catch (Exception e) { // Para capturar cualquier otra excepción inesperada
-            error("An unexpected error occurred during update: " + e.getMessage());
-            // e.printStackTrace(); // Considera quitar esto en producción
+            error("Error: " + e.getMessage());
+        } catch (DateTimeParseException e) {
+            error("Error: Invalid date/time format. Please use YYYY-MM-DD HH:MM:SS.");
+        } catch (Exception e) {
+            error("An unexpected error occurred: " + e.getMessage());
+            e.printStackTrace();
         }
         return Optional.empty();
     }
 
     private UpdateReservationDTO getInfo() {
-        int reservationId;
-        // Pedir el ID de la reserva a actualizar y validar
-        try {
-            reservationId = MenuScanner.readInt("Enter the Reservation ID to update: ");
-            if (reservationId <= 0) {
-                throw new IllegalArgumentException("Reservation ID must be a positive number.");
-            }
-        } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("Invalid Reservation ID format. Please enter a number.");
-        }
+        int reservationId = MenuScanner.readInt("Enter the ID of the reservation to update: ");
 
-        // Buscar la reserva existente. Si no se encuentra, NotFoundException se propagará.
-        ReservationDTO existingReservation = reservationService.findById(reservationId)
-                .orElseThrow(() -> new NotFoundException("Reservation with ID " + reservationId + " not found."));
-
-        // Mostrar detalles actuales usando info()
-        info("\n--- Current Reservation Details ---");
-        info("ID: " " + existingReservation.id());
-                info("Customer ID: " + existingReservation.customer_id());
-        info("Puzzle ID: " + existingReservation.puzzle_id());
-        info("Completion Date: " + (existingReservation.completion_date() != null ? existingReservation.completion_date().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")) : "Not set"));
-        info("Total Price: " + String.format("%.2f", existingReservation.total_price()));
-        info("-----------------------------------\n");
-        info("Enter new values (leave empty to keep current value):");
-
-
-        // --- Customer ID ---
         Integer newCustomerId = null;
-        String customerIdInput = MenuScanner.readString("Enter new Customer ID (current: " + existingReservation.customer_id() + "): ");
+        String customerIdInput = MenuScanner.readString("Enter new Customer ID (leave blank to keep current): ").trim();
         if (!customerIdInput.isEmpty()) {
             try {
                 int parsedId = Integer.parseInt(customerIdInput);
-                if (parsedId <= 0) {
-                    throw new IllegalArgumentException("Customer ID must be a positive number.");
-                }
-                newCustomerId = parsedId;
+                newCustomerId = parsedId <= 0 ? null : parsedId;
             } catch (NumberFormatException e) {
-                throw new IllegalArgumentException("Invalid Customer ID format.");
+                error("Invalid input for Customer ID. Keeping current value.");
             }
         }
 
-        // --- Puzzle ID ---
         Integer newPuzzleId = null;
-        String puzzleIdInput = MenuScanner.readString("Enter new Puzzle ID (current: " + existingReservation.puzzle_id() + "): ");
+        String puzzleIdInput = MenuScanner.readString("Enter new Puzzle ID (leave blank to keep current): ").trim();
         if (!puzzleIdInput.isEmpty()) {
             try {
                 int parsedId = Integer.parseInt(puzzleIdInput);
-                if (parsedId <= 0) {
-                    throw new IllegalArgumentException("Puzzle ID must be a positive number.");
-                }
-                newPuzzleId = parsedId;
+                newPuzzleId = parsedId <= 0 ? null : parsedId;
             } catch (NumberFormatException e) {
-                throw new IllegalArgumentException("Invalid Puzzle ID format.");
+                error("Invalid input for Puzzle ID. Keeping current value.");
             }
         }
 
-        // --- Completion Date ---
         LocalDate newCompletionDate = null;
-        String dateInput = MenuScanner.readString("Enter new Completion Date (DD/MM/YYYY, current: " + (existingReservation.completion_date() != null ? existingReservation.completion_date().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")) : "Not set") + "): ");
-        if (!dateInput.isEmpty()) {
+        String completionDateInput = MenuScanner.readString("Enter new Completion Date (YYYY-MM-DD HH:MM:SS, leave blank to keep current): ").trim();
+        if (!completionDateInput.isEmpty()) {
             try {
-                newCompletionDate = LocalDate.parse(dateInput, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+                newCompletionDate = LocalDate.parse(completionDateInput);
             } catch (DateTimeParseException e) {
-                throw new IllegalArgumentException("Invalid date format. Please use DD/MM/YYYY.");
+                error("Invalid date/time format. Please use YYYY-MM-DD HH:MM:SS. Keeping current value.");
             }
         }
 
-        // Devolver el DTO con el ID de la reserva y los campos opcionales.
         return new UpdateReservationDTO(
-                reservationId, // ID de la reserva es obligatorio y ya validado
+                reservationId,
                 newCustomerId,
                 newPuzzleId,
+                null,
                 newCompletionDate
         );
     }

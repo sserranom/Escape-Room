@@ -96,7 +96,7 @@ public class MenuScanner {
             input = scanner.nextLine().trim();
 
             if (input.isEmpty()) {
-                return null; // Si está vacío, devuelve null y es una entrada válida
+                return null;
             }
 
             try {

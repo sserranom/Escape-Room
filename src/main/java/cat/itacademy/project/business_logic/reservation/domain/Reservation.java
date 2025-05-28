@@ -180,4 +180,9 @@ public class Reservation {
         return finalTotalPrice;
     }
 
+    public void recalculateTotalPrice(PuzzleRepository puzzleRepo, RoomRepository roomRepo) {
+
+        this.setTotalPrice(calculateTotalPrice(this.puzzleId, puzzleRepo, roomRepo));
+    }
+
 }
