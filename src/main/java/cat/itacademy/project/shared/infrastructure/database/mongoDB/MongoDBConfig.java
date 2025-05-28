@@ -7,8 +7,8 @@ public class MongoDBConfig {
     private static final String DB_HOST = dotenv.get("MONGO_HOST");
     private static final String DB_PORT = dotenv.get("MONGO_PORT");
     private static final String DB_DATABASE = dotenv.get("MONGO_DATABASE");
-    private static final String DB_USER = dotenv.get("MONGO_APP_USER");
-    private static final String DB_PASSWORD = dotenv.get("MONGO_APP_PASSWORD");
+    private static final String DB_USER = dotenv.get("MONGO_USER");
+    private static final String DB_PASSWORD = dotenv.get("MONGO_PASSWORD");
 
     private static final String CONNECTION_STRING = String.format(
             "mongodb://%s:%s@%s:%s/%s",

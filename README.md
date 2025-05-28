@@ -110,7 +110,15 @@ This architecture ensures:
      - MONGO_PORT: Port for MongoDB
      - MONGO_HOST: MongoDB host address
      - MONGO_TEST_PORT: Port for the test MongoDB instance
-
+### Complete your mongo setup running this command in the mongo shell (Mongo Compass can be used):
+```js
+use escape_room; // or the database name you set in .env
+db.createUser({
+          user: "username", // same username as in .env
+          pwd: "password", // same password as in .env
+          roles: [{ role: "readWriteAnyDatabase", db: "admin" }]
+        });
+```
 ### Running with Docker Compose
 To start the application with Docker Compose:
 ```
