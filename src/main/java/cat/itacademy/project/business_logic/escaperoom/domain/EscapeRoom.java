@@ -1,7 +1,7 @@
 package cat.itacademy.project.business_logic.escaperoom.domain;
 
-import cat.itacademy.project.shared.domain.dtos.CreateEscapeRoomDTO;
-import cat.itacademy.project.shared.domain.dtos.EscapeRoomDTO;
+import cat.itacademy.project.shared.domain.dtos.escape_room.CreateEscapeRoomDTO;
+import cat.itacademy.project.shared.domain.dtos.escape_room.EscapeRoomDTO;
 
 public class EscapeRoom {
     private final String name;

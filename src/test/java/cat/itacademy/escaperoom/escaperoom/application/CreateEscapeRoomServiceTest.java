@@ -3,8 +3,7 @@ package cat.itacademy.escaperoom.escaperoom.application;
 import cat.itacademy.escaperoom.escaperoom.EscapeRoomMySQLTestRepository;
 import cat.itacademy.escaperoom.escaperoom.infrastructure.MySqlTestConnection;
 import cat.itacademy.project.business_logic.escaperoom.application.CreateEscapeRoomService;
-import cat.itacademy.project.shared.domain.dtos.CreateEscapeRoomDTO;
-import cat.itacademy.project.shared.domain.exceptions.AlreadyExistsException;
+import cat.itacademy.project.shared.domain.dtos.escape_room.CreateEscapeRoomDTO;
 import cat.itacademy.project.shared.domain.exceptions.EmptyFieldException;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -30,8 +29,8 @@ class CreateEscapeRoomServiceTest {
     @Test
     void execute_an_escape_room() {
         CreateEscapeRoomDTO request = new CreateEscapeRoomDTO("Escape Room 1", "url");
-        CreateEscapeRoomService creator = new CreateEscapeRoomService(request, repo);
-        creator.execute();
+        CreateEscapeRoomService creator = new CreateEscapeRoomService(repo);
+        creator.execute(request);
 
         assertThat(repo.findByName("Escape Room 1"))
                 .isPresent()
@@ -41,15 +40,6 @@ class CreateEscapeRoomServiceTest {
                 });
     }
 
-    @Test
-    void throws_exception_when_escape_room_already_exists() {
-        CreateEscapeRoomDTO request = new CreateEscapeRoomDTO("Escape Room 1", "url");
-        CreateEscapeRoomService creator = new CreateEscapeRoomService(request, repo);
-        creator.execute();
-        assertThatExceptionOfType(AlreadyExistsException.class)
-                .isThrownBy(creator::execute)
-                .withMessage("Escape Room 'Escape Room 1' already exist");
-    }
 
     @Test
     void throws_exception_when_fields_are_empty() {
