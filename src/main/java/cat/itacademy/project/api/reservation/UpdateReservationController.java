@@ -7,7 +7,9 @@ import cat.itacademy.project.business_logic.puzzle.infrastructure.PuzzleMySQLRep
 import cat.itacademy.project.business_logic.reservation.application.UpdateReservationService;
 import cat.itacademy.project.business_logic.reservation.domain.ReservationRepository;
 import cat.itacademy.project.business_logic.reservation.infraestructure.ReservationMySQLRepository;
+import cat.itacademy.project.business_logic.room.domain.RoomDecoRepository;
 import cat.itacademy.project.business_logic.room.domain.RoomRepository;
+import cat.itacademy.project.business_logic.room.infraestructure.RoomDecoMySQLRepository;
 import cat.itacademy.project.business_logic.room.infraestructure.RoomMySQLRepository;
 import cat.itacademy.project.shared.domain.dtos.reservation.UpdateReservationDTO;
 import cat.itacademy.project.shared.infrastructure.database.mysql.MySqlConnection;
@@ -22,8 +24,9 @@ public class UpdateReservationController {
         CustomerRepository customerRepo = new CustomerMySQLRepository(MySqlConnection.getInstance());
         PuzzleRepository puzzleRepo = new PuzzleMySQLRepository(MySqlConnection.getInstance());
         RoomRepository roomRepo = new RoomMySQLRepository(MySqlConnection.getInstance());
+        RoomDecoRepository roomDecoRepo = new RoomDecoMySQLRepository(MySqlConnection.getInstance());
 
-        this.service = new UpdateReservationService(repo, customerRepo, puzzleRepo, roomRepo);
+        this.service = new UpdateReservationService(repo, customerRepo, puzzleRepo, roomRepo, roomDecoRepo);
     }
 
     public Optional<Void> execute(UpdateReservationDTO request){

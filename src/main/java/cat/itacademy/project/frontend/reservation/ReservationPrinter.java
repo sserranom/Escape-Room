@@ -17,7 +17,7 @@ public class ReservationPrinter {
                 reservation.id(),
                 reservation.customerId(),
                 reservation.puzzleId(),
-                reservation.total_price(),
+                reservation.totalPrice(),
                 creationDate,
                 completionDate
         );

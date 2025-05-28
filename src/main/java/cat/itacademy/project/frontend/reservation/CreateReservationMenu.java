@@ -42,7 +42,7 @@ public class CreateReservationMenu extends MenuCommand<Void> {
                 customerId = MenuScanner.readInt("Enter the Customer ID: ");
                 puzzleId = MenuScanner.readInt("Enter the Puzzle ID: ");
 
-                completionDate = MenuScanner.readOptionalDate("Enter the Completion Date (DD/MM/YYYY, leave empty if not known): ");
+                completionDate = MenuScanner.readOptionalDate("Enter the Completion Date (YYYY/MM/DD, leave empty if not known): ");
 
                 validInput = true;
 

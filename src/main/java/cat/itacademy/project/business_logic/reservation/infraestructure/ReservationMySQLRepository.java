@@ -2,12 +2,11 @@ package cat.itacademy.project.business_logic.reservation.infraestructure;
 
 import cat.itacademy.project.business_logic.reservation.domain.Reservation;
 import cat.itacademy.project.business_logic.reservation.domain.ReservationRepository;
-import cat.itacademy.project.shared.domain.dtos.reservation.CreateReservationDTO;
 import cat.itacademy.project.shared.domain.dtos.reservation.ReservationDTO;
 import cat.itacademy.project.shared.domain.exceptions.DatabaseException;
 
 import java.sql.*;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -34,9 +33,9 @@ public class ReservationMySQLRepository implements ReservationRepository {
                 preparedStatement.setNull(2, java.sql.Types.INTEGER);
             }
             preparedStatement.setDouble(3, reservation.getTotalPrice());
-            preparedStatement.setTimestamp(4, Timestamp.valueOf(reservation.getCreationDate()));
+            preparedStatement.setTimestamp(4, Timestamp.valueOf(reservation.getCreationDate().atStartOfDay()));
             if (reservation.getCompletionDate() != null) {
-                preparedStatement.setTimestamp(5, Timestamp.valueOf(reservation.getCompletionDate()));
+                preparedStatement.setTimestamp(5, Timestamp.valueOf(reservation.getCompletionDate().atStartOfDay()));
             } else {
                 preparedStatement.setNull(5, java.sql.Types.TIMESTAMP);
             }
@@ -192,7 +191,7 @@ public class ReservationMySQLRepository implements ReservationRepository {
             }
             preparedStatement.setDouble(3, reservation.getTotalPrice());
             if (reservation.getCompletionDate() != null) {
-                preparedStatement.setTimestamp(4, Timestamp.valueOf(reservation.getCompletionDate()));
+                preparedStatement.setTimestamp(4, Timestamp.valueOf(reservation.getCompletionDate().atStartOfDay()));
             } else {
                 preparedStatement.setNull(4, java.sql.Types.TIMESTAMP);
             }
@@ -216,10 +215,10 @@ public class ReservationMySQLRepository implements ReservationRepository {
 
     private ReservationDTO mapResultSetToReservationDTO(ResultSet rs) throws SQLException {
         Timestamp creationTimestamp = rs.getTimestamp("creation_date");
-        LocalDateTime creationDate = (creationTimestamp != null) ? creationTimestamp.toLocalDateTime() : null;
+        LocalDate creationDate = (creationTimestamp != null) ? LocalDate.from(creationTimestamp.toLocalDateTime()) : null;
 
         Timestamp completionTimestamp = rs.getTimestamp("completion_date");
-        LocalDateTime completionDate = (completionTimestamp != null) ? completionTimestamp.toLocalDateTime() : null;
+        LocalDate completionDate = (completionTimestamp != null) ? LocalDate.from(completionTimestamp.toLocalDateTime()) : null;
 
         Integer customerId = rs.getObject("customer_id", Integer.class);
         String customerName = rs.getString("customer_name");
