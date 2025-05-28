@@ -16,44 +16,38 @@ public class ManageThemeMenu extends MenuCommand<Void> {
     public Optional<Void> execute() {
         boolean isRunning = true;
         while (isRunning) {
-            int choice = getUserInput();
             try {
+                int choice = getUserInput();
                 switch (choice) {
                     case 1:
                         FindAllThemesMenu findAllThemesMenu = new FindAllThemesMenu();
                         findAllThemesMenu.execute();
-                        // Here you would implement the logic to list all themes.
                         break;
                     case 2:
                         log("Updating an existing theme...");
                         UpdateThemeMenu updateThemeMenu = new UpdateThemeMenu();
                         updateThemeMenu.execute();
-                        // Here you would implement the logic to update a theme.
                         break;
                     case 3:
                         log("Creating a new theme...");
                         CreateThemeMenu createThemeMenu = new CreateThemeMenu();
                         createThemeMenu.execute();
-                        // Here you would implement the logic to create a new theme.
                         break;
 
                     case 4:
                         log("Managing rooms...");
                         ManageRoomMenu manageRoomMenu = new ManageRoomMenu();
                         manageRoomMenu.execute();
-                        // Here you would implement the logic to manage rooms.
                         break;
                     case 5:
                         log("Managing decorative items...");
                         ManageDecoMenu manageDecoMenu = new ManageDecoMenu();
                         manageDecoMenu.execute();
-                        // Here you would implement the logic to manage decorative items.
                         break;
                     case 6:
                         log("Managing puzzles...");
                         ManagePuzzleMenu managePuzzleMenu = new ManagePuzzleMenu();
                         managePuzzleMenu.execute();
-                        // Here you would implement the logic to manage puzzles.
                         break;
                     case 0:
                         isRunning = false;

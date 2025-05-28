@@ -13,7 +13,7 @@ import cat.itacademy.project.shared.domain.exceptions.CustomException;
 import java.util.Optional;
 
 public class ManageEscapeRoomMenu extends MenuCommand<EscapeRoomDTO> {
-    private  EscapeRoomDTO escapeRoomDTO;
+    private EscapeRoomDTO escapeRoomDTO;
 
 
     public ManageEscapeRoomMenu(EscapeRoomDTO escapeRoomDTO) {

@@ -3,8 +3,6 @@ package cat.itacademy.project.business_logic.reward.application;
 import cat.itacademy.project.business_logic.reward.domain.Reward;
 import cat.itacademy.project.business_logic.reward.domain.RewardRepository;
 
-import java.util.Date;
-
 public class RewardService {
     private final RewardRepository rewardRepository;
 

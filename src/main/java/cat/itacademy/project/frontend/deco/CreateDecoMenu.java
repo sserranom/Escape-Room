@@ -31,7 +31,7 @@ public class CreateDecoMenu extends MenuCommand<Void> {
             try {
                 name = MenuScanner.readString("Enter the name of the Decorative Item: ");
                 description = MenuScanner.readString("Enter the descripcion of the decorative item: ");
-                int typeDeco = MenuScanner.readInt("Select the type of the decorative item: 1 - furniture, 2 - garnishment ");
+                int typeDeco = MenuScanner.readInt("Select the type of the decorative item: 1 - furniture, 2 - garnishment: ");
                 switch (typeDeco) {
                     case 1 -> type = "furniture";
                     case 2 -> type = "garnishment";

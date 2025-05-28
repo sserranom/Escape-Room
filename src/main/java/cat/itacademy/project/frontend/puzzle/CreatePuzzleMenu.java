@@ -29,7 +29,7 @@ public class CreatePuzzleMenu extends MenuCommand<Void> {
 
     private CreatePuzzleDTO getUserInfo() {
 
-        while (name == null  || roomId <= 0 || answer == null || story == null || themeId <= 0 || price <= 0) {
+        while (name == null || roomId <= 0 || answer == null || story == null || themeId <= 0 || price <= 0) {
             try {
                 name = MenuScanner.readString("Enter the name of the puzzle: ");
                 roomId = MenuScanner.readInt("Enter the id of the room: ");

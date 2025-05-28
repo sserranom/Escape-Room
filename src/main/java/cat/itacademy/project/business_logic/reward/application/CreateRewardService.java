@@ -15,10 +15,11 @@ public class CreateRewardService {
     private final RewardRepository rewardRepository;
     private final CustomerRepository customerRepository;
     private final ReservationRepository reservationRepository;
+
     public CreateRewardService(RewardRepository rewardRepository) {
         this.rewardRepository = rewardRepository;
         this.customerRepository = new CustomerMySQLRepository(MySqlConnection.getInstance());
-        this.reservationRepository = new ReservationMySQLRepository(MySqlConnection.getInstance()) ;
+        this.reservationRepository = new ReservationMySQLRepository(MySqlConnection.getInstance());
     }
 
     public void execute(UpdateReservationDTO dto) {

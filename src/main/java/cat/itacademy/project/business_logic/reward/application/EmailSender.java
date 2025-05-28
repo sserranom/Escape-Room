@@ -2,8 +2,6 @@ package cat.itacademy.project.business_logic.reward.application;
 
 import cat.itacademy.project.shared.domain.dtos.reward.CreateRewardDTO;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.logging.Logger;
 
 public class EmailSender {

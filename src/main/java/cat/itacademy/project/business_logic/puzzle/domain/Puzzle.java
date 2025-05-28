@@ -61,7 +61,6 @@ public class Puzzle {
     }
 
 
-
     public int getRoomId() {
         return roomId;
     }
@@ -103,7 +102,7 @@ public class Puzzle {
     }
 
     public boolean isPublishable() {
-        return !name.isBlank()  && roomId > 0 && !answer.isBlank() && !story.isBlank() && themeId > 0 && price > 0;
+        return !name.isBlank() && roomId > 0 && !answer.isBlank() && !story.isBlank() && themeId > 0 && price > 0;
     }
 
     @Override

@@ -3,7 +3,6 @@ package cat.itacademy.project.api.puzzle;
 import cat.itacademy.project.business_logic.reward.application.CreateRewardService;
 import cat.itacademy.project.business_logic.reward.infrastructure.RewardMongoRepository;
 import cat.itacademy.project.shared.domain.dtos.DTO;
-import cat.itacademy.project.shared.domain.dtos.puzzle.PuzzleDTO;
 import cat.itacademy.project.shared.domain.dtos.reservation.UpdateReservationDTO;
 import cat.itacademy.project.shared.domain.events.EventListener;
 import cat.itacademy.project.shared.infrastructure.database.mongodb.MongoDBConnection;

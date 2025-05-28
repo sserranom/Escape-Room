@@ -44,10 +44,13 @@ public class Menu extends MenuCommand<Void> {
     public Optional<Void> execute() {
 
         while (true) {
-            setupCurrentRoom();
-            ManageEscapeRoomMenu manageEscapeRoomMenu = new ManageEscapeRoomMenu(activeRoom);
-            manageEscapeRoomMenu.execute();
-
+            try {
+                setupCurrentRoom();
+                ManageEscapeRoomMenu manageEscapeRoomMenu = new ManageEscapeRoomMenu(activeRoom);
+                manageEscapeRoomMenu.execute();
+            } catch (Exception e) {
+                error(e.getMessage());
+            }
         }
 
 

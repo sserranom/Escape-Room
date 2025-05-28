@@ -27,7 +27,6 @@ public class UpdatePuzzleMenu extends MenuCommand<Void> {
     private UpdatePuzzleDTO getInfo() {
         String nameToUpdate = MenuScanner.readString("Enter the name of the Puzzle to update: ");
         String newName = MenuScanner.readString("Enter the new name: ");
-        String newDifficulty = MenuScanner.readString("Enter the new difficulty: ");
         int newRoomId = MenuScanner.readInt("Enter the new ID of the room: ");
         String newAnswer = MenuScanner.readString("Enter the new answer: ");
         String newStory = MenuScanner.readString("Enter the new story: ");
@@ -36,7 +35,6 @@ public class UpdatePuzzleMenu extends MenuCommand<Void> {
         return new UpdatePuzzleDTO(
                 nameToUpdate,
                 newName.isEmpty() ? null : newName,
-                newDifficulty.isEmpty() ? null : newDifficulty,
                 newRoomId <= 0 ? null : newRoomId,
                 newAnswer.isEmpty() ? null : newAnswer,
                 newStory.isEmpty() ? null : newStory,

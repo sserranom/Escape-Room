@@ -28,7 +28,7 @@ public class UpdateRoomMenu extends MenuCommand<Void> {
         String newDifficulty;
         String nameToUpdate = MenuScanner.readString("Enter the name of the room to update: ");
         String newName = MenuScanner.readString("Enter the new name: ");
-        int level = MenuScanner.readInt("Please select difficulty: 1 - Easy, 2 - Medium, 3 - Hard");
+        int level = MenuScanner.readInt("Please select difficulty: 1 - Easy, 2 - Medium, 3 - Hard: ");
         switch (level) {
             case 1 -> newDifficulty = "easy";
             case 2 -> newDifficulty = "medium";

@@ -174,7 +174,7 @@ public class PuzzleMySQLRepository implements PuzzleRepository {
                         new PuzzleDTO(
                                 rs.getInt("id"),
                                 rs.getString("name"),
-                                rs.getInt("room_id") == 0 ? 0 : rs.getInt("room_id"), // Assuming room_id can be null, default to 0
+                                rs.getInt("room_id") == 0 ? 0 : rs.getInt("room_id"),
                                 rs.getString("answer"),
                                 rs.getString("story"),
                                 rs.getInt("theme_id"),

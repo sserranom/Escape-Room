@@ -26,8 +26,7 @@ public class RewardMongoRepository implements RewardRepository {
     @Override
     public void create(CreateRewardDTO reward) {
         Document doc = new Document(RECIPIENT, reward.recipient())
-                .append(DESCRIPTION, reward.description())
-                ;
+                .append(DESCRIPTION, reward.description());
         collection.insertOne(doc);
     }
 

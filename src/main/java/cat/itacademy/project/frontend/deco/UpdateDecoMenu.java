@@ -29,7 +29,7 @@ public class UpdateDecoMenu extends MenuCommand<Void> {
         String nameToUpdate = MenuScanner.readString("Enter the name of the decorative item to update: ");
         String newName = MenuScanner.readString("Enter the new name: ");
         String newDescription = MenuScanner.readString("Enter the new description: ");
-        int typeObjs = MenuScanner.readInt("Please select Type of de Decorative Item: 1 - furniture, 2 - garnishment");
+        int typeObjs = MenuScanner.readInt("Please select Type of de Decorative Item: 1 - furniture, 2 - garnishment: ");
         switch (typeObjs) {
             case 1 -> newType = "furniture";
             case 2 -> newType = "garnishment";

@@ -98,7 +98,7 @@ public class PrintReservationTicketMenu extends MenuCommand<Void> {
         info("RESERVATION DETAILS:");
         info("  Puzzle:        " + (puzzle != null && puzzle.name() != null ? puzzle.name() : "N/A"));
         info("  Total Price:   " + String.format("%.2f", reservation.totalPrice()) + " €");
-        info("  Created On:    " + (reservation.creation_date() != null ? reservation.creation_date().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")) : "N/A"));
+        info("  Created On:    " + (reservation.creation_date() != null ? reservation.creation_date().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")) : "N/A"));
         info("  Completion Date: " + (reservation.completionDate() != null ? reservation.completionDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")) : "N/A"));
         info("----------------------------------------------------");
         info("        THANK YOU FOR YOUR RESERVATION!");
