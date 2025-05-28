@@ -16,9 +16,8 @@ public class RewardService {
 
         String recipient = reward.getRecipient();
         String description = reward.getDescription();
-        Date deliveryDate = reward.getDeliveryDate();
 
-        EmailSender.send(recipient, description, deliveryDate);
+        EmailSender.send(recipient, description);
 
         rewardRepository.save(reward);
     }

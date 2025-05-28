@@ -63,7 +63,7 @@ public class ManageReservationMenu extends MenuCommand<Void> {
         log("1. Create new Reservation ");
         log("2. Set Reservation as Completed ");
         log("3. Update Reservation details ");
-        log("4. View Reservation details");
+        log("4. View All reservations");
         log("5. Print Reservation Ticket ");
         log("6. Back <-");
 

@@ -12,9 +12,7 @@ import java.util.Optional;
 
 public class UpdateReservationCompletionDateMenu extends MenuCommand<Void> {
 
-    public UpdateReservationCompletionDateMenu() {
 
-    }
 
     @Override
     public Optional<Void> execute() {

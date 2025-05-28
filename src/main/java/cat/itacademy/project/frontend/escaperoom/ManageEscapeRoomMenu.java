@@ -13,7 +13,7 @@ import cat.itacademy.project.shared.domain.exceptions.CustomException;
 import java.util.Optional;
 
 public class ManageEscapeRoomMenu extends MenuCommand<EscapeRoomDTO> {
-    private final EscapeRoomDTO escapeRoomDTO;
+    private  EscapeRoomDTO escapeRoomDTO;
 
 
     public ManageEscapeRoomMenu(EscapeRoomDTO escapeRoomDTO) {
@@ -38,6 +38,7 @@ public class ManageEscapeRoomMenu extends MenuCommand<EscapeRoomDTO> {
                         UpdateEscapeRoomMenu updateEscapeRoomMenu = new UpdateEscapeRoomMenu(escapeRoomDTO);
                         Optional<EscapeRoomDTO> updated = updateEscapeRoomMenu.execute();
                         updated.ifPresent(dto -> {
+                            this.escapeRoomDTO = dto;
                             Menu.setActiveRoom(dto);
                             Menu.updateExistingRooms(dto);
                         });

@@ -6,7 +6,6 @@ import cat.itacademy.project.shared.domain.dtos.puzzle.PuzzleDTO;
 public class Puzzle {
     private int id;
     private String name;
-    private String difficulty;
     private int roomId;
     private String answer;
     private String story;
@@ -26,7 +25,6 @@ public class Puzzle {
 
     public Puzzle(String name, int roomId, String answer, String story, int themeId, double price) {
         this.name = name;
-        this.difficulty = difficulty;
         this.roomId = roomId;
         this.answer = answer;
         this.story = story;
@@ -62,13 +60,7 @@ public class Puzzle {
         this.name = name;
     }
 
-    public String getDifficulty() {
-        return difficulty;
-    }
 
-    public void setDifficulty(String difficulty) {
-        this.difficulty = difficulty;
-    }
 
     public int getRoomId() {
         return roomId;
@@ -111,7 +103,7 @@ public class Puzzle {
     }
 
     public boolean isPublishable() {
-        return !name.isBlank() && !difficulty.isBlank() && roomId > 0 && !answer.isBlank() && !story.isBlank() && themeId > 0 && price > 0;
+        return !name.isBlank()  && roomId > 0 && !answer.isBlank() && !story.isBlank() && themeId > 0 && price > 0;
     }
 
     @Override
@@ -119,7 +111,6 @@ public class Puzzle {
         return "Puzzle{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", difficulty='" + difficulty + '\'' +
                 ", roomID=" + roomId +
                 ", answer='" + answer + '\'' +
                 ", story='" + story + '\'' +

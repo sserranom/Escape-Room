@@ -13,15 +13,13 @@ public class EmailSender {
         if (createRewardDTO == null) {
             throw new IllegalArgumentException("RewardDTO cannot be null");
         }
-        send(createRewardDTO.recipient(), createRewardDTO.description(), createRewardDTO.deliveryDate());
+        send(createRewardDTO.recipient(), createRewardDTO.description());
     }
 
-    public static void send(String recipient, String description, Date deliveryDate) {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-        String formattedDate = (deliveryDate != null) ? dateFormat.format(deliveryDate) : "N/A";
+    public static void send(String recipient, String description) {
         String emailContent = String.format(
-                "=== Sending Email ===%nTo: %s%nSubject: Reward Notification%n%n%s%nDelivery Date: %s%n=====================",
-                recipient, description, formattedDate
+                "=== Sending Email ===%nTo: %s%nSubject: Reward Notification%n%n%s%%n=====================",
+                recipient, description
         );
 
         logger.info(emailContent);

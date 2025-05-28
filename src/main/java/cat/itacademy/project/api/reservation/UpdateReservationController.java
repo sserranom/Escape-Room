@@ -12,11 +12,13 @@ import cat.itacademy.project.business_logic.room.domain.RoomRepository;
 import cat.itacademy.project.business_logic.room.infraestructure.RoomDecoMySQLRepository;
 import cat.itacademy.project.business_logic.room.infraestructure.RoomMySQLRepository;
 import cat.itacademy.project.shared.domain.dtos.reservation.UpdateReservationDTO;
+import cat.itacademy.project.shared.domain.events.EventManager;
 import cat.itacademy.project.shared.infrastructure.database.mysql.MySqlConnection;
 
 import java.util.Optional;
 
 public class UpdateReservationController {
+    private final EventManager eventManager;
     private final UpdateReservationService service;
 
     public UpdateReservationController() {
@@ -25,6 +27,7 @@ public class UpdateReservationController {
         PuzzleRepository puzzleRepo = new PuzzleMySQLRepository(MySqlConnection.getInstance());
         RoomRepository roomRepo = new RoomMySQLRepository(MySqlConnection.getInstance());
         RoomDecoRepository roomDecoRepo = new RoomDecoMySQLRepository(MySqlConnection.getInstance());
+        this.eventManager = EventManager.getInstance();
 
         this.service = new UpdateReservationService(repo, customerRepo, puzzleRepo, roomRepo, roomDecoRepo);
     }
@@ -32,6 +35,7 @@ public class UpdateReservationController {
     public Optional<Void> execute(UpdateReservationDTO request) {
 
         service.execute(request);
+        eventManager.publish("puzzle.completed", request);
         return Optional.empty();
     }
 }

@@ -12,10 +12,10 @@ public class EscapeRoomPrinter {
     static void printInvetory(EscapeRoomInventoryDto escapeRoomInventoryDto) {
         System.out.println("Escape Room Inventory:");
         System.out.println("Rooms:");
-        escapeRoomInventoryDto.rooms().forEach(room -> System.out.printf("Room Id: %d   |  Name:  %s %n", room.id(), room.name()));
+        escapeRoomInventoryDto.rooms().forEach(room -> System.out.printf("Room Id: %d   |  Name:  %s |  Price:  %f %n", room.id(), room.name(), room.price()));
         System.out.println("Decos:");
-        escapeRoomInventoryDto.decos().forEach(deco -> System.out.printf("Deco Id: %d   |  Name:  %s %n", deco.id(), deco.name()));
+        escapeRoomInventoryDto.decos().forEach(deco -> System.out.printf("Deco Id: %d   |  Name:  %s |  Price:  %f %n", deco.id(), deco.name(), deco.price()));
         System.out.println("Puzzles:");
-        escapeRoomInventoryDto.puzzles().forEach(puzzle -> System.out.printf("Puzzle Id: %d   |  Name:  %s %n", puzzle.id(), puzzle.name()));
+        escapeRoomInventoryDto.puzzles().forEach(puzzle -> System.out.printf("Puzzle Id: %d   |  Name:  %s |  Price:  %f %n", puzzle.id(), puzzle.name(), puzzle.price()));
     }
 }

@@ -32,7 +32,6 @@ public class UpdatePuzzleService {
         Puzzle puzzle = Puzzle.fromDatabase(existingOptional.get());
 
         puzzle.setName(!request.name().isBlank() ? request.name() : puzzle.getName());
-        puzzle.setDifficulty(!request.difficulty().isBlank() ? request.difficulty() : puzzle.getDifficulty());
         puzzle.setRoomId(request.roomId() > 0 ? request.roomId() : puzzle.getRoomId());
         puzzle.setAnswer(!request.answer().isBlank() ? request.answer() : puzzle.getAnswer());
         puzzle.setStory(!request.story().isBlank() ? request.story() : puzzle.getStory());

@@ -1,4 +1,4 @@
-package cat.itacademy.project.shared.infrastructure.database.mongoDB;
+package cat.itacademy.project.shared.infrastructure.database.mongodb;
 
 
 import com.mongodb.client.MongoClient;
@@ -17,7 +17,7 @@ public class MongoDBConnection {
         return MongoClients.create(MongoDBConnection.CONNECTION_STRING);
     }
 
-    public static MongoClient getInstance() {
+    private static MongoClient getInstance() {
         MongoClient result = instance;
         if (result != null) {
             return result;

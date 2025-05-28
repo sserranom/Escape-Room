@@ -7,7 +7,7 @@ import cat.itacademy.project.business_logic.notification.infrastructure.Notifica
 import cat.itacademy.project.shared.domain.dtos.customer.CustomerDTO;
 import cat.itacademy.project.shared.domain.dtos.notification.CreateNotificationDTO;
 import cat.itacademy.project.shared.domain.dtos.puzzle.PuzzleDTO;
-import cat.itacademy.project.shared.infrastructure.database.mongoDB.MongoDBConnection;
+import cat.itacademy.project.shared.infrastructure.database.mongodb.MongoDBConnection;
 import cat.itacademy.project.shared.infrastructure.database.mysql.MySqlConnection;
 
 import java.util.ArrayList;

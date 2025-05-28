@@ -3,7 +3,7 @@ package cat.itacademy.project.shared.domain.dtos.puzzle;
 import cat.itacademy.project.shared.domain.exceptions.EmptyFieldException;
 import cat.itacademy.project.shared.domain.exceptions.InvalidPriceException;
 
-public record CreatePuzzleDTO(String name, String difficulty, int roomId, String answer, String story, int themeId,
+public record CreatePuzzleDTO(String name,  int roomId, String answer, String story, int themeId,
                               double price) {
     public CreatePuzzleDTO {
         if (name == null || name.isBlank()) {

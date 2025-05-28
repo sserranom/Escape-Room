@@ -49,7 +49,7 @@ public class ManagePuzzleMenu extends MenuCommand<Void> {
     private int getUserInput() {
         log("1. Create new Puzzle");
         log("2. Update Puzzle details");
-        log("3. View Puzzle details");
+        log("3. View All Puzzles");
         log("4. Back <-");
 
         return MenuScanner.readInt("Please enter your choice: ");

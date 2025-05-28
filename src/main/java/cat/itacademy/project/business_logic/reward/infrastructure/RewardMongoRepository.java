@@ -27,7 +27,7 @@ public class RewardMongoRepository implements RewardRepository {
     public void create(CreateRewardDTO reward) {
         Document doc = new Document(RECIPIENT, reward.recipient())
                 .append(DESCRIPTION, reward.description())
-                .append(DELIVERY_DATE, reward.deliveryDate());
+                ;
         collection.insertOne(doc);
     }
 

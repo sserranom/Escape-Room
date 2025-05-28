@@ -161,7 +161,7 @@ public class PuzzleMySQLRepository implements PuzzleRepository {
 
     public List<PuzzleDTO> findAllByEscapeRoomId(int escapeRoomId) {
         List<PuzzleDTO> puzzles = new ArrayList<>();
-        String sql = "SELECT p.id, p.name, p.theme_id, p.answer, p.story, p.price " +
+        String sql = "SELECT p.id, p.name, p.theme_id, p.answer, p.room_id,p.story, p.price " +
                 "FROM puzzles p " +
                 "JOIN themes t ON p.theme_id = t.id " +
                 "JOIN escape_rooms e ON t.escaperoom_id = e.id " +
