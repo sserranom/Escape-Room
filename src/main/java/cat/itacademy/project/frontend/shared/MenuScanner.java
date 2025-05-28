@@ -7,6 +7,8 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
+import static com.mysql.cj.util.TimeUtil.DATE_FORMATTER;
+
 public class MenuScanner {
     private static final Scanner scanner = new Scanner(System.in);
 
@@ -79,6 +81,29 @@ public class MenuScanner {
                 date = LocalDate.parse(input, formatter);
             } catch (DateTimeParseException e) {
                 System.out.println("Invalid date format or value. Please enter the date in 'dd/MM/yyyy' format (e.g., 25/12/2024).");
+            }
+        }
+        return date;
+    }
+
+    public static LocalDate readOptionalDate(String message) {
+        LocalDate date = null;
+        String input;
+        boolean validInput = false;
+
+        while (!validInput) {
+            System.out.print(message);
+            input = scanner.nextLine().trim();
+
+            if (input.isEmpty()) {
+                return null;
+            }
+
+            try {
+                date = LocalDate.parse(input, DATE_FORMATTER); // Usar el formateador global
+                validInput = true; // Si el parseo es exitoso, la entrada es válida
+            } catch (DateTimeParseException e) {
+                System.out.println("Invalid date format or value. Please enter the date in 'dd/MM/yyyy' format (e.g., 25/12/2024) or leave empty.");
             }
         }
         return date;

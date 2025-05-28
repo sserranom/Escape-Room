@@ -3,6 +3,9 @@ package cat.itacademy.project.frontend.escaperoom;
 
 import cat.itacademy.project.frontend.Customer.ManageCustomerMenu;
 import cat.itacademy.project.frontend.Menu;
+import cat.itacademy.project.frontend.Room.ManageRoomMenu;
+import cat.itacademy.project.frontend.deco.ManageDecoMenu;
+import cat.itacademy.project.frontend.reservation.ManageReservationMenu;
 import cat.itacademy.project.frontend.shared.MenuCommand;
 import cat.itacademy.project.frontend.shared.MenuScanner;
 import cat.itacademy.project.frontend.theme.ManageThemeMenu;
@@ -62,16 +65,21 @@ public class ManageEscapeRoomMenu extends MenuCommand<EscapeRoomDTO> {
                     ManageCustomerMenu manageCustomerMenu = new ManageCustomerMenu();
                     manageCustomerMenu.execute();
                     break;
+
+
+            case 12:
+                log("Manage Reservation: ");
+                ManageReservationMenu manageReservationMenu = new ManageReservationMenu();
+                manageReservationMenu.execute();
                 case 0:
                     log("Exiting to main menu.");
                     Menu.setActiveRoom(null);
                     isRunning = false;
                     break;
-                default:
-                    error("Invalid choice. Please try again.");
-                    break;
-            }
-        }
+            default:
+                error("Invalid choice. Please try again.");
+                break;
+        }}
 
         return Optional.of(escapeRoomDTO);
     }

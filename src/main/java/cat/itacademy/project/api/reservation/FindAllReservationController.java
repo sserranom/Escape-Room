@@ -10,17 +10,17 @@ import java.util.List;
 import java.util.Optional;
 
 public class FindAllReservationController {
-//    private final FindAllReservationsService service;
-//
-//
-//    public FindAllReservationController() {
-//        ReservationRepository repo = new ReservationMySQLRepository(MySqlConnection.getInstance());
-//        this.service = new FindAllReservationsService(repo);
-//    }
-//
-//    public Optional<List<ReservationDTO>> execute(){
-//        List<ReservationDTO> reservations = service.findAll();
-//        return Optional.of(reservations);
-//
-//    }
+    private final FindAllReservationsService service;
+
+
+    public FindAllReservationController() {
+        ReservationRepository repo = new ReservationMySQLRepository(MySqlConnection.getInstance());
+        this.service = new FindAllReservationsService(repo);
+    }
+
+    public Optional<List<ReservationDTO>> execute(){
+        List<ReservationDTO> reservations = service.findAll();
+        return Optional.of(reservations);
+
+    }
 }

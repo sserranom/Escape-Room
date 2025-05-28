@@ -1,41 +1,60 @@
 package cat.itacademy.project.frontend.reservation;
 
+import cat.itacademy.project.api.reservation.CreateReservationController;
 import cat.itacademy.project.frontend.shared.MenuCommand;
 import cat.itacademy.project.frontend.shared.MenuScanner;
 import cat.itacademy.project.shared.domain.dtos.reservation.CreateReservationDTO;
-import cat.itacademy.project.shared.domain.dtos.theme.CreateThemeDTO;
 import cat.itacademy.project.shared.domain.exceptions.EmptyFieldException;
-
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.Optional;
 
 public class CreateReservationMenu extends MenuCommand<Void> {
-    private Integer customer_id;
-    private Integer puzzle_id;
-    private LocalDate completion_date;
+    private final CreateReservationController createReservationController;
 
+    public CreateReservationMenu() {
+        this.createReservationController = new CreateReservationController();
+    }
 
     @Override
     public Optional<Void> execute() {
-        CreateReservationDTO request = getUserInfo();
+        try {
+            CreateReservationDTO request = getUserInfo();
+            createReservationController.execute(request);
+            System.out.println("Reservation created successfully!");
+        } catch (IllegalArgumentException e) {
+            error("Validation error: " + e.getMessage());
+        } catch (EmptyFieldException e) {
+            error("Input error: " + e.getMessage());
+        } catch (Exception e) {
+            error("An unexpected error occurred during reservation creation: " + e.getMessage());
+        }
         return Optional.empty();
     }
+
     public CreateReservationDTO getUserInfo() {
+        Integer customerId = null;
+        Integer puzzleId = null;
+        LocalDate completionDate = null;
 
-
-        while (customer_id == null || puzzle_id == null) {
-
+        boolean validInput = false;
+        while (!validInput) {
             try {
-                customer_id = MenuScanner.readInt("Enter the Customer ID: ");
-                puzzle_id = MenuScanner.readInt("Enter the Puzzle ID: ");
-                completion_date = MenuScanner.readDate("Enter the Date completion: ");
+                customerId = MenuScanner.readInt("Enter the Customer ID: ");
+                puzzleId = MenuScanner.readInt("Enter the Puzzle ID: ");
+
+                completionDate = MenuScanner.readOptionalDate("Enter the Completion Date (DD/MM/YYYY, leave empty if not known): ");
+
+                validInput = true;
+
+            } catch (IllegalArgumentException e) {
+                error("Input error: " + e.getMessage());
             } catch (EmptyFieldException e) {
-                error("Field cannot be empty");
+                error("Field cannot be empty: " + e.getMessage());
             } catch (Exception e) {
-                error("An unexpected error occurred: " + e.getMessage());
+                error("An unexpected error occurred while reading input: " + e.getMessage());
             }
         }
-        return new CreateReservationDTO(customer_id, puzzle_id, completion_date);
+        return new CreateReservationDTO(customerId, puzzleId, completionDate);
     }
+
 }
