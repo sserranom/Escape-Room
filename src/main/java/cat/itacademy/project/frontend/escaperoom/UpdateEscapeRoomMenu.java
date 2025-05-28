@@ -5,6 +5,7 @@ import cat.itacademy.project.frontend.shared.MenuCommand;
 import cat.itacademy.project.frontend.shared.MenuScanner;
 import cat.itacademy.project.shared.domain.dtos.escape_room.EscapeRoomDTO;
 import cat.itacademy.project.shared.domain.dtos.escape_room.UpdateEscapeRoomDTO;
+import cat.itacademy.project.shared.domain.exceptions.CustomException;
 
 import java.util.Optional;
 
@@ -26,7 +27,7 @@ public class UpdateEscapeRoomMenu extends MenuCommand<EscapeRoomDTO> {
             return updated;
         } catch (IllegalArgumentException e) {
             error("Error: " + e.getMessage());
-        } catch (Exception e) {
+        } catch (CustomException e) {
             error("An unexpected error occurred: " + e.getMessage());
         }
         return Optional.empty();

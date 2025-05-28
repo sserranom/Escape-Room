@@ -15,8 +15,8 @@ public class FindAllThemesMenu extends MenuCommand<Void> {
 
         FindAllThemesController controller = new FindAllThemesController();
         Optional<List<ThemeDTO>> result = controller.execute(Menu.activeRoom().id());
-        if (result.get().isEmpty()) {
-            info("No themes found.");
+        if (result.isEmpty()) {
+            error("No themes found.");
         } else {
             info("List of themes:");
             result.get().forEach(ThemePrinter::print);

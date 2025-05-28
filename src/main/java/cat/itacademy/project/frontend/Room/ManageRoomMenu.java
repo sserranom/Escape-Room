@@ -2,46 +2,48 @@ package cat.itacademy.project.frontend.Room;
 
 import cat.itacademy.project.frontend.shared.MenuCommand;
 import cat.itacademy.project.frontend.shared.MenuScanner;
+import cat.itacademy.project.shared.domain.exceptions.CustomException;
 
 import java.util.Optional;
 
 public class ManageRoomMenu extends MenuCommand<Void> {
 
 
-
     @Override
     public Optional<Void> execute() {
-        int choice = getUserInput();
         boolean isRunning = true;
         while (isRunning) {
+            int choice = getUserInput();
+            try {
+                switch (choice) {
+                    case 1:
+                        log("Create Room: ");
+                        CreateRoomMenu createRoomMenu = new CreateRoomMenu();
+                        createRoomMenu.execute();
+                        break;
 
-            switch (choice) {
-                case 1:
-                    log("Create Room: ");
-                    CreateRoomMenu createRoomMenu = new CreateRoomMenu();
-                    createRoomMenu.execute();
-                    break;
+                    case 2:
+                        log("Update Room details: ");
+                        UpdateRoomMenu updateRoomMenu = new UpdateRoomMenu();
+                        updateRoomMenu.execute();
+                        break;
 
-                case 2:
-                    log("Update Room details: ");
-                    UpdateRoomMenu updateRoomMenu = new UpdateRoomMenu();
-                    updateRoomMenu.execute();
-                    break;
+                    case 3:
+                        log("Show all rooms: ");
+                        FindAllRoomMenu findAllRoomMenu = new FindAllRoomMenu();
+                        findAllRoomMenu.execute();
+                        break;
 
-                case 3:
-                    log("Room Details: ");
-                    FindAllRoomMenu findAllRoomMenu = new FindAllRoomMenu();
-                    findAllRoomMenu.execute();
-                    break;
+                    case 4:
+                        log("Back: ");
+                        isRunning = false;
+                        break;
+                    default:
+                        error("Invalid choice. Please try again.");
 
-                case 4:
-                    log("Back: ");
-                    isRunning = false;
-                    break;
-                default:
-                    error("Invalid choice. Please try again.");
-                    choice = getUserInput();
-
+                }
+            } catch (CustomException e) {
+                error(e.getMessage());
             }
         }
         return Optional.empty();

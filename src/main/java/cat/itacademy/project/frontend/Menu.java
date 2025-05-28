@@ -17,9 +17,7 @@ public class Menu extends MenuCommand<Void> {
     private final CreateEscapeRoomMenu createEscapeRoomMenu = new CreateEscapeRoomMenu();
     FindAllEscapeRoomsMenu findAllEscapeRoomsMenu = new FindAllEscapeRoomsMenu();
 
-    public static void addRoom(EscapeRoomDTO escapeRoomDTO) {
-        existingRooms.add(escapeRoomDTO);
-    }
+
 
     public static EscapeRoomDTO activeRoom() {
         return activeRoom;

@@ -10,17 +10,12 @@ import java.util.Optional;
 public class UpdateThemeMenu extends MenuCommand<Void> {
     @Override
     public Optional<Void> execute() {
-        try {
             UpdateThemeDTO dto = getInfo();
             UpdateThemeController controller = new UpdateThemeController();
             controller.execute(dto);
             info("Theme with name '" + dto.nameToUpdate() + "' updated successfully.");
 
-        } catch (IllegalArgumentException e) {
-            error("Error: " + e.getMessage());
-        } catch (Exception e) {
-            error("An unexpected error occurred: " + e.getMessage());
-        }
+
         return Optional.empty();
     }
 
