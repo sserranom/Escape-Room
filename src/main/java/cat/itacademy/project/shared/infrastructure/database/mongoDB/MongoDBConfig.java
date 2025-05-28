@@ -1,4 +1,4 @@
-package cat.itacademy.project.shared.infrastructure.database.mongodb;
+package cat.itacademy.project.shared.infrastructure.database.mongoDB;
 
 import io.github.cdimascio.dotenv.Dotenv;
 
@@ -11,8 +11,10 @@ public class MongoDBConfig {
     private static final String DB_PASSWORD = dotenv.get("MONGO_PASSWORD");
 
     private static final String CONNECTION_STRING = String.format(
-            "mongodb://%s:%s@%s:%s/%s",
-            DB_USER, DB_PASSWORD, DB_HOST, DB_PORT, DB_DATABASE
+//            "mongodb://%s:%s@%s:%s/%s",
+            "mongodb://%s:%s/%s",
+            DB_HOST, DB_PORT, DB_DATABASE
+//            DB_USER, DB_PASSWORD, DB_HOST, DB_PORT, DB_DATABASE
     );
 
     public static String getString() {

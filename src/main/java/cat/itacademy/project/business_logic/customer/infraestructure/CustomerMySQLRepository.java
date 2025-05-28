@@ -83,7 +83,6 @@ public class CustomerMySQLRepository implements CustomerRepository {
         }
         return customers;
     }
-
     @Override
     public Optional<CustomerDTO> findByName(String name) {
         String sql = "SELECT * FROM customers WHERE name = ?";

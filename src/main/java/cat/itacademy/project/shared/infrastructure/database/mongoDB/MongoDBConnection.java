@@ -1,4 +1,4 @@
-package cat.itacademy.project.shared.infrastructure.database.mongodb;
+package cat.itacademy.project.shared.infrastructure.database.mongoDB;
 
 
 import com.mongodb.client.MongoClient;
