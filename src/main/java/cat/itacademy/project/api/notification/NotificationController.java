@@ -6,7 +6,6 @@ import cat.itacademy.project.business_logic.notification.application.CreateNotif
 import cat.itacademy.project.business_logic.notification.infrastructure.NotificationMongoRepository;
 import cat.itacademy.project.shared.domain.dtos.customer.CustomerDTO;
 import cat.itacademy.project.shared.domain.dtos.notification.CreateNotificationDTO;
-import cat.itacademy.project.shared.domain.dtos.notification.NotificationDTO;
 import cat.itacademy.project.shared.domain.dtos.puzzle.PuzzleDTO;
 import cat.itacademy.project.shared.infrastructure.database.mongodb.MongoDBConnection;
 import cat.itacademy.project.shared.infrastructure.database.mysql.MySqlConnection;
@@ -16,19 +15,18 @@ import java.util.List;
 import java.util.logging.Logger;
 
 public class NotificationController {
+    private static final Logger logger = Logger.getLogger(NotificationController.class.getName());
     private final CreateNotificationService createNotificationService;
     private final FindAllCustomerSubscribedService findAllCustomerSubscribedService;
 
     public NotificationController() {
-        this .createNotificationService = new CreateNotificationService(
+        this.createNotificationService = new CreateNotificationService(
                 new NotificationMongoRepository(MongoDBConnection.getDatabase())
         );
         this.findAllCustomerSubscribedService = new FindAllCustomerSubscribedService(
                 new CustomerMySQLRepository(MySqlConnection.getInstance())
         );
     }
-
-    private static final Logger logger = Logger.getLogger(NotificationController.class.getName());
 
     public void send(PuzzleDTO eventDto) {
 
@@ -64,7 +62,7 @@ public class NotificationController {
 
     private List<CreateNotificationDTO> buildNotifications(PuzzleDTO eventDto) {
         List<CreateNotificationDTO> result = new ArrayList<>();
-        List<CustomerDTO> subscribedCustomers  = findAllCustomerSubscribedService.execute();
+        List<CustomerDTO> subscribedCustomers = findAllCustomerSubscribedService.execute();
         for (CustomerDTO customer : subscribedCustomers) {
             CreateNotificationDTO notification = new CreateNotificationDTO(
                     customer.name(),

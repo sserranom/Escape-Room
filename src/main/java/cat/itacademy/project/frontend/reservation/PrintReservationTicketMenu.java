@@ -1,17 +1,17 @@
 package cat.itacademy.project.frontend.reservation;
 
-import cat.itacademy.project.api.reservation.FindReservationByIdController;
 import cat.itacademy.project.api.customer.FindCustomerByIdController;
 import cat.itacademy.project.api.puzzle.FindPuzzleByIdController;
+import cat.itacademy.project.api.reservation.FindReservationByIdController;
 import cat.itacademy.project.frontend.shared.MenuCommand;
 import cat.itacademy.project.frontend.shared.MenuScanner;
-import cat.itacademy.project.shared.domain.dtos.reservation.ReservationDTO;
 import cat.itacademy.project.shared.domain.dtos.customer.CustomerDTO;
 import cat.itacademy.project.shared.domain.dtos.puzzle.PuzzleDTO;
+import cat.itacademy.project.shared.domain.dtos.reservation.ReservationDTO;
 import cat.itacademy.project.shared.domain.exceptions.NotFoundException;
 
-import java.util.Optional;
 import java.time.format.DateTimeFormatter;
+import java.util.Optional;
 
 public class PrintReservationTicketMenu extends MenuCommand<Void> {
 

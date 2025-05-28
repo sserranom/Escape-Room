@@ -10,7 +10,6 @@ import java.util.Optional;
 public class DeleteEscapeRoomMenu extends MenuCommand<Void> {
 
 
-
     @Override
     public Optional<Void> execute() {
         try {

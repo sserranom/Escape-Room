@@ -1,8 +1,8 @@
 package cat.itacademy.project.business_logic.reservation.domain;
 
 import cat.itacademy.project.business_logic.puzzle.domain.PuzzleRepository;
-import cat.itacademy.project.business_logic.room.domain.RoomRepository;
 import cat.itacademy.project.business_logic.room.domain.RoomDecoRepository;
+import cat.itacademy.project.business_logic.room.domain.RoomRepository;
 import cat.itacademy.project.shared.domain.dtos.deco.DecoDTO;
 import cat.itacademy.project.shared.domain.dtos.puzzle.PuzzleDTO;
 import cat.itacademy.project.shared.domain.dtos.reservation.CreateReservationDTO;
@@ -12,7 +12,6 @@ import cat.itacademy.project.shared.domain.exceptions.NotFoundException;
 import cat.itacademy.project.shared.domain.exceptions.PuzzleWithoutRoomException;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 
 public class Reservation {
@@ -78,18 +77,53 @@ public class Reservation {
         );
     }
 
-    public int getId() { return id; }
-    public void setId(int id) { this.id = id; }
-    public Integer getCustomerId() { return customerId; }
-    public void setCustomerId(Integer customerId) { this.customerId = customerId; }
-    public Integer getPuzzleId() { return puzzleId; }
-    public void setPuzzleId(Integer puzzleId) { this.puzzleId = puzzleId; }
-    public double getTotalPrice() { return totalPrice; }
-    public void setTotalPrice(double totalPrice) { this.totalPrice = totalPrice; }
-    public LocalDate getCreationDate() { return creationDate; }
-    public void setCreationDate(LocalDate creationDate) { this.creationDate = creationDate; }
-    public LocalDate getCompletionDate() { return completionDate; }
-    public void setCompletionDate(LocalDate completionDate) { this.completionDate = completionDate; }
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public Integer getCustomerId() {
+        return customerId;
+    }
+
+    public void setCustomerId(Integer customerId) {
+        this.customerId = customerId;
+    }
+
+    public Integer getPuzzleId() {
+        return puzzleId;
+    }
+
+    public void setPuzzleId(Integer puzzleId) {
+        this.puzzleId = puzzleId;
+    }
+
+    public double getTotalPrice() {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(double totalPrice) {
+        this.totalPrice = totalPrice;
+    }
+
+    public LocalDate getCreationDate() {
+        return creationDate;
+    }
+
+    public void setCreationDate(LocalDate creationDate) {
+        this.creationDate = creationDate;
+    }
+
+    public LocalDate getCompletionDate() {
+        return completionDate;
+    }
+
+    public void setCompletionDate(LocalDate completionDate) {
+        this.completionDate = completionDate;
+    }
 
     @Override
     public String toString() {

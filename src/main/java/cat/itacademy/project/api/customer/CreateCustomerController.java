@@ -6,8 +6,6 @@ import cat.itacademy.project.business_logic.customer.infraestructure.CustomerMyS
 import cat.itacademy.project.shared.domain.dtos.customer.CreateCustomerDTO;
 import cat.itacademy.project.shared.infrastructure.database.mysql.MySqlConnection;
 
-import java.util.Optional;
-
 public class CreateCustomerController {
     private final CreateCustomerService service;
 

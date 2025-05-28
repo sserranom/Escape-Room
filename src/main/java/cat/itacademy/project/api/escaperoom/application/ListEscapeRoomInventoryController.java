@@ -11,7 +11,7 @@ public class ListEscapeRoomInventoryController {
 
     public ListEscapeRoomInventoryController() {
         EscapeRoomRepository repo = new EscapeRoomMySQLRepository(MySqlConnection.getInstance());
-        this.service = new ListEscapeRoomInventoryService(repo );
+        this.service = new ListEscapeRoomInventoryService(repo);
     }
 
     public EscapeRoomInventoryDto execute(int escapeRoomId) {

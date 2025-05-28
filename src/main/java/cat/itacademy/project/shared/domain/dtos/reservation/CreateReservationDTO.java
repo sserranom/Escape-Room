@@ -2,7 +2,6 @@ package cat.itacademy.project.shared.domain.dtos.reservation;
 
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 public record CreateReservationDTO(Integer customerId, Integer puzzleId, LocalDate completionDate) {
     public CreateReservationDTO {

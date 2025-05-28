@@ -18,7 +18,7 @@ public class FindAllReservationController {
         this.service = new FindAllReservationsService(repo);
     }
 
-    public Optional<List<ReservationDTO>> execute(){
+    public Optional<List<ReservationDTO>> execute() {
         List<ReservationDTO> reservations = service.findAll();
         return Optional.of(reservations);
 

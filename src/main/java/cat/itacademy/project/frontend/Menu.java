@@ -18,7 +18,6 @@ public class Menu extends MenuCommand<Void> {
     FindAllEscapeRoomsMenu findAllEscapeRoomsMenu = new FindAllEscapeRoomsMenu();
 
 
-
     public static EscapeRoomDTO activeRoom() {
         return activeRoom;
     }

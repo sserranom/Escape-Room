@@ -1,6 +1,5 @@
 package cat.itacademy.project.api.customer;
 
-import cat.itacademy.project.business_logic.customer.application.FindAllCustomerService;
 import cat.itacademy.project.business_logic.customer.application.FindAllCustomerSubscribedService;
 import cat.itacademy.project.business_logic.customer.domain.CustomerRepository;
 import cat.itacademy.project.business_logic.customer.infraestructure.CustomerMySQLRepository;

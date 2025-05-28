@@ -12,8 +12,6 @@ import cat.itacademy.project.business_logic.room.infraestructure.RoomMySQLReposi
 import cat.itacademy.project.shared.domain.dtos.reservation.CreateReservationDTO;
 import cat.itacademy.project.shared.infrastructure.database.mysql.MySqlConnection;
 
-import java.util.Optional;
-
 public class CreateReservationController {
     private final CreateReservationService service;
 

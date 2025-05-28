@@ -1,7 +1,6 @@
 package cat.itacademy.project.business_logic.notification.infrastructure;
 
 import cat.itacademy.project.business_logic.notification.domain.Notification;
-
 import cat.itacademy.project.business_logic.notification.domain.NotificationRepository;
 import cat.itacademy.project.shared.domain.dtos.notification.CreateNotificationDTO;
 import com.mongodb.client.MongoCollection;
@@ -15,10 +14,10 @@ import java.util.Optional;
 
 
 public class NotificationMongoRepository implements NotificationRepository {
-    private final MongoCollection<Document> collection;
     private static final String RECIPIENT_NAME = "recipientName";
     private static final String RECIPIENT_EMAIL = "recipientEmail";
     private static final String MESSAGE = "message";
+    private final MongoCollection<Document> collection;
 
 
     public NotificationMongoRepository(MongoDatabase database) {

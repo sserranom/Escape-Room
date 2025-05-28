@@ -1,6 +1,5 @@
 package cat.itacademy.project.business_logic.reservation.domain;
 
-import cat.itacademy.project.shared.domain.dtos.reservation.CreateReservationDTO;
 import cat.itacademy.project.shared.domain.dtos.reservation.ReservationDTO;
 
 import java.util.List;

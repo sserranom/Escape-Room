@@ -12,17 +12,17 @@ import java.util.Optional;
 public class FindReservationByCustomerIdController {
     private final FindReservationsByCustomerIdService service;
 
-    public FindReservationByCustomerIdController(){
+    public FindReservationByCustomerIdController() {
         ReservationRepository repo = new ReservationMySQLRepository(MySqlConnection.getInstance());
         this.service = new FindReservationsByCustomerIdService(repo);
     }
 
-    public Optional<List<ReservationDTO>> execute(int customerId){
-       try {
-           return service.execute(customerId);
-       }catch (Exception e){
-           return Optional.empty();
-       }
+    public Optional<List<ReservationDTO>> execute(int customerId) {
+        try {
+            return service.execute(customerId);
+        } catch (Exception e) {
+            return Optional.empty();
+        }
     }
 
 }

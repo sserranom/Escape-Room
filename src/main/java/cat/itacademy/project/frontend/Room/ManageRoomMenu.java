@@ -33,8 +33,12 @@ public class ManageRoomMenu extends MenuCommand<Void> {
                         FindAllRoomMenu findAllRoomMenu = new FindAllRoomMenu();
                         findAllRoomMenu.execute();
                         break;
-
                     case 4:
+                        log("Add decorative item to room: ");
+                        AddDecoToRoomMenu addDecoToRoomMenu = new AddDecoToRoomMenu();
+                        addDecoToRoomMenu.execute();
+                        break;
+                    case 5:
                         log("Back: ");
                         isRunning = false;
                         break;
@@ -52,8 +56,9 @@ public class ManageRoomMenu extends MenuCommand<Void> {
     private int getUserInput() {
         log("1. Create new Room ");
         log("2. Update Room details ");
-        log("3. View Room details");
-        log("4. Back <-");
+        log("3. Show all rooms ");
+        log("4. Add decorative item to room ");
+        log("5. Back <-");
 
         return MenuScanner.readInt("Please enter your choice: ");
     }

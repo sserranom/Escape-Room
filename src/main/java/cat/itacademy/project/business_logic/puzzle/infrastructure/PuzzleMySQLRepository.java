@@ -158,6 +158,7 @@ public class PuzzleMySQLRepository implements PuzzleRepository {
         }
         return Optional.empty();
     }
+
     public List<PuzzleDTO> findAllByEscapeRoomId(int escapeRoomId) {
         List<PuzzleDTO> puzzles = new ArrayList<>();
         String sql = "SELECT p.id, p.name, p.theme_id, p.answer, p.story, p.price " +

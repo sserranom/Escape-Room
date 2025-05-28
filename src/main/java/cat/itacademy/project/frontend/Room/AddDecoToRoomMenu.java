@@ -11,10 +11,11 @@ import java.util.Optional;
 
 public class AddDecoToRoomMenu extends MenuCommand<Void> {
     private final AssignDecoToRoomController assignDecoToRoomController = new AssignDecoToRoomController();
-    private AssignDecoToRoomDto request;
+
 
     @Override
     public Optional<Void> execute() {
+        AssignDecoToRoomDto request;
         try {
             request = getUserInfo();
             assignDecoToRoomController.execute(request);

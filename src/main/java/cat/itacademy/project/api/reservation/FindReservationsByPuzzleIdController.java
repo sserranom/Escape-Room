@@ -5,7 +5,6 @@ import cat.itacademy.project.business_logic.reservation.domain.ReservationReposi
 import cat.itacademy.project.business_logic.reservation.infraestructure.ReservationMySQLRepository;
 import cat.itacademy.project.shared.domain.dtos.reservation.ReservationDTO;
 import cat.itacademy.project.shared.infrastructure.database.mysql.MySqlConnection;
-import jdk.dynalink.linker.LinkerServices;
 
 import java.util.List;
 import java.util.Optional;
@@ -18,10 +17,11 @@ public class FindReservationsByPuzzleIdController {
         ReservationRepository repo = new ReservationMySQLRepository(MySqlConnection.getInstance());
         this.service = new FindReservationsByPuzzleIdService(repo);
     }
-    public Optional<List<ReservationDTO>> execute(int puzzleId){
-        try{
+
+    public Optional<List<ReservationDTO>> execute(int puzzleId) {
+        try {
             return service.execute(puzzleId);
-        }catch (Exception e){
+        } catch (Exception e) {
             return Optional.empty();
         }
     }

@@ -22,7 +22,7 @@ public class CreateCustomerService {
         repo.create(createCustomerDTO);
     }
 
-    private void ensureDoesNotExist(){
+    private void ensureDoesNotExist() {
         Optional<CustomerDTO> existing = repo.findByName(customer.getName());
         if (existing.isPresent()) {
             throw new AlreadyExistsException("Customer " + customer.getName() + " already exist");

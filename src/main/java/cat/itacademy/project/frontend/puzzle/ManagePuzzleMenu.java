@@ -1,10 +1,7 @@
 package cat.itacademy.project.frontend.puzzle;
 
 import cat.itacademy.project.frontend.shared.MenuCommand;
-import cat.itacademy.project.shared.domain.dtos.puzzle.CreatePuzzleDTO;
-import cat.itacademy.project.shared.domain.dtos.puzzle.UpdatePuzzleDTO;
 import cat.itacademy.project.frontend.shared.MenuScanner;
-
 
 import java.util.Optional;
 

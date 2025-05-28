@@ -5,7 +5,8 @@ import cat.itacademy.project.shared.domain.dtos.escape_room.EscapeRoomInventoryD
 
 public class ListEscapeRoomInventoryService {
     private final EscapeRoomRepository repo;
-    public ListEscapeRoomInventoryService( EscapeRoomRepository repo) {
+
+    public ListEscapeRoomInventoryService(EscapeRoomRepository repo) {
         this.repo = repo;
     }
 

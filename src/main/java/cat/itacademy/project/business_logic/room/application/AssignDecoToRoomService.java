@@ -10,7 +10,7 @@ public class AssignDecoToRoomService {
         this.repo = repo;
     }
 
-    public void execute(AssignDecoToRoomDto request){
+    public void execute(AssignDecoToRoomDto request) {
         repo.assignDecoToRoom(request);
     }
 }

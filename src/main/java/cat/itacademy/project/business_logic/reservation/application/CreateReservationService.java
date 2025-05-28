@@ -20,7 +20,7 @@ public class CreateReservationService {
         this.roomDecoRepo = roomDecoRepo;
     }
 
-    public void execute(CreateReservationDTO request){
+    public void execute(CreateReservationDTO request) {
 
         Reservation newReservation = new Reservation(
                 request.customerId(),

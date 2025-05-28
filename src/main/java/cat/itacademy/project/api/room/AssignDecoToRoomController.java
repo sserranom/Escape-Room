@@ -12,7 +12,7 @@ public class AssignDecoToRoomController {
         this.assignDecoToRoomService = new AssignDecoToRoomService(new RoomDecoMySQLRepository(MySqlConnection.getInstance()));
     }
 
-    public void execute(AssignDecoToRoomDto request){
+    public void execute(AssignDecoToRoomDto request) {
         assignDecoToRoomService.execute(request);
     }
 }

@@ -22,7 +22,7 @@ public class MenuScanner {
         if (input.isEmpty()) {
             throw new EmptyFieldException("Input cannot be empty");
         }
-        return input;
+        return input.trim();
     }
 
     public static int readInt(String message) {

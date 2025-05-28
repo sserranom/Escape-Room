@@ -4,10 +4,10 @@ import org.bson.types.ObjectId;
 
 
 public class Notification {
-    private ObjectId id;
     private final String recipientName;
     private final String recipientEmail;
     private final String message;
+    private ObjectId id;
 
     public Notification(ObjectId id, String recipientName, String recipientEmail, String message) {
         this.id = id;
@@ -37,8 +37,6 @@ public class Notification {
     public String getMessage() {
         return message;
     }
-
-
 
 
 }

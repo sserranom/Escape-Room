@@ -40,7 +40,7 @@ public class UpdatePuzzleService {
         puzzle.setPrice(request.price() > 0 ? request.price() : puzzle.getPrice());
 
         repo.update(puzzle);
-        if (puzzle.isPublishable()){
+        if (puzzle.isPublishable()) {
             eventManager.publish("puzzle.published", puzzle.toDTO());
         }
         return Optional.of(puzzle.toDTO());

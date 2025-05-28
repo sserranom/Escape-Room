@@ -19,7 +19,7 @@ import java.util.Optional;
 public class UpdateReservationController {
     private final UpdateReservationService service;
 
-    public UpdateReservationController(){
+    public UpdateReservationController() {
         ReservationRepository repo = new ReservationMySQLRepository(MySqlConnection.getInstance());
         CustomerRepository customerRepo = new CustomerMySQLRepository(MySqlConnection.getInstance());
         PuzzleRepository puzzleRepo = new PuzzleMySQLRepository(MySqlConnection.getInstance());
@@ -29,7 +29,7 @@ public class UpdateReservationController {
         this.service = new UpdateReservationService(repo, customerRepo, puzzleRepo, roomRepo, roomDecoRepo);
     }
 
-    public Optional<Void> execute(UpdateReservationDTO request){
+    public Optional<Void> execute(UpdateReservationDTO request) {
 
         service.execute(request);
         return Optional.empty();

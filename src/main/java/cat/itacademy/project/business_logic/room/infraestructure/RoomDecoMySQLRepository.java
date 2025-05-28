@@ -27,6 +27,7 @@ public class RoomDecoMySQLRepository implements RoomDecoRepository {
             preparedStatement.setInt(1, request.roomId());
             preparedStatement.setInt(2, request.decoId());
             preparedStatement.setInt(3, request.escapeRoomId());
+            preparedStatement.executeUpdate();
         } catch (SQLException e) {
             throw new DatabaseException("Error assigning deco to room: " + e.getMessage());
         }
@@ -53,7 +54,7 @@ public class RoomDecoMySQLRepository implements RoomDecoRepository {
                 "d.type as type, " +
                 "d.escaperoom_id as escaperoom_id, " +
                 "d.price as price FROM deco_inventory di " +
-                     "JOIN deco d ON di.deco_id = d.id WHERE di.room_id = ?";
+                "JOIN deco d ON di.deco_id = d.id WHERE di.room_id = ?";
         try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             preparedStatement.setInt(1, roomId);
             //(int id, String name, String description, String type, int escapeRoomId, double price)

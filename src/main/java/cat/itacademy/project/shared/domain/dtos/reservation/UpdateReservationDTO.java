@@ -1,9 +1,9 @@
 package cat.itacademy.project.shared.domain.dtos.reservation;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
-public record UpdateReservationDTO(Integer id, Integer id_customer, Integer id_puzzle, Double totalPrice, LocalDate completionDate) {
+public record UpdateReservationDTO(Integer id, Integer id_customer, Integer id_puzzle, Double totalPrice,
+                                   LocalDate completionDate) {
     public UpdateReservationDTO {
         if (id <= 0) {
             throw new IllegalArgumentException("Reservation ID must be a positive integer for update.");

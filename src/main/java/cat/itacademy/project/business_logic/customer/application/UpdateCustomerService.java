@@ -12,7 +12,7 @@ import java.util.Optional;
 public class UpdateCustomerService {
     private final CustomerRepository repo;
 
-    public UpdateCustomerService( CustomerRepository repo) {
+    public UpdateCustomerService(CustomerRepository repo) {
         this.repo = repo;
     }
 

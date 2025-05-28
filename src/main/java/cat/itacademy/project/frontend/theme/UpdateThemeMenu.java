@@ -10,10 +10,10 @@ import java.util.Optional;
 public class UpdateThemeMenu extends MenuCommand<Void> {
     @Override
     public Optional<Void> execute() {
-            UpdateThemeDTO dto = getInfo();
-            UpdateThemeController controller = new UpdateThemeController();
-            controller.execute(dto);
-            info("Theme with name '" + dto.nameToUpdate() + "' updated successfully.");
+        UpdateThemeDTO dto = getInfo();
+        UpdateThemeController controller = new UpdateThemeController();
+        controller.execute(dto);
+        info("Theme with name '" + dto.nameToUpdate() + "' updated successfully.");
 
 
         return Optional.empty();

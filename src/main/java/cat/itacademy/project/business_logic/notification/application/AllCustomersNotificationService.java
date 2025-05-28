@@ -1,6 +1,5 @@
 package cat.itacademy.project.business_logic.notification.application;
 
-import cat.itacademy.project.api.notification.NotificationController;
 import cat.itacademy.project.business_logic.customer.domain.CustomerRepository;
 import cat.itacademy.project.shared.domain.dtos.customer.CustomerDTO;
 import cat.itacademy.project.shared.domain.dtos.notification.NotificationDTO;

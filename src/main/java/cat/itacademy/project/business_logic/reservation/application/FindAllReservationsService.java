@@ -1,6 +1,5 @@
 package cat.itacademy.project.business_logic.reservation.application;
 
-import cat.itacademy.project.business_logic.reservation.domain.Reservation;
 import cat.itacademy.project.business_logic.reservation.domain.ReservationRepository;
 import cat.itacademy.project.shared.domain.dtos.reservation.ReservationDTO;
 

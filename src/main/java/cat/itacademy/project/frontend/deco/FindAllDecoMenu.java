@@ -7,32 +7,20 @@ import cat.itacademy.project.shared.domain.dtos.deco.DecoDTO;
 import java.util.List;
 import java.util.Optional;
 
-public class FindAllDecoMenu extends MenuCommand<List<DecoDTO>> {
-//    @Override
-//    public Optional<List<DecoDTO>> execute() {
-//        FindAllDecoController controller = new FindAllDecoController();
-//        Optional<List<DecoDTO>> result = controller.execute();
-//        if (result.isEmpty()) {
-//            info("No Decorative item Found.");
-//        } else {
-//            info("List of Decorative Items: ");
-//            result.get().forEach(deco -> log("Decorative Items"));
-//        }
-//
-//        return result;
-//    }
+public class FindAllDecoMenu extends MenuCommand<Void> {
 
     @Override
-    public Optional<List<DecoDTO>> execute() {
+    public Optional<Void> execute() {
         FindAllDecoController controller = new FindAllDecoController();
-        Optional<List<DecoDTO>> result = controller.execute();
-        if (result.get().isEmpty()) {
+        List<DecoDTO> result = controller.execute().get();
+        if (result.isEmpty()) {
             error("No Decorative Items Found.");
+
         } else {
             info("List of Decorative Items: ");
-            result.get().forEach(DecoPrinter::print);
+            result.forEach(DecoPrinter::print);
         }
 
-        return result;
+        return Optional.empty();
     }
 }

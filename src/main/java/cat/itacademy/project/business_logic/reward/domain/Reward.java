@@ -6,10 +6,10 @@ import java.util.Date;
 
 public class Reward {
     private static final long serialVersionUID = 1L;
-    private ObjectId id;
     private final String recipient;
     private final String description;
     private final Date deliveryDate;
+    private ObjectId id;
 
     public Reward(ObjectId id, String recipient, String description, Date deliveryDate) {
         this.id = id;
@@ -31,6 +31,7 @@ public class Reward {
     public String getRecipient() {
         return recipient;
     }
+
     public String getDescription() {
         return description;
     }

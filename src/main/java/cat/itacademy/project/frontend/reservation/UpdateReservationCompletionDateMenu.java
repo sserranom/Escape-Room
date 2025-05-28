@@ -1,4 +1,5 @@
 package cat.itacademy.project.frontend.reservation;
+
 import cat.itacademy.project.api.reservation.UpdateReservationController;
 import cat.itacademy.project.frontend.shared.MenuCommand;
 import cat.itacademy.project.frontend.shared.MenuScanner;

@@ -6,5 +6,5 @@ import cat.itacademy.project.shared.domain.dtos.room.RoomDTO;
 
 import java.util.List;
 
-public record EscapeRoomInventoryDto (List<RoomDTO> rooms, List<PuzzleDTO> puzzles  , List<DecoDTO> decos) {
+public record EscapeRoomInventoryDto(List<RoomDTO> rooms, List<PuzzleDTO> puzzles, List<DecoDTO> decos) {
 }

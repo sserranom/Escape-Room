@@ -22,6 +22,7 @@ public class Theme {
         this.description = description;
         this.escapeRoom = escapeRoom;
     }
+
     private Theme(int id, String name, String description, EscapeRoom escapeRoom) {
         this.id = id;
         this.name = name;
