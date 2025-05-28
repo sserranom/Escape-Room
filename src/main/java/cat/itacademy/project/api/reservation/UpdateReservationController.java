@@ -1,6 +1,5 @@
 package cat.itacademy.project.api.reservation;
 
-import cat.itacademy.project.api.theme.UpdateThemeController;
 import cat.itacademy.project.business_logic.customer.domain.CustomerRepository;
 import cat.itacademy.project.business_logic.customer.infraestructure.CustomerMySQLRepository;
 import cat.itacademy.project.business_logic.puzzle.domain.PuzzleRepository;
